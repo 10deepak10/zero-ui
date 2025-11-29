@@ -25,6 +25,67 @@
 
 ---
 
+## 🏗 Component Categories
+
+Zero UI is built around 6 core categories to cover every aspect of modern web development:
+
+### 1️⃣ Form Elements
+Foundational UI controls for data entry.
+- `zui-file-upload` (Available)
+- `zui-button` (Available)
+- `zui-card` (Available)
+- `zui-otp-input` (Planned)
+- `zui-phone-input` (Planned)
+- `zui-star-rating` (Planned)
+- `zui-select` (Planned)
+- `zui-checkbox` (Planned)
+- `zui-radio-group` (Planned)
+- `zui-toggle` (Planned)
+- `zui-slider` (Planned)
+- `zui-pin-input` (Planned)
+
+### 2️⃣ Browser & Device Capability Checkers
+Detect hardware and browser features instantly.
+- `zui-os-check` (Planned)
+- `zui-browser-check` (Planned)
+- `zui-screen-check` (Planned)
+- `zui-storage-check` (Planned)
+- `zui-gpu-check` (Planned)
+- `zui-network-check` (Planned)
+- `zui-battery-check` (Planned)
+- `zui-online-status` (Planned)
+
+### 3️⃣ Permissions & Media Components
+Handle device permissions and media access.
+- `zui-camera-check` (Planned)
+- `zui-mic-check` (Planned)
+- `zui-geolocation-check` (Planned)
+- `zui-notification-check` (Planned)
+- `zui-clipboard-check` (Planned)
+
+### 4️⃣ Extensions & Integrations
+Check for external tools and wallets.
+- `zui-extension-check` (Planned)
+- `zui-wallet-check` (Planned)
+
+### 5️⃣ Proctoring Tools
+Essential for ed-tech and monitoring systems.
+- `zui-tab-switch-check` (Planned)
+- `zui-devtools-check` (Planned)
+- `zui-incognito-check` (Planned)
+- `zui-fullscreen-check` (Planned)
+- `zui-copy-paste-test` (Planned)
+- `zui-face-detection-check` (Planned)
+- `zui-multi-monitor-check` (Planned)
+
+### 6️⃣ Utility Components
+Helpers to simplify app logic.
+- `zui-logger` (Planned)
+- `zui-event-bus` (Planned)
+- `zui-theme-provider` (Planned)
+
+---
+
 ## 📦 Installation for Consumers
 
 To use **Zero UI** in your own project:
@@ -38,19 +99,20 @@ Then import the components you need:
 ```typescript
 import '@deepverse/zero-ui/button';
 import '@deepverse/zero-ui/card';
+import '@deepverse/zero-ui/file-upload';
 ```
 
 For detailed usage instructions and framework integration guides (React, Angular, etc.), please refer to the [Library Documentation](packages/zero-ui/README.md).
 
 ---
 
-## � Development & Contribution
+## 🚀 Development & Contribution
 
 ### Project Structure
 
 This monorepo is organized into the following workspaces:
 
-- **`packages/zero-ui`**: The core library containing all Web Components (`dv-button`, `dv-card`, `dv-upload-box`, etc.).
+- **`packages/zero-ui`**: The core library containing all Web Components (`zui-button`, `zui-card`, `zui-file-upload`, etc.).
 - **`demo`**: A Vite-based playground for developing, testing, and showcasing the components.
 
 ### Getting Started

@@ -3,8 +3,8 @@ import { customElement, property, state, query } from 'lit/decorators.js';
 
 export type UploadState = 'idle' | 'loading' | 'success' | 'error';
 
-@customElement('dv-upload-box')
-export class DvUploadBox extends LitElement {
+@customElement('zui-file-upload')
+export class ZuiFileUpload extends LitElement {
   static formAssociated = true;
 
   static styles = css`
@@ -12,91 +12,91 @@ export class DvUploadBox extends LitElement {
       display: block;
       
       /* Color variables */
-      --upload-border-color: #e5e7eb;
-      --upload-border-color-hover: #3b82f6;
-      --upload-border-color-loading: #3b82f6;
-      --upload-border-color-success: #10b981;
-      --upload-border-color-error: #ef4444;
+      --zui-border-color: #e5e7eb;
+      --zui-border-color-hover: #3b82f6;
+      --zui-border-color-loading: #3b82f6;
+      --zui-border-color-success: #10b981;
+      --zui-border-color-error: #ef4444;
       
-      --upload-bg-color: #ffffff;
-      --upload-bg-color-loading: #eff6ff;
-      --upload-bg-color-success: #ecfdf5;
-      --upload-bg-color-error: #fef2f2;
+      --zui-bg-color: #ffffff;
+      --zui-bg-color-loading: #eff6ff;
+      --zui-bg-color-success: #ecfdf5;
+      --zui-bg-color-error: #fef2f2;
       
-      --upload-icon-bg: #f0f9ff;
-      --upload-icon-bg-alt: #f3f4f6;
-      --upload-icon-color: #3b82f6;
+      --zui-icon-bg: #f0f9ff;
+      --zui-icon-bg-alt: #f3f4f6;
+      --zui-icon-color: #3b82f6;
       
-      --upload-text-primary: #111827;
-      --upload-text-secondary: #6b7280;
-      --upload-link-color: #3b82f6;
-      --upload-error-color: #ef4444;
+      --zui-text-primary: #111827;
+      --zui-text-secondary: #6b7280;
+      --zui-link-color: #3b82f6;
+      --zui-error-color: #ef4444;
       
-      --upload-file-bg: #ffffff;
-      --upload-progress-bg: #e5e7eb;
-      --upload-progress-bar: #3b82f6;
+      --zui-file-bg: #ffffff;
+      --zui-progress-bg: #e5e7eb;
+      --zui-progress-bar: #3b82f6;
       
       /* Spacing variables */
-      --upload-padding: 32px;
-      --upload-border-width: 2px;
-      --upload-border-radius: 12px;
-      --upload-gap: 16px;
+      --zui-padding: 32px;
+      --zui-border-width: 2px;
+      --zui-border-radius: 12px;
+      --zui-gap: 16px;
       
       /* Size variables */
-      --upload-icon-size: 56px;
-      --upload-icon-size-loading: 48px;
-      --upload-max-width: 100%;
+      --zui-icon-size: 56px;
+      --zui-icon-size-loading: 48px;
+      --zui-max-width: 100%;
       
       /* Typography */
-      --upload-label-size: 18px;
-      --upload-label-weight: 600;
-      --upload-hint-size: 14px;
-      --upload-info-size: 13px;
-      --upload-filename-size: 14px;
-      --upload-filename-weight: 500;
-      --upload-meta-size: 12px;
-      --upload-error-size: 13px;
+      --zui-label-size: 18px;
+      --zui-label-weight: 600;
+      --zui-hint-size: 14px;
+      --zui-info-size: 13px;
+      --zui-filename-size: 14px;
+      --zui-filename-weight: 500;
+      --zui-meta-size: 12px;
+      --zui-error-size: 13px;
       
       /* Effects */
-      --upload-transition-speed: 0.2s;
-      --upload-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      --upload-disabled-opacity: 0.6;
+      --zui-transition-speed: 0.2s;
+      --zui-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      --zui-disabled-opacity: 0.6;
     }
 
     .upload-wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: var(--upload-padding);
-      border: var(--upload-border-width) dashed var(--upload-border-color);
-      border-radius: var(--upload-border-radius);
-      transition: border-color var(--upload-transition-speed);
-      background: var(--upload-bg-color);
+      padding: var(--zui-padding);
+      border: var(--zui-border-width) dashed var(--zui-border-color);
+      border-radius: var(--zui-border-radius);
+      transition: border-color var(--zui-transition-speed);
+      background: var(--zui-bg-color);
       cursor: pointer;
     }
 
     .upload-wrapper:hover {
-      border-color: var(--upload-border-color-hover);
+      border-color: var(--zui-border-color-hover);
     }
 
     .upload-wrapper.loading {
-      border-color: var(--upload-border-color-loading);
-      background: var(--upload-bg-color-loading);
+      border-color: var(--zui-border-color-loading);
+      background: var(--zui-bg-color-loading);
       cursor: default;
     }
 
     .upload-wrapper.success {
-      border-color: var(--upload-border-color-success);
-      background: var(--upload-bg-color-success);
+      border-color: var(--zui-border-color-success);
+      background: var(--zui-bg-color-success);
     }
 
     .upload-wrapper.error {
-      border-color: var(--upload-border-color-error);
-      background: var(--upload-bg-color-error);
+      border-color: var(--zui-border-color-error);
+      background: var(--zui-bg-color-error);
     }
 
     .upload-wrapper.disabled {
-      opacity: var(--upload-disabled-opacity);
+      opacity: var(--zui-disabled-opacity);
       cursor: not-allowed;
     }
 
@@ -105,9 +105,9 @@ export class DvUploadBox extends LitElement {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: var(--upload-gap);
+      gap: var(--zui-gap);
       width: 100%;
-      max-width: var(--upload-max-width);
+      max-width: var(--zui-max-width);
     }
 
     input[type="file"] {
@@ -122,20 +122,20 @@ export class DvUploadBox extends LitElement {
     }
 
     .icon {
-      width: var(--upload-icon-size);
-      height: var(--upload-icon-size);
+      width: var(--zui-icon-size);
+      height: var(--zui-icon-size);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--upload-icon-bg);
-      color: var(--upload-icon-color);
-      transition: all var(--upload-transition-speed);
+      background: var(--zui-icon-bg);
+      color: var(--zui-icon-color);
+      transition: all var(--zui-transition-speed);
     }
 
     .loading .icon {
-      width: var(--upload-icon-size-loading);
-      height: var(--upload-icon-size-loading);
+      width: var(--zui-icon-size-loading);
+      height: var(--zui-icon-size-loading);
     }
 
     .success .icon {
@@ -154,26 +154,26 @@ export class DvUploadBox extends LitElement {
     }
 
     .label {
-      font-size: var(--upload-label-size);
-      font-weight: var(--upload-label-weight);
-      color: var(--upload-text-primary);
+      font-size: var(--zui-label-size);
+      font-weight: var(--zui-label-weight);
+      color: var(--zui-text-primary);
     }
 
     .hint {
-      color: var(--upload-text-secondary);
-      font-size: var(--upload-hint-size);
+      color: var(--zui-text-secondary);
+      font-size: var(--zui-hint-size);
       margin: 0;
       text-align: center;
       font-weight: 400;
     }
 
     .link {
-      color: var(--upload-link-color);
+      color: var(--zui-link-color);
     }
 
     .info {
-      font-size: var(--upload-info-size);
-      color: var(--upload-text-secondary);
+      font-size: var(--zui-info-size);
+      color: var(--zui-text-secondary);
     }
 
     .file-display {
@@ -181,10 +181,10 @@ export class DvUploadBox extends LitElement {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: var(--upload-gap) 16px;
-      background: var(--upload-file-bg);
-      border-radius: var(--upload-border-radius);
-      box-shadow: var(--upload-shadow);
+      padding: var(--zui-gap) 16px;
+      background: var(--zui-file-bg);
+      border-radius: var(--zui-border-radius);
+      box-shadow: var(--zui-shadow);
     }
 
     .file-info {
@@ -193,9 +193,9 @@ export class DvUploadBox extends LitElement {
     }
 
     .filename {
-      font-size: var(--upload-filename-size);
-      font-weight: var(--upload-filename-weight);
-      color: var(--upload-text-primary);
+      font-size: var(--zui-filename-size);
+      font-weight: var(--zui-filename-weight);
+      color: var(--zui-text-primary);
       display: block;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -203,8 +203,8 @@ export class DvUploadBox extends LitElement {
     }
 
     .meta {
-      font-size: var(--upload-meta-size);
-      color: var(--upload-text-secondary);
+      font-size: var(--zui-meta-size);
+      color: var(--zui-text-secondary);
       text-transform: uppercase;
       margin-top: 2px;
     }
@@ -212,7 +212,7 @@ export class DvUploadBox extends LitElement {
     .progress {
       width: 100%;
       height: 4px;
-      background: var(--upload-progress-bg);
+      background: var(--zui-progress-bg);
       border-radius: 2px;
       overflow: hidden;
       margin-top: 8px;
@@ -220,8 +220,8 @@ export class DvUploadBox extends LitElement {
 
     .progress-bar {
       height: 100%;
-      background: var(--upload-progress-bar);
-      transition: width var(--upload-transition-speed);
+      background: var(--zui-progress-bar);
+      transition: width var(--zui-transition-speed);
       border-radius: 2px;
     }
 
@@ -236,12 +236,12 @@ export class DvUploadBox extends LitElement {
       border: none;
       background: transparent;
       padding: 0;
-      margin-left: var(--upload-gap);
+      margin-left: var(--zui-gap);
       flex-shrink: 0;
     }
 
     .btn:hover {
-      background: var(--upload-icon-bg-alt);
+      background: var(--zui-icon-bg-alt);
     }
 
     .btn svg {
@@ -250,8 +250,8 @@ export class DvUploadBox extends LitElement {
     }
 
     .error-msg {
-      color: var(--upload-error-color);
-      font-size: var(--upload-error-size);
+      color: var(--zui-error-color);
+      font-size: var(--zui-error-size);
       margin-top: 8px;
     }
   `;
@@ -543,6 +543,6 @@ export class DvUploadBox extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'dv-upload-box': DvUploadBox;
+    'zui-file-upload': ZuiFileUpload;
   }
 }

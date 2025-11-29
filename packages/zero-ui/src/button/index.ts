@@ -1,6 +1,6 @@
 // Side-effect import that defines the custom element
-import './dv-button';
+import './zui-button.js';
 
 
 // Optional: re-export class for direct JS/TS consumers
-export * from './dv-button';
+export * from './zui-button.js';

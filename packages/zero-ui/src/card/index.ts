@@ -1,2 +1,2 @@
-import './dv-card';
-export * from './dv-card';
+import './zui-card.js';
+export * from './zui-card.js';

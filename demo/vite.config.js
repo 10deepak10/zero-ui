@@ -4,9 +4,9 @@ import path from 'path';
 export default defineConfig({
   resolve: {
     alias: {
-      '@deepverse/zero-ui/button': path.resolve(__dirname, '../packages/zero-ui/dist/button/dv-button.js'),
-      '@deepverse/zero-ui/card': path.resolve(__dirname, '../packages/zero-ui/dist/card/dv-card.js'),
-      '@deepverse/zero-ui/upload-box': path.resolve(__dirname, '../packages/zero-ui/dist/upload-box/dv-upload-box.js'),
+      '@deepverse/zero-ui/button': path.resolve(__dirname, '../packages/zero-ui/src/button/zui-button.ts'),
+      '@deepverse/zero-ui/card': path.resolve(__dirname, '../packages/zero-ui/src/card/zui-card.ts'),
+      '@deepverse/zero-ui/file-upload': path.resolve(__dirname, '../packages/zero-ui/src/file-upload/zui-file-upload.ts'),
       '@deepverse/zero-ui': path.resolve(__dirname, '../packages/zero-ui/dist/index.js'),
     }
   }
