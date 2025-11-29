@@ -22,6 +22,10 @@
     "./file-upload": {
       "types": "./dist/file-upload/zui-file-upload.d.ts",
       "default": "./dist/file-upload/zui-file-upload.js"
+    },
+    "./otp-input": {
+      "types": "./dist/otp-input/zui-otp-input.d.ts",
+      "default": "./dist/otp-input/zui-otp-input.js"
     }
   },
   "files": ["dist"],

@@ -15,6 +15,7 @@
   "dependencies": {
     "@deepverse/zero-ui": "link:../packages/zero-ui",
     "button": "link:../packages/zero-ui/button",
-    "card": "link:../packages/zero-ui/card"
+    "card": "link:../packages/zero-ui/card",
+    "lit": "^3.3.1"
   }
 }
