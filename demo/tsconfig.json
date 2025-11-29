@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["vite/client"],
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@deepverse/zero-ui": ["../packages/zero-ui/dist/index.js"],
+      "@deepverse/zero-ui/button": ["../packages/zero-ui/dist/button/dv-button.js"],
+      "@deepverse/zero-ui/card": ["../packages/zero-ui/dist/card/dv-card.js"],
+      "@deepverse/zero-ui/upload-box": ["../packages/zero-ui/dist/upload-box/dv-upload-box.js"]
+    }
+  },
+  "include": ["src"]
+}

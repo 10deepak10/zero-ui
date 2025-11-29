@@ -1,0 +1,13 @@
+{
+  "name": "zero-ui",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "packages/*",
+    "demo"
+  ],
+  "scripts": {
+    "build": "pnpm -F @deepverse/zero-ui build",
+    "dev": "pnpm -F demo dev"
+  }
+}
