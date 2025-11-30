@@ -26,6 +26,10 @@
     "./otp-input": {
       "types": "./dist/otp-input/zui-otp-input.d.ts",
       "default": "./dist/otp-input/zui-otp-input.js"
+    },
+    "./phone-input": {
+      "types": "./dist/phone-input/zui-phone-input.d.ts",
+      "default": "./dist/phone-input/zui-phone-input.js"
     }
   },
   "files": ["dist"],
