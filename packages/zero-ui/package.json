@@ -34,6 +34,14 @@
     "./star-rating": {
       "types": "./dist/star-rating/zui-star-rating.d.ts",
       "default": "./dist/star-rating/zui-star-rating.js"
+    },
+    "./select": {
+      "types": "./dist/select/zui-select.d.ts",
+      "default": "./dist/select/zui-select.js"
+    },
+    "./dropdown": {
+      "types": "./dist/dropdown/zui-dropdown.d.ts",
+      "default": "./dist/dropdown/zui-dropdown.js"
     }
   },
   "files": ["dist"],

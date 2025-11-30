@@ -10,6 +10,8 @@ export default defineConfig({
       '@deepverse/zero-ui/otp-input': path.resolve(__dirname, '../packages/zero-ui/src/otp-input/zui-otp-input.ts'),
       '@deepverse/zero-ui/phone-input': path.resolve(__dirname, '../packages/zero-ui/src/phone-input/zui-phone-input.ts'),
       '@deepverse/zero-ui/star-rating': path.resolve(__dirname, '../packages/zero-ui/src/star-rating/zui-star-rating.ts'),
+      '@deepverse/zero-ui/select': path.resolve(__dirname, '../packages/zero-ui/src/select/zui-select.ts'),
+      '@deepverse/zero-ui/dropdown': path.resolve(__dirname, '../packages/zero-ui/src/dropdown/zui-dropdown.ts'),
       '@deepverse/zero-ui': path.resolve(__dirname, '../packages/zero-ui/dist/index.js'),
     }
   }

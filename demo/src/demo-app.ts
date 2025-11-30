@@ -8,6 +8,8 @@ import './pages/file-upload-demo';
 import './pages/otp-input-demo';
 import './pages/phone-input-demo';
 import './pages/star-rating-demo';
+import './pages/select-demo';
+import './pages/dropdown-demo';
 import './pages/placeholder-demo';
 
 @customElement('demo-app')
@@ -119,13 +121,14 @@ export class DemoApp extends LitElement {
         // General UI
         case '/button': return html`<button-demo></button-demo>`;
         case '/card': return html`<card-demo></card-demo>`;
+        case '/dropdown': return html`<dropdown-demo></dropdown-demo>`;
 
         // Form Elements
         case '/file-upload': return html`<file-upload-demo></file-upload-demo>`;
         case '/otp-input': return html`<otp-input-demo></otp-input-demo>`;
         case '/phone-input': return html`<phone-input-demo></phone-input-demo>`;
         case '/star-rating': return html`<star-rating-demo></star-rating-demo>`;
-        case '/select': return html`<placeholder-demo componentName="Select"></placeholder-demo>`;
+        case '/select': return html`<select-demo></select-demo>`;
         case '/checkbox': return html`<placeholder-demo componentName="Checkbox"></placeholder-demo>`;
         case '/radio-group': return html`<placeholder-demo componentName="Radio Group"></placeholder-demo>`;
         case '/toggle': return html`<placeholder-demo componentName="Toggle"></placeholder-demo>`;
@@ -195,6 +198,7 @@ export class DemoApp extends LitElement {
             <div class="nav-header">General UI</div>
             ${this._renderNavLink('/button', 'Button')}
             ${this._renderNavLink('/card', 'Card')}
+            ${this._renderNavLink('/dropdown', 'Dropdown')}
           </div>
 
           <div class="nav-group">
