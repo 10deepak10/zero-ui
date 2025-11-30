@@ -17,82 +17,122 @@ export class DemoApp extends LitElement {
   @state() private _route = window.location.pathname;
 
   static styles = css`
-    :host {
-      display: flex;
-      height: 100vh;
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      color: #333;
-    }
+  :host {
+    display: flex;
+    height: 100vh;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #fff;
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0f0f1e 100%);
+  }
 
-    aside {
-      width: 280px;
-      background: #f8f9fa;
-      border-right: 1px solid #e9ecef;
-      display: flex;
-      flex-direction: column;
-      padding: 24px 0;
-      flex-shrink: 0;
-    }
+  aside {
+    width: 280px;
+    backdrop-filter: blur(25px);
+    background: rgba(255,255,255,0.04);
+    border-right: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    flex-direction: column;
+    padding: 24px 0;
+    flex-shrink: 0;
+    box-shadow: 4px 0 30px rgba(0,0,0,0.4);
+  }
 
-    .brand {
-      padding: 0 24px 24px;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #111;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border-bottom: 1px solid #e9ecef;
-    }
+  .brand {
+  padding: 0 24px 24px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
-    nav {
-      flex: 1;
-      overflow-y: auto;
-      padding: 24px 16px;
-    }
+  /* glass effect background */
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 14px 20px;
+  margin: 0 16px 26px;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 
-    .nav-group {
-      margin-bottom: 24px;
-    }
+  /* vivid neon gradient text */
+  background-clip: padding-box;
+  color: #ffffff;
 
-    .nav-header {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      color: #6c757d;
-      font-weight: 600;
-      padding: 0 12px;
-      margin-bottom: 8px;
-    }
+  /* glow */
+  text-shadow: 
+    0 0 8px rgba(59,130,246,0.6),
+    0 0 12px rgba(139,92,246,0.6);
+}
 
-    a {
-      display: block;
-      padding: 8px 12px;
-      color: #495057;
-      text-decoration: none;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      transition: all 0.2s;
-      cursor: pointer;
-      margin-bottom: 2px;
-    }
+/* Apply gradient only to the logo icon */
+.brand .logo {
+  font-size: 1.8rem;
+  background: linear-gradient(135deg, #3b82f6, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 
-    a:hover {
-      background: #e9ecef;
-      color: #212529;
-    }
+  text-shadow: 
+    0 0 10px rgba(59,130,246,0.5),
+    0 0 16px rgba(139,92,246,0.5);
+}
 
-    a.active {
-      background: #e7f1ff;
-      color: #0d6efd;
-      font-weight: 500;
-    }
 
-    main {
-      flex: 1;
-      overflow-y: auto;
-      background: #fff;
-    }
-  `;
+  nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px 16px;
+  }
+
+  .nav-group {
+    margin-bottom: 24px;
+  }
+
+  .nav-header {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: #8b9dc3;
+    font-weight: 600;
+    padding: 0 12px;
+    margin-bottom: 10px;
+    opacity: 0.7;
+  }
+
+  a {
+    display: block;
+    padding: 10px 14px;
+    color: #b0bdd9;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    margin-bottom: 4px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.03);
+    backdrop-filter: blur(8px);
+  }
+
+  a:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.12);
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(59,130,246,0.2);
+    transform: translateX(4px);
+  }
+
+  a.active {
+    background: linear-gradient(135deg, rgba(59,130,246,0.3), rgba(139,92,246,0.3));
+    border-color: rgba(59,130,246,0.6);
+    color: #fff;
+    box-shadow: 0 6px 30px rgba(59,130,246,0.4);
+  }
+
+  main {
+    flex: 1;
+    overflow-y: auto;
+    background: transparent; /* match intro page */
+  }
+`;
+
 
   connectedCallback() {
     super.connectedCallback();
@@ -116,73 +156,73 @@ export class DemoApp extends LitElement {
 
   private _renderPage() {
     switch (this._route) {
-        case '/': return html`<intro-page></intro-page>`;
+      case '/': return html`<intro-page></intro-page>`;
 
-        // General UI
-        case '/button': return html`<button-demo></button-demo>`;
-        case '/card': return html`<card-demo></card-demo>`;
-        case '/dropdown': return html`<dropdown-demo></dropdown-demo>`;
+      // General UI
+      case '/button': return html`<button-demo></button-demo>`;
+      case '/card': return html`<card-demo></card-demo>`;
+      case '/dropdown': return html`<dropdown-demo></dropdown-demo>`;
 
-        // Form Elements
-        case '/file-upload': return html`<file-upload-demo></file-upload-demo>`;
-        case '/otp-input': return html`<otp-input-demo></otp-input-demo>`;
-        case '/phone-input': return html`<phone-input-demo></phone-input-demo>`;
-        case '/star-rating': return html`<star-rating-demo></star-rating-demo>`;
-        case '/select': return html`<select-demo></select-demo>`;
-        case '/checkbox': return html`<placeholder-demo componentName="Checkbox"></placeholder-demo>`;
-        case '/radio-group': return html`<placeholder-demo componentName="Radio Group"></placeholder-demo>`;
-        case '/toggle': return html`<placeholder-demo componentName="Toggle"></placeholder-demo>`;
-        case '/slider': return html`<placeholder-demo componentName="Slider"></placeholder-demo>`;
-        case '/pin-input': return html`<placeholder-demo componentName="Pin Input"></placeholder-demo>`;
+      // Form Elements
+      case '/file-upload': return html`<file-upload-demo></file-upload-demo>`;
+      case '/otp-input': return html`<otp-input-demo></otp-input-demo>`;
+      case '/phone-input': return html`<phone-input-demo></phone-input-demo>`;
+      case '/star-rating': return html`<star-rating-demo></star-rating-demo>`;
+      case '/select': return html`<select-demo></select-demo>`;
+      case '/checkbox': return html`<placeholder-demo componentName="Checkbox"></placeholder-demo>`;
+      case '/radio-group': return html`<placeholder-demo componentName="Radio Group"></placeholder-demo>`;
+      case '/toggle': return html`<placeholder-demo componentName="Toggle"></placeholder-demo>`;
+      case '/slider': return html`<placeholder-demo componentName="Slider"></placeholder-demo>`;
+      case '/pin-input': return html`<placeholder-demo componentName="Pin Input"></placeholder-demo>`;
 
-        // Browser & Device
-        case '/os-check': return html`<placeholder-demo componentName="OS Check"></placeholder-demo>`;
-        case '/browser-check': return html`<placeholder-demo componentName="Browser Check"></placeholder-demo>`;
-        case '/screen-check': return html`<placeholder-demo componentName="Screen Check"></placeholder-demo>`;
-        case '/storage-check': return html`<placeholder-demo componentName="Storage Check"></placeholder-demo>`;
-        case '/gpu-check': return html`<placeholder-demo componentName="GPU Check"></placeholder-demo>`;
-        case '/network-check': return html`<placeholder-demo componentName="Network Check"></placeholder-demo>`;
-        case '/battery-check': return html`<placeholder-demo componentName="Battery Check"></placeholder-demo>`;
-        case '/online-status': return html`<placeholder-demo componentName="Online Status"></placeholder-demo>`;
+      // Browser & Device
+      case '/os-check': return html`<placeholder-demo componentName="OS Check"></placeholder-demo>`;
+      case '/browser-check': return html`<placeholder-demo componentName="Browser Check"></placeholder-demo>`;
+      case '/screen-check': return html`<placeholder-demo componentName="Screen Check"></placeholder-demo>`;
+      case '/storage-check': return html`<placeholder-demo componentName="Storage Check"></placeholder-demo>`;
+      case '/gpu-check': return html`<placeholder-demo componentName="GPU Check"></placeholder-demo>`;
+      case '/network-check': return html`<placeholder-demo componentName="Network Check"></placeholder-demo>`;
+      case '/battery-check': return html`<placeholder-demo componentName="Battery Check"></placeholder-demo>`;
+      case '/online-status': return html`<placeholder-demo componentName="Online Status"></placeholder-demo>`;
 
-        // Permissions & Media
-        case '/camera-check': return html`<placeholder-demo componentName="Camera Check"></placeholder-demo>`;
-        case '/mic-check': return html`<placeholder-demo componentName="Microphone Check"></placeholder-demo>`;
-        case '/geolocation-check': return html`<placeholder-demo componentName="Geolocation Check"></placeholder-demo>`;
-        case '/notification-check': return html`<placeholder-demo componentName="Notification Check"></placeholder-demo>`;
-        case '/clipboard-check': return html`<placeholder-demo componentName="Clipboard Check"></placeholder-demo>`;
+      // Permissions & Media
+      case '/camera-check': return html`<placeholder-demo componentName="Camera Check"></placeholder-demo>`;
+      case '/mic-check': return html`<placeholder-demo componentName="Microphone Check"></placeholder-demo>`;
+      case '/geolocation-check': return html`<placeholder-demo componentName="Geolocation Check"></placeholder-demo>`;
+      case '/notification-check': return html`<placeholder-demo componentName="Notification Check"></placeholder-demo>`;
+      case '/clipboard-check': return html`<placeholder-demo componentName="Clipboard Check"></placeholder-demo>`;
 
-        // Extensions
-        case '/extension-check': return html`<placeholder-demo componentName="Extension Check"></placeholder-demo>`;
-        case '/wallet-check': return html`<placeholder-demo componentName="Wallet Check"></placeholder-demo>`;
+      // Extensions
+      case '/extension-check': return html`<placeholder-demo componentName="Extension Check"></placeholder-demo>`;
+      case '/wallet-check': return html`<placeholder-demo componentName="Wallet Check"></placeholder-demo>`;
 
-        // Proctoring
-        case '/tab-switch-check': return html`<placeholder-demo componentName="Tab Switch Check"></placeholder-demo>`;
-        case '/devtools-check': return html`<placeholder-demo componentName="DevTools Check"></placeholder-demo>`;
-        case '/incognito-check': return html`<placeholder-demo componentName="Incognito Check"></placeholder-demo>`;
-        case '/fullscreen-check': return html`<placeholder-demo componentName="Fullscreen Check"></placeholder-demo>`;
-        case '/copy-paste-test': return html`<placeholder-demo componentName="Copy Paste Test"></placeholder-demo>`;
-        case '/face-detection-check': return html`<placeholder-demo componentName="Face Detection Check"></placeholder-demo>`;
-        case '/multi-monitor-check': return html`<placeholder-demo componentName="Multi-Monitor Check"></placeholder-demo>`;
+      // Proctoring
+      case '/tab-switch-check': return html`<placeholder-demo componentName="Tab Switch Check"></placeholder-demo>`;
+      case '/devtools-check': return html`<placeholder-demo componentName="DevTools Check"></placeholder-demo>`;
+      case '/incognito-check': return html`<placeholder-demo componentName="Incognito Check"></placeholder-demo>`;
+      case '/fullscreen-check': return html`<placeholder-demo componentName="Fullscreen Check"></placeholder-demo>`;
+      case '/copy-paste-test': return html`<placeholder-demo componentName="Copy Paste Test"></placeholder-demo>`;
+      case '/face-detection-check': return html`<placeholder-demo componentName="Face Detection Check"></placeholder-demo>`;
+      case '/multi-monitor-check': return html`<placeholder-demo componentName="Multi-Monitor Check"></placeholder-demo>`;
 
-        // Utilities
-        case '/logger': return html`<placeholder-demo componentName="Logger"></placeholder-demo>`;
-        case '/event-bus': return html`<placeholder-demo componentName="Event Bus"></placeholder-demo>`;
-        case '/theme-provider': return html`<placeholder-demo componentName="Theme Provider"></placeholder-demo>`;
+      // Utilities
+      case '/logger': return html`<placeholder-demo componentName="Logger"></placeholder-demo>`;
+      case '/event-bus': return html`<placeholder-demo componentName="Event Bus"></placeholder-demo>`;
+      case '/theme-provider': return html`<placeholder-demo componentName="Theme Provider"></placeholder-demo>`;
 
-        default: return html`<intro-page></intro-page>`;
+      default: return html`<intro-page></intro-page>`;
     }
   }
 
-    private _renderNavLink(path: string, label: string) {
-        return html`
+  private _renderNavLink(path: string, label: string) {
+    return html`
       <a 
         href="${path}" 
         class="${this._route === path ? 'active' : ''}"
         @click="${(e: Event) => this._navigate(e, path)}"
       >${label}</a>
     `;
-    }
+  }
 
   render() {
     return html`
