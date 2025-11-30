@@ -38,6 +38,12 @@
       ],
       "@deepverse/zero-ui/star-rating": [
         "../packages/zero-ui/src/star-rating/zui-star-rating.ts"
+      ],
+      "@deepverse/zero-ui/select": [
+        "../packages/zero-ui/src/select/zui-select.ts"
+      ],
+      "@deepverse/zero-ui/dropdown": [
+        "../packages/zero-ui/src/dropdown/zui-dropdown.ts"
       ]
     }
   },
