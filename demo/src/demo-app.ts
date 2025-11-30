@@ -6,6 +6,7 @@ import './pages/button-demo';
 import './pages/card-demo';
 import './pages/file-upload-demo';
 import './pages/otp-input-demo';
+import './pages/phone-input-demo';
 
 @customElement('demo-app')
 export class DemoApp extends LitElement {
@@ -120,6 +121,8 @@ export class DemoApp extends LitElement {
         return html`<file-upload-demo></file-upload-demo>`;
       case '/otp-input':
         return html`<otp-input-demo></otp-input-demo>`;
+        case '/phone-input':
+            return html`<phone-input-demo></phone-input-demo>`;
       default:
         return html`<intro-page></intro-page>`;
     }
@@ -161,6 +164,11 @@ export class DemoApp extends LitElement {
               class="${this._route === '/otp-input' ? 'active' : ''}"
               @click="${(e: Event) => this._navigate(e, '/otp-input')}"
             >OTP Input</a>
+            <a
+              href="/phone-input"
+              class="${this._route === '/phone-input' ? 'active' : ''}"
+              @click="${(e: Event) => this._navigate(e, '/phone-input')}"
+            >Phone Input</a>
           </div>
         </nav>
       </aside>

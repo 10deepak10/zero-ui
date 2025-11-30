@@ -32,6 +32,9 @@
       ],
       "@deepverse/zero-ui/otp-input": [
         "../packages/zero-ui/src/otp-input/zui-otp-input.ts"
+      ],
+      "@deepverse/zero-ui/phone-input": [
+        "../packages/zero-ui/src/phone-input/zui-phone-input.ts"
       ]
     }
   },
