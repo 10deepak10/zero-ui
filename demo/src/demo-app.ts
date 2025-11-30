@@ -15,53 +15,86 @@ import './pages/placeholder-demo';
 @customElement('demo-app')
 export class DemoApp extends LitElement {
   @state() private _route = window.location.pathname;
+  @state() private _theme: 'dark' | 'light' = 'dark';
 
   static styles = css`
-  :host {
-    display: flex;
-    height: 100vh;
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    color: #fff;
-    background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0f0f1e 100%);
-  }
+    :host {
+      --bg-body: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0f0f1e 100%);
+      --text-main: #fff;
+      --text-muted: #8b9dc3;
+      --glass-bg: rgba(255, 255, 255, 0.04);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      --card-bg: rgba(255, 255, 255, 0.02);
+      --card-border: rgba(255, 255, 255, 0.05);
+      --sidebar-bg: rgba(255, 255, 255, 0.04);
+      --sidebar-border: rgba(255, 255, 255, 0.08);
+      --link-hover-bg: rgba(255, 255, 255, 0.08);
+      --link-active-bg: linear-gradient(135deg, rgba(59,130,246,0.3), rgba(139,92,246,0.3));
+      --brand-bg: rgba(255, 255, 255, 0.06);
 
-  aside {
-    width: 280px;
-    backdrop-filter: blur(25px);
-    background: rgba(255,255,255,0.04);
-    border-right: 1px solid rgba(255,255,255,0.08);
-    display: flex;
-    flex-direction: column;
-    padding: 24px 0;
-    flex-shrink: 0;
-    box-shadow: 4px 0 30px rgba(0,0,0,0.4);
-  }
+      display: flex;
+      height: 100vh;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      color: var(--text-main);
+      background: var(--bg-body);
+      transition: background 0.3s ease, color 0.3s ease;
+    }
 
-  .brand {
-  padding: 0 24px 24px;
-  font-size: 1.6rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    :host([theme="light"]) {
+      --bg-body: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      --text-main: #1f2937;
+      --text-muted: #6b7280;
+      --glass-bg: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.5);
+      --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+      --card-bg: rgba(255, 255, 255, 0.6);
+      --card-border: rgba(255, 255, 255, 0.4);
+      --sidebar-bg: rgba(255, 255, 255, 0.4);
+      --sidebar-border: rgba(255, 255, 255, 0.5);
+      --link-hover-bg: rgba(255, 255, 255, 0.5);
+      --link-active-bg: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(139,92,246,0.2));
+      --brand-bg: rgba(255, 255, 255, 0.5);
+    }
 
-  /* glass effect background */
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 14px;
-  padding: 14px 20px;
-  margin: 0 16px 26px;
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+    aside {
+      width: 280px;
+      backdrop-filter: blur(25px);
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--sidebar-border);
+      display: flex;
+      flex-direction: column;
+      padding: 24px 0;
+      flex-shrink: 0;
+      box-shadow: 4px 0 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
 
-  /* vivid neon gradient text */
-  background-clip: padding-box;
-  color: #ffffff;
+    .brand {
+      padding: 0 24px 24px;
+      font-size: 1.6rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
 
-  /* glow */
-  text-shadow: 
-    0 0 8px rgba(59,130,246,0.6),
-    0 0 12px rgba(139,92,246,0.6);
-}
+      /* glass effect background */
+      background: var(--brand-bg);
+      border-radius: 14px;
+      padding: 14px 20px;
+      margin: 0 16px 26px;
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+
+      /* vivid neon gradient text */
+      background-clip: padding-box;
+      color: var(--text-main);
+
+      /* glow */
+      text-shadow: 
+        0 0 8px rgba(59,130,246,0.6),
+        0 0 12px rgba(139,92,246,0.6);
+    }
 
 /* Apply gradient only to the logo icon */
 .brand .logo {
@@ -86,63 +119,69 @@ export class DemoApp extends LitElement {
     margin-bottom: 24px;
   }
 
-  .nav-header {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    color: #8b9dc3;
-    font-weight: 600;
-    padding: 0 12px;
-    margin-bottom: 10px;
-    opacity: 0.7;
-  }
+    .nav-header {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 600;
+      padding: 0 12px;
+      margin-bottom: 10px;
+      opacity: 0.7;
+    }
 
-  a {
-    display: block;
-    padding: 10px 14px;
-    color: #b0bdd9;
-    text-decoration: none;
-    border-radius: 10px;
-    font-size: 0.95rem;
-    transition: all 0.25s ease;
-    cursor: pointer;
-    margin-bottom: 4px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.03);
-    backdrop-filter: blur(8px);
-  }
+    a {
+      display: block;
+      padding: 10px 14px;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      margin-bottom: 4px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(8px);
+    }
 
-  a:hover {
-    background: rgba(255,255,255,0.08);
-    border-color: rgba(255,255,255,0.12);
-    color: #fff;
-    box-shadow: 0 6px 20px rgba(59,130,246,0.2);
-    transform: translateX(4px);
-  }
+    a:hover {
+      background: var(--link-hover-bg);
+      border-color: var(--glass-border);
+      color: var(--text-main);
+      box-shadow: 0 6px 20px rgba(59,130,246,0.2);
+      transform: translateX(4px);
+    }
 
-  a.active {
-    background: linear-gradient(135deg, rgba(59,130,246,0.3), rgba(139,92,246,0.3));
-    border-color: rgba(59,130,246,0.6);
-    color: #fff;
-    box-shadow: 0 6px 30px rgba(59,130,246,0.4);
-  }
+    a.active {
+      background: var(--link-active-bg);
+      border-color: rgba(59,130,246,0.6);
+      color: var(--text-main);
+      box-shadow: 0 6px 30px rgba(59,130,246,0.4);
+    }
 
   main {
     flex: 1;
     overflow-y: auto;
     background: transparent; /* match intro page */
-  }
 `;
 
 
   connectedCallback() {
     super.connectedCallback();
     window.addEventListener('popstate', this._handlePopState);
+    this.addEventListener('theme-toggle', this._handleThemeToggle as EventListener);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     window.removeEventListener('popstate', this._handlePopState);
+    this.removeEventListener('theme-toggle', this._handleThemeToggle as EventListener);
   }
+
+  private _handleThemeToggle = () => {
+    this._theme = this._theme === 'dark' ? 'light' : 'dark';
+    this.setAttribute('theme', this._theme);
+  };
 
   private _handlePopState = () => {
     this._route = window.location.pathname;

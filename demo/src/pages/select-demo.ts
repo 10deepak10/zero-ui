@@ -8,14 +8,16 @@ export class SelectDemo extends LitElement {
     :host {
       display: block;
       padding: 24px;
+      color: var(--text-main);
     }
 
     .demo-section {
       margin-bottom: 2rem;
-      padding: 1.5rem;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      background: #fff;
+      padding: 2rem;
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
     }
 
     h2 {
@@ -23,7 +25,7 @@ export class SelectDemo extends LitElement {
       margin-bottom: 1rem;
       font-size: 1.25rem;
       font-weight: 600;
-      color: #111827;
+      color: var(--text-main);
     }
 
     .preview {
@@ -32,12 +34,16 @@ export class SelectDemo extends LitElement {
       gap: 1rem;
       margin-bottom: 1rem;
       max-width: 400px;
+      padding: 2rem;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
     }
 
     .output {
       margin-top: 0.5rem;
       font-size: 0.875rem;
-      color: #6b7280;
+      color: var(--text-muted);
     }
   `;
 

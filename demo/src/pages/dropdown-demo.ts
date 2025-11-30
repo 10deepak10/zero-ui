@@ -9,14 +9,15 @@ export class DropdownDemo extends LitElement {
     :host {
       display: block;
       padding: 24px;
+      color: var(--text-main);
     }
 
     .demo-section {
       margin-bottom: 2rem;
-      padding: 1.5rem;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      background: #fff;
+      padding: 2rem;
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      background: var(--card-bg);
     }
 
     h2 {
@@ -24,7 +25,7 @@ export class DropdownDemo extends LitElement {
       margin-bottom: 1rem;
       font-size: 1.25rem;
       font-weight: 600;
-      color: #111827;
+      color: var(--text-main);
     }
 
     .preview {
@@ -32,6 +33,10 @@ export class DropdownDemo extends LitElement {
       gap: 2rem;
       margin-bottom: 1rem;
       height: 200px; /* Ensure space for dropdown */
+      padding: 2rem;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
     }
 
     .menu-item {
@@ -42,24 +47,31 @@ export class DropdownDemo extends LitElement {
       background: none;
       border: none;
       cursor: pointer;
-      color: #374151;
+      color: #374151; /* Will be overridden by dropdown content style if needed, but let's use variable */
+      color: var(--text-main);
       font-size: 0.875rem;
+      transition: background 0.2s;
     }
 
     .menu-item:hover {
-      background-color: #f3f4f6;
+      background-color: var(--link-hover-bg);
     }
 
     .custom-content {
       padding: 1rem;
+      color: var(--text-main);
     }
 
     input {
       display: block;
+      width: 100%;
       padding: 0.5rem;
       margin-bottom: 0.5rem;
-      border: 1px solid #d1d5db;
+      border: 1px solid var(--glass-border);
       border-radius: 0.375rem;
+      background: var(--glass-bg);
+      color: var(--text-main);
+      box-sizing: border-box;
     }
   `;
 
@@ -100,7 +112,7 @@ export class DropdownDemo extends LitElement {
 
       <div class="demo-section">
         <h2>Close on Scroll</h2>
-        <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">
+        <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem;">
           This dropdown will close when you scroll the page.
         </p>
         <div class="preview">
@@ -117,7 +129,7 @@ export class DropdownDemo extends LitElement {
 
       <div class="demo-section">
         <h2>Close from Inside Content</h2>
-        <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 1rem;">
+        <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem;">
           Click any menu item to close the dropdown.
         </p>
         <div class="preview">

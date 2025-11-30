@@ -11,7 +11,7 @@ export class PlaceholderDemo extends LitElement {
       justify-content: center;
       height: 100%;
       text-align: center;
-      color: #6b7280;
+      color: var(--text-muted);
       padding: 2rem;
       box-sizing: border-box;
     }
@@ -19,7 +19,7 @@ export class PlaceholderDemo extends LitElement {
     h1 {
       font-size: 2rem;
       font-weight: 700;
-      color: #111827;
+      color: var(--text-main);
       margin-bottom: 1rem;
     }
 

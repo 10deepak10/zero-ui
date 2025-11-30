@@ -1,19 +1,50 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement, state, property } from 'lit/decorators.js';
 
 @customElement('intro-page')
 export class IntroPage extends LitElement {
   @state() private isHovering = false;
+  @property({ type: String }) theme: 'dark' | 'light' = 'dark';
 
   static styles = css`
     :host {
       display: block;
       min-height: 100vh;
-      background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0f0f1e 100%);
+      background: transparent;
       font-family: 'Segoe UI', system-ui, sans-serif;
-      color: #fff;
+      color: var(--text-main);
       overflow: hidden;
       position: relative;
+    }
+
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: flex-end;
+      z-index: 100;
+    }
+
+    .theme-toggle {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--text-main);
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .theme-toggle:hover {
+      background: var(--glass-border);
+      transform: scale(1.1);
     }
 
     .hero-section {
@@ -49,7 +80,7 @@ export class IntroPage extends LitElement {
     .tagline {
       text-align: center;
       font-size: 1.5rem;
-      color: #8b9dc3;
+      color: var(--text-muted);
       font-weight: 300;
       letter-spacing: 1px;
       margin-bottom: 40px;
@@ -59,7 +90,7 @@ export class IntroPage extends LitElement {
       text-align: center;
       font-size: 1.1rem;
       line-height: 1.8;
-      color: #6b7d9f;
+      color: var(--text-muted);
       max-width: 800px;
       margin: 0 auto 60px;
     }
@@ -113,8 +144,8 @@ export class IntroPage extends LitElement {
     }
 
     .feature-card {
-      background: rgba(255,255,255,0.02);
-      border: 1px solid rgba(255,255,255,0.05);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
       backdrop-filter: blur(20px);
       padding: 40px;
       border-radius: 20px;
@@ -135,7 +166,7 @@ export class IntroPage extends LitElement {
     .feature-card:hover {
       transform: translateY(-8px);
       border-color: rgba(59,130,246,0.3);
-      box-shadow: 0 20px 60px rgba(59,130,246,0.2);
+      box-shadow: var(--glass-shadow);
     }
 
     .feature-card:hover::before {
@@ -164,7 +195,7 @@ export class IntroPage extends LitElement {
 
     .feature-description {
       font-size: 1.05rem;
-      color: #8b9dc3;
+      color: var(--text-muted);
       line-height: 1.7;
     }
 
@@ -223,7 +254,7 @@ export class IntroPage extends LitElement {
 
       const fontSize = canvas.width * 0.18;
       tctx.font = `bold ${fontSize}px Segoe UI`;
-      tctx.fillStyle = "#fff";
+      tctx.fillStyle = this.theme === 'dark' ? "#fff" : "#111827";
       tctx.textAlign = "center";
       tctx.textBaseline = "middle";
 
@@ -338,11 +369,18 @@ export class IntroPage extends LitElement {
 
         /* GLASSMORPHISM PARTICLE */
         const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 6);
-        gradient.addColorStop(0, "rgba(255,255,255,0.95)");
-        gradient.addColorStop(0.3, "rgba(120,170,255,0.45)");
-        gradient.addColorStop(1, "rgba(100,100,255,0)");
 
-        ctx.globalCompositeOperation = "lighter"; // neon add-glow
+        if (this.theme === 'dark') {
+          gradient.addColorStop(0, "rgba(255,255,255,0.95)");
+          gradient.addColorStop(0.3, "rgba(120,170,255,0.45)");
+          gradient.addColorStop(1, "rgba(100,100,255,0)");
+          ctx.globalCompositeOperation = "lighter"; // neon add-glow
+        } else {
+          gradient.addColorStop(0, "rgba(59,130,246,0.95)");
+          gradient.addColorStop(0.3, "rgba(59,130,246,0.45)");
+          gradient.addColorStop(1, "rgba(59,130,246,0)");
+          ctx.globalCompositeOperation = "source-over"; // normal blending for light mode
+        }
         ctx.fillStyle = gradient;
 
         ctx.beginPath();
@@ -359,8 +397,36 @@ export class IntroPage extends LitElement {
   }
 
 
+  private _toggleTheme() {
+    const newTheme = this.theme === 'dark' ? 'light' : 'dark';
+    this.theme = newTheme; // Update local state immediately for faster UI feedback
+    this.dispatchEvent(new CustomEvent('theme-toggle', {
+      bubbles: true,
+      composed: true
+    }));
+
+    // Re-initialize shapes with new color
+    this.initCanvas();
+  }
+
   render() {
     return html`
+      <header>
+        <button class="theme-toggle" @click=${this._toggleTheme} aria-label="Toggle theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+      </header>
+
       <div class="hero-section">
         <div class="canvas-container">
           <canvas id="hero-canvas"></canvas>

@@ -8,25 +8,40 @@ export class ButtonDemo extends LitElement {
     :host {
       display: block;
       padding: 24px;
+      color: var(--text-main);
     }
     .demo-section {
       margin-bottom: 40px;
-      padding: 24px;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
+      padding: 32px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
     }
     h2 {
       margin-top: 0;
       margin-bottom: 24px;
+      font-weight: 600;
+      color: var(--text-main);
     }
     .preview {
       display: flex;
       gap: 16px;
       align-items: center;
-      padding: 24px;
-      background: #f9fafb;
+      justify-content: center;
+      padding: 40px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      margin-bottom: 24px;
+    }
+    pre {
+      background: rgba(0,0,0,0.3);
+      padding: 16px;
       border-radius: 8px;
-      margin-bottom: 16px;
+      overflow-x: auto;
+      color: #e2e8f0;
+      border: 1px solid rgba(255,255,255,0.1);
     }
   `;
 
