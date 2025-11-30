@@ -7,6 +7,7 @@ import './pages/card-demo';
 import './pages/file-upload-demo';
 import './pages/otp-input-demo';
 import './pages/phone-input-demo';
+import './pages/star-rating-demo';
 
 @customElement('demo-app')
 export class DemoApp extends LitElement {
@@ -123,6 +124,8 @@ export class DemoApp extends LitElement {
         return html`<otp-input-demo></otp-input-demo>`;
         case '/phone-input':
             return html`<phone-input-demo></phone-input-demo>`;
+        case '/star-rating':
+            return html`<star-rating-demo></star-rating-demo>`;
       default:
         return html`<intro-page></intro-page>`;
     }
@@ -169,6 +172,11 @@ export class DemoApp extends LitElement {
               class="${this._route === '/phone-input' ? 'active' : ''}"
               @click="${(e: Event) => this._navigate(e, '/phone-input')}"
             >Phone Input</a>
+            <a
+              href="/star-rating"
+              class="${this._route === '/star-rating' ? 'active' : ''}"
+              @click="${(e: Event) => this._navigate(e, '/star-rating')}"
+            >Star Rating</a>
           </div>
         </nav>
       </aside>

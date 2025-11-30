@@ -12,3 +12,4 @@ export * from './card/zui-card.js';
 export * from './file-upload/zui-file-upload.js';
 export * from './otp-input/zui-otp-input.js';
 export * from './phone-input/zui-phone-input.js';
+export * from './star-rating/zui-star-rating.js';

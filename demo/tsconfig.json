@@ -35,6 +35,9 @@
       ],
       "@deepverse/zero-ui/phone-input": [
         "../packages/zero-ui/src/phone-input/zui-phone-input.ts"
+      ],
+      "@deepverse/zero-ui/star-rating": [
+        "../packages/zero-ui/src/star-rating/zui-star-rating.ts"
       ]
     }
   },

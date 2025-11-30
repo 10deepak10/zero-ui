@@ -30,6 +30,10 @@
     "./phone-input": {
       "types": "./dist/phone-input/zui-phone-input.d.ts",
       "default": "./dist/phone-input/zui-phone-input.js"
+    },
+    "./star-rating": {
+      "types": "./dist/star-rating/zui-star-rating.d.ts",
+      "default": "./dist/star-rating/zui-star-rating.js"
     }
   },
   "files": ["dist"],
