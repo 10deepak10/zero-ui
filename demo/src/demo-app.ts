@@ -14,6 +14,7 @@ import './pages/checkbox-demo';
 import './pages/radio-group-demo';
 import './pages/toggle-demo';
 import './pages/slider-demo';
+import './pages/os-check-demo';
 import './pages/placeholder-demo';
 
 @customElement('demo-app')
@@ -216,10 +217,9 @@ export class DemoApp extends LitElement {
       case '/radio-group': return html`<radio-group-demo></radio-group-demo>`;
       case '/toggle': return html`<toggle-demo></toggle-demo>`;
       case '/slider': return html`<slider-demo></slider-demo>`;
-      case '/pin-input': return html`<placeholder-demo componentName="Pin Input"></placeholder-demo>`;
 
       // Browser & Device
-      case '/os-check': return html`<placeholder-demo componentName="OS Check"></placeholder-demo>`;
+      case '/os-check': return html`<os-check-demo></os-check-demo>`;
       case '/browser-check': return html`<placeholder-demo componentName="Browser Check"></placeholder-demo>`;
       case '/screen-check': return html`<placeholder-demo componentName="Screen Check"></placeholder-demo>`;
       case '/storage-check': return html`<placeholder-demo componentName="Storage Check"></placeholder-demo>`;
@@ -295,7 +295,6 @@ export class DemoApp extends LitElement {
             ${this._renderNavLink('/radio-group', 'Radio Group')}
             ${this._renderNavLink('/toggle', 'Toggle')}
             ${this._renderNavLink('/slider', 'Slider')}
-            ${this._renderNavLink('/pin-input', 'Pin Input')}
           </div>
 
           <div class="nav-group">

@@ -8,6 +8,7 @@ import './checkbox';
 import './radio-group';
 import './toggle';
 import './slider';
+import './os-check';
 
 
 // Re-exports (optional for TS/JS consumers)
@@ -23,3 +24,4 @@ export * from './checkbox/zui-checkbox.js';
 export * from './radio-group/index.js';
 export * from './toggle/zui-toggle.js';
 export * from './slider/zui-slider.js';
+export * from './os-check/zui-os-check.js';

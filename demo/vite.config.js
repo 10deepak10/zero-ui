@@ -52,6 +52,10 @@ export default defineConfig({
         __dirname,
         "../packages/zero-ui/src/slider/zui-slider.ts"
       ),
+      "@deepverse/zero-ui/os-check": path.resolve(
+        __dirname,
+        "../packages/zero-ui/src/os-check/zui-os-check.ts"
+      ),
       "@deepverse/zero-ui": path.resolve(
         __dirname,
         "../packages/zero-ui/dist/index.js"
