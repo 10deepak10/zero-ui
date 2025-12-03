@@ -1,9 +1,8 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, state, property } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 
 @customElement('intro-page')
 export class IntroPage extends LitElement {
-  @state() private isHovering = false;
   @property({ type: String }) theme: 'dark' | 'light' = 'dark';
 
   static styles = css`
@@ -237,11 +236,10 @@ export class IntroPage extends LitElement {
       mouse.y = e.clientY - rect.top;
     });
 
-    canvas.addEventListener('mouseenter', () => this.isHovering = true);
     canvas.addEventListener('mouseleave', () => {
-      this.isHovering = false;
       mouse.x = mouse.y = null;
     });
+
 
     /* ------------------------------------------------------
        HELPER: GET PARTICLE POSITIONS OF TEXT

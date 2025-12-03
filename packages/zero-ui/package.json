@@ -42,9 +42,15 @@
     "./dropdown": {
       "types": "./dist/dropdown/zui-dropdown.d.ts",
       "default": "./dist/dropdown/zui-dropdown.js"
+    },
+    "./checkbox": {
+      "types": "./dist/checkbox/zui-checkbox.d.ts",
+      "default": "./dist/checkbox/zui-checkbox.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "rollup -c"
   },

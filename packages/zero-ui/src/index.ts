@@ -4,6 +4,7 @@ import './card';
 import './file-upload';
 import './otp-input';
 import './phone-input';
+import './checkbox';
 
 
 // Re-exports (optional for TS/JS consumers)
@@ -15,3 +16,4 @@ export * from './phone-input/zui-phone-input.js';
 export * from './star-rating/zui-star-rating.js';
 export * from './select/zui-select.js';
 export * from './dropdown/zui-dropdown.js';
+export * from './checkbox/zui-checkbox.js';
