@@ -10,6 +10,7 @@ import './pages/phone-input-demo';
 import './pages/star-rating-demo';
 import './pages/select-demo';
 import './pages/dropdown-demo';
+import './pages/checkbox-demo';
 import './pages/placeholder-demo';
 
 @customElement('demo-app')
@@ -208,7 +209,7 @@ export class DemoApp extends LitElement {
       case '/phone-input': return html`<phone-input-demo></phone-input-demo>`;
       case '/star-rating': return html`<star-rating-demo></star-rating-demo>`;
       case '/select': return html`<select-demo></select-demo>`;
-      case '/checkbox': return html`<placeholder-demo componentName="Checkbox"></placeholder-demo>`;
+      case '/checkbox': return html`<checkbox-demo></checkbox-demo>`;
       case '/radio-group': return html`<placeholder-demo componentName="Radio Group"></placeholder-demo>`;
       case '/toggle': return html`<placeholder-demo componentName="Toggle"></placeholder-demo>`;
       case '/slider': return html`<placeholder-demo componentName="Slider"></placeholder-demo>`;

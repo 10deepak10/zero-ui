@@ -16,7 +16,7 @@ export class PhoneInputDemo extends LitElement {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 16px;
-      backdrop-filter: blur(12px);
+      
     }
     h2 {
       margin-top: 0;

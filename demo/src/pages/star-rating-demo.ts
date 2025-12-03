@@ -17,7 +17,7 @@ export class StarRatingDemo extends LitElement {
       border: 1px solid var(--card-border);
       border-radius: 16px;
       background: var(--card-bg);
-      backdrop-filter: blur(12px);
+      
     }
 
     h2 {

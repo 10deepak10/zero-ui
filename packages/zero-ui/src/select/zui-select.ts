@@ -299,25 +299,7 @@ export class ZuiSelect extends LitElement {
     `;
   }
 
-  private _toggleDropdown() {
-    if (this.disabled) return;
-    this._open = !this._open;
-  }
 
-  updated(changedProperties: Map<string, any>) {
-    super.updated(changedProperties);
-    
-    if (changedProperties.has('_open')) {
-      const dropdown = this.shadowRoot?.querySelector('zui-dropdown') as any;
-      if (dropdown) {
-        if (this._open && !dropdown.open) {
-          dropdown.openDropdown();
-        } else if (!this._open && dropdown.open) {
-          dropdown.close();
-        }
-      }
-    }
-  }
 
   render() {
     return html`
