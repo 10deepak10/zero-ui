@@ -54,6 +54,10 @@
     "./toggle": {
       "types": "./dist/toggle/zui-toggle.d.ts",
       "default": "./dist/toggle/zui-toggle.js"
+    },
+    "./slider": {
+      "types": "./dist/slider/zui-slider.d.ts",
+      "default": "./dist/slider/zui-slider.js"
     }
   },
   "files": [
