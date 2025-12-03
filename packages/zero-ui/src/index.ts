@@ -6,6 +6,7 @@ import './otp-input';
 import './phone-input';
 import './checkbox';
 import './radio-group';
+import './toggle';
 
 
 // Re-exports (optional for TS/JS consumers)
@@ -19,3 +20,4 @@ export * from './select/zui-select.js';
 export * from './dropdown/zui-dropdown.js';
 export * from './checkbox/zui-checkbox.js';
 export * from './radio-group/index.js';
+export * from './toggle/zui-toggle.js';

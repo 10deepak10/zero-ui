@@ -44,6 +44,10 @@ export default defineConfig({
         __dirname,
         "../packages/zero-ui/src/radio-group/index.ts"
       ),
+      "@deepverse/zero-ui/toggle": path.resolve(
+        __dirname,
+        "../packages/zero-ui/src/toggle/zui-toggle.ts"
+      ),
       "@deepverse/zero-ui": path.resolve(
         __dirname,
         "../packages/zero-ui/dist/index.js"
