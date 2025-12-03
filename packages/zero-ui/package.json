@@ -58,6 +58,10 @@
     "./slider": {
       "types": "./dist/slider/zui-slider.d.ts",
       "default": "./dist/slider/zui-slider.js"
+    },
+    "./os-check": {
+      "types": "./dist/os-check/zui-os-check.d.ts",
+      "default": "./dist/os-check/zui-os-check.js"
     }
   },
   "files": [
