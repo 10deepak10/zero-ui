@@ -50,6 +50,10 @@
     "./radio-group": {
       "types": "./dist/radio-group/index.d.ts",
       "default": "./dist/radio-group/index.js"
+    },
+    "./toggle": {
+      "types": "./dist/toggle/zui-toggle.d.ts",
+      "default": "./dist/toggle/zui-toggle.js"
     }
   },
   "files": [
