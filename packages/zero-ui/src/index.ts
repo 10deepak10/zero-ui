@@ -5,6 +5,7 @@ import './file-upload';
 import './otp-input';
 import './phone-input';
 import './checkbox';
+import './radio-group';
 
 
 // Re-exports (optional for TS/JS consumers)
@@ -17,3 +18,4 @@ export * from './star-rating/zui-star-rating.js';
 export * from './select/zui-select.js';
 export * from './dropdown/zui-dropdown.js';
 export * from './checkbox/zui-checkbox.js';
+export * from './radio-group/index.js';

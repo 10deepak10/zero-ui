@@ -11,6 +11,7 @@ import './pages/star-rating-demo';
 import './pages/select-demo';
 import './pages/dropdown-demo';
 import './pages/checkbox-demo';
+import './pages/radio-group-demo';
 import './pages/placeholder-demo';
 
 @customElement('demo-app')
@@ -210,7 +211,7 @@ export class DemoApp extends LitElement {
       case '/star-rating': return html`<star-rating-demo></star-rating-demo>`;
       case '/select': return html`<select-demo></select-demo>`;
       case '/checkbox': return html`<checkbox-demo></checkbox-demo>`;
-      case '/radio-group': return html`<placeholder-demo componentName="Radio Group"></placeholder-demo>`;
+      case '/radio-group': return html`<radio-group-demo></radio-group-demo>`;
       case '/toggle': return html`<placeholder-demo componentName="Toggle"></placeholder-demo>`;
       case '/slider': return html`<placeholder-demo componentName="Slider"></placeholder-demo>`;
       case '/pin-input': return html`<placeholder-demo componentName="Pin Input"></placeholder-demo>`;

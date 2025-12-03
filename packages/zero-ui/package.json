@@ -46,6 +46,10 @@
     "./checkbox": {
       "types": "./dist/checkbox/zui-checkbox.d.ts",
       "default": "./dist/checkbox/zui-checkbox.js"
+    },
+    "./radio-group": {
+      "types": "./dist/radio-group/index.d.ts",
+      "default": "./dist/radio-group/index.js"
     }
   },
   "files": [

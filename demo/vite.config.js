@@ -40,6 +40,10 @@ export default defineConfig({
         __dirname,
         "../packages/zero-ui/src/checkbox/zui-checkbox.ts"
       ),
+      "@deepverse/zero-ui/radio-group": path.resolve(
+        __dirname,
+        "../packages/zero-ui/src/radio-group/index.ts"
+      ),
       "@deepverse/zero-ui": path.resolve(
         __dirname,
         "../packages/zero-ui/dist/index.js"
