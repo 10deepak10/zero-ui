@@ -13,6 +13,7 @@ import './pages/dropdown-demo';
 import './pages/checkbox-demo';
 import './pages/radio-group-demo';
 import './pages/toggle-demo';
+import './pages/slider-demo';
 import './pages/placeholder-demo';
 
 @customElement('demo-app')
@@ -214,7 +215,7 @@ export class DemoApp extends LitElement {
       case '/checkbox': return html`<checkbox-demo></checkbox-demo>`;
       case '/radio-group': return html`<radio-group-demo></radio-group-demo>`;
       case '/toggle': return html`<toggle-demo></toggle-demo>`;
-      case '/slider': return html`<placeholder-demo componentName="Slider"></placeholder-demo>`;
+      case '/slider': return html`<slider-demo></slider-demo>`;
       case '/pin-input': return html`<placeholder-demo componentName="Pin Input"></placeholder-demo>`;
 
       // Browser & Device
