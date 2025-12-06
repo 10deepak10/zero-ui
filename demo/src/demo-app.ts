@@ -16,6 +16,7 @@ import './pages/toggle-demo';
 import './pages/slider-demo';
 import './pages/os-check-demo';
 import './pages/browser-check-demo';
+import './pages/screen-check-demo';
 import './pages/placeholder-demo';
 
 @customElement('demo-app')
@@ -222,7 +223,7 @@ export class DemoApp extends LitElement {
       // Browser & Device
       case '/os-check': return html`<os-check-demo></os-check-demo>`;
       case '/browser-check': return html`<browser-check-demo></browser-check-demo>`;
-      case '/screen-check': return html`<placeholder-demo componentName="Screen Check"></placeholder-demo>`;
+      case '/screen-check': return html`<screen-check-demo></screen-check-demo>`;
       case '/storage-check': return html`<placeholder-demo componentName="Storage Check"></placeholder-demo>`;
       case '/gpu-check': return html`<placeholder-demo componentName="GPU Check"></placeholder-demo>`;
       case '/network-check': return html`<placeholder-demo componentName="Network Check"></placeholder-demo>`;

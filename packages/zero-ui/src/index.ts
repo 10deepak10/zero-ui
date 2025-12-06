@@ -10,6 +10,7 @@ import './toggle';
 import './slider';
 import './os-check';
 import './browser-check';
+import './screen-check';
 
 
 // Re-exports (optional for TS/JS consumers)
@@ -27,3 +28,4 @@ export * from './toggle/zui-toggle.js';
 export * from './slider/zui-slider.js';
 export * from './os-check/zui-os-check.js';
 export * from './browser-check/zui-browser-check.js';
+export * from './screen-check/zui-screen-check.js';
