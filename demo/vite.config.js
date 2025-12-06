@@ -64,6 +64,10 @@ export default defineConfig({
         __dirname,
         "../packages/zero-ui/src/screen-check/zui-screen-check.ts"
       ),
+      "@deepverse/zero-ui/storage-check": path.resolve(
+        __dirname,
+        "../packages/zero-ui/src/storage-check/zui-storage-check.ts"
+      ),
       "@deepverse/zero-ui": path.resolve(
         __dirname,
         "../packages/zero-ui/src/index.ts"

@@ -65,6 +65,9 @@
       ],
       "@deepverse/zero-ui/screen-check": [
         "../packages/zero-ui/src/screen-check/zui-screen-check.ts"
+      ],
+      "@deepverse/zero-ui/storage-check": [
+        "../packages/zero-ui/src/storage-check/zui-storage-check.ts"
       ]
     }
   },
