@@ -11,6 +11,7 @@ import './slider';
 import './os-check';
 import './browser-check';
 import './screen-check';
+import './storage-check';
 
 
 // Re-exports (optional for TS/JS consumers)
@@ -29,4 +30,5 @@ export * from './slider/zui-slider.js';
 export * from './os-check/zui-os-check.js';
 export * from './browser-check/zui-browser-check.js';
 export * from './screen-check/zui-screen-check.js';
+export * from './storage-check/zui-storage-check.js';
 export * from './services/index.js';

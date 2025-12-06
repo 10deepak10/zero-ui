@@ -70,6 +70,10 @@
     "./screen-check": {
       "types": "./dist/screen-check/zui-screen-check.d.ts",
       "default": "./dist/screen-check/zui-screen-check.js"
+    },
+    "./storage-check": {
+      "types": "./dist/storage-check/zui-storage-check.d.ts",
+      "default": "./dist/storage-check/zui-storage-check.js"
     }
   },
   "files": [
