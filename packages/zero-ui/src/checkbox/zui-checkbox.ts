@@ -1,4 +1,4 @@
-import { LitElement, html, css, PropertyValueMap } from 'lit';
+import { LitElement, html, css, type PropertyValueMap } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 
 @customElement('zui-checkbox')

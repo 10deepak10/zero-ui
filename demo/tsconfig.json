@@ -20,7 +20,7 @@
 
     "baseUrl": ".",
     "paths": {
-      "@deepverse/zero-ui": ["../packages/zero-ui/dist/index.js"],
+      "@deepverse/zero-ui": ["../packages/zero-ui/src/index.ts"],
       "@deepverse/zero-ui/button": [
         "../packages/zero-ui/src/button/zui-button.ts"
       ],
@@ -44,6 +44,27 @@
       ],
       "@deepverse/zero-ui/dropdown": [
         "../packages/zero-ui/src/dropdown/zui-dropdown.ts"
+      ],
+      "@deepverse/zero-ui/checkbox": [
+        "../packages/zero-ui/src/checkbox/zui-checkbox.ts"
+      ],
+      "@deepverse/zero-ui/radio-group": [
+        "../packages/zero-ui/src/radio-group/zui-radio-group.ts"
+      ],
+      "@deepverse/zero-ui/toggle": [
+        "../packages/zero-ui/src/toggle/zui-toggle.ts"
+      ],
+      "@deepverse/zero-ui/slider": [
+        "../packages/zero-ui/src/slider/zui-slider.ts"
+      ],
+      "@deepverse/zero-ui/os-check": [
+        "../packages/zero-ui/src/os-check/zui-os-check.ts"
+      ],
+      "@deepverse/zero-ui/browser-check": [
+        "../packages/zero-ui/src/browser-check/zui-browser-check.ts"
+      ],
+      "@deepverse/zero-ui/screen-check": [
+        "../packages/zero-ui/src/screen-check/zui-screen-check.ts"
       ]
     }
   },

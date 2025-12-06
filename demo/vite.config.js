@@ -66,7 +66,7 @@ export default defineConfig({
       ),
       "@deepverse/zero-ui": path.resolve(
         __dirname,
-        "../packages/zero-ui/dist/index.js"
+        "../packages/zero-ui/src/index.ts"
       ),
     },
   },

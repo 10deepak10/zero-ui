@@ -1,10 +1,29 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import '@deepverse/zero-ui/screen-check';
+import { ScreenCheckService } from '@deepverse/zero-ui';
 
 @customElement('screen-check-demo')
 export class ScreenCheckDemo extends LitElement {
   @state() private _screenInfo: any = null;
+  @state() private _serviceInfo: any = null;
+
+  private _cleanupSubscription: (() => void) | null = null;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._cleanupSubscription = ScreenCheckService.subscribe((info) => {
+      this._serviceInfo = info;
+    });
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    if (this._cleanupSubscription) {
+      this._cleanupSubscription();
+      this._cleanupSubscription = null;
+    }
+  }
 
   static styles = css`
     :host {
@@ -99,6 +118,26 @@ ${JSON.stringify(this._screenInfo, null, 2)}</div>
         <h2>Static Snapshot</h2>
         <div class="demo-item">
           <zui-screen-check></zui-screen-check>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Service Usage (Headless)</h2>
+        <div class="code-block">
+import { ScreenCheckService } from '@deepverse/zero-ui';
+
+// Subscribe to updates programmatically
+const cleanup = ScreenCheckService.subscribe((info) => {
+  console.log('Screen updated:', info);
+});
+
+// Don't forget to cleanup!
+// cleanup();
+        </div>
+
+        <div class="code-block" style="margin-top: 10px; border-left: 4px solid #3b82f6;">
+// Result:
+${JSON.stringify(this._serviceInfo, null, 2)}
         </div>
       </div>
     `;

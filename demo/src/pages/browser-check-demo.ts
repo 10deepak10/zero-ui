@@ -1,10 +1,17 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import '@deepverse/zero-ui/browser-check';
+import { BrowserCheckService } from '@deepverse/zero-ui';
 
 @customElement('browser-check-demo')
 export class BrowserCheckDemo extends LitElement {
   @state() private _detectedBrowser: any = null;
+  @state() private _serviceInfo: any = null;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._serviceInfo = BrowserCheckService.getBrowserInfo();
+  }
 
   static styles = css`
     :host {
@@ -64,7 +71,6 @@ export class BrowserCheckDemo extends LitElement {
 
   private _handleBrowserDetected(e: CustomEvent) {
     this._detectedBrowser = e.detail;
-    console.log('Browser Detected:', e.detail);
   }
 
   render() {
@@ -101,6 +107,21 @@ ${JSON.stringify(this._detectedBrowser, null, 2)}</div>
           <div class="demo-item">
             <zui-browser-check ?showIcon=${false}></zui-browser-check>
           </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Service Usage (Headless)</h2>
+        <div class="code-block">
+import { BrowserCheckService } from '@deepverse/zero-ui';
+
+// Get Browser info directly without a component
+const info = BrowserCheckService.getBrowserInfo();
+        </div>
+
+        <div class="code-block" style="margin-top: 10px; border-left: 4px solid #3b82f6;">
+// Result:
+${JSON.stringify(this._serviceInfo, null, 2)}
         </div>
       </div>
     `;
