@@ -62,6 +62,10 @@
     "./os-check": {
       "types": "./dist/os-check/zui-os-check.d.ts",
       "default": "./dist/os-check/zui-os-check.js"
+    },
+    "./browser-check": {
+      "types": "./dist/browser-check/zui-browser-check.d.ts",
+      "default": "./dist/browser-check/zui-browser-check.js"
     }
   },
   "files": [
