@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 
 @customElement('zui-slider')
 export class ZuiSlider extends LitElement {
@@ -11,7 +11,6 @@ export class ZuiSlider extends LitElement {
   @property({ type: String }) name = '';
   @property({ type: String }) label = '';
 
-  @state() private _activeThumb: 'min' | 'max' | null = null;
 
   static styles = css`
     :host {
@@ -137,8 +136,7 @@ export class ZuiSlider extends LitElement {
     if (this.disabled) return;
     e.preventDefault();
     e.stopPropagation();
-    
-    this._activeThumb = thumb;
+
     
     const handleMouseMove = (e: MouseEvent) => {
       const track = this.shadowRoot!.querySelector('.track-wrapper') as HTMLElement;
@@ -161,7 +159,6 @@ export class ZuiSlider extends LitElement {
     };
 
     const handleMouseUp = () => {
-      this._activeThumb = null;
       this._emitChange();
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);

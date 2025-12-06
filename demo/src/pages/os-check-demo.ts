@@ -1,10 +1,17 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import '@deepverse/zero-ui/os-check';
+import { OsCheckService } from '@deepverse/zero-ui';
 
 @customElement('os-check-demo')
 export class OsCheckDemo extends LitElement {
   @state() private _detectedOS: any = null;
+  @state() private _serviceInfo: any = null;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._serviceInfo = OsCheckService.getOSInfo();
+  }
 
   static styles = css`
     :host {
@@ -101,6 +108,21 @@ ${JSON.stringify(this._detectedOS, null, 2)}</div>
           <div class="demo-item">
             <zui-os-check ?showIcon=${false}></zui-os-check>
           </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Service Usage (Headless)</h2>
+        <div class="code-block">
+import { OsCheckService } from '@deepverse/zero-ui';
+
+// Get OS info directly without a component
+const info = OsCheckService.getOSInfo();
+        </div>
+
+        <div class="code-block" style="margin-top: 10px; border-left: 4px solid #3b82f6;">
+// Result:
+${JSON.stringify(this._serviceInfo, null, 2)}
         </div>
       </div>
     `;

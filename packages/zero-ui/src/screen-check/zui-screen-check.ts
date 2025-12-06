@@ -1,23 +1,12 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-
-export interface ScreenInfo {
-  width: number;
-  height: number;
-  availWidth: number;
-  availHeight: number;
-  colorDepth: number;
-  pixelRatio: number;
-  orientation: string;
-}
+import { ScreenCheckService, type ScreenInfo } from '../services/screen.service.js';
 
 @customElement('zui-screen-check')
 export class ZuiScreenCheck extends LitElement {
   @property({ type: Boolean }) live = false;
 
   @state() private _screenInfo: ScreenInfo | null = null;
-  
-  private _resizeObserver: ResizeObserver | null = null;
 
   static styles = css`
     :host {
@@ -95,15 +84,7 @@ export class ZuiScreenCheck extends LitElement {
   };
 
   private _updateScreenInfo() {
-    const info: ScreenInfo = {
-      width: window.screen.width,
-      height: window.screen.height,
-      availWidth: window.screen.availWidth,
-      availHeight: window.screen.availHeight,
-      colorDepth: window.screen.colorDepth,
-      pixelRatio: window.devicePixelRatio || 1,
-      orientation: screen.orientation?.type || (window.innerWidth > window.innerHeight ? 'landscape' : 'portrait')
-    };
+    const info = ScreenCheckService.getScreenInfo();
 
     // Only update if changed
     if (JSON.stringify(info) !== JSON.stringify(this._screenInfo)) {
@@ -132,6 +113,13 @@ export class ZuiScreenCheck extends LitElement {
           <div class="label">Available Space</div>
           <div class="value">
             ${this._screenInfo.availWidth} <span class="unit">x</span> ${this._screenInfo.availHeight}
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="label">Viewport Size</div>
+          <div class="value">
+            ${this._screenInfo.viewportWidth} <span class="unit">x</span> ${this._screenInfo.viewportHeight}
           </div>
         </div>
 
