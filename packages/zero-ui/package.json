@@ -66,6 +66,10 @@
     "./browser-check": {
       "types": "./dist/browser-check/zui-browser-check.d.ts",
       "default": "./dist/browser-check/zui-browser-check.js"
+    },
+    "./screen-check": {
+      "types": "./dist/screen-check/zui-screen-check.d.ts",
+      "default": "./dist/screen-check/zui-screen-check.js"
     }
   },
   "files": [
