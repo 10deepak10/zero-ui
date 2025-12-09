@@ -78,6 +78,10 @@
     "./gpu-check": {
       "types": "./dist/gpu-check/zui-gpu-check.d.ts",
       "default": "./dist/gpu-check/zui-gpu-check.js"
+    },
+    "./network-check": {
+      "types": "./dist/network-check/zui-network-check.d.ts",
+      "default": "./dist/network-check/zui-network-check.js"
     }
   },
   "files": [
