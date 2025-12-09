@@ -265,10 +265,12 @@ export class DemoApp extends LitElement {
       case '/geolocation-check':
         import('./pages/geolocation-check-demo');
         return html`<geolocation-check-demo></geolocation-check-demo>`;
+      case '/clipboard-check':
+        import('./pages/clipboard-check-demo');
+        return html`<clipboard-check-demo></clipboard-check-demo>`;
       case '/notification-check':
         import('./pages/notification-check-demo');
         return html`<notification-check-demo></notification-check-demo>`;
-      case '/clipboard-check': return html`<placeholder-demo componentName="Clipboard Check"></placeholder-demo>`;
 
       // Extensions
       case '/extension-check': return html`<placeholder-demo componentName="Extension Check"></placeholder-demo>`;

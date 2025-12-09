@@ -6,3 +6,4 @@ export * from './gpu.service.js';
 export * from './network.service.js';
 export * from './battery.service.js';
 export * from './camera.service.js';
+export * from './clipboard.service.js';
