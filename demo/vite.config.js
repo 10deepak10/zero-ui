@@ -145,6 +145,13 @@ export default defineConfig({
         ),
       },
       {
+        find: "@deepverse/zero-ui/theme-check",
+        replacement: path.resolve(
+          __dirname,
+          "../packages/zero-ui/src/theme-check/zui-theme-check.ts"
+        ),
+      },
+      {
         find: "@deepverse/zero-ui",
         replacement: path.resolve(
           __dirname,

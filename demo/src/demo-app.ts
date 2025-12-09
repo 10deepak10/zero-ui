@@ -233,7 +233,11 @@ export class DemoApp extends LitElement {
       case '/gpu-check':
         return html`<gpu-check-demo></gpu-check-demo>`;
       case '/network-check':
+        import('./pages/network-check-demo');
         return html`<network-check-demo></network-check-demo>`;
+      case '/theme-check':
+        import('./pages/theme-check-demo');
+        return html`<theme-check-demo></theme-check-demo>`;
       case '/battery-check':
         return html`<battery-check-demo></battery-check-demo>`;
       case '/online-status':
@@ -318,8 +322,8 @@ export class DemoApp extends LitElement {
             ${this._renderNavLink('/storage-check', 'Storage Check')}
             ${this._renderNavLink('/gpu-check', 'GPU Check')}
             ${this._renderNavLink('/network-check', 'Network Check')}
+            ${this._renderNavLink('/theme-check', 'Theme Check')}
             ${this._renderNavLink('/battery-check', 'Battery Check')}
-            ${this._renderNavLink('/online-status', 'Online Status')}
           </div>
 
           <div class="nav-group">
