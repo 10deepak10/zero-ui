@@ -21,6 +21,7 @@ import './pages/storage-check-demo';
 import './pages/gpu-check-demo';
 import './pages/network-check-demo';
 import './pages/battery-check-demo';
+import './pages/camera-check-demo';
 import './pages/placeholder-demo';
 
 @customElement('demo-app')
@@ -239,8 +240,10 @@ export class DemoApp extends LitElement {
         return html`<placeholder-demo componentName="Online Status"></placeholder-demo>`;
 
       // Permissions & Media
-      case '/camera-check': return html`<placeholder-demo componentName="Camera Check"></placeholder-demo>`;
-      case '/mic-check': return html`<placeholder-demo componentName="Microphone Check"></placeholder-demo>`;
+      case '/camera-check':
+        return html`<camera-check-demo></camera-check-demo>`;
+      case '/mic-check':
+        return html`<placeholder-demo componentName="Microphone Check"></placeholder-demo>`;
       case '/geolocation-check': return html`<placeholder-demo componentName="Geolocation Check"></placeholder-demo>`;
       case '/notification-check': return html`<placeholder-demo componentName="Notification Check"></placeholder-demo>`;
       case '/clipboard-check': return html`<placeholder-demo componentName="Clipboard Check"></placeholder-demo>`;
@@ -320,9 +323,17 @@ export class DemoApp extends LitElement {
           </div>
 
           <div class="nav-group">
-            <div class="nav-header">Permissions & Media</div>
-            ${this._renderNavLink('/camera-check', 'Camera Check')}
-            ${this._renderNavLink('/mic-check', 'Mic Check')}
+            <div class="nav-section">Permissions & Media</div>
+            <a
+              href="/camera-check"
+              class="${this._route === '/camera-check' ? 'active' : ''}"
+              @click="${(e: Event) => this._navigate(e, '/camera-check')}"
+            >Camera Check</a>
+            <a 
+              href="/mic-check" 
+              class="${this._route === '/mic-check' ? 'active' : ''}"
+              @click="${(e: Event) => this._navigate(e, '/mic-check')}"
+            >Mic Check</a>
             ${this._renderNavLink('/geolocation-check', 'Geolocation Check')}
             ${this._renderNavLink('/notification-check', 'Notification Check')}
             ${this._renderNavLink('/clipboard-check', 'Clipboard Check')}

@@ -71,7 +71,8 @@
       ],
       "@deepverse/zero-ui/gpu-check": ["../packages/zero-ui/src/gpu-check/zui-gpu-check.ts"],
       "@deepverse/zero-ui/network-check": ["../packages/zero-ui/src/network-check/zui-network-check.ts"],
-      "@deepverse/zero-ui/battery-check": ["../packages/zero-ui/src/battery-check/zui-battery-check.ts"]
+      "@deepverse/zero-ui/battery-check": ["../packages/zero-ui/src/battery-check/zui-battery-check.ts"],
+      "@deepverse/zero-ui/camera-check": ["../packages/zero-ui/src/camera-check/zui-camera-check.ts"]
     }
   },
   "include": ["src"]

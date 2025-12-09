@@ -86,6 +86,10 @@
     "./battery-check": {
       "types": "./dist/battery-check/zui-battery-check.d.ts",
       "default": "./dist/battery-check/zui-battery-check.js"
+    },
+    "./camera-check": {
+      "types": "./dist/camera-check/zui-camera-check.d.ts",
+      "default": "./dist/camera-check/zui-camera-check.js"
     }
   },
   "files": [
