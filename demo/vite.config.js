@@ -152,6 +152,13 @@ export default defineConfig({
         ),
       },
       {
+        find: "@deepverse/zero-ui/mic-check",
+        replacement: path.resolve(
+          __dirname,
+          "../packages/zero-ui/src/mic-check/zui-mic-check.ts"
+        ),
+      },
+      {
         find: "@deepverse/zero-ui",
         replacement: path.resolve(
           __dirname,
