@@ -159,6 +159,13 @@ export default defineConfig({
         ),
       },
       {
+        find: "@deepverse/zero-ui/geolocation-check",
+        replacement: path.resolve(
+          __dirname,
+          "../packages/zero-ui/src/geolocation-check/zui-geolocation-check.ts"
+        ),
+      },
+      {
         find: "@deepverse/zero-ui",
         replacement: path.resolve(
           __dirname,

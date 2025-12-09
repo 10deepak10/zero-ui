@@ -249,7 +249,9 @@ export class DemoApp extends LitElement {
       // Permissions & Media
       case '/camera-check':
         return html`<camera-check-demo></camera-check-demo>`;
-      case '/geolocation-check': return html`<placeholder-demo componentName="Geolocation Check"></placeholder-demo>`;
+      case '/geolocation-check':
+        import('./pages/geolocation-check-demo');
+        return html`<geolocation-check-demo></geolocation-check-demo>`;
       case '/notification-check': return html`<placeholder-demo componentName="Notification Check"></placeholder-demo>`;
       case '/clipboard-check': return html`<placeholder-demo componentName="Clipboard Check"></placeholder-demo>`;
 
