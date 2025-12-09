@@ -68,7 +68,8 @@
       ],
       "@deepverse/zero-ui/storage-check": [
         "../packages/zero-ui/src/storage-check/zui-storage-check.ts"
-      ]
+      ],
+      "@deepverse/zero-ui/gpu-check": ["../packages/zero-ui/src/gpu-check/zui-gpu-check.ts"]
     }
   },
   "include": ["src"]
