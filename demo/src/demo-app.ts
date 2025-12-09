@@ -20,6 +20,7 @@ import './pages/screen-check-demo';
 import './pages/storage-check-demo';
 import './pages/gpu-check-demo';
 import './pages/network-check-demo';
+import './pages/battery-check-demo';
 import './pages/placeholder-demo';
 
 @customElement('demo-app')
@@ -233,7 +234,7 @@ export class DemoApp extends LitElement {
       case '/network-check':
         return html`<network-check-demo></network-check-demo>`;
       case '/battery-check':
-        return html`<placeholder-demo componentName="Battery Check"></placeholder-demo>`;
+        return html`<battery-check-demo></battery-check-demo>`;
       case '/online-status':
         return html`<placeholder-demo componentName="Online Status"></placeholder-demo>`;
 

@@ -4,3 +4,4 @@ export * from './screen.service.js';
 export * from './storage.service.js';
 export * from './gpu.service.js';
 export * from './network.service.js';
+export * from './battery.service.js';
