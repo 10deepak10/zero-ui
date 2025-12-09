@@ -74,6 +74,10 @@
     "./storage-check": {
       "types": "./dist/storage-check/zui-storage-check.d.ts",
       "default": "./dist/storage-check/zui-storage-check.js"
+    },
+    "./gpu-check": {
+      "types": "./dist/gpu-check/zui-gpu-check.d.ts",
+      "default": "./dist/gpu-check/zui-gpu-check.js"
     }
   },
   "files": [
