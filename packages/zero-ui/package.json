@@ -95,6 +95,10 @@
       "types": "./dist/theme-check/zui-theme-check.d.ts",
       "default": "./dist/theme-check/zui-theme-check.js"
     },
+    "./mic-check": {
+      "types": "./dist/mic-check/zui-mic-check.d.ts",
+      "default": "./dist/mic-check/zui-mic-check.js"
+    },
     "./services": {
       "types": "./dist/services/index.d.ts",
       "default": "./dist/services/index.js"

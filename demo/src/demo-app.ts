@@ -238,6 +238,9 @@ export class DemoApp extends LitElement {
       case '/theme-check':
         import('./pages/theme-check-demo');
         return html`<theme-check-demo></theme-check-demo>`;
+      case '/mic-check':
+        import('./pages/mic-check-demo');
+        return html`<mic-check-demo></mic-check-demo>`;
       case '/battery-check':
         return html`<battery-check-demo></battery-check-demo>`;
       case '/online-status':
@@ -246,8 +249,6 @@ export class DemoApp extends LitElement {
       // Permissions & Media
       case '/camera-check':
         return html`<camera-check-demo></camera-check-demo>`;
-      case '/mic-check':
-        return html`<placeholder-demo componentName="Microphone Check"></placeholder-demo>`;
       case '/geolocation-check': return html`<placeholder-demo componentName="Geolocation Check"></placeholder-demo>`;
       case '/notification-check': return html`<placeholder-demo componentName="Notification Check"></placeholder-demo>`;
       case '/clipboard-check': return html`<placeholder-demo componentName="Clipboard Check"></placeholder-demo>`;
@@ -327,17 +328,9 @@ export class DemoApp extends LitElement {
           </div>
 
           <div class="nav-group">
-            <div class="nav-section">Permissions & Media</div>
-            <a
-              href="/camera-check"
-              class="${this._route === '/camera-check' ? 'active' : ''}"
-              @click="${(e: Event) => this._navigate(e, '/camera-check')}"
-            >Camera Check</a>
-            <a 
-              href="/mic-check" 
-              class="${this._route === '/mic-check' ? 'active' : ''}"
-              @click="${(e: Event) => this._navigate(e, '/mic-check')}"
-            >Mic Check</a>
+            <div class="nav-header">Permissions & Media</div>
+            ${this._renderNavLink('/camera-check', 'Camera Check')}
+            ${this._renderNavLink('/mic-check', 'Mic Check')}
             ${this._renderNavLink('/geolocation-check', 'Geolocation Check')}
             ${this._renderNavLink('/notification-check', 'Notification Check')}
             ${this._renderNavLink('/clipboard-check', 'Clipboard Check')}
