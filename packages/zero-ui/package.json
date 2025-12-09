@@ -82,6 +82,10 @@
     "./network-check": {
       "types": "./dist/network-check/zui-network-check.d.ts",
       "default": "./dist/network-check/zui-network-check.js"
+    },
+    "./battery-check": {
+      "types": "./dist/battery-check/zui-battery-check.d.ts",
+      "default": "./dist/battery-check/zui-battery-check.js"
     }
   },
   "files": [

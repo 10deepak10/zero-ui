@@ -131,6 +131,13 @@ export default defineConfig({
         ),
       },
       {
+        find: "@deepverse/zero-ui/battery-check",
+        replacement: path.resolve(
+          __dirname,
+          "../packages/zero-ui/src/battery-check/zui-battery-check.ts"
+        ),
+      },
+      {
         find: "@deepverse/zero-ui",
         replacement: path.resolve(
           __dirname,
