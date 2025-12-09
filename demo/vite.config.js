@@ -166,6 +166,13 @@ export default defineConfig({
         ),
       },
       {
+        find: "@deepverse/zero-ui/clipboard-check",
+        replacement: path.resolve(
+          __dirname,
+          "../packages/zero-ui/src/clipboard-check/zui-clipboard-check.ts"
+        ),
+      },
+      {
         find: "@deepverse/zero-ui/notification-check",
         replacement: path.resolve(
           __dirname,

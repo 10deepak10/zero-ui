@@ -8,6 +8,9 @@ import './checkbox';
 import './radio-group';
 import './toggle';
 import './slider';
+import './star-rating';
+import './select';
+import './dropdown';
 import './os-check';
 import './browser-check';
 import './screen-check';
@@ -16,6 +19,7 @@ import './gpu-check';
 import './network-check';
 import './battery-check';
 import './camera-check';
+import './clipboard-check';
 
 
 // Re-exports (optional for TS/JS consumers)
@@ -39,6 +43,7 @@ export * from './gpu-check/zui-gpu-check.js';
 export * from './network-check/zui-network-check.js';
 export * from './battery-check/zui-battery-check.js';
 export * from './camera-check/zui-camera-check.js';
+export * from './clipboard-check/zui-clipboard-check.js';
 export * from './geolocation-check/zui-geolocation-check.js';
 export * from './theme-check/zui-theme-check.js';
 export * from './mic-check/zui-mic-check.js';
