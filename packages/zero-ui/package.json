@@ -90,6 +90,14 @@
     "./camera-check": {
       "types": "./dist/camera-check/zui-camera-check.d.ts",
       "default": "./dist/camera-check/zui-camera-check.js"
+    },
+    "./theme-check": {
+      "types": "./dist/theme-check/zui-theme-check.d.ts",
+      "default": "./dist/theme-check/zui-theme-check.js"
+    },
+    "./services": {
+      "types": "./dist/services/index.d.ts",
+      "default": "./dist/services/index.js"
     }
   },
   "files": [
