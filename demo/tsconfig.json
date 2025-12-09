@@ -75,7 +75,8 @@
       "@deepverse/zero-ui/camera-check": ["../packages/zero-ui/src/camera-check/zui-camera-check.ts"],
       "@deepverse/zero-ui/theme-check": ["../packages/zero-ui/src/theme-check/zui-theme-check.ts"],
       "@deepverse/zero-ui/mic-check": ["../packages/zero-ui/src/mic-check/zui-mic-check.ts"],
-      "@deepverse/zero-ui/geolocation-check": ["../packages/zero-ui/src/geolocation-check/zui-geolocation-check.ts"]
+      "@deepverse/zero-ui/geolocation-check": ["../packages/zero-ui/src/geolocation-check/zui-geolocation-check.ts"],
+      "@deepverse/zero-ui/notification-check": ["../packages/zero-ui/src/notification-check/zui-notification-check.ts"]
     }
   },
   "include": ["src"]

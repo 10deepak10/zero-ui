@@ -166,6 +166,13 @@ export default defineConfig({
         ),
       },
       {
+        find: "@deepverse/zero-ui/notification-check",
+        replacement: path.resolve(
+          __dirname,
+          "../packages/zero-ui/src/notification-check/zui-notification-check.ts"
+        ),
+      },
+      {
         find: "@deepverse/zero-ui",
         replacement: path.resolve(
           __dirname,

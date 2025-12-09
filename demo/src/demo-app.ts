@@ -171,6 +171,19 @@ export class DemoApp extends LitElement {
       box-shadow: 0 6px 30px rgba(59,130,246,0.4);
     }
 
+    .experimental-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(251, 191, 36, 0.2);
+      color: #fbbf24;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-left: 8px;
+      letter-spacing: 0.03em;
+    }
+
   main {
     flex: 1;
     overflow-y: auto;
@@ -252,7 +265,9 @@ export class DemoApp extends LitElement {
       case '/geolocation-check':
         import('./pages/geolocation-check-demo');
         return html`<geolocation-check-demo></geolocation-check-demo>`;
-      case '/notification-check': return html`<placeholder-demo componentName="Notification Check"></placeholder-demo>`;
+      case '/notification-check':
+        import('./pages/notification-check-demo');
+        return html`<notification-check-demo></notification-check-demo>`;
       case '/clipboard-check': return html`<placeholder-demo componentName="Clipboard Check"></placeholder-demo>`;
 
       // Extensions
@@ -277,13 +292,16 @@ export class DemoApp extends LitElement {
     }
   }
 
-  private _renderNavLink(path: string, label: string) {
+  private _renderNavLink(path: string, label: string, isExperimental = false) {
     return html`
       <a 
         href="${path}" 
         class="${this._route === path ? 'active' : ''}"
         @click="${(e: Event) => this._navigate(e, path)}"
-      >${label}</a>
+      >
+        ${label}
+        ${isExperimental ? html`<span class="experimental-badge">Experimental</span>` : ''}
+      </a>
     `;
   }
 
@@ -334,7 +352,7 @@ export class DemoApp extends LitElement {
             ${this._renderNavLink('/camera-check', 'Camera Check')}
             ${this._renderNavLink('/mic-check', 'Mic Check')}
             ${this._renderNavLink('/geolocation-check', 'Geolocation Check')}
-            ${this._renderNavLink('/notification-check', 'Notification Check')}
+            ${this._renderNavLink('/notification-check', 'Notification Check', true)}
             ${this._renderNavLink('/clipboard-check', 'Clipboard Check')}
           </div>
 

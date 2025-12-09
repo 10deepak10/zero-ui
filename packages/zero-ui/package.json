@@ -103,6 +103,10 @@
       "types": "./dist/geolocation-check/zui-geolocation-check.d.ts",
       "default": "./dist/geolocation-check/zui-geolocation-check.js"
     },
+    "./notification-check": {
+      "types": "./dist/notification-check/zui-notification-check.d.ts",
+      "default": "./dist/notification-check/zui-notification-check.js"
+    },
     "./services": {
       "types": "./dist/services/index.d.ts",
       "default": "./dist/services/index.js"
