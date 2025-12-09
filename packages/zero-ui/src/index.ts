@@ -39,6 +39,7 @@ export * from './gpu-check/zui-gpu-check.js';
 export * from './network-check/zui-network-check.js';
 export * from './battery-check/zui-battery-check.js';
 export * from './camera-check/zui-camera-check.js';
+export * from './geolocation-check/zui-geolocation-check.js';
 export * from './theme-check/zui-theme-check.js';
 export * from './mic-check/zui-mic-check.js';
 export * from './services/index.js';
