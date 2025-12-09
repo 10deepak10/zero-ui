@@ -42,4 +42,5 @@ export * from './camera-check/zui-camera-check.js';
 export * from './geolocation-check/zui-geolocation-check.js';
 export * from './theme-check/zui-theme-check.js';
 export * from './mic-check/zui-mic-check.js';
+export * from './notification-check/zui-notification-check.js';
 export * from './services/index.js';
