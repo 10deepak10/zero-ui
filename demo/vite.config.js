@@ -138,6 +138,13 @@ export default defineConfig({
         ),
       },
       {
+        find: "@deepverse/zero-ui/camera-check",
+        replacement: path.resolve(
+          __dirname,
+          "../packages/zero-ui/src/camera-check/zui-camera-check.ts"
+        ),
+      },
+      {
         find: "@deepverse/zero-ui",
         replacement: path.resolve(
           __dirname,
