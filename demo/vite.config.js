@@ -124,6 +124,13 @@ export default defineConfig({
         ),
       },
       {
+        find: "@deepverse/zero-ui/network-check",
+        replacement: path.resolve(
+          __dirname,
+          "../packages/zero-ui/src/network-check/zui-network-check.ts"
+        ),
+      },
+      {
         find: "@deepverse/zero-ui",
         replacement: path.resolve(
           __dirname,

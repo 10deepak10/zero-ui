@@ -19,6 +19,7 @@ import './pages/browser-check-demo';
 import './pages/screen-check-demo';
 import './pages/storage-check-demo';
 import './pages/gpu-check-demo';
+import './pages/network-check-demo';
 import './pages/placeholder-demo';
 
 @customElement('demo-app')
@@ -227,10 +228,14 @@ export class DemoApp extends LitElement {
       case '/browser-check': return html`<browser-check-demo></browser-check-demo>`;
       case '/screen-check': return html`<screen-check-demo></screen-check-demo>`;
       case '/storage-check': return html`<storage-check-demo></storage-check-demo>`;
-      case '/gpu-check': return html`<gpu-check-demo></gpu-check-demo>`;
-      case '/network-check': return html`<placeholder-demo componentName="Network Check"></placeholder-demo>`;
-      case '/battery-check': return html`<placeholder-demo componentName="Battery Check"></placeholder-demo>`;
-      case '/online-status': return html`<placeholder-demo componentName="Online Status"></placeholder-demo>`;
+      case '/gpu-check':
+        return html`<gpu-check-demo></gpu-check-demo>`;
+      case '/network-check':
+        return html`<network-check-demo></network-check-demo>`;
+      case '/battery-check':
+        return html`<placeholder-demo componentName="Battery Check"></placeholder-demo>`;
+      case '/online-status':
+        return html`<placeholder-demo componentName="Online Status"></placeholder-demo>`;
 
       // Permissions & Media
       case '/camera-check': return html`<placeholder-demo componentName="Camera Check"></placeholder-demo>`;

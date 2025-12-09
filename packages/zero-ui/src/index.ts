@@ -13,6 +13,7 @@ import './browser-check';
 import './screen-check';
 import './storage-check';
 import './gpu-check';
+import './network-check';
 
 
 // Re-exports (optional for TS/JS consumers)
@@ -33,4 +34,5 @@ export * from './browser-check/zui-browser-check.js';
 export * from './screen-check/zui-screen-check.js';
 export * from './storage-check/zui-storage-check.js';
 export * from './gpu-check/zui-gpu-check.js';
+export * from './network-check/zui-network-check.js';
 export * from './services/index.js';
