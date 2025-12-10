@@ -273,17 +273,15 @@ export class DemoApp extends LitElement {
         return html`<notification-check-demo></notification-check-demo>`;
 
       // Extensions
-      case '/extension-check': return html`<placeholder-demo componentName="Extension Check"></placeholder-demo>`;
+      case '/extension-check':
+        import('./pages/extension-check-demo');
+        return html`<extension-check-demo></extension-check-demo>`;
       case '/wallet-check': return html`<placeholder-demo componentName="Wallet Check"></placeholder-demo>`;
 
       // Proctoring
-      case '/tab-switch-check': return html`<placeholder-demo componentName="Tab Switch Check"></placeholder-demo>`;
-      case '/devtools-check': return html`<placeholder-demo componentName="DevTools Check"></placeholder-demo>`;
-      case '/incognito-check': return html`<placeholder-demo componentName="Incognito Check"></placeholder-demo>`;
-      case '/fullscreen-check': return html`<placeholder-demo componentName="Fullscreen Check"></placeholder-demo>`;
-      case '/copy-paste-test': return html`<placeholder-demo componentName="Copy Paste Test"></placeholder-demo>`;
-      case '/face-detection-check': return html`<placeholder-demo componentName="Face Detection Check"></placeholder-demo>`;
-      case '/multi-monitor-check': return html`<placeholder-demo componentName="Multi-Monitor Check"></placeholder-demo>`;
+      case '/proctoring':
+        import('./pages/proctoring-demo');
+        return html`<proctoring-demo></proctoring-demo>`;
 
       // Utilities
       case '/logger': return html`<placeholder-demo componentName="Logger"></placeholder-demo>`;
@@ -361,18 +359,11 @@ export class DemoApp extends LitElement {
           <div class="nav-group">
             <div class="nav-header">Extensions</div>
             ${this._renderNavLink('/extension-check', 'Extension Check')}
-            ${this._renderNavLink('/wallet-check', 'Wallet Check')}
           </div>
 
           <div class="nav-group">
             <div class="nav-header">Proctoring</div>
-            ${this._renderNavLink('/tab-switch-check', 'Tab Switch Check')}
-            ${this._renderNavLink('/devtools-check', 'DevTools Check')}
-            ${this._renderNavLink('/incognito-check', 'Incognito Check')}
-            ${this._renderNavLink('/fullscreen-check', 'Fullscreen Check')}
-            ${this._renderNavLink('/copy-paste-test', 'Copy Paste Test')}
-            ${this._renderNavLink('/face-detection-check', 'Face Detection Check')}
-            ${this._renderNavLink('/multi-monitor-check', 'Multi-Monitor Check')}
+            ${this._renderNavLink('/proctoring', 'Proctoring Session')}
           </div>
 
           <div class="nav-group">
