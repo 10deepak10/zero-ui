@@ -85,6 +85,9 @@
       ],
       "@deepverse/zero-ui/proctoring": [
         "../packages/zero-ui/src/proctoring/zui-proctoring.ts"
+      ],
+      "@deepverse/zero-ui/logger": [
+        "../packages/zero-ui/src/logger/zui-logger.ts"
       ]
     }
   },

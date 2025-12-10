@@ -115,6 +115,10 @@
       "types": "./dist/proctoring/index.d.ts",
       "default": "./dist/proctoring/index.js"
     },
+    "./logger": {
+      "types": "./dist/logger/index.d.ts",
+      "default": "./dist/logger/index.js"
+    },
     "./services": {
       "types": "./dist/services/index.d.ts",
       "default": "./dist/services/index.js"

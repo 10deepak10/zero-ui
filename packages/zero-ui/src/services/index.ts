@@ -9,3 +9,4 @@ export * from './camera.service.js';
 export * from './clipboard.service.js';
 export * from './extension.service.js';
 export * from './proctoring.service.js';
+export * from './logger.service.js';

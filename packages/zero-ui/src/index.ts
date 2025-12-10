@@ -51,5 +51,6 @@ export * from './mic-check/zui-mic-check.js';
 export * from './notification-check/zui-notification-check.js';
 export * from './extension-check/index.js';
 export * from './proctoring/index.js';
+export * from './logger/index.js';
 
 export * from './services/index.js';

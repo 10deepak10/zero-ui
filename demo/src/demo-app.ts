@@ -284,7 +284,9 @@ export class DemoApp extends LitElement {
         return html`<proctoring-demo></proctoring-demo>`;
 
       // Utilities
-      case '/logger': return html`<placeholder-demo componentName="Logger"></placeholder-demo>`;
+      case '/logger':
+        import('./pages/logger-demo');
+        return html`<logger-demo></logger-demo>`;
       case '/event-bus': return html`<placeholder-demo componentName="Event Bus"></placeholder-demo>`;
       case '/theme-provider': return html`<placeholder-demo componentName="Theme Provider"></placeholder-demo>`;
 
