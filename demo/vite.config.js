@@ -200,6 +200,13 @@ export default defineConfig({
           "../packages/zero-ui/src/logger/zui-logger.ts"
         ),
       },
+      {
+        find: "@deepverse/zero-ui/split",
+        replacement: path.resolve(
+          __dirname,
+          "../packages/zero-ui/src/split/zui-split.ts"
+        ),
+      },
 
       {
         find: "@deepverse/zero-ui",
