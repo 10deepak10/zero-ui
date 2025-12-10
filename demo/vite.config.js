@@ -209,6 +209,13 @@ export default defineConfig({
       },
 
       {
+        find: "@deepverse/zero-ui/text-editor",
+        replacement: path.resolve(
+          __dirname,
+          "../packages/zero-ui/src/text-editor/index.ts"
+        ),
+      },
+      {
         find: "@deepverse/zero-ui",
         replacement: path.resolve(
           __dirname,

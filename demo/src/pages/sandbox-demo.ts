@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { LoggerService } from '@deepverse/zero-ui';
+import { LoggerService, FormatterService } from '@deepverse/zero-ui';
 import '@deepverse/zero-ui/logger';
 import '@deepverse/zero-ui/split';
 import '@deepverse/zero-ui/toggle';
@@ -143,6 +143,22 @@ export class SandboxDemo extends LitElement {
       background: #ef4444;
       color: white;
     }
+
+    .action-btn {
+      background: transparent;
+      border: 1px solid var(--card-border, #e2e8f0);
+      color: var(--text-muted, #94a3b8);
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .action-btn:hover {
+      background: var(--card-border, #e2e8f0);
+      color: var(--text-main, #334155);
+    }
   `;
 
   @state() private _html = DEFAULT_HTML;
@@ -275,7 +291,10 @@ export class SandboxDemo extends LitElement {
           <!-- Code Editors Pane -->
           <div class="editors" slot="one">
             <div class="editor-group">
-              <label>HTML</label>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <label>HTML</label>
+                <button class="action-btn" @click=${() => this._handleInput('html', FormatterService.formatHtml(this._html))}>Format</button>
+              </div>
               <textarea 
                 .value=${this._html}
                 @input=${(e: Event) => this._handleInput('html', (e.target as HTMLTextAreaElement).value)}
@@ -284,7 +303,10 @@ export class SandboxDemo extends LitElement {
             </div>
 
             <div class="editor-group">
-              <label>CSS</label>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <label>CSS</label>
+                <button class="action-btn" @click=${() => this._handleInput('css', FormatterService.formatCss(this._css))}>Format</button>
+              </div>
               <textarea 
                 .value=${this._css}
                 @input=${(e: Event) => this._handleInput('css', (e.target as HTMLTextAreaElement).value)}
@@ -293,7 +315,10 @@ export class SandboxDemo extends LitElement {
             </div>
 
             <div class="editor-group">
-              <label>JavaScript</label>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <label>JavaScript</label>
+                <button class="action-btn" @click=${() => this._handleInput('js', FormatterService.formatJs(this._js))}>Format</button>
+              </div>
               <textarea 
                 .value=${this._js}
                 @input=${(e: Event) => this._handleInput('js', (e.target as HTMLTextAreaElement).value)}
