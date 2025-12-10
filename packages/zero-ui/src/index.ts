@@ -20,6 +20,7 @@ import './network-check';
 import './battery-check';
 import './camera-check';
 import './clipboard-check';
+import './extension-check';
 
 
 // Re-exports (optional for TS/JS consumers)
@@ -48,4 +49,7 @@ export * from './geolocation-check/zui-geolocation-check.js';
 export * from './theme-check/zui-theme-check.js';
 export * from './mic-check/zui-mic-check.js';
 export * from './notification-check/zui-notification-check.js';
+export * from './extension-check/index.js';
+export * from './proctoring/index.js';
+
 export * from './services/index.js';

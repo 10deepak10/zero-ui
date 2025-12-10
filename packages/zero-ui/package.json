@@ -107,6 +107,14 @@
       "types": "./dist/notification-check/zui-notification-check.d.ts",
       "default": "./dist/notification-check/zui-notification-check.js"
     },
+    "./extension-check": {
+      "types": "./dist/extension-check/index.d.ts",
+      "default": "./dist/extension-check/index.js"
+    },
+    "./proctoring": {
+      "types": "./dist/proctoring/index.d.ts",
+      "default": "./dist/proctoring/index.js"
+    },
     "./services": {
       "types": "./dist/services/index.d.ts",
       "default": "./dist/services/index.js"

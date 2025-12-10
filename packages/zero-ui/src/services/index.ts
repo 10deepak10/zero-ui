@@ -7,3 +7,5 @@ export * from './network.service.js';
 export * from './battery.service.js';
 export * from './camera.service.js';
 export * from './clipboard.service.js';
+export * from './extension.service.js';
+export * from './proctoring.service.js';

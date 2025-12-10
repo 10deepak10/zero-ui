@@ -180,6 +180,21 @@ export default defineConfig({
         ),
       },
       {
+        find: "@deepverse/zero-ui/extension-check",
+        replacement: path.resolve(
+          __dirname,
+          "../packages/zero-ui/src/extension-check/zui-extension-check.ts"
+        ),
+      },
+      {
+        find: "@deepverse/zero-ui/proctoring",
+        replacement: path.resolve(
+          __dirname,
+          "../packages/zero-ui/src/proctoring/zui-proctoring.ts"
+        ),
+      },
+
+      {
         find: "@deepverse/zero-ui",
         replacement: path.resolve(
           __dirname,

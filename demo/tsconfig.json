@@ -77,7 +77,15 @@
       "@deepverse/zero-ui/mic-check": ["../packages/zero-ui/src/mic-check/zui-mic-check.ts"],
       "@deepverse/zero-ui/geolocation-check": ["../packages/zero-ui/src/geolocation-check/zui-geolocation-check.ts"],
       "@deepverse/zero-ui/clipboard-check": ["../packages/zero-ui/src/clipboard-check/zui-clipboard-check.ts"],
-      "@deepverse/zero-ui/notification-check": ["../packages/zero-ui/src/notification-check/zui-notification-check.ts"]
+      "@deepverse/zero-ui/notification-check": [
+        "../packages/zero-ui/src/notification-check/zui-notification-check.ts"
+      ],
+      "@deepverse/zero-ui/extension-check": [
+        "../packages/zero-ui/src/extension-check/zui-extension-check.ts"
+      ],
+      "@deepverse/zero-ui/proctoring": [
+        "../packages/zero-ui/src/proctoring/zui-proctoring.ts"
+      ]
     }
   },
   "include": ["src"]
