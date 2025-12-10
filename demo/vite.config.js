@@ -193,6 +193,13 @@ export default defineConfig({
           "../packages/zero-ui/src/proctoring/zui-proctoring.ts"
         ),
       },
+      {
+        find: "@deepverse/zero-ui/logger",
+        replacement: path.resolve(
+          __dirname,
+          "../packages/zero-ui/src/logger/zui-logger.ts"
+        ),
+      },
 
       {
         find: "@deepverse/zero-ui",
