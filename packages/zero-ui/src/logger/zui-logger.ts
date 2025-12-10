@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, property, state, query } from 'lit/decorators.js';
+import { customElement, state, query } from 'lit/decorators.js';
 import { LoggerService, type LogEntry, type LogLevel } from '../services/logger.service.js';
 
 @customElement('zui-logger')
@@ -8,6 +8,7 @@ export class ZuiLogger extends LitElement {
     :host {
       display: block;
       font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      height: 100%;
     }
 
     .terminal {
@@ -17,7 +18,7 @@ export class ZuiLogger extends LitElement {
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      height: 500px;
+      height: 100%;
     }
 
     .toolbar {

@@ -23,6 +23,8 @@ import './pages/network-check-demo';
 import './pages/battery-check-demo';
 import './pages/camera-check-demo';
 import './pages/placeholder-demo';
+import './pages/sandbox-demo';
+import './pages/split-demo';
 
 @customElement('demo-app')
 export class DemoApp extends LitElement {
@@ -225,6 +227,7 @@ export class DemoApp extends LitElement {
       // General UI
       case '/button': return html`<button-demo></button-demo>`;
       case '/card': return html`<card-demo></card-demo>`;
+      case '/split': return html`<split-demo></split-demo>`;
       case '/dropdown': return html`<dropdown-demo></dropdown-demo>`;
 
       // Form Elements
@@ -290,6 +293,9 @@ export class DemoApp extends LitElement {
       case '/event-bus': return html`<placeholder-demo componentName="Event Bus"></placeholder-demo>`;
       case '/theme-provider': return html`<placeholder-demo componentName="Theme Provider"></placeholder-demo>`;
 
+      // Tools
+      case '/sandbox': return html`<sandbox-demo></sandbox-demo>`;
+
       default: return html`<intro-page></intro-page>`;
     }
   }
@@ -321,6 +327,7 @@ export class DemoApp extends LitElement {
             <div class="nav-header">General UI</div>
             ${this._renderNavLink('/button', 'Button')}
             ${this._renderNavLink('/card', 'Card')}
+            ${this._renderNavLink('/split', 'Split')}
             ${this._renderNavLink('/dropdown', 'Dropdown')}
           </div>
 
@@ -373,6 +380,11 @@ export class DemoApp extends LitElement {
             ${this._renderNavLink('/logger', 'Logger')}
             ${this._renderNavLink('/event-bus', 'Event Bus')}
             ${this._renderNavLink('/theme-provider', 'Theme Provider')}
+          </div>
+
+          <div class="nav-group">
+            <div class="nav-header">Tools</div>
+            ${this._renderNavLink('/sandbox', 'Sandbox')}
           </div>
         </nav>
       </aside>

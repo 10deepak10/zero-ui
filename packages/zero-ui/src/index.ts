@@ -53,4 +53,5 @@ export * from './extension-check/index.js';
 export * from './proctoring/index.js';
 export * from './logger/index.js';
 
-export * from './services/index.js';
+export * from './split';
+export * from './services';

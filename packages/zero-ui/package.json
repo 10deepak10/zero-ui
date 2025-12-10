@@ -11,6 +11,10 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
+    "./split": {
+      "types": "./dist/split/index.d.ts",
+      "default": "./dist/split/index.js"
+    },
     "./button": {
       "types": "./dist/button/zui-button.d.ts",
       "default": "./dist/button/zui-button.js"
