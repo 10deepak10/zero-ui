@@ -126,6 +126,10 @@
     "./services": {
       "types": "./dist/services/index.d.ts",
       "default": "./dist/services/index.js"
+    },
+    "./text-editor": {
+      "types": "./dist/text-editor/index.d.ts",
+      "default": "./dist/text-editor/index.js"
     }
   },
   "files": [

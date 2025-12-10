@@ -1,3 +1,5 @@
+export * from './theme.service.js';
+export * from './formatter.service.js';
 export * from './os.service.js';
 export * from './browser.service.js';
 export * from './screen.service.js';
