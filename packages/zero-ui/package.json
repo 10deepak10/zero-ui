@@ -130,6 +130,10 @@
     "./text-editor": {
       "types": "./dist/text-editor/index.d.ts",
       "default": "./dist/text-editor/index.js"
+    },
+    "./code-editor": {
+      "types": "./dist/code-editor/index.d.ts",
+      "default": "./dist/code-editor/index.js"
     }
   },
   "files": [

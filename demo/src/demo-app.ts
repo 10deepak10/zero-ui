@@ -293,6 +293,9 @@ export class DemoApp extends LitElement {
       case '/text-editor':
         import('./pages/text-editor-demo');
         return html`<text-editor-demo></text-editor-demo>`;
+      case '/code-editor':
+        import('./pages/code-editor-demo');
+        return html`<code-editor-demo></code-editor-demo>`;
       case '/event-bus': return html`<placeholder-demo componentName="Event Bus"></placeholder-demo>`;
       case '/theme-provider': return html`<placeholder-demo componentName="Theme Provider"></placeholder-demo>`;
 
@@ -382,6 +385,7 @@ export class DemoApp extends LitElement {
             <div class="nav-header">Utilities</div>
             ${this._renderNavLink('/logger', 'Logger')}
             ${this._renderNavLink('/text-editor', 'Text Editor')}
+            ${this._renderNavLink('/code-editor', 'Code Editor')}
             ${this._renderNavLink('/event-bus', 'Event Bus')}
             ${this._renderNavLink('/theme-provider', 'Theme Provider')}
           </div>
