@@ -127,6 +127,10 @@
       "types": "./dist/event-bus/index.d.ts",
       "default": "./dist/event-bus/index.js"
     },
+    "./theme-provider": {
+      "types": "./dist/theme-provider/index.d.ts",
+      "default": "./dist/theme-provider/index.js"
+    },
     "./services": {
       "types": "./dist/services/index.d.ts",
       "default": "./dist/services/index.js"
