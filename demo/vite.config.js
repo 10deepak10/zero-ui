@@ -216,6 +216,13 @@ export default defineConfig({
         ),
       },
       {
+        find: "@deepverse/zero-ui/code-editor",
+        replacement: path.resolve(
+          __dirname,
+          "../packages/zero-ui/src/code-editor/index.ts"
+        ),
+      },
+      {
         find: "@deepverse/zero-ui",
         replacement: path.resolve(
           __dirname,
