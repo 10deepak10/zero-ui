@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "build": "pnpm -F @deepverse/zero-ui build",
-    "dev": "pnpm -F demo dev"
+    "dev": "pnpm -F demo dev",
+    "dev:host": "pnpm -F demo dev --host"
   }
 }

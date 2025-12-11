@@ -299,7 +299,9 @@ export class DemoApp extends LitElement {
       case '/code-editor':
         import('./pages/code-editor-demo');
         return html`<code-editor-demo></code-editor-demo>`;
-      case '/event-bus': return html`<placeholder-demo componentName="Event Bus"></placeholder-demo>`;
+      case '/event-bus':
+        import('./pages/event-bus-demo');
+        return html`<event-bus-demo></event-bus-demo>`;
       case '/theme-provider': return html`<placeholder-demo componentName="Theme Provider"></placeholder-demo>`;
 
       // Tools

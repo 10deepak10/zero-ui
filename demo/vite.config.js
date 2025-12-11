@@ -201,10 +201,24 @@ export default defineConfig({
         ),
       },
       {
+        find: "@deepverse/zero-ui/event-bus",
+        replacement: path.resolve(
+          __dirname,
+          "../packages/zero-ui/src/event-bus/zui-event-bus.ts"
+        ),
+      },
+      {
         find: "@deepverse/zero-ui/split",
         replacement: path.resolve(
           __dirname,
           "../packages/zero-ui/src/split/zui-split.ts"
+        ),
+      },
+      {
+        find: "@deepverse/zero-ui/tabs",
+        replacement: path.resolve(
+          __dirname,
+          "../packages/zero-ui/src/tabs/index.ts"
         ),
       },
 
