@@ -20,7 +20,9 @@
 
     "baseUrl": ".",
     "paths": {
-      "@deepverse/zero-ui": ["../packages/zero-ui/src/index.ts"],
+      "@deepverse/zero-ui": [
+        "../packages/zero-ui/src"
+      ],
       "@deepverse/zero-ui/button": [
         "../packages/zero-ui/src/button/zui-button.ts"
       ],
@@ -88,6 +90,12 @@
       ],
       "@deepverse/zero-ui/logger": [
         "../packages/zero-ui/src/logger/zui-logger.ts"
+      ],
+      "@deepverse/zero-ui/code-editor": [
+        "../packages/zero-ui/src/code-editor/zui-code-editor.ts"
+      ],
+      "@deepverse/zero-ui/tabs": [
+        "../packages/zero-ui/src/tabs/index.ts"
       ]
     }
   },
