@@ -13,6 +13,8 @@ export * from './storage.service.js';
 export * from './syntax-highlighter.service.js';
 export * from './theme.service.js';
 export * from './event-bus.service.js';
+export * from './theme.service.js';
+
 
 // Resolve ambiguities with named exports
 export { ClipboardCheckService, type ClipboardPermissionStatus, type ClipboardHistoryItem as ClipboardCheckHistoryItem } from './clipboard.service.js';

@@ -31,6 +31,8 @@ export * from './text-editor/index.js';
 export * from './code-editor/index.js';
 export * from './logger/index.js';
 export * from './event-bus/index.js';
+export * from './theme-provider/index.js';
+
 export * from './services/index.js';
 export * from './split/index.js';
 export * from './tabs/index.js';
