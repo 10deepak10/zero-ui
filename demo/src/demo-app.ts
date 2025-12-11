@@ -228,6 +228,9 @@ export class DemoApp extends LitElement {
       case '/button': return html`<button-demo></button-demo>`;
       case '/card': return html`<card-demo></card-demo>`;
       case '/split': return html`<split-demo></split-demo>`;
+      case '/tabs':
+        import('./pages/tabs-demo');
+        return html`<tabs-demo></tabs-demo>`;
       case '/dropdown': return html`<dropdown-demo></dropdown-demo>`;
 
       // Form Elements
@@ -334,6 +337,7 @@ export class DemoApp extends LitElement {
             ${this._renderNavLink('/button', 'Button')}
             ${this._renderNavLink('/card', 'Card')}
             ${this._renderNavLink('/split', 'Split')}
+            ${this._renderNavLink('/tabs', 'Tabs')}
             ${this._renderNavLink('/dropdown', 'Dropdown')}
           </div>
 

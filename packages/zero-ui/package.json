@@ -134,6 +134,10 @@
     "./code-editor": {
       "types": "./dist/code-editor/index.d.ts",
       "default": "./dist/code-editor/index.js"
+    },
+    "./tabs": {
+      "types": "./dist/tabs/index.d.ts",
+      "default": "./dist/tabs/index.js"
     }
   },
   "files": [
