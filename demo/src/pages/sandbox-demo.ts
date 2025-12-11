@@ -4,6 +4,7 @@ import { LoggerService, FormatterService } from '@deepverse/zero-ui';
 import '@deepverse/zero-ui/logger';
 import '@deepverse/zero-ui/split';
 import '@deepverse/zero-ui/toggle';
+import '@deepverse/zero-ui/code-editor';
 
 const DEFAULT_HTML = '<h1>Hello Sandbox</h1>\n<p>Start editing to see changes!</p>\n<button id="btn">Click Me</button>';
 const DEFAULT_CSS = 'body {\n  font-family: sans-serif;\n  padding: 20px;\n}\n\nh1 {\n  color: #3b82f6;\n}\n\nbutton {\n  padding: 8px 16px;\n  background: #10b981;\n  color: white;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n}';
@@ -55,23 +56,7 @@ export class SandboxDemo extends LitElement {
       color: var(--text-muted);
     }
 
-    textarea {
-      flex: 1;
-      background: rgba(0, 0, 0, 0.2);
-      border: 1px solid var(--card-border);
-      color: #e2e8f0;
-      padding: 12px;
-      border-radius: 8px;
-      font-family: 'Consolas', 'Monaco', monospace;
-      font-size: 0.9rem;
-      resize: none;
-      min-height: 150px;
-    }
 
-    textarea:focus {
-      outline: none;
-      border-color: #3b82f6;
-    }
 
     .preview {
       background: white;
@@ -288,18 +273,18 @@ export class SandboxDemo extends LitElement {
       <div class="container">
         <zui-split direction="horizontal" initialSplit="50%">
           
-          <!-- Code Editors Pane -->
+            <!-- Code Editors Pane -->
           <div class="editors" slot="one">
             <div class="editor-group">
               <div style="display: flex; justify-content: space-between; align-items: center;">
                 <label>HTML</label>
                 <button class="action-btn" @click=${() => this._handleInput('html', FormatterService.formatHtml(this._html))}>Format</button>
               </div>
-              <textarea 
+              <zui-code-editor
                 .value=${this._html}
-                @input=${(e: Event) => this._handleInput('html', (e.target as HTMLTextAreaElement).value)}
-                placeholder="<div>Content</div>"
-              ></textarea>
+                language="html"
+                @change=${(e: CustomEvent) => this._handleInput('html', e.detail.value)}
+              ></zui-code-editor>
             </div>
 
             <div class="editor-group">
@@ -307,11 +292,11 @@ export class SandboxDemo extends LitElement {
                 <label>CSS</label>
                 <button class="action-btn" @click=${() => this._handleInput('css', FormatterService.formatCss(this._css))}>Format</button>
               </div>
-              <textarea 
+              <zui-code-editor
                 .value=${this._css}
-                @input=${(e: Event) => this._handleInput('css', (e.target as HTMLTextAreaElement).value)}
-                placeholder=".class { color: red; }"
-              ></textarea>
+                language="css"
+                @change=${(e: CustomEvent) => this._handleInput('css', e.detail.value)}
+              ></zui-code-editor>
             </div>
 
             <div class="editor-group">
@@ -319,11 +304,11 @@ export class SandboxDemo extends LitElement {
                 <label>JavaScript</label>
                 <button class="action-btn" @click=${() => this._handleInput('js', FormatterService.formatJs(this._js))}>Format</button>
               </div>
-              <textarea 
+              <zui-code-editor
                 .value=${this._js}
-                @input=${(e: Event) => this._handleInput('js', (e.target as HTMLTextAreaElement).value)}
-                placeholder="console.log('Hello');"
-              ></textarea>
+                language="javascript"
+                @change=${(e: CustomEvent) => this._handleInput('js', e.detail.value)}
+              ></zui-code-editor>
             </div>
           </div>
 
