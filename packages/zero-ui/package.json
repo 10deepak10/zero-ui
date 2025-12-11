@@ -123,6 +123,10 @@
       "types": "./dist/logger/index.d.ts",
       "default": "./dist/logger/index.js"
     },
+    "./event-bus": {
+      "types": "./dist/event-bus/index.d.ts",
+      "default": "./dist/event-bus/index.js"
+    },
     "./services": {
       "types": "./dist/services/index.d.ts",
       "default": "./dist/services/index.js"

@@ -1,70 +1,123 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { LoggerService, FormatterService } from '@deepverse/zero-ui';
+import { LoggerService, FormatterService, EventBusService } from '@deepverse/zero-ui';
 import '@deepverse/zero-ui/logger';
+import '@deepverse/zero-ui/event-bus';
 import '@deepverse/zero-ui/split';
 import '@deepverse/zero-ui/toggle';
 import '@deepverse/zero-ui/code-editor';
+import '@deepverse/zero-ui/tabs';
 
 const DEFAULT_HTML = '<h1>Hello Sandbox</h1>\n<p>Start editing to see changes!</p>\n<button id="btn">Click Me</button>';
 const DEFAULT_CSS = 'body {\n  font-family: sans-serif;\n  padding: 20px;\n}\n\nh1 {\n  color: #3b82f6;\n}\n\nbutton {\n  padding: 8px 16px;\n  background: #10b981;\n  color: white;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n}';
-const DEFAULT_JS = 'document.getElementById("btn").addEventListener("click", () => {\n  console.log("Button clicked at " + new Date().toLocaleTimeString());\n});\n\nconsole.info("Sandbox initialized");\nconsole.warn("This is a warning example");';
+const DEFAULT_JS = 'document.getElementById("btn").addEventListener("click", () => {\n  console.log("Button clicked at " + new Date().toLocaleTimeString());\n  EventBus.emit("user:click", { btnId: "btn", time: Date.now() });\n});\n\nconsole.info("Sandbox initialized");\nEventBus.emit("sandbox:init", { ready: true });';
 
 @customElement('sandbox-demo')
 export class SandboxDemo extends LitElement {
   static styles = css`
     :host {
+      * {
+        box-sizing: border-box;
+      }
+
       display: flex;
       flex-direction: column;
       height: 100%;
       padding: 16px;
-      box-sizing: border-box;
+      /* box-sizing: border-box; redundant with * rule but kept for host */
+      box-sizing: border-box; 
       gap: 16px;
       color: var(--text-main);
+      --sandbox-border: rgba(255, 255, 255, 0.1);
+      --sandbox-header-bg: rgba(255, 255, 255, 0.03);
+      --sandbox-bg: #1e1e1e;
     }
 
     h2 {
       margin: 0;
       font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
     }
 
     .container {
-      display: block;
+      display: block; // Flex handled by split
       flex: 1;
       min-height: 0;
-      /* Remove grid styles as we use zui-split now */
+      border: 1px solid var(--sandbox-border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #0f172a;
     }
 
+    /* Common Section Styles */
+    .section {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        min-height: 0;
+        background: var(--sandbox-bg);
+    }
+    
+    .section-header {
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        background: var(--sandbox-header-bg);
+        border-bottom: 1px solid var(--sandbox-border);
+        font-size: 0.8rem;
+        font-family: 'Monaco', 'Menlo', monospace;
+        font-weight: 600;
+        color: #94a3b8;
+        letter-spacing: 0.05em;
+        flex-shrink: 0;
+        /* Default accent */
+        border-left: 3px solid transparent; 
+    }
+    
+    .section-header.html { border-left-color: #e44d26; }
+    .section-header.css { border-left-color: #2965f1; }
+    .section-header.js { border-left-color: #f0db4f; }
+    .section-header.preview { border-left-color: #3b82f6; }
+
     .editors {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      overflow-y: auto;
-      padding-right: 8px;
+      display: block;
+      height: 100%;
+      overflow: hidden; /* Split handles scrolling inside panes */
     }
 
     .editor-group {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      flex: 1;
+      height: 100%;
+      min-height: 0;
+      /* Border handled by split gutter now */
+    }
+    
+    .editor-group:last-child {
+        border-bottom: none;
     }
 
-    label {
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--text-muted);
+    /* Remove individual editor borders as the group handles it */
+    zui-code-editor {
+        border: none;
+        border-radius: 0;
+        height: 100%;
     }
-
-
 
     .preview {
       background: white;
-      border-radius: 8px;
-      overflow: hidden;
       display: flex;
       flex-direction: column;
-      height: 100%; /* Ensure it fills the split pane */
+      height: 100%; 
+    }
+    
+    .preview-iframe-wrapper {
+        flex: 1;
+        background: white;
+        position: relative;
     }
 
     /* Prevent iframe from stealing mouse events during resize */
@@ -72,35 +125,36 @@ export class SandboxDemo extends LitElement {
       pointer-events: none;
     }
 
-    .preview-header {
-      background: #f1f5f9;
-      padding: 8px 16px;
-      border-bottom: 1px solid #e2e8f0;
-      color: #475569;
-      font-size: 0.8rem;
-      font-weight: 600;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
     iframe {
-      flex: 1;
       border: none;
       width: 100%;
       height: 100%;
-      background: white;
+      display: block;
+    }
+
+    /* Controls in header */
+    .controls {
+        display: flex;
+        gap: 8px; 
+        align-items: center;
+        white-space: nowrap;
+    }
+    
+    .controls zui-toggle {
+        font-size: 0.8rem;
+        margin-right: 8px;
     }
 
     .run-btn {
       background: #3b82f6;
       color: white;
       border: none;
-      padding: 6px 12px;
-      border-radius: 4px;
+      padding: 6px 16px;
+      border-radius: 6px;
       cursor: pointer;
       font-weight: 600;
       font-size: 0.8rem;
+      transition: background 0.2s;
     }
 
     .run-btn:hover {
@@ -108,41 +162,92 @@ export class SandboxDemo extends LitElement {
     }
     
     .run-btn:disabled {
-      background: #cbd5e1;
+      background: #334155;
+      color: #94a3b8;
       cursor: not-allowed;
     }
 
     .reset-btn {
       background: transparent;
       color: #ef4444;
-      border: 1px solid #ef4444;
-      padding: 5px 11px;
-      border-radius: 4px;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 5px 12px;
+      border-radius: 6px;
       cursor: pointer;
-      font-weight: 600;
+      font-weight: 500;
       font-size: 0.8rem;
       transition: all 0.2s;
     }
 
     .reset-btn:hover {
-      background: #ef4444;
-      color: white;
+      background: rgba(239, 68, 68, 0.1);
+      color: #f87171;
+      border-color: #ef4444;
     }
 
     .action-btn {
       background: transparent;
-      border: 1px solid var(--card-border, #e2e8f0);
-      color: var(--text-muted, #94a3b8);
+      border: 1px solid var(--sandbox-border);
+      color: #94a3b8;
       font-size: 0.75rem;
-      padding: 2px 8px;
+      padding: 4px 8px;
       border-radius: 4px;
       cursor: pointer;
       transition: all 0.2s;
     }
 
     .action-btn:hover {
-      background: var(--card-border, #e2e8f0);
-      color: var(--text-main, #334155);
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+    }
+    
+    /* Tabs Integration */
+    zui-tabs {
+       height: 100%;
+       display: flex;
+       flex-direction: column;
+       --card-border: var(--sandbox-border);
+       background: #1e293b; /* Match logger bg */
+    }
+    
+    /* Unified Tab Style matching Section Headers */
+    zui-tabs::part(tabs-content) {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* Custom premium tab styles */
+    zui-tab {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 48px; /* Match section header height */
+      padding: 0 24px;
+      transition: all 0.2s ease;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #64748b;
+      position: relative;
+      background: transparent;
+      user-select: none;
+      border-bottom: 2px solid transparent;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    zui-tab:hover {
+      color: #cbd5e1;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    
+    zui-tab[active] {
+       color: #60a5fa;
+       background: rgba(59, 130, 246, 0.05);
+       border-bottom-color: #60a5fa;
+    }
+    
+    zui-tab-panel {
+      height: 100%;
     }
   `;
 
@@ -200,7 +305,9 @@ export class SandboxDemo extends LitElement {
   }
 
   private _handleMessage = (e: MessageEvent) => {
-    if (e.data && e.data.type === 'sandbox-log') {
+    if (!e.data) return;
+
+    if (e.data.type === 'sandbox-log') {
       const { level, args } = e.data;
       const message = args.join(' ');
       
@@ -211,6 +318,11 @@ export class SandboxDemo extends LitElement {
         case 'error': LoggerService.error(message, 'Sandbox'); break;
         default: LoggerService.debug(message, 'Sandbox');
       }
+    }
+
+    if (e.data.type === 'sandbox-event') {
+      const { name, data } = e.data;
+      EventBusService.emit(name, data, 'Sandbox');
     }
   };
 
@@ -253,6 +365,13 @@ export class SandboxDemo extends LitElement {
                 sendLog('error', [msg]);
                 return false; // Let it bubble to browser console too if needed, or true to suppress
               };
+              
+              const EventBus = {
+                emit: (name, data) => {
+                    window.parent.postMessage({ type: 'sandbox-event', name, data }, '*');
+                }
+              };
+              window.EventBus = EventBus;
             })();
           </script>
         </head>
@@ -273,53 +392,62 @@ export class SandboxDemo extends LitElement {
       <div class="container">
         <zui-split direction="horizontal" initialSplit="50%">
           
-            <!-- Code Editors Pane -->
+          <!-- Code Editors Pane -->
+          <!-- Code Editors Pane -->
           <div class="editors" slot="one">
-            <div class="editor-group">
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <label>HTML</label>
-                <button class="action-btn" @click=${() => this._handleInput('html', FormatterService.formatHtml(this._html))}>Format</button>
-              </div>
-              <zui-code-editor
-                .value=${this._html}
-                language="html"
-                @change=${(e: CustomEvent) => this._handleInput('html', e.detail.value)}
-              ></zui-code-editor>
-            </div>
 
-            <div class="editor-group">
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <label>CSS</label>
-                <button class="action-btn" @click=${() => this._handleInput('css', FormatterService.formatCss(this._css))}>Format</button>
-              </div>
-              <zui-code-editor
-                .value=${this._css}
-                language="css"
-                @change=${(e: CustomEvent) => this._handleInput('css', e.detail.value)}
-              ></zui-code-editor>
-            </div>
+            <zui-split direction="vertical" initialSplit="33%">
+                <div class="editor-group" slot="one">
+                  <div class="section-header html">
+                    <span>HTML</span>
+                    <button class="action-btn" @click=${() => this._handleInput('html', FormatterService.formatHtml(this._html))}>Format</button>
+                  </div>
+                  <zui-code-editor
+                    .value=${this._html}
+                    language="html"
+                    @change=${(e: CustomEvent) => this._handleInput('html', e.detail.value)}
+                  ></zui-code-editor>
+                </div>
 
-            <div class="editor-group">
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <label>JavaScript</label>
-                <button class="action-btn" @click=${() => this._handleInput('js', FormatterService.formatJs(this._js))}>Format</button>
-              </div>
-              <zui-code-editor
-                .value=${this._js}
-                language="javascript"
-                @change=${(e: CustomEvent) => this._handleInput('js', e.detail.value)}
-              ></zui-code-editor>
-            </div>
+                <div slot="two" style="height: 100%">
+                    <zui-split direction="vertical" initialSplit="50%">
+                        <div class="editor-group" slot="one">
+                          <div class="section-header css">
+                            <span>CSS</span>
+                            <button class="action-btn" @click=${() => this._handleInput('css', FormatterService.formatCss(this._css))}>Format</button>
+                          </div>
+                          <zui-code-editor
+                            .value=${this._css}
+                            language="css"
+                            @change=${(e: CustomEvent) => this._handleInput('css', e.detail.value)}
+                          ></zui-code-editor>
+                        </div>
+        
+                        <div class="editor-group" slot="two">
+                          <div class="section-header js">
+                            <span>JavaScript</span>
+                            <button class="action-btn" @click=${() => this._handleInput('js', FormatterService.formatJs(this._js))}>Format</button>
+                          </div>
+                          <zui-code-editor
+                            .value=${this._js}
+                            language="javascript"
+                            @change=${(e: CustomEvent) => this._handleInput('js', e.detail.value)}
+                          ></zui-code-editor>
+                        </div>
+                    </zui-split>
+                </div>
+            </zui-split>
+            
           </div>
 
           <!-- Preview & Logs Pane -->
           <div class="preview" slot="two">
             <zui-split direction="vertical" initialSplit="70%">
               
-              <div class="preview-content" slot="one" style="height: 100%; display: flex; flex-direction: column;">
-                <div class="preview-header">
-                  Preview
-                  <div style="display: flex; gap: 12px; align-items: center;">
+              <div class="section" slot="one">
+                <div class="section-header">
+                  <span>Preview</span>
+                  <div class="controls">
                     <zui-toggle 
                       ?checked=${this._liveReload}
                       @change=${this._toggleLiveReload}
@@ -334,11 +462,23 @@ export class SandboxDemo extends LitElement {
                     >Run</button>
                   </div>
                 </div>
-                <iframe .srcdoc=${this._srcDoc} sandbox="allow-scripts allow-modals"></iframe>
+                <div class="preview-iframe-wrapper">
+                     <iframe .srcdoc=${this._srcDoc} sandbox="allow-scripts allow-modals"></iframe>
+                </div>
               </div>
 
-              <div class="logs-content" slot="two" style="height: 100%;">
-                <zui-logger style="--logger-bg: #1e293b; height: 100%; border: none; border-top: 1px solid var(--card-border);"></zui-logger>
+              <div class="section" slot="two">
+                <zui-tabs style="flex: 1; display: flex; flex-direction: column;">
+                    <zui-tab slot="tabs">Console</zui-tab>
+                    <zui-tab slot="tabs">Events</zui-tab>
+                    
+                    <zui-tab-panel slot="panels">
+                         <zui-logger style="--logger-bg: #1e293b; height: 100%; border: none;"></zui-logger>
+                    </zui-tab-panel>
+                    <zui-tab-panel slot="panels">
+                        <zui-event-bus style="--event-bus-bg: #1e293b; height: 100%; border: none;"></zui-event-bus>
+                    </zui-tab-panel>
+                </zui-tabs>
               </div>
 
             </zui-split>
