@@ -131,6 +131,10 @@
       "types": "./dist/theme-provider/index.d.ts",
       "default": "./dist/theme-provider/index.js"
     },
+    "./theme-generator": {
+      "types": "./dist/theme-generator/index.d.ts",
+      "default": "./dist/theme-generator/index.js"
+    },
     "./services": {
       "types": "./dist/services/index.d.ts",
       "default": "./dist/services/index.js"

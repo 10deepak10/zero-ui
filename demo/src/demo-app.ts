@@ -302,15 +302,12 @@ export class DemoApp extends LitElement {
       case '/event-bus':
         import('./pages/event-bus-demo');
         return html`<event-bus-demo></event-bus-demo>`;
-      case '/theme-provider':
-        import('./pages/theme-demo');
-        return html`<theme-demo></theme-demo>`;
+      case '/theme-generator':
+        import('./pages/theme-generator-demo');
+        return html`<theme-generator-demo></theme-generator-demo>`;
 
       // Tools
       case '/sandbox': return html`<sandbox-demo></sandbox-demo>`;
-      case '/theme':
-        import('./pages/theme-demo');
-        return html`<theme-demo></theme-demo>`;
 
       default: return html`<intro-page></intro-page>`;
     }
@@ -398,12 +395,13 @@ export class DemoApp extends LitElement {
             ${this._renderNavLink('/text-editor', 'Text Editor')}
             ${this._renderNavLink('/code-editor', 'Code Editor')}
             ${this._renderNavLink('/event-bus', 'Event Bus')}
-            ${this._renderNavLink('/theme-provider', 'Theme Provider', true)}
+            ${this._renderNavLink('/theme-provider', 'Theme Provider')}
           </div>
 
           <div class="nav-group">
             <div class="nav-header">Tools</div>
             ${this._renderNavLink('/sandbox', 'Sandbox')}
+            ${this._renderNavLink('/theme-generator', 'Theme Generator')}
           </div>
         </nav>
       </aside>

@@ -228,6 +228,13 @@ export default defineConfig({
           "../packages/zero-ui/src/theme-provider/index.ts"
         ),
       },
+      {
+        find: "@deepverse/zero-ui/theme-generator",
+        replacement: path.resolve(
+          __dirname,
+          "../packages/zero-ui/src/theme-generator/index.ts"
+        ),
+      },
 
       {
         find: "@deepverse/zero-ui/text-editor",
