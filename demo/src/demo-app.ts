@@ -305,6 +305,9 @@ export class DemoApp extends LitElement {
       case '/theme-generator':
         import('./pages/theme-generator-demo');
         return html`<theme-generator-demo></theme-generator-demo>`;
+      case '/json-formatter':
+        import('./pages/json-formatter-demo');
+        return html`<json-formatter-demo></json-formatter-demo>`;
 
       // Tools
       case '/sandbox': return html`<sandbox-demo></sandbox-demo>`;
@@ -402,6 +405,7 @@ export class DemoApp extends LitElement {
             <div class="nav-header">Tools</div>
             ${this._renderNavLink('/sandbox', 'Sandbox')}
             ${this._renderNavLink('/theme-generator', 'Theme Generator')}
+            ${this._renderNavLink('/json-formatter', 'JSON Formatter')}
           </div>
         </nav>
       </aside>
