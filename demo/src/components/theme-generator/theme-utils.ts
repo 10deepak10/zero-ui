@@ -36,6 +36,16 @@ export function generateCssVariables(theme: ThemeConfig, mode: 'light' | 'dark' 
         lines.push(`--radius-${key}: ${value};`);
     });
 
+    // Shadows
+    Object.entries(theme.shadows).forEach(([key, value]) => {
+        lines.push(`--shadow-${key}: ${value};`);
+    });
+
+    // Animations
+    Object.entries(theme.animations).forEach(([key, value]) => {
+        lines.push(`--animate-${key}: ${value};`);
+    });
+
     return lines.join('\n');
 }
 
