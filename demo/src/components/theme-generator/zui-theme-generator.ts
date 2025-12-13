@@ -181,6 +181,7 @@ export class ZuiThemeGenerator extends LitElement {
   @property({ type: Boolean }) showPreview = true;
 
   @state() private _theme: ThemeConfig = { ...DEFAULT_THEME };
+    @state() private _baseTheme: ThemeConfig = { ...DEFAULT_THEME };
   @state() private _generatedCss = '';
   @state() private _previewImage: string = '';
   @state() private _previewMode: 'light' | 'dark' = 'light';
@@ -265,7 +266,21 @@ export class ZuiThemeGenerator extends LitElement {
 
 
   private _resetToDefault() {
-      this._theme = JSON.parse(JSON.stringify(DEFAULT_THEME));
+      // "Smart Reset":
+      // 1. If an image was uploaded, we revert to the extracted theme (stored in _baseTheme).
+      // 2. We ONLY reset the colors for the CURRENT mode.
+
+      const currentMode = this._previewMode;
+      const baseColors = this._baseTheme.colors[currentMode];
+
+      this._theme = {
+          ...this._theme,
+          colors: {
+              ...this._theme.colors,
+              [currentMode]: { ...baseColors }
+          }
+      };
+
       this._updateTheme();
   }
 
@@ -278,6 +293,7 @@ export class ZuiThemeGenerator extends LitElement {
           console.log('Extracted Colors:', colors);
           const newTheme = mapPaletteToTheme(colors);
           this._theme = newTheme;
+          this._baseTheme = JSON.parse(JSON.stringify(newTheme));
           
           // Switch to Dark mode if the auto-extracted dark background is very dominant? 
           // For now, stick to light or user preference.
@@ -288,6 +304,14 @@ export class ZuiThemeGenerator extends LitElement {
           alert('Failed to extract theme from image');
       }
   }
+
+    private _copyCss() {
+        const cssContent = `:root {
+${this._generatedCss}
+}`;
+        navigator.clipboard.writeText(cssContent);
+        alert('CSS Variables copied to clipboard!');
+    }
 
   private _copyJson() {
       navigator.clipboard.writeText(JSON.stringify(this._theme, null, 2));
@@ -325,6 +349,57 @@ export class ZuiThemeGenerator extends LitElement {
         </div>
       `;
   }
+
+    private _renderTypoInput(label: string, path: string[]) {
+        // Helper to access nested property
+        let target: any = this._theme.typography;
+        for (let i = 0; i < path.length - 1; i++) {
+            target = target[path[i]];
+        }
+        const finalKey = path[path.length - 1];
+        const value = target[finalKey];
+
+        return html`
+        <div class="form-group" style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <label class="form-label" style="width: 120px; margin: 0;">${label}</label>
+            <input type="text" 
+                .value=${value}
+                @change=${(e: any) => {
+                target[finalKey] = e.target.value;
+                this._updateTheme();
+                this.requestUpdate();
+            }}
+            >
+        </div>
+      `;
+    }
+
+    private _renderTextInput(label: string, section: 'shadows' | 'animations', key: string) {
+        const value = (this._theme[section] as any)[key];
+        return html`
+        <div class="form-group" style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <label class="form-label" style="width: 120px; margin: 0;">${label}</label>
+            <input type="text" 
+                .value=${value}
+                @change=${(e: any) => {
+                (this._theme[section] as any)[key] = e.target.value;
+                this._updateTheme();
+                this.requestUpdate();
+            }}
+            >
+        </div>
+      `;
+    }
+
+    private _downloadConfig() {
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this._theme, null, 2));
+        const downloadAnchorNode = document.createElement('a');
+        downloadAnchorNode.setAttribute("href", dataStr);
+        downloadAnchorNode.setAttribute("download", "theme-config.json");
+        document.body.appendChild(downloadAnchorNode); // required for firefox
+        downloadAnchorNode.click();
+        downloadAnchorNode.remove();
+    }
 
   render() {
     return html`
@@ -417,11 +492,26 @@ export class ZuiThemeGenerator extends LitElement {
                                 }}
                             >
                         </div>
+
+                        <div class="section-title">Headings (Font Size)</div>
+                        ${this._renderTypoInput('H1 Size', ['headings', 'h1', 'fontSize'])}
+                        ${this._renderTypoInput('H2 Size', ['headings', 'h2', 'fontSize'])}
+                        ${this._renderTypoInput('H3 Size', ['headings', 'h3', 'fontSize'])}
+                        ${this._renderTypoInput('H4 Size', ['headings', 'h4', 'fontSize'])}
+                        ${this._renderTypoInput('H5 Size', ['headings', 'h5', 'fontSize'])}
+                        ${this._renderTypoInput('H6 Size', ['headings', 'h6', 'fontSize'])}
+
+                        <div class="section-title">Body & Caption</div>
+                        ${this._renderTypoInput('Body Size', ['body', 'fontSize'])}
+                        ${this._renderTypoInput('Caption Size', ['caption', 'fontSize'])}
+                        <!-- Note: Caption specific color not supported in standard model yet, 
+                             but user asked for size. I'll stick to size for now to avoid breaking model contract/utils 
+                             unless I add it to model. User asked for "settings for all heading size, subtext size". 
+                             So Size is sufficient. Remove color input. -->
                     </zui-tab-panel>
 
                     <zui-tab-panel slot="panels">
                         <div class="section-title">Border Radius</div>
-                        <!-- Add fields here -->
                          <div class="form-group">
                             <label class="form-label">Small (sm)</label>
                             <input type="text" 
@@ -436,6 +526,23 @@ export class ZuiThemeGenerator extends LitElement {
                                 @change=${(e: any) => { this._theme.borderRadius.md = e.target.value; this._updateTheme(); }}
                             >
                          </div>
+                         <div class="form-group">
+                            <label class="form-label">Large (lg)</label>
+                            <input type="text"
+                                .value=${this._theme.borderRadius.lg} 
+                                @change=${(e: any) => { this._theme.borderRadius.lg = e.target.value; this._updateTheme(); }}
+                            >
+                         </div>
+
+                        <div class="section-title">Shadows</div>
+                        ${this._renderTextInput('Small', 'shadows', 'sm')}
+                        ${this._renderTextInput('Medium', 'shadows', 'md')}
+                        ${this._renderTextInput('Large', 'shadows', 'lg')}
+
+                        <div class="section-title">Animations (Duration)</div>
+                        ${this._renderTextInput('Fast', 'animations', 'fast')}
+                        ${this._renderTextInput('Normal', 'animations', 'normal')}
+                        ${this._renderTextInput('Slow', 'animations', 'slow')}
                     </zui-tab-panel>
                  </zui-tabs>
             </div>
@@ -443,6 +550,7 @@ export class ZuiThemeGenerator extends LitElement {
             <div style="padding: 16px; border-top: 1px solid var(--card-border); display: flex; gap: 8px;">
                 <zui-button size="sm" variant="secondary" @click=${this._resetToDefault}>Reset</zui-button>
                 <zui-button size="sm" @click=${this._copyJson}>Copy JSON</zui-button>
+                <zui-button size="sm" @click=${this._copyCss} variant="primary">Copy CSS</zui-button>
             </div>
         </div>
 
@@ -479,7 +587,7 @@ export class ZuiThemeGenerator extends LitElement {
                             ">🌙</button>
                     </div>
                 </div>
-                <zui-button size="sm">Download Config</zui-button>
+                <zui-button size="sm" @click=${this._downloadConfig}>Download Config</zui-button>
             </div>
             
             <!-- We apply the generated CSS variables to this container -->
@@ -556,32 +664,185 @@ export class ZuiThemeGenerator extends LitElement {
                          </div>
                     `}
 
-                    <!-- Features -->
                     <div style="
                         padding: 48px 24px;
-                        display: grid; 
-                        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-                        gap: 24px;
                         max-width: 1200px; margin: 0 auto; width: 100%;
                     ">
-                        
-                       <!-- ... cards ... -->
-                       ${/* Cards logic already replaced in previous step, keep them */ ''}
-                        
-                       <div style="background: var(--color-surface); border-radius: var(--radius-md); padding: 24px; height: 100%; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-                            <div style="font-size: 2rem; margin-bottom: 16px;">✨</div>
-                            <h3 style="margin: 0 0 8px; color: var(--color-text);">Auto Extraction</h3>
-                            <p style="opacity: 0.7; line-height: 1.5; color: var(--color-text);">Colors are pulled directly from your image using advanced quantization.</p>
-                        </div>
-                        <div style="background: var(--color-surface); border-radius: var(--radius-md); padding: 24px; height: 100%; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-                            <div style="font-size: 2rem; margin-bottom: 16px;">🎨</div>
-                            <h3 style="margin: 0 0 8px; color: var(--color-text);">Semantic Mapping</h3>
-                            <p style="opacity: 0.7; line-height: 1.5; color: var(--color-text);">We intelligently assign primary, secondary, and semantic tokens.</p>
-                        </div>
-                         <div style="background: var(--color-surface); border-radius: var(--radius-md); padding: 24px; height: 100%; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-                            <div style="font-size: 2rem; margin-bottom: 16px;">🚀</div>
-                            <h3 style="margin: 0 0 8px; color: var(--color-text);">Production Ready</h3>
-                            <p style="opacity: 0.7; line-height: 1.5; color: var(--color-text);">Export to JSON or CSS variables and drop into your app immediately.</p>
+                        <!-- Realistic Typography Examples -->
+                         <div style="margin-bottom: 64px;">
+                            <h2 style="font-size: 1.5rem; margin-bottom: 24px; opacity: 0.5; text-transform: uppercase; letter-spacing: 2px;">Typography in Context</h2>
+                            
+                            <div style="
+                                display: grid; 
+                                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+                                gap: 24px;
+                            ">
+                                <!-- Blog Post Card Example -->
+                                <div style="
+                                    background: var(--color-surface);
+                                    border-radius: var(--radius-md);
+                                    padding: 32px;
+                                    box-shadow: var(--shadow-sm);
+                                    border: 1px solid var(--card-border, rgba(255,255,255,0.05));
+                                ">
+                                    <span style="font-size: var(--font-size-caption); color: var(--color-primary); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Design Trends</span>
+                                    <h1 style="margin: 12px 0; color: var(--color-text); line-height: 1.1;">The Future of UI Design</h1>
+                                    <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 24px;">
+                                        <div style="width: 32px; height: 32px; border-radius: 99px; background: var(--color-secondary);"></div>
+                                        <div style="font-size: var(--font-size-caption); color: var(--text-muted, #94a3b8);">
+                                            <span>Jane Doe</span> • <span>Oct 24, 2025</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <h2 style="margin: 0 0 12px; color: var(--color-text);">Understanding Color Theory</h2>
+                                    <p style="margin: 0 0 16px; color: var(--color-text); line-height: 1.6; opacity: 0.9;">
+                                        Colors aren't just visual decoration; they evoke emotion and guide user behavior. 
+                                        When building a design system, your primary palette defines your brand's voice.
+                                    </p>
+                                    <a href="#" style="color: var(--color-primary); text-decoration: none; font-weight: 600;">Read more →</a>
+                                </div>
+
+                                <!-- Dashboard Widget Example -->
+                                <div style="
+                                    background: var(--color-surface);
+                                    border-radius: var(--radius-md);
+                                    padding: 32px;
+                                    box-shadow: var(--shadow-sm);
+                                    border: 1px solid var(--card-border, rgba(255,255,255,0.05));
+                                    display: flex; flex-direction: column;
+                                ">
+                                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 24px;">
+                                        <div>
+                                            <h3 style="margin: 0; color: var(--color-text);">Revenue Overview</h3>
+                                            <span style="font-size: var(--font-size-caption); opacity: 0.6; color: var(--color-text);">Last 30 days performance</span>
+                                        </div>
+                                        <button style="padding: 4px 12px; border-radius: 99px; background: rgba(255,255,255,0.1); border: none; color: var(--color-text); cursor: pointer;">Export</button>
+                                    </div>
+
+                                    <div style="margin-bottom: 32px;">
+                                        <h4 style="font-size: 3rem; margin: 0; color: var(--color-text); line-height: 1;">$45,231.89</h4>
+                                        <div style="color: var(--color-success); margin-top: 8px; font-weight: 600;">+20.1% <span style="font-weight: 400; opacity: 0.7; color: var(--color-text);">vs last month</span></div>
+                                    </div>
+
+                                    <h5 style="margin: 0 0 16px; color: var(--color-text); text-transform: uppercase; font-size: 0.75rem; opacity: 0.7;">Top Channels</h5>
+
+                                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border, rgba(255,255,255,0.05)); padding-bottom: 8px;">
+                                            <h6 style="margin: 0; color: var(--color-text);">Organic Search</h6>
+                                            <span style="font-weight: 600; color: var(--color-text);">65%</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border, rgba(255,255,255,0.05)); padding-bottom: 8px;">
+                                            <h6 style="margin: 0; color: var(--color-text);">Direct Traffic</h6>
+                                            <span style="font-weight: 600; color: var(--color-text);">22%</span>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                                            <h6 style="margin: 0; color: var(--color-text);">Social Media</h6>
+                                            <span style="font-weight: 600; color: var(--color-text);">13%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+
+                        <!-- Real Life Example: Pricing -->
+                        <div>
+                            <h2 style="font-size: 1.5rem; margin-bottom: 32px; opacity: 0.5; text-transform: uppercase; letter-spacing: 2px;">Pricing</h2>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px;">
+                                <!-- Standard Plan -->
+                                <div style="
+                                    background: var(--color-surface);
+                                    border-radius: var(--radius-md);
+                                    padding: 32px;
+                                    box-shadow: var(--shadow-sm);
+                                    border: 1px solid var(--card-border, rgba(255,255,255,0.05));
+                                    transition: transform var(--animate-normal);
+                                "
+                                @mouseenter=${(e: any) => e.target.style.transform = 'translateY(-5px)'}
+                                @mouseleave=${(e: any) => e.target.style.transform = 'translateY(0)'}
+                                >
+                                    <h3 style="color: var(--color-text); margin-top: 0;">Standard</h3>
+                                    <div style="font-size: 3rem; font-weight: 800; color: var(--color-text); margin-bottom: 16px;">$19<span style="font-size: 1rem; opacity: 0.6; font-weight: 400;">/mo</span></div>
+                                    <p style="color: var(--color-text); opacity: 0.8; margin-bottom: 24px;">Perfect for individual developers.</p>
+                                    <button style="
+                                        width: 100%;
+                                        padding: 12px;
+                                        border-radius: var(--radius-sm);
+                                        background: transparent;
+                                        border: 1px solid var(--color-text);
+                                        color: var(--color-text);
+                                        cursor: pointer;
+                                        font-weight: 600;
+                                        transition: all var(--animate-fast);
+                                    "
+                                    onmouseover="this.style.background='var(--color-text)'; this.style.color='var(--color-surface)'"
+                                    onmouseout="this.style.background='transparent'; this.style.color='var(--color-text)'"
+                                    >Get Started</button>
+                                </div>
+
+                                <!-- Pro Plan (Highlighted) -->
+                                <div style="
+                                    background: var(--color-surface);
+                                    border-radius: var(--radius-lg);
+                                    padding: 40px 32px;
+                                    box-shadow: var(--shadow-lg);
+                                    border: 2px solid var(--color-primary);
+                                    position: relative;
+                                    transform: scale(1.05);
+                                ">
+                                    <div style="
+                                        position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+                                        background: var(--color-primary); color: #fff;
+                                        padding: 4px 12px; border-radius: 99px; font-size: 0.75rem; font-weight: 700;
+                                    ">MOST POPULAR</div>
+                                    <h3 style="color: var(--color-primary); margin-top: 0;">Professional</h3>
+                                    <div style="font-size: 3rem; font-weight: 800; color: var(--color-text); margin-bottom: 16px;">$49<span style="font-size: 1rem; opacity: 0.6; font-weight: 400;">/mo</span></div>
+                                    <p style="color: var(--color-text); opacity: 0.8; margin-bottom: 24px;">For growing teams and businesses.</p>
+                                    <ul style="list-style: none; padding: 0; margin: 0 0 24px; color: var(--color-text); opacity: 0.8; font-size: 0.9rem;">
+                                        <li style="margin-bottom: 8px;">✓ All Standard features</li>
+                                        <li style="margin-bottom: 8px;">✓ Unlimited projects</li>
+                                        <li>✓ Priority support</li>
+                                    </ul>
+                                    <button style="
+                                        width: 100%;
+                                        padding: 12px;
+                                        border-radius: var(--radius-md);
+                                        background: var(--color-primary);
+                                        border: none;
+                                        color: #fff;
+                                        cursor: pointer;
+                                        font-weight: 600;
+                                        box-shadow: var(--shadow-md);
+                                        transition: transform var(--animate-normal), box-shadow var(--animate-normal);
+                                    "
+                                    onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='var(--shadow-lg)'"
+                                    onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='var(--shadow-md)'"
+                                    >Get Pro Now</button>
+                                </div>
+
+                                <!-- Enterprise Plan -->
+                                <div style="
+                                    background: var(--color-surface);
+                                    border-radius: var(--radius-md);
+                                    padding: 32px;
+                                    box-shadow: var(--shadow-sm);
+                                    border: 1px solid var(--card-border, rgba(255,255,255,0.05));
+                                    opacity: 0.8;
+                                ">
+                                    <h3 style="color: var(--color-text); margin-top: 0;">Enterprise</h3>
+                                    <div style="font-size: 3rem; font-weight: 800; color: var(--color-text); margin-bottom: 16px;">Custom</div>
+                                    <p style="color: var(--color-text); opacity: 0.8; margin-bottom: 24px;">For large scale organizations.</p>
+                                    <button style="
+                                        width: 100%;
+                                        padding: 12px;
+                                        border-radius: var(--radius-sm);
+                                        background: transparent;
+                                        border: 1px solid var(--card-border, #ccc);
+                                        color: var(--color-text);
+                                        cursor: pointer;
+                                        font-weight: 600;
+                                    ">Contact Sales</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
