@@ -10,7 +10,7 @@ export class ThemeServiceDemo extends LitElement {
   static styles = css`
     .demo-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 24px;
     }
     
@@ -84,6 +84,34 @@ export class ThemeServiceDemo extends LitElement {
       padding: 8px;
       border-radius: 4px;
       margin-top: 8px;
+      overflow-x: auto;
+    }
+
+    @media (max-width: 600px) {
+      .demo-grid {
+        grid-template-columns: 1fr;
+      }
+      .input-group > div {
+        flex-direction: column;
+      }
+      
+      /* Target the generated theme preview grid */
+      .input-group > div[style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+      }
+      
+      /* Target the result box flex container */
+      .result-box[style*="display: flex"] {
+         flex-direction: column;
+         align-items: flex-start !important;
+         gap: 8px;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
     }
   `;
 

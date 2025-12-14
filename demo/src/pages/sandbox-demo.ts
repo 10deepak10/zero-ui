@@ -261,6 +261,22 @@ export class SandboxDemo extends LitElement {
       height: 100%;
       padding: 0;
     }
+
+    @media (max-width: 600px) {
+      .section-header {
+        padding: 0 8px;
+        font-size: 0.75rem;
+      }
+      .controls {
+        gap: 4px;
+      }
+      .run-btn {
+        padding: 4px 10px;
+      }
+      .reset-btn {
+        padding: 4px 8px;
+      }
+    }
   `;
 
   @state() private _html = DEFAULT_HTML;

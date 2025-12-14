@@ -22,6 +22,12 @@ export class CameraCheckDemo extends LitElement {
       border-radius: 12px;
       flex-wrap: wrap;
     }
+
+    @media (max-width: 768px) {
+      .preview {
+        padding: 16px;
+      }
+    }
     
     zui-camera-check {
        width: 100%;

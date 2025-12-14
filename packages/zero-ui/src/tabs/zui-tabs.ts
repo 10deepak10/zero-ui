@@ -16,6 +16,12 @@ export class ZuiTabs extends LitElement {
       border-bottom: 1px solid var(--card-border, #334155);
       margin-bottom: 16px;
       gap: 2px;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none; /* Firefox */
+    }
+    .tabs-header::-webkit-scrollbar {
+      display: none; /* Chrome/Safari */
     }
   `;
 

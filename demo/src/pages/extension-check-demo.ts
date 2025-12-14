@@ -66,6 +66,12 @@ export class ExtensionCheckDemo extends LitElement {
       flex-wrap: wrap;
     }
 
+    @media (max-width: 768px) {
+      .preview {
+        padding: 16px;
+      }
+    }
+
     zui-extension-check {
       width: 100%;
     }
@@ -115,7 +121,7 @@ const extensions = [ ... ]; // See JSON tab for config
                 <zui-extension-check .extensions=${this.extensions}></zui-extension-check>
               </div>
 
-               <div style="background: #1e1e1e; border-radius: 8px; overflow: hidden; padding: 16px; border: 1px solid var(--card-border);">
+               <div style="background: #1e1e1e; border-radius: 8px; overflow-x: auto; padding: 16px; border: 1px solid var(--card-border); max-width: 100%; box-sizing: border-box;">
                    <pre style="margin:0; color: #d4d4d4; font-family: monospace; font-size: 0.85rem;">// Config used:
 ${JSON.stringify(this.extensions, null, 2)}</pre>
                </div>

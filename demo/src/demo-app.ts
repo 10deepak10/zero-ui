@@ -57,6 +57,10 @@ export class DemoApp extends LitElement {
       transition: background 0.3s ease, color 0.3s ease;
       --gradient-text: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
       
+      @media (max-width: 768px) {
+        flex-direction: column;
+      }
+      
       /* Code Editor Syntax (Dark) */
       --code-comment: #6a9955;
       --code-string: #ce9178;
@@ -142,7 +146,73 @@ export class DemoApp extends LitElement {
       flex-direction: column;
       flex-shrink: 0;
       box-shadow: 4px 0 30px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease;
+      z-index: 50;
+    }
+
+    .mobile-header {
+      display: none;
+      padding: 16px;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--glass-border);
+      background: var(--bg-body);
+    }
+
+    .menu-btn {
+      background: none;
+      border: none;
+      color: var(--text-main);
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 40;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .overlay.open {
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      aside {
+        position: fixed;
+        height: 100%;
+        left: 0;
+        top: 0;
+        transform: translateX(-100%);
+      }
+
+      aside.open {
+        transform: translateX(0);
+      }
+
+      .mobile-header {
+        display: flex;
+      }
+
+      .overlay {
+        display: block;
+        pointer-events: none;
+      }
+      
+      .overlay.open {
+        pointer-events: auto;
+      }
+      
+      .brand {
+        display: none; /* Hide brand in sidebar on mobile as it is in header */
+      }
     }
 
     .brand {
@@ -256,10 +326,20 @@ export class DemoApp extends LitElement {
     this.removeEventListener('theme-toggle', this._handleThemeToggle as EventListener);
   }
 
+  @state() private _sidebarOpen = false;
+
   private _handleThemeToggle = () => {
     this._theme = this._theme === 'dark' ? 'light' : 'dark';
     this.setAttribute('theme', this._theme);
   };
+
+  private _toggleSidebar() {
+    this._sidebarOpen = !this._sidebarOpen;
+  }
+
+  private _closeSidebar() {
+    this._sidebarOpen = false;
+  }
 
   private _handlePopState = () => {
     this._route = window.location.pathname;
@@ -269,6 +349,7 @@ export class DemoApp extends LitElement {
     e.preventDefault();
     window.history.pushState({}, '', path);
     this._route = path;
+    this._closeSidebar();
   }
 
   private _renderPage() {
@@ -385,7 +466,41 @@ export class DemoApp extends LitElement {
 
   render() {
     return html`
-      <aside>
+      <div class="mobile-header">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="menu-btn" @click=${this._toggleSidebar} aria-label="Menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 12h18M3 6h18M3 18h18" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="brand-text">Zero UI</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <button class="menu-btn" @click=${this._handleThemeToggle} aria-label="Toggle theme">
+            ${this._theme === 'light' ? html`
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            ` : html`
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+            `}
+          </button>
+        </div>
+      </div>
+
+      <div class="overlay ${this._sidebarOpen ? 'open' : ''}" @click=${this._closeSidebar}></div>
+
+      <aside class="${this._sidebarOpen ? 'open' : ''}">
         <div class="brand">
           <img src="/brand-logo.png" alt="Zero UI" class="brand-logo-img" />
           <span class="brand-text">Zero UI</span>
@@ -466,7 +581,7 @@ export class DemoApp extends LitElement {
           </div>
         </nav>
       </aside>
-      <main>${this._renderPage()}</main>
+      <main @click=${this._closeSidebar}>${this._renderPage()}</main>
     `;
   }
 }

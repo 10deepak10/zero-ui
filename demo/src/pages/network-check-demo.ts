@@ -25,6 +25,12 @@ export class NetworkCheckDemo extends LitElement {
       border-radius: 12px;
       flex-wrap: wrap;
     }
+
+    @media (max-width: 768px) {
+      .preview {
+        padding: 16px;
+      }
+    }
     .tip {
       background: rgba(59, 130, 246, 0.1);
       border-left: 4px solid #3b82f6;

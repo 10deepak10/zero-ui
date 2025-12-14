@@ -20,6 +20,12 @@ export class DemoPage extends LitElement {
       max-width: 1200px;
       margin: 0 auto;
     }
+    
+    @media (max-width: 768px) {
+      :host {
+        padding: 16px;
+      }
+    }
 
     header {
       margin-bottom: 40px;

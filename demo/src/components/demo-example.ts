@@ -72,6 +72,23 @@ export class DemoExample extends LitElement {
     ::slotted(*) {
       min-width: 50%;
     }
+
+    .code-wrapper {
+      overflow-x: auto;
+      max-width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .preview-container {
+        padding: 16px;
+      }
+      ::slotted(*) {
+        min-width: 100%;
+      }
+      .header {
+        padding: 16px 16px 0;
+      }
+    }
   `;
 
   @property() header = '';

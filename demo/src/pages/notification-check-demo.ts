@@ -19,6 +19,12 @@ export class NotificationCheckDemo extends LitElement {
       flex-wrap: wrap;
     }
 
+    @media (max-width: 768px) {
+      .preview {
+        padding: 16px;
+      }
+    }
+
     zui-notification-check {
       width: 100%;
     }

@@ -33,6 +33,7 @@ export class ZuiSplit extends LitElement {
       position: relative;
       z-index: 10;
       transition: background 0.2s;
+      touch-action: none; /* Prevent scrolling while dragging */
     }
 
     .gutter::after {
@@ -114,6 +115,23 @@ export class ZuiSplit extends LitElement {
   @state() private _splitSize: string = '50%';
   @query('.container') private _container!: HTMLElement;
 
+  @state() private _isMobile = false;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._checkMobile();
+    window.addEventListener('resize', this._checkMobile);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener('resize', this._checkMobile);
+  }
+
+  private _checkMobile = () => {
+    this._isMobile = window.innerWidth < 768;
+  };
+
   protected firstUpdated() {
     this._splitSize = this.initialSplit;
   }
@@ -121,14 +139,11 @@ export class ZuiSplit extends LitElement {
   private _startResize(e: PointerEvent) {
     e.preventDefault();
     this.resizing = true;
-    
-    // We can't rely just on _splitSize because it might be % but we are moving pixels
-    // So we calculate the initial pixel size
+
     const containerRect = this._container.getBoundingClientRect();
-    const isVertical = this.direction === 'vertical';
+    const isVertical = this.direction === 'vertical' || (this.direction === 'horizontal' && this._isMobile);
     const totalSize = isVertical ? containerRect.height : containerRect.width;
 
-    // Capturing initial pointer capture is good practice
     (e.target as HTMLElement).setPointerCapture(e.pointerId);
 
     const onMove = (moveEvent: PointerEvent) => {
@@ -141,19 +156,13 @@ export class ZuiSplit extends LitElement {
       
       if (isVertical) {
         const offset = currentY - containerRect.top;
-        newSize = offset; // This is the new height of pane 1
+        newSize = offset;
       } else {
         const offset = currentX - containerRect.left;
-        newSize = offset; // This is the new width of pane 1
+        newSize = offset;
       }
 
-      // Constrain
       newSize = Math.max(0, Math.min(newSize, totalSize - this.gutterSize));
-
-      // Convert back to percentage for responsiveness? 
-      // Or keep as pixels? Pixels feel more stable during drag.
-      // But percentage is better for window resize. 
-      // Let's stick to percentage for the state.
       const percentage = (newSize / totalSize) * 100;
       this._splitSize = `${percentage}%`;
     };
@@ -170,7 +179,8 @@ export class ZuiSplit extends LitElement {
   }
 
   render() {
-    const isVertical = this.direction === 'vertical';
+    const isVertical = this.direction === 'vertical' || (this.direction === 'horizontal' && this._isMobile);
+
     
     const pane1Style = isVertical 
       ? `height: ${this._splitSize}` 

@@ -18,6 +18,9 @@ export class CodeEditorDemo extends LitElement {
       border-radius: 8px;
       overflow: hidden;
       background: #1e1e1e;
+      overflow-x: auto;
+      max-width: 100%;
+      box-sizing: border-box;
     }
   `;
 
