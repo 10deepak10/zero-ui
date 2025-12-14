@@ -10,12 +10,15 @@ export class ZuiEventBus extends LitElement {
       display: block;
       font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
       height: 100%;
+      box-sizing: border-box;
     }
+
+    * { box-sizing: border-box; }
 
     .container {
       background: var(--event-bus-bg, #0f172a);
       border: 1px solid var(--event-bus-border, #1e293b);
-      border-radius: 12px;
+      border-radius: var(--event-bus-radius, 12px);
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -23,7 +26,9 @@ export class ZuiEventBus extends LitElement {
     }
 
     .toolbar {
-      background: rgba(255, 255, 255, 0.03);
+      background: var(--bg-muted, rgba(255, 255, 255, 0.03));
+      padding: 8px 16px;
+      background: var(--bg-muted, rgba(255, 255, 255, 0.03));
       padding: 8px 16px;
       border-bottom: 1px solid var(--event-bus-border, #1e293b);
       display: flex;
@@ -33,9 +38,9 @@ export class ZuiEventBus extends LitElement {
     }
 
     .search-input {
-      background: rgba(0, 0, 0, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #e2e8f0;
+      background: var(--zui-input-bg, rgba(0, 0, 0, 0.2));
+      border: 1px solid var(--card-border, rgba(255, 255, 255, 0.1));
+      color: var(--text-main, #e2e8f0);
       padding: 6px 10px;
       border-radius: 4px;
       font-family: inherit;
@@ -50,9 +55,9 @@ export class ZuiEventBus extends LitElement {
     }
 
     .action-btn {
-      background: rgba(255, 255, 255, 0.1);
+      background: var(--bg-hover, rgba(255, 255, 255, 0.1));
       border: none;
-      color: #e2e8f0;
+      color: var(--text-main, #e2e8f0);
       padding: 6px 12px;
       border-radius: 4px;
       font-family: inherit;
@@ -78,13 +83,15 @@ export class ZuiEventBus extends LitElement {
       padding: 8px 16px;
       font-size: 0.85rem;
       line-height: 1.4;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+      font-size: 0.85rem;
+      line-height: 1.4;
+      border-bottom: 1px solid var(--card-border, rgba(255, 255, 255, 0.02));
       align-items: center;
       cursor: pointer;
     }
 
     .event-item:hover {
-      background: rgba(255, 255, 255, 0.02);
+      background: var(--bg-hover, rgba(255, 255, 255, 0.02));
     }
 
     .timestamp {
@@ -107,13 +114,13 @@ export class ZuiEventBus extends LitElement {
     }
 
     .details {
-      background: rgba(0, 0, 0, 0.2);
+      background: var(--zui-input-bg, rgba(0, 0, 0, 0.2));
       padding: 8px 16px;
       font-size: 0.8rem;
-      color: #94a3b8;
+      color: var(--text-muted, #94a3b8);
       overflow-x: auto;
       white-space: pre-wrap;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+      border-bottom: 1px solid var(--card-border, rgba(255, 255, 255, 0.02));
     }
 
     .empty-state {

@@ -1,6 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import '@deepverse/zero-ui/os-check';
+import '../components/demo-page';
+import '../components/demo-example';
 import { OsCheckService } from '@deepverse/zero-ui';
 
 @customElement('os-check-demo')
@@ -14,117 +16,145 @@ export class OsCheckDemo extends LitElement {
   }
 
   static styles = css`
-    :host {
-      display: block;
-      padding: 40px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 30px;
-      background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .section {
-      margin-bottom: 50px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 16px;
-      padding: 30px;
-    }
-
-    h2 {
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      color: var(--text-main);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding-bottom: 10px;
-    }
-
-    .demo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 30px;
-    }
-
-    .demo-item {
+    .preview {
       display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .code-block {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 15px;
-      border-radius: 8px;
-      font-family: monospace;
-      font-size: 0.9rem;
-      color: #a5b4fc;
-      margin-top: 10px;
-      white-space: pre-wrap;
+      gap: 16px;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      flex-wrap: wrap;
     }
   `;
 
   private _handleOSDetected(e: CustomEvent) {
     this._detectedOS = e.detail;
-    console.log('OS Detected:', e.detail);
   }
 
   render() {
-    return html`
-      <h1>OS Check</h1>
+    const properties = [
+      { name: 'showVersion', type: 'boolean', default: 'false', description: 'Display OS version.' },
+      { name: 'showIcon', type: 'boolean', default: 'true', description: 'Display OS icon.' },
+    ];
 
-      <div class="section">
-        <h2>Basic Detection</h2>
-        <div class="demo-grid">
-          <div class="demo-item">
+    const basicHtml = `<zui-os-check 
+  @os-detected="\${handleDetection}"
+></zui-os-check>`;
+
+    const basicReact = `import { ZuiOsCheck } from '@deepverse/zero-ui/react';
+
+function App() {
+  const handleDetection = (e) => {
+    console.log('Detected OS:', e.detail);
+  };
+
+  return <ZuiOsCheck onOsDetected={handleDetection} />;
+}`;
+
+    const basicAngular = `import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: \`<zui-os-check (os-detected)="handleDetection($event)"></zui-os-check>\`
+})
+export class AppComponent {
+  handleDetection(e: any) {
+    console.log('Detected OS:', e.detail);
+  }
+}`;
+
+    const basicVue = `<template>
+  <zui-os-check @os-detected="handleDetection" />
+</template>
+
+<script setup>
+const handleDetection = (e) => {
+  console.log('Detected OS:', e.detail);
+};
+</script>`;
+
+    const versionHtml = `<zui-os-check showVersion></zui-os-check>`;
+    const noIconHtml = `<zui-os-check ?showIcon="\${false}"></zui-os-check>`;
+
+    const serviceReact = `import { OsCheckService } from '@deepverse/zero-ui';
+
+// Get OS info directly
+const info = OsCheckService.getOSInfo();`;
+    const serviceAngular = `import { OsCheckService } from '@deepverse/zero-ui';
+    
+const info = OsCheckService.getOSInfo();`;
+    const serviceVue = `import { OsCheckService } from '@deepverse/zero-ui';
+    
+const info = OsCheckService.getOSInfo();`;
+
+    return html`
+      <demo-page
+        name="OS Check"
+        description="Detects the user's Operating System, version, and architecture."
+        .properties=${properties}
+      >
+        <demo-example
+          header="Basic Detection"
+          description="Standard OS detection badge."
+          .html=${basicHtml}
+          .react=${basicReact}
+          .angular=${basicAngular}
+          .vue=${basicVue}
+        >
+          <div class="preview">
             <zui-os-check 
               @os-detected=${this._handleOSDetected}
             ></zui-os-check>
-            ${this._detectedOS ? html`
-              <div class="code-block">Detected OS:
-${JSON.stringify(this._detectedOS, null, 2)}</div>
-            ` : ''}
           </div>
-        </div>
-      </div>
+          ${this._detectedOS ? html`
+             <div style="margin-top: 16px; background: #1e1e1e; padding: 16px; border-radius: 8px; width: 100%;">
+                <zui-code-editor .value=${"// Detected OS:\n" + JSON.stringify(this._detectedOS, null, 2)} readonly language="json"></zui-code-editor>
+             </div>
+          ` : ''}
+        </demo-example>
 
-      <div class="section">
-        <h2>With Version</h2>
-        <div class="demo-grid">
-          <div class="demo-item">
+        <demo-example
+          header="With Version"
+          description="Displays the specific OS version."
+          .html=${versionHtml}
+          .react=${basicReact.replace('<ZuiOsCheck', '<ZuiOsCheck showVersion')}
+          .angular=${basicAngular.replace('<zui-os-check', '<zui-os-check showVersion')}
+          .vue=${basicVue.replace('<zui-os-check', '<zui-os-check showVersion')}
+        >
+          <div class="preview">
             <zui-os-check showVersion></zui-os-check>
           </div>
-        </div>
-      </div>
+        </demo-example>
 
-      <div class="section">
-        <h2>Without Icon</h2>
-        <div class="demo-grid">
-          <div class="demo-item">
+        <demo-example
+          header="Without Icon"
+          description="Text-only display."
+          .html=${noIconHtml}
+          .react=${basicReact.replace('<ZuiOsCheck', '<ZuiOsCheck showIcon={false}')}
+          .angular=${basicAngular.replace('<zui-os-check', '<zui-os-check [showIcon]="false"')}
+          .vue=${basicVue.replace('<zui-os-check', '<zui-os-check :showIcon="false"')}
+        >
+          <div class="preview">
             <zui-os-check ?showIcon=${false}></zui-os-check>
           </div>
-        </div>
-      </div>
+        </demo-example>
 
-      <div class="section">
-        <h2>Service Usage (Headless)</h2>
-        <div class="code-block">
-import { OsCheckService } from '@deepverse/zero-ui';
-
-// Get OS info directly without a component
-const info = OsCheckService.getOSInfo();
-        </div>
-
-        <div class="code-block" style="margin-top: 10px; border-left: 4px solid #3b82f6;">
+        <demo-example
+          header="Service Usage"
+          description="Headless API for accessing OS info."
+          .html=${`<!-- No HTML equivalent, JS-only -->`}
+          .react=${serviceReact}
+          .angular=${serviceAngular}
+          .vue=${serviceVue}
+        >
+           <pre style="width: 100%; background: #1e1e1e; padding: 16px; border-radius: 8px; overflow: auto; color: #fff;">
 // Result:
 ${JSON.stringify(this._serviceInfo, null, 2)}
-        </div>
-      </div>
+           </pre>
+        </demo-example>
+      </demo-page>
     `;
   }
 }

@@ -1,38 +1,19 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '@deepverse/zero-ui/logger';
+import '../components/demo-page';
+import '../components/demo-example';
 import { LoggerService } from '@deepverse/zero-ui';
 
 @customElement('logger-demo')
 export class LoggerDemo extends LitElement {
   static styles = css`
-    :host {
-      display: block;
-      padding: 24px;
-      color: var(--text-main);
-    }
-
-    .demo-section {
-      margin-bottom: 40px;
-      padding: 32px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      backdrop-filter: blur(12px);
-    }
-
-    h2 {
-      margin-top: 0;
-      margin-bottom: 24px;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
     .controls {
       display: flex;
       gap: 12px;
-      margin-bottom: 24px;
       flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 24px;
     }
 
     button {
@@ -43,6 +24,8 @@ export class LoggerDemo extends LitElement {
       cursor: pointer;
       color: white;
       transition: opacity 0.2s;
+      font-family: inherit;
+      font-size: 0.875rem;
     }
 
     button:hover {
@@ -56,7 +39,11 @@ export class LoggerDemo extends LitElement {
     .btn-spam { background: #8b5cf6; }
 
     .preview {
-      margin-top: 24px;
+      margin-top: 0px;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      overflow: hidden;
+      height: 400px;
     }
 
     zui-logger {
@@ -96,25 +83,80 @@ export class LoggerDemo extends LitElement {
   }
 
   render() {
-    return html`
-      <h1>Logger Utility</h1>
-      <p>System-wide logging service with a built-in terminal visualizer.</p>
+    const basicHtml = `<zui-logger></zui-logger>`;
 
-      <div class="demo-section">
-        <h2>Interactive Demo</h2>
-        
-        <div class="controls">
-          <button class="btn-info" @click=${this._logInfo}>Log Info</button>
-          <button class="btn-warn" @click=${this._logWarn}>Log Warning</button>
-          <button class="btn-error" @click=${this._logError}>Log Error</button>
-          <button class="btn-debug" @click=${this._logDebug}>Log Debug</button>
-          <button class="btn-spam" @click=${this._startSpam}>Generate Traffic</button>
-        </div>
+    const basicReact = `import { ZuiLogger, LoggerService } from '@deepverse/zero-ui/react';
 
-        <div class="preview">
-          <zui-logger></zui-logger>
-        </div>
+  function App() {
+    const logInfo = () => {
+      LoggerService.info('Hello Info', 'Category', { meta: 'data' });
+    };
+
+    return (
+      <div>
+        <button onClick={logInfo}>Log Info</button>
+        <ZuiLogger />
       </div>
+    );
+  }`;
+
+    const basicAngular = `import { Component } from '@angular/core';
+import { LoggerService } from '@deepverse/zero-ui';
+
+@Component({
+  selector: 'app-root',
+  template: \`
+    <button (click)="logInfo()">Log Info</button>
+    <zui-logger></zui-logger>
+  \`
+})
+export class AppComponent {
+  logInfo() {
+    LoggerService.info('Hello Info', 'Category', { meta: 'data' });
+  }
+}`;
+
+    const basicVue = `<template>
+  <button @click="logInfo">Log Info</button>
+  <zui-logger />
+</template>
+
+<script setup>
+import { LoggerService } from '@deepverse/zero-ui';
+
+const logInfo = () => {
+  LoggerService.info('Hello Info', 'Category', { meta: 'data' });
+};
+</script>`;
+
+    return html`
+      <demo-page
+        name="Logger Utility"
+        description="System-wide logging service with a built-in terminal-like visualizer."
+      >
+        <demo-example
+          header="Interactive Demo"
+          description="Visual log explorer and service integration."
+          .html=${basicHtml}
+          .react=${basicReact}
+          .angular=${basicAngular}
+          .vue=${basicVue}
+        >
+          <div>
+            <div class="controls">
+              <button class="btn-info" @click=${this._logInfo}>Log Info</button>
+              <button class="btn-warn" @click=${this._logWarn}>Log Warning</button>
+              <button class="btn-error" @click=${this._logError}>Log Error</button>
+              <button class="btn-debug" @click=${this._logDebug}>Log Debug</button>
+              <button class="btn-spam" @click=${this._startSpam}>Generate Traffic</button>
+            </div>
+
+            <div class="preview">
+              <zui-logger></zui-logger>
+            </div>
+          </div>
+        </demo-example>
+      </demo-page>
     `;
   }
 }

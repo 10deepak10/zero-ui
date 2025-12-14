@@ -1,63 +1,27 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import '@deepverse/zero-ui/select';
+import '../components/demo-page';
+import '../components/demo-example';
 
 @customElement('select-demo')
 export class SelectDemo extends LitElement {
   static styles = css`
-    :host {
-      display: block;
-      padding: 24px;
-      color: var(--text-main);
-    }
-
-    .demo-section {
-      margin-bottom: 2rem;
-      padding: 2rem;
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      background: var(--card-bg);
-      
-    }
-
-    h2 {
-      margin-top: 0;
-      margin-bottom: 1rem;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
-    .preview {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-bottom: 1rem;
-      max-width: 400px;
-      padding: 2rem;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
-    }
-
     .output {
       margin-top: 0.5rem;
       font-size: 0.875rem;
       color: var(--text-muted);
     }
+    zui-select {
+        width: 100%;
+        max-width: 300px;
+    }
   `;
 
-  @state()
-  private _value1 = '';
-
-  @state()
-  private _value2 = '';
-
-  @state()
-  private _values1: string[] = [];
-
-  @state()
-  private _values2: string[] = [];
+  @state() private _value1 = '';
+  @state() private _value2 = '';
+  @state() private _values1: string[] = [];
+  @state() private _values2: string[] = [];
 
   private _options = [
     { label: 'Apple', value: 'apple' },
@@ -70,81 +34,141 @@ export class SelectDemo extends LitElement {
   ];
 
   render() {
+    const properties = [
+      { name: 'value', type: 'string', default: "''", description: 'Selected value (single select).' },
+      { name: 'values', type: 'string[]', default: '[]', description: 'Selected values (multi select).' },
+      { name: 'options', type: 'Option[]', default: '[]', description: 'Array of {label, value} objects.' },
+      { name: 'label', type: 'string', default: "''", description: 'Label text.' },
+      { name: 'placeholder', type: 'string', default: "''", description: 'Placeholder text.' },
+      { name: 'multiple', type: 'boolean', default: 'false', description: 'Enable multi-select.' },
+      { name: 'searchable', type: 'boolean', default: 'false', description: 'Enable search/filter.' },
+      { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable the select.' },
+    ];
+
+    const basicHtml = `<zui-select
+  label="Choose a fruit"
+  .options="\${options}"
+  .value="\${value}"
+  @zui-change="\${handleChange}"
+></zui-select>`;
+
+    const multiHtml = `<zui-select
+  label="Search and select multiple"
+  multiple
+  searchable
+  .options="\${options}"
+  .values="\${values}"
+  @zui-change="\${handleChange}"
+></zui-select>`;
+
+    const basicReact = `import { ZuiSelect } from '@deepverse/zero-ui/react';
+
+const options = [
+  { label: 'Apple', value: 'apple' },
+  { label: 'Banana', value: 'banana' },
+];
+
+function App() {
+  const [value, setValue] = useState('');
+  return (
+    <ZuiSelect
+      label="Choose a fruit"
+      options={options}
+      value={value}
+      onZuiChange={(e) => setValue(e.detail.value)}
+    />
+  );
+}`;
+
+    const basicAngular = `import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: \`
+    <zui-select
+      label="Choose a fruit"
+      [options]="options"
+      [value]="value"
+      (zui-change)="handleChange($event)">
+    </zui-select>
+  \`
+})
+export class AppComponent {
+  value = '';
+  options = [
+    { label: 'Apple', value: 'apple' },
+    { label: 'Banana', value: 'banana' },
+  ];
+  handleChange(e: any) {
+    this.value = e.detail.value;
+  }
+}`;
+
+    const basicVue = `<template>
+  <zui-select
+    label="Choose a fruit"
+    :options="options"
+    v-model="value"
+  />
+</template>
+
+<script setup>
+import { ref } from 'vue';
+const value = ref('');
+const options = [
+  { label: 'Apple', value: 'apple' },
+  { label: 'Banana', value: 'banana' },
+];
+</script>`;
+
     return html`
-      <h1>Select</h1>
-      <p>An advanced select component with search and multi-select capabilities.</p>
-
-      <div class="demo-section">
-        <h2>Single Select</h2>
-        <div class="preview">
-          <zui-select
-            label="Choose a fruit"
-            .options=${this._options}
-            .value=${this._value1}
-            @zui-change=${(e: CustomEvent) => this._value1 = e.detail.value}
-          ></zui-select>
-          <div class="output">Selected: ${this._value1 || 'None'}</div>
-        </div>
-      </div>
-
-      <div class="demo-section">
-        <h2>Single Select with Search</h2>
-        <div class="preview">
-          <zui-select
-            label="Search and select"
-            searchable
-            .options=${this._options}
-            .value=${this._value2}
-            @zui-change=${(e: CustomEvent) => this._value2 = e.detail.value}
-          ></zui-select>
-          <div class="output">Selected: ${this._value2 || 'None'}</div>
-        </div>
-      </div>
-
-      <div class="demo-section">
-        <h2>Multi-Select</h2>
-        <div class="preview">
-          <zui-select
-            label="Choose multiple fruits"
-            multiple
-            .options=${this._options}
-            .values=${this._values1}
-            @zui-change=${(e: CustomEvent) => this._values1 = e.detail.values}
-          ></zui-select>
-          <div class="output">
-            Selected: ${this._values1.length > 0 ? this._values1.join(', ') : 'None'}
+      <demo-page
+        name="Select"
+        description="An advanced select component with search and multi-select capabilities."
+        .properties=${properties}
+      >
+        <demo-example
+          header="Single Select"
+          description="Basic usage for selecting a single option."
+          .html=${basicHtml}
+          .react=${basicReact}
+          .angular=${basicAngular}
+          .vue=${basicVue}
+        >
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <zui-select
+              label="Choose a fruit"
+              .options=${this._options}
+              .value=${this._value1}
+              @zui-change=${(e: CustomEvent) => this._value1 = e.detail.value}
+            ></zui-select>
+            <div class="output">Selected: ${this._value1 || 'None'}</div>
           </div>
-        </div>
-      </div>
+        </demo-example>
 
-      <div class="demo-section">
-        <h2>Multi-Select with Search</h2>
-        <div class="preview">
-          <zui-select
-            label="Search and select multiple"
-            multiple
-            searchable
-            .options=${this._options}
-            .values=${this._values2}
-            @zui-change=${(e: CustomEvent) => this._values2 = e.detail.values}
-          ></zui-select>
-          <div class="output">
-            Selected: ${this._values2.length > 0 ? this._values2.join(', ') : 'None'}
+        <demo-example
+          header="Multi-Select with Search"
+          description="Select multiple options with filtering."
+          .html=${multiHtml}
+          .react=${basicReact}
+          .angular=${basicAngular}
+          .vue=${basicVue}
+        >
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <zui-select
+              label="Search and select multiple"
+              multiple
+              searchable
+              .options=${this._options}
+              .values=${this._values2}
+              @zui-change=${(e: CustomEvent) => this._values2 = e.detail.values}
+            ></zui-select>
+            <div class="output">
+              Selected: ${this._values2.length > 0 ? this._values2.join(', ') : 'None'}
+            </div>
           </div>
-        </div>
-      </div>
-
-      <div class="demo-section">
-        <h2>Disabled</h2>
-        <div class="preview">
-          <zui-select
-            label="Disabled select"
-            disabled
-            .options=${this._options}
-            value="apple"
-          ></zui-select>
-        </div>
-      </div>
+        </demo-example>
+      </demo-page>
     `;
   }
 }

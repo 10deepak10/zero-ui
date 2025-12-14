@@ -1,6 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import '@deepverse/zero-ui/browser-check';
+import '../components/demo-page';
+import '../components/demo-example';
 import { BrowserCheckService } from '@deepverse/zero-ui';
 
 @customElement('browser-check-demo')
@@ -14,58 +16,16 @@ export class BrowserCheckDemo extends LitElement {
   }
 
   static styles = css`
-    :host {
-      display: block;
-      padding: 40px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 30px;
-      background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .section {
-      margin-bottom: 50px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 16px;
-      padding: 30px;
-    }
-
-    h2 {
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      color: var(--text-main);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding-bottom: 10px;
-    }
-
-    .demo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 30px;
-    }
-
-    .demo-item {
+    .preview {
       display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .code-block {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 15px;
-      border-radius: 8px;
-      font-family: monospace;
-      font-size: 0.9rem;
-      color: #a5b4fc;
-      margin-top: 10px;
-      white-space: pre-wrap;
+      gap: 16px;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      flex-wrap: wrap;
     }
   `;
 
@@ -74,56 +34,127 @@ export class BrowserCheckDemo extends LitElement {
   }
 
   render() {
-    return html`
-      <h1>Browser Check</h1>
+    const properties = [
+      { name: 'showVersion', type: 'boolean', default: 'false', description: 'Display browser version.' },
+      { name: 'showIcon', type: 'boolean', default: 'true', description: 'Display browser icon.' },
+    ];
 
-      <div class="section">
-        <h2>Basic Detection</h2>
-        <div class="demo-grid">
-          <div class="demo-item">
+    const basicHtml = `<zui-browser-check 
+  @browser-detected="\${handleDetection}"
+></zui-browser-check>`;
+
+    const basicReact = `import { ZuiBrowserCheck } from '@deepverse/zero-ui/react';
+
+function App() {
+  const handleDetection = (e) => {
+    console.log('Detected Browser:', e.detail);
+  };
+
+  return <ZuiBrowserCheck onBrowserDetected={handleDetection} />;
+}`;
+
+    const basicAngular = `import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: \`<zui-browser-check (browser-detected)="handleDetection($event)"></zui-browser-check>\`
+})
+export class AppComponent {
+  handleDetection(e: any) {
+    console.log('Detected Browser:', e.detail);
+  }
+}`;
+
+    const basicVue = `<template>
+  <zui-browser-check @browser-detected="handleDetection" />
+</template>
+
+<script setup>
+const handleDetection = (e) => {
+  console.log('Detected Browser:', e.detail);
+};
+</script>`;
+
+    const versionHtml = `<zui-browser-check showVersion></zui-browser-check>`;
+    const noIconHtml = `<zui-browser-check ?showIcon="\${false}"></zui-browser-check>`;
+
+    const serviceReact = `import { BrowserCheckService } from '@deepverse/zero-ui';
+
+// Get Browser info directly
+const info = BrowserCheckService.getBrowserInfo();`;
+    const serviceAngular = `import { BrowserCheckService } from '@deepverse/zero-ui';
+
+const info = BrowserCheckService.getBrowserInfo();`;
+    const serviceVue = `import { BrowserCheckService } from '@deepverse/zero-ui';
+
+const info = BrowserCheckService.getBrowserInfo();`;
+
+    return html`
+      <demo-page
+        name="Browser Check"
+        description="Detects the user's browser, version, and platform."
+        .properties=${properties}
+      >
+        <demo-example
+          header="Basic Detection"
+          description="Standard browser detection badge."
+          .html=${basicHtml}
+          .react=${basicReact}
+          .angular=${basicAngular}
+          .vue=${basicVue}
+        >
+          <div class="preview">
             <zui-browser-check 
               @browser-detected=${this._handleBrowserDetected}
             ></zui-browser-check>
-            ${this._detectedBrowser ? html`
-              <div class="code-block">Detected Browser:
-${JSON.stringify(this._detectedBrowser, null, 2)}</div>
-            ` : ''}
           </div>
-        </div>
-      </div>
+          ${this._detectedBrowser ? html`
+             <div style="margin-top: 16px; background: #1e1e1e; padding: 16px; border-radius: 8px; width: 100%;">
+                <zui-code-editor .value=${"// Detected Browser:\n" + JSON.stringify(this._detectedBrowser, null, 2)} readonly language="json"></zui-code-editor>
+             </div>
+          ` : ''}
+        </demo-example>
 
-      <div class="section">
-        <h2>With Version</h2>
-        <div class="demo-grid">
-          <div class="demo-item">
+        <demo-example
+          header="With Version"
+          description="Displays the specific browser version."
+          .html=${versionHtml}
+          .react=${basicReact.replace('<ZuiBrowserCheck', '<ZuiBrowserCheck showVersion')}
+          .angular=${basicAngular.replace('<zui-browser-check', '<zui-browser-check showVersion')}
+          .vue=${basicVue.replace('<zui-browser-check', '<zui-browser-check showVersion')}
+        >
+          <div class="preview">
             <zui-browser-check showVersion></zui-browser-check>
           </div>
-        </div>
-      </div>
+        </demo-example>
 
-      <div class="section">
-        <h2>Without Icon</h2>
-        <div class="demo-grid">
-          <div class="demo-item">
+        <demo-example
+          header="Without Icon"
+          description="Text-only display."
+          .html=${noIconHtml}
+          .react=${basicReact.replace('<ZuiBrowserCheck', '<ZuiBrowserCheck showIcon={false}')}
+          .angular=${basicAngular.replace('<zui-browser-check', '<zui-browser-check [showIcon]="false"')}
+          .vue=${basicVue.replace('<zui-browser-check', '<zui-browser-check :showIcon="false"')}
+        >
+          <div class="preview">
             <zui-browser-check ?showIcon=${false}></zui-browser-check>
           </div>
-        </div>
-      </div>
+        </demo-example>
 
-      <div class="section">
-        <h2>Service Usage (Headless)</h2>
-        <div class="code-block">
-import { BrowserCheckService } from '@deepverse/zero-ui';
-
-// Get Browser info directly without a component
-const info = BrowserCheckService.getBrowserInfo();
-        </div>
-
-        <div class="code-block" style="margin-top: 10px; border-left: 4px solid #3b82f6;">
+        <demo-example
+          header="Service Usage"
+          description="Headless API for accessing browser info."
+          .html=${`<!-- No HTML equivalent, JS-only -->`}
+          .react=${serviceReact}
+          .angular=${serviceAngular}
+          .vue=${serviceVue}
+        >
+           <pre style="width: 100%; background: #1e1e1e; padding: 16px; border-radius: 8px; overflow: auto; color: #fff;">
 // Result:
 ${JSON.stringify(this._serviceInfo, null, 2)}
-        </div>
-      </div>
+           </pre>
+        </demo-example>
+      </demo-page>
     `;
   }
 }

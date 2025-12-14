@@ -20,12 +20,12 @@ export class ZuiCheckbox extends LitElement {
       vertical-align: middle;
       cursor: pointer;
       --zui-checkbox-size: 18px;
-      --zui-checkbox-color: #3b82f6;
-      --zui-checkbox-border-color: #d1d5db;
+      --zui-checkbox-color: var(--zui-primary, #3b82f6);
+      --zui-checkbox-border-color: var(--card-border, #d1d5db);
       --zui-checkbox-border-radius: 4px;
       --zui-checkbox-check-color: #ffffff;
       --zui-checkbox-disabled-opacity: 0.5;
-      --zui-checkbox-focus-ring: 0 0 0 3px rgba(59, 130, 246, 0.3);
+      --zui-checkbox-focus-ring: 0 0 0 3px var(--zui-focus-ring, rgba(59, 130, 246, 0.3));
     }
 
     :host([disabled]) {

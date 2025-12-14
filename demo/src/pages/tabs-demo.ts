@@ -1,42 +1,12 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '@deepverse/zero-ui';
-import '@deepverse/zero-ui/code-editor';
+import '@deepverse/zero-ui'; // Imports all components including tabs
 import '../components/demo-page';
+import '../components/demo-example';
 
 @customElement('tabs-demo')
 export class TabsDemo extends LitElement {
-  static styles = css`
-    .demo-section {
-      margin-bottom: 40px;
-      padding: 32px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-    h2 {
-      margin-top: 0;
-      margin-bottom: 0px;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-    .preview {
-      display: block;
-      padding: 40px;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
-    }
-    .code-block {
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      overflow: hidden;
-      background: #1e1e1e;
-    }
-  `;
+  static styles = css``;
 
   render() {
     const properties = [
@@ -44,7 +14,7 @@ export class TabsDemo extends LitElement {
       { name: 'disabled', type: 'boolean', default: 'false', description: 'Whether the tab is disabled (header only).' },
     ];
 
-    const basicUsage = `<zui-tabs>
+    const basicHtml = `<zui-tabs>
   <zui-tab slot="tabs">Account</zui-tab>
   <zui-tab slot="tabs">Password</zui-tab>
   <zui-tab slot="tabs" disabled>Settings</zui-tab>
@@ -64,15 +34,86 @@ export class TabsDemo extends LitElement {
   </zui-tab-panel>
 </zui-tabs>`;
 
+    const basicReact = `import { ZuiTabs, ZuiTab, ZuiTabPanel } from '@deepverse/zero-ui/react';
+
+function App() {
+  return (
+    <ZuiTabs>
+      <ZuiTab slot="tabs">Account</ZuiTab>
+      <ZuiTab slot="tabs">Password</ZuiTab>
+      <ZuiTab slot="tabs" disabled>Settings</ZuiTab>
+
+      <ZuiTabPanel slot="panels">
+        <h3>Account Info</h3>
+        <p>Manage your account details.</p>
+      </ZuiTabPanel>
+      <ZuiTabPanel slot="panels">
+        <h3>Change Password</h3>
+      </ZuiTabPanel>
+      <ZuiTabPanel slot="panels">
+        Settings are disabled
+      </ZuiTabPanel>
+    </ZuiTabs>
+  );
+}`;
+
+    const basicAngular = `import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: \`
+    <zui-tabs>
+      <zui-tab slot="tabs">Account</zui-tab>
+      <zui-tab slot="tabs">Password</zui-tab>
+      <zui-tab slot="tabs" disabled>Settings</zui-tab>
+
+      <zui-tab-panel slot="panels">
+        <h3>Account Info</h3>
+      </zui-tab-panel>
+      <zui-tab-panel slot="panels">
+        <h3>Change Password</h3>
+      </zui-tab-panel>
+      <zui-tab-panel slot="panels">
+        Disabled
+      </zui-tab-panel>
+    </zui-tabs>
+  \`
+})
+export class AppComponent {}`;
+
+    const basicVue = `<template>
+  <zui-tabs>
+    <zui-tab slot="tabs">Account</zui-tab>
+    <zui-tab slot="tabs">Password</zui-tab>
+    <zui-tab slot="tabs" disabled>Settings</zui-tab>
+
+    <zui-tab-panel slot="panels">
+      <h3>Account Info</h3>
+    </zui-tab-panel>
+    <zui-tab-panel slot="panels">
+      <h3>Change Password</h3>
+    </zui-tab-panel>
+    <zui-tab-panel slot="panels">
+      Disabled
+    </zui-tab-panel>
+  </zui-tabs>
+</template>`;
+
     return html`
       <demo-page
         name="Tabs"
         description="Organize content into separate views where only one view can be visible at a time."
         .properties=${properties}
       >
-        <div class="demo-section">
-          <h2>Basic Usage</h2>
-          <div class="preview">
+        <demo-example
+          header="Basic Usage"
+          description="Standard tabs with panels."
+          .html=${basicHtml}
+          .react=${basicReact}
+          .angular=${basicAngular}
+          .vue=${basicVue}
+        >
+          <div style="background: var(--glass-bg); padding: 20px; border-radius: 8px;">
             <zui-tabs>
               <zui-tab slot="tabs">Account</zui-tab>
               <zui-tab slot="tabs">Password</zui-tab>
@@ -93,14 +134,7 @@ export class TabsDemo extends LitElement {
               </zui-tab-panel>
             </zui-tabs>
           </div>
-          <div class="code-block">
-            <zui-code-editor
-              .value=${basicUsage}
-              readonly
-              language="html"
-            ></zui-code-editor>
-          </div>
-        </div>
+        </demo-example>
       </demo-page>
     `;
   }

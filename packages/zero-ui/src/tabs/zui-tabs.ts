@@ -55,10 +55,10 @@ export class ZuiTabs extends LitElement {
 
   render() {
     return html`
-      <div class="tabs-header">
+      <div class="tabs-header" part="tabs-header">
         <slot name="tabs" @slotchange=${this._handleSlotChange}></slot>
       </div>
-      <div class="tabs-content">
+      <div class="tabs-content" part="tabs-content">
         <slot name="panels"></slot>
       </div>
     `;

@@ -20,11 +20,11 @@ export class ZuiToggle extends LitElement {
       --zui-toggle-width: 44px;
       --zui-toggle-height: 24px;
       --zui-toggle-thumb-size: 20px;
-      --zui-toggle-bg-off: #e5e7eb;
-      --zui-toggle-bg-on: #3b82f6;
+      --zui-toggle-bg-off: var(--card-border, #e5e7eb);
+      --zui-toggle-bg-on: var(--zui-primary, #3b82f6);
       --zui-toggle-thumb-color: #ffffff;
       --zui-toggle-disabled-opacity: 0.5;
-      --zui-toggle-focus-ring: 0 0 0 3px rgba(59, 130, 246, 0.3);
+      --zui-toggle-focus-ring: 0 0 0 3px var(--zui-focus-ring, rgba(59, 130, 246, 0.3));
       --zui-toggle-transition: 0.2s ease;
     }
 

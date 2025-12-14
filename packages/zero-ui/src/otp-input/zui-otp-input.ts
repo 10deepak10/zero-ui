@@ -20,22 +20,22 @@ export class ZuiOtpInput extends LitElement {
       height: 48px;
       font-size: 1.25rem;
       text-align: center;
-      border: 1px solid #d1d5db;
+      border: 1px solid var(--card-border, #d1d5db);
       border-radius: 6px;
-      background: #fff;
-      color: #111827;
+      background: var(--zui-input-bg, var(--card-bg, #fff));
+      color: var(--text-main, #111827);
       outline: none;
       transition: all 0.2s;
     }
 
     input:focus {
-      border-color: #3b82f6;
+      border-color: var(--zui-primary, #3b82f6);
       box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
     }
 
     input:disabled {
-      background: #f3f4f6;
-      color: #9ca3af;
+      background: var(--bg-muted, #f3f4f6);
+      color: var(--text-muted, #9ca3af);
       cursor: not-allowed;
     }
   `;

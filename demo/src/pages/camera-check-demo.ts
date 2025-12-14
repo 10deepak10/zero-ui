@@ -1,6 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import '@deepverse/zero-ui/camera-check';
+import '../components/demo-page';
+import '../components/demo-example';
 import { CameraCheckService, type CameraDevice } from '@deepverse/zero-ui';
 
 @customElement('camera-check-demo')
@@ -9,62 +11,20 @@ export class CameraCheckDemo extends LitElement {
   @state() private _devices: CameraDevice[] = [];
   
   static styles = css`
-    :host {
-      display: block;
-      padding: 40px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 30px;
-      background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .section {
-      margin-bottom: 50px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 16px;
-      padding: 30px;
-    }
-
-    h2 {
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      color: var(--text-main);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding-bottom: 10px;
-    }
-
-    .demo-item {
+    .preview {
       display: flex;
-      flex-direction: column;
-      gap: 10px;
+      gap: 16px;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      flex-wrap: wrap;
     }
-
-    .code-block {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 15px;
-      border-radius: 8px;
-      font-family: monospace;
-      font-size: 0.9rem;
-      color: #a5b4fc;
-      margin-top: 10px;
-      white-space: pre-wrap;
-    }
-
-    button {
-      background: #3b82f6;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-bottom: 10px;
+    
+    zui-camera-check {
+       width: 100%;
     }
   `;
 
@@ -89,26 +49,118 @@ export class CameraCheckDemo extends LitElement {
   }
 
   render() {
+    const properties = [
+      { name: 'showPreview', type: 'boolean', default: 'false', description: 'Show video preview if permission granted.' }
+    ];
+
+    const basicHtml = `<zui-camera-check showPreview></zui-camera-check>`;
+
+    const basicReact = `import { ZuiCameraCheck } from '@deepverse/zero-ui/react';
+
+function App() {
+  return <ZuiCameraCheck showPreview />;
+}`;
+
+    const basicAngular = `import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: \`<zui-camera-check showPreview></zui-camera-check>\`
+})
+export class AppComponent {}`;
+
+    const basicVue = `<template>
+  <zui-camera-check showPreview />
+</template>`;
+
+    const serviceReact = `import { useState, useEffect } from 'react';
+import { CameraCheckService } from '@deepverse/zero-ui';
+
+function App() {
+  const [permission, setPermission] = useState('Unknown');
+  const [devices, setDevices] = useState([]);
+
+  useEffect(() => {
+    async function load() {
+      setPermission(await CameraCheckService.checkPermission());
+      setDevices(await CameraCheckService.getDevices());
+    }
+    load();
+  }, []);
+
+  return <pre>{JSON.stringify({ permission, devices }, null, 2)}</pre>;
+}`;
+
+    const serviceAngular = `import { Component, OnInit } from '@angular/core';
+import { CameraCheckService } from '@deepverse/zero-ui';
+
+@Component({
+  selector: 'app-root',
+  template: \`<pre>{{ info | json }}</pre>\`
+})
+export class AppComponent implements OnInit {
+  info: any = {};
+  async ngOnInit() {
+    this.info = {
+      permission: await CameraCheckService.checkPermission(),
+      devices: await CameraCheckService.getDevices()
+    };
+  }
+}`;
+
+    const serviceVue = `<template>
+  <pre>{{ info }}</pre>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+import { CameraCheckService } from '@deepverse/zero-ui';
+
+const info = ref({});
+onMounted(async () => {
+  info.value = {
+      permission: await CameraCheckService.checkPermission(),
+      devices: await CameraCheckService.getDevices()
+  };
+});
+</script>`;
+
     return html`
-      <h1>Camera Check</h1>
+      <demo-page
+        name="Camera Check"
+        description="Manages camera permissions and lists available video input devices."
+        .properties=${properties}
+      >
+        <demo-example
+          header="Component Usage"
+          description="Camera test with preview."
+          .html=${basicHtml}
+          .react=${basicReact}
+          .angular=${basicAngular}
+          .vue=${basicVue}
+        >
+          <div class="preview">
+            <zui-camera-check ?showPreview=${true}></zui-camera-check>
+          </div>
+        </demo-example>
 
-      <div class="section">
-        <h2>Component Usage</h2>
-        <div class="demo-item">
-          <zui-camera-check ?showPreview=${true}></zui-camera-check>
-        </div>
-      </div>
-
-      <div class="section">
-        <h2>Service Usage (Headless)</h2>
-        <div class="code-block">
+        <demo-example
+          header="Service Usage"
+          description="Headless API for accessing camera info."
+          .html=${`<!-- No HTML equivalent, JS-only -->`}
+          .react=${serviceReact}
+          .angular=${serviceAngular}
+          .vue=${serviceVue}
+        >
+           <pre style="background: #1e1e1e; padding: 16px; border-radius: 8px; overflow: auto; color: #fff;">
 // Permission Status:
 ${this._permission}
 
 // Detected Devices:
 ${JSON.stringify(this._devices, null, 2)}
-        </div>
-      </div>
+           </pre>
+        </demo-example>
+      </demo-page>
     `;
   }
 }

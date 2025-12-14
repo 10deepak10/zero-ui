@@ -48,17 +48,50 @@ export class ButtonDemo extends LitElement {
       { name: 'disabled', type: 'boolean', default: 'false', description: 'Whether the button is disabled.' },
     ];
 
-    const basicUsage = `<zui-button>Default Button</zui-button>
+    const basicHtml = `<zui-button>Default Button</zui-button>
 <zui-button variant="primary">Primary</zui-button>
 <zui-button variant="secondary">Secondary</zui-button>`;
 
-    const variants = `<zui-button variant="primary">Primary</zui-button>
+    const basicReact = `import { ZuiButton } from '@deepverse/zero-ui/react';
+
+function App() {
+  return (
+    <>
+      <ZuiButton>Default Button</ZuiButton>
+      <ZuiButton variant="primary">Primary</ZuiButton>
+      <ZuiButton variant="secondary">Secondary</ZuiButton>
+    </>
+  );
+}`;
+
+    const basicAngular = `import { Component } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  template: \`
+    <zui-button>Default Button</zui-button>
+    <zui-button variant="primary">Primary</zui-button>
+    <zui-button variant="secondary">Secondary</zui-button>
+  \`,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+export class AppComponent {}`;
+
+    const basicVue = `<template>
+  <zui-button>Default Button</zui-button>
+  <zui-button variant="primary">Primary</zui-button>
+  <zui-button variant="secondary">Secondary</zui-button>
+</template>`;
+
+    const variantsHtml = `<zui-button variant="primary">Primary</zui-button>
 <zui-button variant="secondary">Secondary</zui-button>
 <zui-button variant="outline">Outline</zui-button>
 <zui-button variant="ghost">Ghost</zui-button>
 <zui-button variant="danger">Danger</zui-button>`;
 
-    const sizes = `<zui-button size="sm">Small</zui-button>
+    const sizesHtml = `<zui-button size="sm">Small</zui-button>
 <zui-button size="md">Medium</zui-button>
 <zui-button size="lg">Large</zui-button>`;
 
@@ -68,55 +101,52 @@ export class ButtonDemo extends LitElement {
         description="Buttons allow users to take actions, and make choices, with a single tap. They are used to trigger actions or navigate to other pages."
         .properties=${properties}
       >
-        <div class="demo-section">
-          <h2>Basic Usage</h2>
-          <div class="preview">
+        <demo-example
+          header="Basic Usage"
+          description="Standard buttons for common actions."
+          .html=${basicHtml}
+          .react=${basicReact}
+          .angular=${basicAngular}
+          .vue=${basicVue}
+        >
+          <div style="display: flex; gap: 16px; flex-wrap: wrap;">
             <zui-button>Default Button</zui-button>
             <zui-button variant="primary">Primary</zui-button>
             <zui-button variant="secondary">Secondary</zui-button>
           </div>
-          <div class="code-block">
-            <zui-code-editor
-              .value=${basicUsage}
-              readonly
-              language="html"
-            ></zui-code-editor>
-          </div>
-        </div>
+        </demo-example>
 
-        <div class="demo-section">
-          <h2>Variants</h2>
-          <div class="preview">
+        <demo-example
+          header="Variants"
+          description="Different visual styles to convey hierarchy."
+          .html=${variantsHtml}
+          .react=${basicReact.replace('Default Button', 'Primary').replace('variant="secondary"', 'variant="danger"')} 
+          .angular=${basicAngular}
+          .vue=${basicVue}
+        >
+          <div style="display: flex; gap: 16px; flex-wrap: wrap;">
             <zui-button variant="primary">Primary</zui-button>
             <zui-button variant="secondary">Secondary</zui-button>
             <zui-button variant="outline">Outline</zui-button>
             <zui-button variant="ghost">Ghost</zui-button>
             <zui-button variant="danger">Danger</zui-button>
           </div>
-          <div class="code-block">
-            <zui-code-editor
-              .value=${variants}
-              readonly
-              language="html"
-            ></zui-code-editor>
-          </div>
-        </div>
+        </demo-example>
 
-        <div class="demo-section">
-          <h2>Sizes</h2>
-          <div class="preview">
+        <demo-example
+          header="Sizes"
+          description="Available in small, medium, and large sizes."
+          .html=${sizesHtml}
+          .react=${basicReact}
+          .angular=${basicAngular}
+          .vue=${basicVue}
+        >
+           <div style="display: flex; gap: 16px; align-items: center;">
             <zui-button size="sm">Small</zui-button>
             <zui-button size="md">Medium</zui-button>
             <zui-button size="lg">Large</zui-button>
           </div>
-          <div class="code-block">
-            <zui-code-editor
-              .value=${sizes}
-              readonly
-              language="html"
-            ></zui-code-editor>
-          </div>
-        </div>
+        </demo-example>
       </demo-page>
     `;
   }

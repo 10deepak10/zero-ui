@@ -1,40 +1,12 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import '@deepverse/zero-ui/otp-input';
+import '../components/demo-page';
+import '../components/demo-example';
 
 @customElement('otp-input-demo')
 export class OtpInputDemo extends LitElement {
   static styles = css`
-    :host {
-      display: block;
-      padding: 24px;
-      color: var(--text-main);
-    }
-    .demo-section {
-      margin-bottom: 40px;
-      padding: 32px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      
-    }
-    h2 {
-      margin-top: 0;
-      margin-bottom: 24px;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-    .preview {
-      padding: 40px;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
-      margin-bottom: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      align-items: center;
-    }
     .output {
       margin-top: 16px;
       padding: 12px;
@@ -46,50 +18,113 @@ export class OtpInputDemo extends LitElement {
       width: 100%;
       max-width: 400px;
     }
-    pre {
-      background: rgba(0,0,0,0.3);
-      padding: 16px;
-      border-radius: 8px;
-      overflow-x: auto;
-      color: #e2e8f0;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
   `;
 
-  @state()
-  private _otpValue = '';
-
-  @state()
-  private _otpComplete = '';
+  @state() private _otpValue = '';
+  @state() private _otpComplete = '';
 
   render() {
+    const properties = [
+      { name: 'length', type: 'number', default: '6', description: 'Number of OTP digits.' },
+      { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable input.' },
+      { name: 'value', type: 'string', default: "''", description: 'Current OTP value.' },
+    ];
+
+    const basicHtml = `<zui-otp-input
+  length="6"
+  @zui-otp-change="\${handleChange}"
+  @zui-otp-complete="\${handleComplete}"
+></zui-otp-input>`;
+
+    const basicReact = `import { ZuiOtpInput } from '@deepverse/zero-ui/react';
+
+function App() {
+  return (
+    <ZuiOtpInput
+      length={6}
+      onZuiOtpChange={(e) => console.log('Change:', e.detail.value)}
+      onZuiOtpComplete={(e) => console.log('Complete:', e.detail.value)}
+    />
+  );
+}`;
+
+    const basicAngular = `import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: \`
+    <zui-otp-input
+      [length]="6"
+      (zui-otp-change)="handleChange($event)"
+      (zui-otp-complete)="handleComplete($event)">
+    </zui-otp-input>
+  \`
+})
+export class AppComponent {
+  handleChange(e: any) {
+    console.log('Change:', e.detail.value);
+  }
+  handleComplete(e: any) {
+    console.log('Complete:', e.detail.value);
+  }
+}`;
+
+    const basicVue = `<template>
+  <zui-otp-input
+    :length="6"
+    @zui-otp-change="logChange"
+    @zui-otp-complete="logComplete"
+  />
+</template>
+
+<script setup>
+const logChange = (e) => console.log('Change:', e.detail.value);
+const logComplete = (e) => console.log('Complete:', e.detail.value);
+</script>`;
+
+    const shortHtml = `<zui-otp-input length="4"></zui-otp-input>`;
+
+
     return html`
-      <h1>OTP Input</h1>
-      <p>A secure and user-friendly one-time password input field.</p>
-
-      <div class="demo-section">
-        <h2>Basic Usage</h2>
-        <div class="preview">
-          <zui-otp-input
-            @zui-otp-change=${(e: CustomEvent) => this._otpValue = e.detail.value}
-            @zui-otp-complete=${(e: CustomEvent) => this._otpComplete = e.detail.value}
-          ></zui-otp-input>
-          
-          <div class="output">
-            Current Value: ${this._otpValue}<br>
-            Completed: ${this._otpComplete || '...'}
+      <demo-page
+        name="OTP Input"
+        description="A secure and user-friendly one-time password input field with auto-focus and navigation."
+        .properties=${properties}
+      >
+        <demo-example
+          header="Basic Usage"
+          description="Standard 6-digit OTP input."
+          .html=${basicHtml}
+          .react=${basicReact}
+          .angular=${basicAngular}
+          .vue=${basicVue}
+        >
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+            <zui-otp-input
+              @zui-otp-change=${(e: CustomEvent) => this._otpValue = e.detail.value}
+              @zui-otp-complete=${(e: CustomEvent) => this._otpComplete = e.detail.value}
+            ></zui-otp-input>
+            
+            <div class="output">
+              Current Value: ${this._otpValue}<br>
+              Completed: ${this._otpComplete || '...'}
+            </div>
           </div>
-        </div>
-        <pre><code>&lt;zui-otp-input length="6"&gt;&lt;/zui-otp-input&gt;</code></pre>
-      </div>
+        </demo-example>
 
-      <div class="demo-section">
-        <h2>4-Digit OTP</h2>
-        <div class="preview">
-          <zui-otp-input length="4"></zui-otp-input>
-        </div>
-        <pre><code>&lt;zui-otp-input length="4"&gt;&lt;/zui-otp-input&gt;</code></pre>
-      </div>
+        <demo-example
+          header="4-Digit OTP"
+          description="Configurable length (e.g. 4 digits)."
+          .html=${shortHtml}
+          .react=${basicReact.replace('length={6}', 'length={4}')}
+          .angular=${basicAngular.replace('[length]="6"', '[length]="4"')}
+          .vue=${basicVue.replace(':length="6"', ':length="4"')}
+        >
+           <div style="display: flex; justify-content: center;">
+            <zui-otp-input length="4"></zui-otp-input>
+          </div>
+        </demo-example>
+      </demo-page>
     `;
   }
 }

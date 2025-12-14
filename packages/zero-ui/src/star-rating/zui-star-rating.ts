@@ -81,8 +81,8 @@ export class ZuiStarRating extends LitElement {
             >
               <defs>
                 <linearGradient id=${gradientId}>
-                  <stop offset="${fill}%" stop-color="#fbbf24" />
-                  <stop offset="${fill}%" stop-color="#d1d5db" />
+                  <stop offset="${fill}%" stop-color="var(--star-filled, #fbbf24)" />
+                  <stop offset="${fill}%" stop-color="var(--star-empty, var(--text-muted, #d1d5db))" />
                 </linearGradient>
               </defs>
               <path 

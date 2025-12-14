@@ -1,42 +1,19 @@
-
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '@deepverse/zero-ui/event-bus';
+import '../components/demo-page';
+import '../components/demo-example';
 import { EventBusService } from '@deepverse/zero-ui';
 
 @customElement('event-bus-demo')
 export class EventBusDemo extends LitElement {
   static styles = css`
-    :host {
-      display: block;
-      padding: 24px;
-      color: var(--text-main);
-    }
-
-    .demo-section {
-      margin-bottom: 40px;
-      padding: 32px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      backdrop-filter: blur(12px);
-      height: 600px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    h2 {
-      margin-top: 0;
-      margin-bottom: 24px;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
     .controls {
       display: flex;
       gap: 12px;
-      margin-bottom: 24px;
       flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 24px;
     }
 
     button {
@@ -47,6 +24,8 @@ export class EventBusDemo extends LitElement {
       cursor: pointer;
       color: white;
       transition: opacity 0.2s;
+      font-family: inherit;
+      font-size: 0.875rem;
     }
 
     button:hover {
@@ -60,11 +39,13 @@ export class EventBusDemo extends LitElement {
 
     .preview {
       flex: 1;
-      min-height: 0;
+      height: 400px;
       background: #0f172a;
       border-radius: 12px;
       border: 1px solid var(--card-border);
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     zui-event-bus {
@@ -94,24 +75,85 @@ export class EventBusDemo extends LitElement {
   }
 
   render() {
-    return html`
-      <h1>Event Bus Utility</h1>
-      <p>Global messaging bus for decoupled communication. Includes a visual inspector.</p>
+    const basicHtml = `<zui-event-bus></zui-event-bus>`;
 
-      <div class="demo-section">
-        <h2>Interactive Inspector</h2>
-        
-        <div class="controls">
-          <button class="btn-user" @click=${this._emitUserEvent}>Emit User Event</button>
-          <button class="btn-system" @click=${this._emitSystemEvent}>Emit System Event</button>
-          <button class="btn-notif" @click=${this._emitNotification}>Emit Notification</button>
-          <button class="btn-error" @click=${this._emitError}>Emit Error</button>
-        </div>
+    const basicReact = `import { ZuiEventBus, EventBusService } from '@deepverse/zero-ui/react';
 
-        <div class="preview">
-          <zui-event-bus></zui-event-bus>
-        </div>
+function App() {
+  const emitEvent = () => {
+    EventBusService.emit('user:action', { type: 'click' }, 'Source');
+  };
+
+  return (
+    <div>
+      <button onClick={emitEvent}>Emit Event</button>
+      <div style={{ height: '400px' }}>
+        <ZuiEventBus />
       </div>
+    </div>
+  );
+}`;
+
+    const basicAngular = `import { Component } from '@angular/core';
+import { EventBusService } from '@deepverse/zero-ui';
+
+@Component({
+  selector: 'app-root',
+  template: \`
+    <button (click)="emitEvent()">Emit Event</button>
+    <div style="height: 400px">
+      <zui-event-bus></zui-event-bus>
+    </div>
+  \`
+})
+export class AppComponent {
+  emitEvent() {
+    EventBusService.emit('user:action', { type: 'click' }, 'Source');
+  }
+}`;
+
+    const basicVue = `<template>
+  <button @click="emitEvent">Emit Event</button>
+  <div style="height: 400px">
+    <zui-event-bus />
+  </div>
+</template>
+
+<script setup>
+import { EventBusService } from '@deepverse/zero-ui';
+
+const emitEvent = () => {
+  EventBusService.emit('user:action', { type: 'click' }, 'Source');
+};
+</script>`;
+
+    return html`
+      <demo-page
+        name="Event Bus Utility"
+        description="Global messaging bus for decoupled communication. Includes a visual inspector."
+      >
+        <demo-example
+          header="Interactive Inspector"
+          description="Visualizes events passing through the global event bus."
+          .html=${basicHtml}
+          .react=${basicReact}
+          .angular=${basicAngular}
+          .vue=${basicVue}
+        >
+          <div>
+            <div class="controls">
+              <button class="btn-user" @click=${this._emitUserEvent}>Emit User Event</button>
+              <button class="btn-system" @click=${this._emitSystemEvent}>Emit System Event</button>
+              <button class="btn-notif" @click=${this._emitNotification}>Emit Notification</button>
+              <button class="btn-error" @click=${this._emitError}>Emit Error</button>
+            </div>
+
+            <div class="preview">
+              <zui-event-bus></zui-event-bus>
+            </div>
+          </div>
+        </demo-example>
+      </demo-page>
     `;
   }
 }

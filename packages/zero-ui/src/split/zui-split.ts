@@ -29,7 +29,7 @@ export class ZuiSplit extends LitElement {
 
     .gutter {
       flex: 0 0 auto;
-      background: var(--split-gutter-bg, rgba(255, 255, 255, 0.1));
+      background: var(--split-gutter-bg, var(--card-border, #e5e7eb));
       position: relative;
       z-index: 10;
       transition: background 0.2s;
@@ -38,12 +38,13 @@ export class ZuiSplit extends LitElement {
     .gutter::after {
       content: '';
       position: absolute;
-      background: var(--split-handle-color, rgba(255, 255, 255, 0.3));
+      background: var(--split-handle-color, var(--text-muted, #9ca3af));
       border-radius: 99px;
     }
 
     .gutter:hover, .gutter.active {
-      background: var(--split-gutter-hover-bg, rgba(59, 130, 246, 0.5));
+      background: var(--split-gutter-hover-bg, var(--zui-primary, #3b82f6));
+      opacity: 0.8;
     }
 
     /* Horizontal styles */
