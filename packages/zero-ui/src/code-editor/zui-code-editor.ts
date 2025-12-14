@@ -219,7 +219,7 @@ export class ZuiCodeEditor extends LitElement {
   private _handleAutoClose(char: string, target: HTMLTextAreaElement) {
     let newValue = target.value;
     let selectionStart = target.selectionStart;
-    let selectionEnd = target.selectionEnd;
+    // let selectionEnd = target.selectionEnd;
     let newCursorPos = selectionStart;
 
     // Pairs

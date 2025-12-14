@@ -19,8 +19,7 @@ export class SelectDemo extends LitElement {
   `;
 
   @state() private _value1 = '';
-  @state() private _value2 = '';
-  @state() private _values1: string[] = [];
+
   @state() private _values2: string[] = [];
 
   private _options = [
