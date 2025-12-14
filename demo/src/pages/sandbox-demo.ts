@@ -361,6 +361,61 @@ export class SandboxDemo extends LitElement {
         <head>
           <style>${this._activeCss}</style>
           <script>
+            // CRITICAL: Error suppression MUST be the very first thing to run
+            // Suppress "Access to storage" errors from extensions/browser in null-origin iframe
+            (function() {
+              const suppress = (msg) => {
+                const str = String(msg);
+                return str.includes('Access to storage') || 
+                       str.includes('SecurityError') || 
+                       str.includes('Framing is not allowed');
+              };
+
+              // 1. Global error handler
+              window.onerror = function(msg, url, line, col, error) {
+                if (suppress(msg)) return true; // Suppress
+                return false;
+              };
+
+              // 2. Capture phase error listener (catch before bubble)
+              window.addEventListener('error', function(e) {
+                if (suppress(e.message)) {
+                  e.preventDefault();
+                  e.stopImmediatePropagation();
+                }
+              }, true);
+
+              // 3. Unhandled promise rejections
+              window.addEventListener('unhandledrejection', function(e) {
+                const msg = e.reason?.message || String(e.reason);
+                if (suppress(msg)) {
+                  e.preventDefault();
+                  e.stopImmediatePropagation();
+                }
+              });
+            })();
+
+            // Shim storage to prevent crashes
+            try {
+              const noop = { getItem: () => null, setItem: () => {}, removeItem: () => {}, clear: () => {} };
+              if (!window.localStorage) {
+                  try {
+                    Object.defineProperty(window, 'localStorage', { value: noop });
+                  } catch(e) {
+                     window.localStorage = noop; 
+                  }
+              }
+              if (!window.sessionStorage) {
+                  try {
+                    Object.defineProperty(window, 'sessionStorage', { value: noop });
+                  } catch(e) {
+                     window.sessionStorage = noop; 
+                  }
+              }
+            } catch (e) {
+               // If completely blocked, we can't do much but we suppressed the error above
+            }
+
             (function() {
               const originalLog = console.log;
               const originalInfo = console.info;
@@ -378,20 +433,19 @@ export class SandboxDemo extends LitElement {
                   });
                   window.parent.postMessage({ type: 'sandbox-log', level, args: safeArgs }, '*');
                 } catch (e) {
-                  originalError.call(console, 'Failed to send log to parent', e);
+                  // Don't use originalError here to avoid loop if it triggers something
                 }
               }
 
               console.log = (...args) => { originalLog.apply(console, args); sendLog('log', args); };
               console.info = (...args) => { originalInfo.apply(console, args); sendLog('info', args); };
               console.warn = (...args) => { originalWarn.apply(console, args); sendLog('warn', args); };
-              console.error = (...args) => { originalError.apply(console, args); sendLog('error', args); };
-              
-              window.onerror = function(msg, url, line, col, error) {
-                // Route global errors (including SyntaxErrors) to our logger
-                // msg is usually the error string
-                sendLog('error', [msg]);
-                return false; // Let it bubble to browser console too if needed, or true to suppress
+              // Catch console.error too
+              console.error = (...args) => { 
+                const msg = args.join(' ');
+                if (msg.includes('Access to storage')) return; // Suppress from console
+                originalError.apply(console, args); 
+                sendLog('error', args); 
               };
               
               const EventBus = {

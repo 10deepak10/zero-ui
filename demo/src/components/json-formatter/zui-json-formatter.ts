@@ -149,7 +149,9 @@ export class ZuiJsonFormatter extends LitElement {
   private _copyPath(path: string) {
       if (path === 'root') return;
       const cleanPath = path.replace(/^root\./, '');
-      navigator.clipboard.writeText(cleanPath);
+      navigator.clipboard.writeText(cleanPath).catch(err => {
+          console.warn('Clipboard write failed:', err);
+      });
       // Ideally show a toast
   }
 
@@ -327,7 +329,9 @@ export class ZuiJsonFormatter extends LitElement {
   private _handleCopy(e: Event, path: string, data: any, isExpanded: boolean) {
       e.stopPropagation();
       if (!isExpanded && typeof data === 'object' && data !== null) {
-          navigator.clipboard.writeText(JSON.stringify(data, null, 2));
+          navigator.clipboard.writeText(JSON.stringify(data, null, 2)).catch(err => {
+              console.warn('Clipboard write failed:', err);
+          });
       } else {
           this._copyPath(path);
       }

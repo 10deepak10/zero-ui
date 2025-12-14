@@ -461,6 +461,14 @@ export class IntroPage extends LitElement {
           Designed for the modern web with zero framework overhead and universal compatibility.
         </p>
 
+        <div style="margin-bottom: 40px; display: flex; justify-content: center; gap: 16px; align-items: center; flex-wrap: wrap;">
+            <a href="https://www.npmjs.com/package/@deepverse/zero-ui" target="_blank" style="text-decoration: none; color: inherit;">
+                <div style="background: var(--card-bg); border: 1px solid var(--card-border); padding: 12px 24px; border-radius: 8px; font-family: monospace; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: all 0.2s;">
+                    <span style="opacity: 0.7;">$</span> npm install @deepverse/zero-ui
+                </div>
+            </a>
+        </div>
+
         <div class="cta-buttons">
         <button class="btn btn-secondary" @click=${(e: Event) => this._navigateTo(e, '/json-formatter')}>JSON Formatter</button>
         <button class="btn btn-primary" @click=${(e: Event) => this._navigateTo(e, '/sandbox')}>Sandbox</button>
