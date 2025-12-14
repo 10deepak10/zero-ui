@@ -13,9 +13,7 @@
     "vite": "^7.2.4"
   },
   "dependencies": {
-    "@deepverse/zero-ui": "link:../packages/zero-ui",
-    "button": "link:../packages/zero-ui/button",
-    "card": "link:../packages/zero-ui/card",
+    "@deepverse/zero-ui": "workspace:*",
     "lit": "^3.3.1"
   }
 }
