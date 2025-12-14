@@ -33,6 +33,7 @@ export class ZuiTabs extends LitElement {
   }
 
   private _handleSlotChange() {
+    console.log('ZuiTabs: Slot change detected', { tabs: this._tabs.length, panels: this._panels.length });
     // If no tab is active, activate the first one
     const activeTab = this._tabs.find(t => t.active);
     if (!activeTab && this._tabs.length > 0) {
@@ -65,7 +66,7 @@ export class ZuiTabs extends LitElement {
         <slot name="tabs" @slotchange=${this._handleSlotChange}></slot>
       </div>
       <div class="tabs-content" part="tabs-content">
-        <slot name="panels"></slot>
+        <slot name="panels" @slotchange=${this._handleSlotChange}></slot>
       </div>
     `;
   }
