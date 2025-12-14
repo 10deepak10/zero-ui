@@ -19,6 +19,12 @@ export class MicCheckDemo extends LitElement {
       flex-wrap: wrap;
     }
 
+    @media (max-width: 768px) {
+      .preview {
+        padding: 16px;
+      }
+    }
+
     zui-mic-check {
       width: 100%;
     }

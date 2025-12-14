@@ -204,6 +204,7 @@ export class IntroPage extends LitElement {
       .tagline { font-size: 1.2rem; }
       .description { font-size: 1rem; }
       .features { grid-template-columns: 1fr; }
+      .theme-toggle { display: none; }
     }
   `;
 
@@ -258,7 +259,8 @@ export class IntroPage extends LitElement {
       temp.width = canvas.width;
       temp.height = canvas.height;
 
-      const fontSize = canvas.width * 0.18;
+      const isMobile = canvas.width < 768;
+      const fontSize = isMobile ? canvas.width * 0.5 : canvas.width * 0.18;
       tctx.font = `bold ${fontSize}px Segoe UI`;
       tctx.fillStyle = this.theme === 'dark' ? "#fff" : "#111827";
       tctx.textAlign = "center";
@@ -318,14 +320,20 @@ export class IntroPage extends LitElement {
     const morphOrder: ShapeKeys[] = ["Z", "UI"];
     let currentMorphIndex = 0;
 
-    canvas.addEventListener("mouseenter", () => {
+    const triggerMorph = () => {
       targetShape = shapes[morphOrder[currentMorphIndex]];
-
       currentMorphIndex = (currentMorphIndex + 1) % morphOrder.length;
-    });
+    };
+
+    canvas.addEventListener("mouseenter", triggerMorph);
 
     canvas.addEventListener("mouseleave", () => {
       targetShape = shapes.zero;
+    });
+
+    // Single Tap / Click interaction
+    canvas.addEventListener('click', () => {
+      triggerMorph();
     });
 
     /* ------------------------------------------------------

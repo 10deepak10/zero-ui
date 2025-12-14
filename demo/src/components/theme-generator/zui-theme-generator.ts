@@ -39,6 +39,32 @@ export class ZuiThemeGenerator extends LitElement {
       background: var(--sidebar-bg, rgba(255, 255, 255, 0.04));
       flex-shrink: 0;
     }
+    
+    @media (max-width: 768px) {
+        .container {
+            flex-direction: column;
+            overflow-y: auto; /* allow full page scroll */
+            overflow-x: hidden;
+        }
+        .sidebar {
+            width: 100%;
+            height: auto;
+            border-right: none;
+            border-bottom: 1px solid var(--card-border, rgba(255, 255, 255, 0.1));
+            flex-shrink: 0;
+        }
+        .preview-area {
+            height: auto;
+            min-height: 500px;
+        }
+        /* Toolbar wrapping */
+        .toolbar {
+            height: auto;
+            flex-wrap: wrap;
+            padding: 8px 16px;
+            gap: 8px;
+        }
+    }
 
     .preview-area {
       flex: 1;

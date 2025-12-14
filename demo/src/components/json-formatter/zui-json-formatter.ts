@@ -45,6 +45,19 @@ export class ZuiJsonFormatter extends LitElement {
       overflow-y: auto;
     }
 
+    @media (max-width: 768px) {
+      .split-view {
+        flex-direction: column;
+      }
+      .output-pane {
+        border-left: none;
+        border-top: 1px solid var(--card-border, #333);
+      }
+      .toolbar {
+        flex-wrap: wrap;
+      }
+    }
+
     textarea {
       flex: 1;
       background: transparent;

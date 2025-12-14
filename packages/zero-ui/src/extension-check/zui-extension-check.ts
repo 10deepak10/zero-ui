@@ -88,6 +88,15 @@ export class ZuiExtensionCheck extends LitElement {
       opacity: 0.7;
       pointer-events: none;
     }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 16px;
+      }
+      .status-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   `;
 
   @property({ type: Array })

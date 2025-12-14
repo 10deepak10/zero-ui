@@ -22,6 +22,12 @@ export class GpuCheckDemo extends LitElement {
       flex-wrap: wrap;
     }
 
+    @media (max-width: 768px) {
+      .preview {
+        padding: 16px;
+      }
+    }
+
     zui-gpu-check {
       width: 100%;
     }
