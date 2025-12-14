@@ -10,9 +10,13 @@ export class ThemeService {
 
   static {
     // Initialize from storage or default
-    const stored = localStorage.getItem('zui-theme') as Theme;
-    if (stored && ['light', 'dark', 'system'].includes(stored)) {
-      this._currentTheme = stored;
+    try {
+      const stored = localStorage.getItem('zui-theme') as Theme;
+      if (stored && ['light', 'dark', 'system'].includes(stored)) {
+        this._currentTheme = stored;
+      }
+    } catch (e) {
+      console.warn('ThemeService: Storage access denied, defaulting to system.');
     }
 
     if (typeof window !== 'undefined') {
@@ -39,7 +43,11 @@ export class ThemeService {
     if (this._currentTheme === theme) return;
 
     this._currentTheme = theme;
-    localStorage.setItem('zui-theme', theme);
+    try {
+      localStorage.setItem('zui-theme', theme);
+    } catch (e) {
+      // Ignore
+    }
     this._notify();
   }
 

@@ -134,6 +134,7 @@ export class ZuiSplit extends LitElement {
 
   protected firstUpdated() {
     this._splitSize = this.initialSplit;
+    this.requestUpdate();
   }
 
   private _startResize(e: PointerEvent) {

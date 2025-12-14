@@ -333,12 +333,12 @@ export class ZuiThemeGenerator extends LitElement {
         const cssContent = `:root {
 ${this._generatedCss}
 }`;
-        navigator.clipboard.writeText(cssContent);
+        navigator.clipboard.writeText(cssContent).catch(err => console.warn('Copy failed:', err));
         alert('CSS Variables copied to clipboard!');
     }
 
   private _copyJson() {
-      navigator.clipboard.writeText(JSON.stringify(this._theme, null, 2));
+      navigator.clipboard.writeText(JSON.stringify(this._theme, null, 2)).catch(err => console.warn('Copy failed:', err));
       alert('JSON copied to clipboard!');
   }
 

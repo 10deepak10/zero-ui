@@ -161,8 +161,6 @@ export class ZuiCodeEditor extends LitElement {
         this._textarea.selectionEnd = this._pendingSelection.end;
         this._pendingSelection = null;
       }
-
-      this.requestUpdate();
     }
   }
 
@@ -448,7 +446,11 @@ export class ZuiCodeEditor extends LitElement {
     const cutEnd = Math.min(this.value.length, lineEnd + 1);
     const lineText = this.value.substring(lineStart, cutEnd);
 
-    await navigator.clipboard.writeText(lineText);
+    try {
+      await navigator.clipboard.writeText(lineText);
+    } catch (e) {
+      console.warn('Clipboard write failed (cut):', e);
+    }
 
     const newValue = this.value.substring(0, lineStart) + this.value.substring(cutEnd);
     this.value = newValue;
@@ -464,7 +466,11 @@ export class ZuiCodeEditor extends LitElement {
 
   private async _copyCurrentLine() {
     const { text } = this._getLineInfo(this._textarea.selectionStart);
-    await navigator.clipboard.writeText(text + '\n');
+    try {
+      await navigator.clipboard.writeText(text + '\n');
+    } catch (e) {
+      console.warn('Clipboard write failed (copy):', e);
+    }
   }
 
   private _toggleComment() {
