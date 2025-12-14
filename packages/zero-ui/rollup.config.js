@@ -11,5 +11,5 @@ export default {
     }
   ],
   plugins: [typescript()],
-  external: ['lit']
+  external: [/^lit/, 'tslib']
 };
