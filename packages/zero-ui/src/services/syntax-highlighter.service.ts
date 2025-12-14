@@ -1,15 +1,15 @@
 
 export class SyntaxHighlighterService {
 
-  private static readonly TOKEN_TYPES = {
-    comment: 'color: #6a9955; font-style: italic;',
-    string: 'color: #ce9178;',
-    keyword: 'color: #569cd6;',
-    number: 'color: #b5cea8;',
-    tag: 'color: #569cd6;',
-    attribute: 'color: #9cdcfe;',
-    operator: 'color: #d4d4d4;',
-    default: 'color: #d4d4d4;'
+  private static readonly TOKEN_CLASSES = {
+    comment: 'token-comment',
+    string: 'token-string',
+    keyword: 'token-keyword',
+    number: 'token-number',
+    tag: 'token-tag',
+    attribute: 'token-attribute',
+    operator: 'token-operator',
+    default: 'token-default'
   };
 
   static highlight(code: string, lang: string): string {
@@ -49,9 +49,9 @@ export class SyntaxHighlighterService {
       .replace(/'/g, "&#039;");
   }
 
-  private static _span(type: keyof typeof SyntaxHighlighterService.TOKEN_TYPES, content: string): string {
-    const style = this.TOKEN_TYPES[type];
-    return `<span style="${style}">${content}</span>`;
+  private static _span(type: keyof typeof SyntaxHighlighterService.TOKEN_CLASSES, content: string): string {
+    const className = this.TOKEN_CLASSES[type];
+    return `<span class="${className}">${content}</span>`;
   }
 
   private static _tokenizeJs(code: string): string {

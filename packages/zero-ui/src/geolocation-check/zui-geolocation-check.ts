@@ -16,8 +16,8 @@ export class ZuiGeolocationCheck extends LitElement {
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--card-bg, rgba(255, 255, 255, 0.03));
+      border: 1px solid var(--card-border, rgba(255, 255, 255, 0.1));
       border-radius: 12px;
       padding: 24px;
     }
@@ -89,7 +89,7 @@ export class ZuiGeolocationCheck extends LitElement {
     }
 
     .coord-item {
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--bg-muted, rgba(255, 255, 255, 0.05));
       padding: 16px;
       border-radius: 8px;
       text-align: center;

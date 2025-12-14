@@ -1,6 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import '@deepverse/zero-ui';
+import './demo-example';
 
 export interface ComponentProperty {
   name: string;
@@ -28,7 +29,7 @@ export class DemoPage extends LitElement {
       margin: 0 0 16px 0;
       font-size: 2.5rem;
       font-weight: 700;
-      background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+      background: var(--gradient-text, linear-gradient(135deg, #fff 0%, #a5b4fc 100%));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -106,6 +107,7 @@ export class DemoPage extends LitElement {
         </zui-tab-panel>
 
         <zui-tab-panel slot="panels">
+          <slot name="api"></slot>
           ${this.properties.length > 0 ? html`
             <table class="api-table">
               <thead>
@@ -127,9 +129,7 @@ export class DemoPage extends LitElement {
                 `)}
               </tbody>
             </table>
-          ` : html`
-            <p style="color: var(--text-muted); padding: 24px;">No properties documented.</p>
-          `}
+          ` : ''}
         </zui-tab-panel>
       </zui-tabs>
     `;

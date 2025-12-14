@@ -9,10 +9,10 @@ export class ZuiJsonFormatter extends LitElement {
       height: 100%;
       flex-direction: column;
       font-family: monospace;
-      background: #1e1e1e;
-      color: #d4d4d4;
+      background: var(--card-bg, #1e1e1e);
+      color: var(--text-main, #d4d4d4);
       overflow: hidden;
-      border: 1px solid #333;
+      border: 1px solid var(--card-border, #333);
       border-radius: 6px;
     }
 
@@ -20,8 +20,8 @@ export class ZuiJsonFormatter extends LitElement {
       display: flex;
       padding: 8px;
       gap: 8px;
-      border-bottom: 1px solid #333;
-      background: #252526;
+      border-bottom: 1px solid var(--card-border, #333);
+      background: var(--bg-muted, #252526);
       align-items: center;
     }
 
@@ -40,15 +40,15 @@ export class ZuiJsonFormatter extends LitElement {
     }
 
     .output-pane {
-      border-left: 1px solid #333;
+      border-left: 1px solid var(--card-border, #333);
       padding: 8px;
       overflow-y: auto;
     }
 
     textarea {
       flex: 1;
-      background: #1e1e1e;
-      color: #d4d4d4;
+      background: transparent;
+      color: var(--code-default, var(--text-main, #d4d4d4));
       border: none;
       resize: none;
       padding: 8px;
@@ -58,8 +58,8 @@ export class ZuiJsonFormatter extends LitElement {
 
     .error-msg {
       padding: 8px;
-      background: #5a1d1d;
-      color: #ffcccc;
+      background: var(--color-danger, #5a1d1d);
+      color: #fff;
       font-size: 0.8rem;
     }
     
@@ -84,6 +84,37 @@ export class ZuiJsonFormatter extends LitElement {
     }
     .copy-btn:hover {
         color: #fff;
+    }
+
+    .btn {
+      background: transparent;
+      border: 1px solid var(--card-border, #333);
+      color: var(--text-main, #d4d4d4);
+      padding: 4px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    .btn:hover:not(:disabled) {
+      background: var(--bg-hover, rgba(255,255,255,0.05));
+    }
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .search-input {
+      background: var(--zui-input-bg, rgba(255,255,255,0.05));
+      border: 1px solid var(--card-border, #444);
+      color: var(--text-main, #ddd);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-family: inherit;
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: var(--color-primary, #3b82f6);
     }
   `;
 
@@ -130,27 +161,27 @@ export class ZuiJsonFormatter extends LitElement {
   render() {
     return html`
       <div class="toolbar">
-        <button @click=${this._format}>Format</button>
-        <button @click=${() => { this._input = ''; this._parsedData = null; }}>Clear</button>
+        <button class="btn" @click=${this._format}>Format</button>
+        <button class="btn" @click=${() => { this._input = ''; this._parsedData = null; }}>Clear</button>
         <div style="width: 1px; height: 16px; background: #444; margin: 0 4px;"></div>
-        <button @click=${this._expandAll} ?disabled=${!this._parsedData} title="Expand All">+</button>
-        <button @click=${this._collapseAll} ?disabled=${!this._parsedData} title="Collapse All">-</button>
+        <button class="btn" @click=${this._expandAll} ?disabled=${!this._parsedData} title="Expand All">+</button>
+        <button class="btn" @click=${this._collapseAll} ?disabled=${!this._parsedData} title="Collapse All">-</button>
         
         <div style="flex: 1"></div>
         <div class="search-box" style="display: flex; gap: 4px; align-items: center;">
              <input 
                 type="text" 
+                class="search-input"
                 placeholder="Search keys or values..." 
                 .value=${this._searchQuery}
                 @input=${(e: any) => this._searchQuery = e.target.value}
-                style="background: #333; border: 1px solid #444; color: #ddd; padding: 4px 8px; border-radius: 4px;"
              >
              ${this._searchResults.length > 0 ? html`
                 <span style="font-size: 0.8rem; color: #888;">
                     ${this._currentMatchIndex + 1}/${this._searchResults.length}
                 </span>
-                <button @click=${this._prevMatch}>↑</button>
-                <button @click=${this._nextMatch}>↓</button>
+                <button class="btn" style="padding: 2px 8px;" @click=${this._prevMatch}>↑</button>
+                <button class="btn" style="padding: 2px 8px;" @click=${this._nextMatch}>↓</button>
              ` : ''}
         </div>
       </div>
@@ -328,7 +359,7 @@ export class ZuiJsonFormatter extends LitElement {
                 </span>
                 
                 ${key && key !== 'root' ? html`
-                    <span style="color: #9cdcfe; margin-right: 4px;">${this._renderKeyLabel(key)}:</span>
+                    <span style="color: var(--code-attribute, #9cdcfe); margin-right: 4px;">${this._renderKeyLabel(key)}:</span>
                     <button 
                         class="copy-btn" 
                         title="${isExpanded ? 'Copy path' : 'Copy JSON'}" 
@@ -361,10 +392,10 @@ export class ZuiJsonFormatter extends LitElement {
       const isResult = this._searchResults.includes(path);
 
       const colorMap = {
-          string: '#ce9178',
-          number: '#b5cea8',
-          boolean: '#569cd6',
-          null: '#569cd6'
+          string: 'var(--code-string, #ce9178)',
+          number: 'var(--code-number, #b5cea8)',
+          boolean: 'var(--code-keyword, #569cd6)',
+          null: 'var(--code-keyword, #569cd6)'
       };
 
       return html`
@@ -378,7 +409,7 @@ export class ZuiJsonFormatter extends LitElement {
                 ${isMatch ? 'background: rgba(255, 255, 0, 0.2); outline: 1px solid rgba(255, 255, 0, 0.5);' : isResult ? 'background: rgba(255, 255, 0, 0.1);' : ''}
         ">
             ${key !== 'root' && key ? html`
-                <span style="color: #9cdcfe; margin-right: 4px;">${this._renderKeyLabel(key)}:</span>
+                <span style="color: var(--code-attribute, #9cdcfe); margin-right: 4px;">${this._renderKeyLabel(key)}:</span>
                 <button class="copy-btn" title="Copy path" @click=${(e: Event) => { e.stopPropagation(); this._copyPath(path); }}>📋</button>
             ` : ''}
             <span style="color: ${colorMap[type]};">${value}</span>

@@ -1,9 +1,7 @@
 
 import { LitElement, html, css } from 'lit';
 import { customElement, state, property } from 'lit/decorators.js';
-import { type ThemeConfig, DEFAULT_THEME } from './theme-models.js';
-import { generateCssVariables, getContrastRatio } from './theme-utils.js';
-import { extractColorsFromImage, mapPaletteToTheme } from './image-utils.js';
+import { type ThemeConfig, DEFAULT_THEME, ThemeGeneratorService } from '@deepverse/zero-ui';
 import '@deepverse/zero-ui/tabs';
 import '@deepverse/zero-ui/button';
 import '@deepverse/zero-ui/card';
@@ -236,7 +234,7 @@ export class ZuiThemeGenerator extends LitElement {
        // We now generate CSS based on the ACTIVE preview mode's palette.
        // This ensures "What You See Is What You Edit".
        
-       this._generatedCss = generateCssVariables(this._theme, this._previewMode);
+      this._generatedCss = ThemeGeneratorService.generateCssVariables(this._theme, this._previewMode);
       
        this.dispatchEvent(new CustomEvent('change', { 
           detail: { theme: this._theme, css: this._generatedCss } 
@@ -289,9 +287,9 @@ export class ZuiThemeGenerator extends LitElement {
           // Create URL for preview
           this._previewImage = URL.createObjectURL(file);
           
-          const colors = await extractColorsFromImage(file);
+          const colors = await ThemeGeneratorService.extractColorsFromImage(file);
           console.log('Extracted Colors:', colors);
-          const newTheme = mapPaletteToTheme(colors);
+          const newTheme = ThemeGeneratorService.mapPaletteToTheme(colors);
           this._theme = newTheme;
           this._baseTheme = JSON.parse(JSON.stringify(newTheme));
           
@@ -326,7 +324,7 @@ ${this._generatedCss}
       if (key === 'text' || key === 'background') {
           const otherKey = key === 'text' ? 'background' : 'text';
           const otherValue = palette[otherKey];
-          const ratio = getContrastRatio(value, otherValue);
+          const ratio = ThemeGeneratorService.getContrastRatio(value, otherValue);
           if (ratio < 4.5) {
               contrastMsg = `⚠️ Low Contrast: ${ratio.toFixed(2)}`;
           }

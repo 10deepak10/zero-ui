@@ -1,6 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import '@deepverse/zero-ui/checkbox';
+import '../components/demo-page';
+import '../components/demo-example';
 
 @customElement('checkbox-demo')
 export class CheckboxDemo extends LitElement {
@@ -8,59 +10,6 @@ export class CheckboxDemo extends LitElement {
   @state() private _indeterminate = true;
 
   static styles = css`
-    :host {
-      display: block;
-      padding: 40px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 30px;
-      background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .section {
-      margin-bottom: 50px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 16px;
-      padding: 30px;
-    }
-
-    h2 {
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      color: var(--text-main);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding-bottom: 10px;
-    }
-
-    .demo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
-    }
-
-    .demo-item {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .code-block {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 15px;
-      border-radius: 8px;
-      font-family: monospace;
-      font-size: 0.9rem;
-      color: #a5b4fc;
-      margin-top: 10px;
-    }
-
     .custom-theme {
       --zui-checkbox-color: #10b981;
       --zui-checkbox-border-radius: 50%;
@@ -68,67 +17,146 @@ export class CheckboxDemo extends LitElement {
   `;
 
   render() {
-    return html`
-      <h1>Checkbox</h1>
+    const properties = [
+      { name: 'checked', type: 'boolean', default: 'false', description: 'Whether the checkbox is checked.' },
+      { name: 'indeterminate', type: 'boolean', default: 'false', description: 'Visual indeterminate state.' },
+      { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable interaction.' },
+      { name: 'label', type: 'string', default: "''", description: 'Label text to display.' },
+    ];
 
-      <div class="section">
-        <h2>Basic Usage</h2>
-        <div class="demo-grid">
-          <div class="demo-item">
+    const basicHtml = `<zui-checkbox 
+  label="Accept Terms" 
+  .checked="\${checked}"
+  @change="\${handleChange}"
+></zui-checkbox>`;
+
+    const basicReact = `import { ZuiCheckbox } from '@deepverse/zero-ui/react';
+
+function App() {
+  const [checked, setChecked] = useState(false);
+  return (
+    <ZuiCheckbox
+      label="Accept Terms"
+      checked={checked}
+      onZuiChange={(e) => setChecked(e.detail.checked)}
+    />
+  );
+}`;
+
+    const basicAngular = `import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: \`
+    <zui-checkbox 
+      label="Accept Terms" 
+      [checked]="checked" 
+      (change)="handleChange($event)">
+    </zui-checkbox>
+  \`
+})
+export class AppComponent {
+  checked = false;
+  handleChange(e: any) {
+    this.checked = e.detail.checked;
+  }
+}`;
+
+    const basicVue = `<template>
+  <zui-checkbox 
+    label="Accept Terms" 
+    :checked="checked" 
+    @change="checked = $event.detail.checked" 
+  />
+</template>
+
+<script setup>
+import { ref } from 'vue';
+const checked = ref(false);
+</script>`;
+
+    const statesHtml = `<zui-checkbox label="Disabled Unchecked" disabled></zui-checkbox>
+<zui-checkbox label="Disabled Checked" disabled checked></zui-checkbox>
+<zui-checkbox label="Indeterminate" indeterminate></zui-checkbox>`;
+
+    const customThemeHtml = `<style>
+  .custom-theme {
+    --zui-checkbox-color: #10b981;
+    --zui-checkbox-border-radius: 50%;
+  }
+</style>
+
+<zui-checkbox class="custom-theme" label="Custom" checked></zui-checkbox>`;
+
+    return html`
+      <demo-page
+        name="Checkbox"
+        description="Checkboxes allow the user to select one or more items from a set."
+        .properties=${properties}
+      >
+        <demo-example
+          header="Basic Usage"
+          description="Standard checkbox with label and state management."
+          .html=${basicHtml}
+          .react=${basicReact}
+          .angular=${basicAngular}
+          .vue=${basicVue}
+        >
+          <div style="display: flex; gap: 16px; align-items: center; justify-content: center; flex-wrap: wrap;">
             <zui-checkbox 
               label="Accept Terms" 
               .checked=${this._checked1}
               @change=${(e: any) => this._checked1 = e.detail.checked}
             ></zui-checkbox>
-            <div class="code-block">Checked: ${this._checked1}</div>
-          </div>
-
-          <div class="demo-item">
             <zui-checkbox 
               label="Subscribe to newsletter" 
               checked
             ></zui-checkbox>
           </div>
-        </div>
-      </div>
+        </demo-example>
 
-      <div class="section">
-        <h2>States</h2>
-        <div class="demo-grid">
-          <div class="demo-item">
+        <demo-example
+          header="States"
+          description="Different interaction states including disabled and indeterminate."
+          .html=${statesHtml}
+          .react=${basicReact}
+          .angular=${basicAngular}
+          .vue=${basicVue}
+        >
+          <div style="display: flex; gap: 16px; align-items: center; justify-content: center; flex-wrap: wrap;">
             <zui-checkbox label="Disabled Unchecked" disabled></zui-checkbox>
-          </div>
-          <div class="demo-item">
             <zui-checkbox label="Disabled Checked" disabled checked></zui-checkbox>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                <zui-checkbox
+                label="Indeterminate"
+                .indeterminate=${this._indeterminate}
+                @change=${() => this._indeterminate = false}
+                ></zui-checkbox>
+                <button 
+                @click=${() => this._indeterminate = true}
+                style="padding: 4px 8px; font-size: 10px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: var(--text-main); border-radius: 4px; cursor: pointer;"
+                >
+                Reset
+                </button>
+            </div>
           </div>
-          <div class="demo-item">
-            <zui-checkbox 
-              label="Indeterminate" 
-              .indeterminate=${this._indeterminate}
-              @change=${() => this._indeterminate = false}
-            ></zui-checkbox>
-            <button 
-              @click=${() => this._indeterminate = true}
-              style="margin-top: 10px; padding: 5px 10px; background: rgba(255,255,255,0.1); border: none; color: white; border-radius: 4px; cursor: pointer;"
-            >
-              Reset Indeterminate
-            </button>
-          </div>
-        </div>
-      </div>
+        </demo-example>
 
-      <div class="section">
-        <h2>Custom Styling</h2>
-        <div class="demo-grid">
-          <div class="demo-item">
-            <zui-checkbox 
-              class="custom-theme" 
-              label="Custom Colors & Shape" 
-              checked
-            ></zui-checkbox>
-          </div>
-        </div>
-      </div>
+        <demo-example
+          header="Custom Styling"
+          description="Customize colors and radius using CSS variables."
+          .html=${customThemeHtml}
+          .react=${basicReact}
+          .angular=${basicAngular}
+          .vue=${basicVue}
+        >
+          <zui-checkbox 
+            class="custom-theme" 
+            label="Custom Colors & Shape" 
+            checked
+          ></zui-checkbox>
+        </demo-example>
+      </demo-page>
     `;
   }
 }

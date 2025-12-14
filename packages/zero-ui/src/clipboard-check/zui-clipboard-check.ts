@@ -19,8 +19,8 @@ export class ZuiClipboardCheck extends LitElement {
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--card-bg, rgba(255, 255, 255, 0.03));
+      border: 1px solid var(--card-border, rgba(255, 255, 255, 0.1));
       border-radius: 12px;
       padding: 24px;
     }
@@ -94,7 +94,7 @@ export class ZuiClipboardCheck extends LitElement {
     }
 
     .test-group {
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--bg-muted, rgba(255, 255, 255, 0.05));
       padding: 16px;
       border-radius: 8px;
     }
@@ -108,9 +108,9 @@ export class ZuiClipboardCheck extends LitElement {
     }
 
     input, textarea {
-      background: rgba(0, 0, 0, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: white;
+      background: var(--zui-input-bg, rgba(0, 0, 0, 0.2));
+      border: 1px solid var(--card-border, rgba(255, 255, 255, 0.1));
+      color: var(--text-main, white);
       padding: 8px 12px;
       border-radius: 6px;
       font-family: inherit;
@@ -148,8 +148,8 @@ export class ZuiClipboardCheck extends LitElement {
     }
 
     .clipboard-display {
-      background: rgba(0, 0, 0, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--zui-input-bg, rgba(0, 0, 0, 0.3));
+      border: 1px solid var(--card-border, rgba(255, 255, 255, 0.1));
       padding: 12px;
       border-radius: 6px;
       font-family: monospace;
@@ -168,7 +168,7 @@ export class ZuiClipboardCheck extends LitElement {
 
     .history-section {
       margin-top: 24px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid var(--card-border, rgba(255, 255, 255, 0.1));
       padding-top: 20px;
     }
 
@@ -203,7 +203,7 @@ export class ZuiClipboardCheck extends LitElement {
       display: flex;
       align-items: flex-start;
       gap: 12px;
-      background: rgba(255, 255, 255, 0.03);
+      background: var(--bg-muted, rgba(255, 255, 255, 0.03));
       padding: 10px;
       border-radius: 6px;
       font-size: 0.9rem;

@@ -13,7 +13,8 @@ export * from './storage.service.js';
 export * from './syntax-highlighter.service.js';
 export * from './theme.service.js';
 export * from './event-bus.service.js';
-export * from './theme.service.js';
+export * from './theme-generator.service.js';
+export * from './theme-models.js';
 
 
 // Resolve ambiguities with named exports

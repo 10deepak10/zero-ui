@@ -28,9 +28,8 @@ export class SandboxDemo extends LitElement {
       box-sizing: border-box; 
       gap: 16px;
       color: var(--text-main);
-      --sandbox-border: rgba(255, 255, 255, 0.1);
-      --sandbox-header-bg: rgba(255, 255, 255, 0.03);
-      --sandbox-bg: #1e1e1e;
+      --sandbox-border: var(--card-border, rgba(255, 255, 255, 0.1));
+      --sandbox-bg: var(--sandbox-bg, #1e1e1e);
     }
 
     h2 {
@@ -47,7 +46,9 @@ export class SandboxDemo extends LitElement {
       border: 1px solid var(--sandbox-border);
       border-radius: 12px;
       overflow: hidden;
-      background: #0f172a;
+      overflow: hidden;
+      overflow: hidden;
+      background: var(--sandbox-bg, var(--card-bg));
     }
 
     /* Common Section Styles */
@@ -65,12 +66,13 @@ export class SandboxDemo extends LitElement {
         align-items: center;
         justify-content: space-between;
         padding: 0 16px;
-        background: var(--sandbox-header-bg);
+        background: var(--sandbox-header-bg, var(--bg-muted));
         border-bottom: 1px solid var(--sandbox-border);
         font-size: 0.8rem;
         font-family: 'Monaco', 'Menlo', monospace;
         font-weight: 600;
-        color: #94a3b8;
+        font-weight: 600;
+        color: var(--sandbox-header-text, #94a3b8);
         letter-spacing: 0.05em;
         flex-shrink: 0;
         /* Default accent */
@@ -205,9 +207,16 @@ export class SandboxDemo extends LitElement {
     zui-tabs {
        height: 100%;
        display: flex;
+       display: flex;
        flex-direction: column;
        --card-border: var(--sandbox-border);
-       background: #1e293b; /* Match logger bg */
+       background: var(--sandbox-bg, var(--card-bg));
+    }
+
+    zui-tabs::part(tabs-header) {
+      margin-bottom: 0;
+        border-bottom: 1px solid var(--sandbox-border);
+        background: var(--sandbox-header-bg, var(--bg-muted));
     }
     
     /* Unified Tab Style matching Section Headers */
@@ -226,7 +235,9 @@ export class SandboxDemo extends LitElement {
       transition: all 0.2s ease;
       font-size: 0.85rem;
       font-weight: 600;
-      color: #64748b;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--sandbox-tab-text, #64748b);
       position: relative;
       background: transparent;
       user-select: none;
@@ -236,18 +247,19 @@ export class SandboxDemo extends LitElement {
     }
 
     zui-tab:hover {
-      color: #cbd5e1;
-      background: rgba(255, 255, 255, 0.02);
+      color: var(--sandbox-tab-hover, #cbd5e1);
+      background: var(--bg-hover, rgba(255, 255, 255, 0.02));
     }
     
     zui-tab[active] {
-       color: #60a5fa;
+       color: var(--zui-primary, #60a5fa);
        background: rgba(59, 130, 246, 0.05);
-       border-bottom-color: #60a5fa;
+       border-bottom-color: var(--zui-primary, #60a5fa);
     }
     
     zui-tab-panel {
       height: 100%;
+      padding: 0;
     }
   `;
 
@@ -387,12 +399,9 @@ export class SandboxDemo extends LitElement {
 
   render() {
     return html`
-      <h2>HTML/CSS/JS Sandbox</h2>
-      
       <div class="container">
         <zui-split direction="horizontal" initialSplit="50%">
           
-          <!-- Code Editors Pane -->
           <!-- Code Editors Pane -->
           <div class="editors" slot="one">
 
@@ -473,10 +482,10 @@ export class SandboxDemo extends LitElement {
                     <zui-tab slot="tabs">Events</zui-tab>
                     
                     <zui-tab-panel slot="panels">
-                         <zui-logger style="--logger-bg: #1e293b; height: 100%; border: none;"></zui-logger>
+                         <zui-logger style="height: 100%; border: none; --logger-radius: 0; --logger-border: none; --bg-muted: var(--sandbox-header-bg, var(--bg-muted));"></zui-logger>
                     </zui-tab-panel>
                     <zui-tab-panel slot="panels">
-                        <zui-event-bus style="--event-bus-bg: #1e293b; height: 100%; border: none;"></zui-event-bus>
+                        <zui-event-bus style="height: 100%; border: none; --event-bus-radius: 0; --event-bus-border: none; --bg-muted: var(--sandbox-header-bg, var(--bg-muted));"></zui-event-bus>
                     </zui-tab-panel>
                 </zui-tabs>
               </div>

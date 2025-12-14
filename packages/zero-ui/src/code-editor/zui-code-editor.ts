@@ -15,8 +15,8 @@ export class ZuiCodeEditor extends LitElement {
       border: 1px solid var(--card-border);
       border-radius: 8px;
       overflow: hidden;
-      background: #1e1e1e;
-      color: #d4d4d4;
+      background: var(--zui-input-bg, var(--card-bg, #1e1e1e));
+      color: var(--text-main, #d4d4d4);
       font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
       font-size: 14px;
       line-height: 1.5;
@@ -30,12 +30,12 @@ export class ZuiCodeEditor extends LitElement {
 
     .gutter {
       width: 40px;
-      background: #252526;
-      color: #858585;
+      background: var(--bg-muted, #252526);
+      color: var(--text-muted, #858585);
       text-align: right;
       padding: 10px 8px 10px 0;
       user-select: none;
-      border-right: 1px solid #333;
+      border-right: 1px solid var(--card-border, #333);
       overflow: hidden;
       flex-shrink: 0;
       box-sizing: border-box;
@@ -77,7 +77,7 @@ export class ZuiCodeEditor extends LitElement {
     textarea {
       z-index: 2;
       color: transparent;
-      caret-color: #d4d4d4;
+      caret-color: var(--text-main, #d4d4d4);
     }
 
     /* Highlight layer sits below */
@@ -93,8 +93,9 @@ export class ZuiCodeEditor extends LitElement {
     .suggestions-popup {
       position: absolute;
       z-index: 10;
-      background: #252526;
-      border: 1px solid #454545;
+      background: var(--card-bg, #252526);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--card-border, #454545);
       border-radius: 4px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
       max-height: 200px;
@@ -105,13 +106,23 @@ export class ZuiCodeEditor extends LitElement {
     .suggestion-item {
       padding: 4px 8px;
       cursor: pointer;
-      color: #cccccc;
+      color: var(--text-main, #cccccc);
     }
 
     .suggestion-item:hover, .suggestion-item.active {
-      background: #094771;
+      background: var(--zui-primary, #094771);
       color: #ffffff;
     }
+
+    /* Syntax Highlighting Tokens */
+    .token-comment { color: var(--code-comment, #6a9955); font-style: italic; }
+    .token-string { color: var(--code-string, #ce9178); }
+    .token-keyword { color: var(--code-keyword, #569cd6); }
+    .token-number { color: var(--code-number, #b5cea8); }
+    .token-tag { color: var(--code-tag, #569cd6); }
+    .token-attribute { color: var(--code-attribute, #9cdcfe); }
+    .token-operator { color: var(--code-operator, #d4d4d4); }
+    .token-default { color: var(--code-default, #d4d4d4); }
   `;
 
   @property({ type: String }) value = '';

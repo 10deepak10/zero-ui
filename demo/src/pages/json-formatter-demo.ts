@@ -10,11 +10,12 @@ export class JsonFormatterDemo extends LitElement {
       height: 100vh;
       padding: 16px;
       box-sizing: border-box;
-      background: #0f172a;
+      box-sizing: border-box;
+      /* background: #0f172a; removed for theme support */
     }
     
     h1 {
-        color: #fff;
+        color: var(--text-main);
         font-family: sans-serif;
         margin-top: 0;
     }
@@ -23,7 +24,6 @@ export class JsonFormatterDemo extends LitElement {
   render() {
     return html`
       <div style="height: 100%; display: flex; flex-direction: column;">
-        <h1>JSON Formatter & Explorer</h1>
         <div style="flex: 1; min-height: 0;">
             <zui-json-formatter></zui-json-formatter>
         </div>

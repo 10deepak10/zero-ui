@@ -70,16 +70,16 @@ export class ZuiProctoring extends LitElement {
     }
 
     .violation-log {
-      background: rgba(0, 0, 0, 0.2);
+      background: var(--bg-muted, rgba(0, 0, 0, 0.2));
       border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border, rgba(255, 255, 255, 0.05));
       max-height: 300px;
       overflow-y: auto;
     }
 
     .log-header {
       padding: 12px 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid var(--card-border, rgba(255, 255, 255, 0.05));
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -96,7 +96,7 @@ export class ZuiProctoring extends LitElement {
 
     .log-item {
       padding: 10px 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid var(--card-border, rgba(255, 255, 255, 0.03));
       display: flex;
       justify-content: space-between;
       align-items: center;

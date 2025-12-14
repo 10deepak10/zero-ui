@@ -24,8 +24,8 @@ export class ZuiMicCheck extends LitElement {
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--card-bg, rgba(255, 255, 255, 0.03));
+      border: 1px solid var(--card-border, rgba(255, 255, 255, 0.1));
       border-radius: 12px;
       padding: 20px;
     }
@@ -95,7 +95,7 @@ export class ZuiMicCheck extends LitElement {
     }
 
     .device-item {
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--bg-muted, rgba(255, 255, 255, 0.05));
       padding: 10px;
       border-radius: 6px;
       font-size: 0.9rem;
@@ -113,7 +113,7 @@ export class ZuiMicCheck extends LitElement {
     /* Visualizer Meter */
     .meter-container {
       margin-top: 20px;
-      background: rgba(0, 0, 0, 0.3);
+      background: var(--bg-muted, rgba(0, 0, 0, 0.3));
       border-radius: 8px;
       padding: 16px;
       display: flex;

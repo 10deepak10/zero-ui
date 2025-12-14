@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import '../select/zui-select.js';
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -241,6 +242,7 @@ const ALL_COUNTRIES = [
   { code: 'UY', dial: '+598', flag: '🇺🇾', name: 'Uruguay', lengths: [8] },
   { code: 'UZ', dial: '+998', flag: '🇺🇿', name: 'Uzbekistan', lengths: [9] },
   { code: 'VU', dial: '+678', flag: '🇻🇺', name: 'Vanuatu', lengths: [7] },
+
   { code: 'VA', dial: '+379', flag: '🇻🇦', name: 'Vatican', lengths: [10] },
   { code: 'VE', dial: '+58', flag: '🇻🇪', name: 'Venezuela', lengths: [10] },
   { code: 'VN', dial: '+84', flag: '🇻🇳', name: 'Vietnam', lengths: [9] },
@@ -261,16 +263,19 @@ export class ZuiPhoneInput extends LitElement {
 
     .container {
       display: flex;
-      border: 1px solid #d1d5db;
+      align-items: center;
+      border: 1px solid var(--card-border, #d1d5db);
       border-radius: 6px;
-      overflow: hidden;
+      overflow: visible; /* flexible for dropdown */
       transition: all 0.2s;
-      background: #fff;
+      background: var(--zui-input-bg, var(--card-bg, #fff));
+      position: relative;
     }
 
     .container:focus-within {
-      border-color: #3b82f6;
+      border-color: var(--zui-primary, #3b82f6);
       box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      z-index: 10;
     }
 
     .container.invalid {
@@ -281,30 +286,39 @@ export class ZuiPhoneInput extends LitElement {
       box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
     }
 
-    select {
-      appearance: none;
-      background: #f9fafb;
-      border: none;
-      border-right: 1px solid #e5e7eb;
-      padding: 8px 12px;
-      font-size: 1rem;
-      color: #111827;
-      cursor: pointer;
-      outline: none;
-      min-width: 80px;
-      height: 42px;
+    zui-select {
+      width: 110px;
+      flex-shrink: 0;
+      /* Override zui-select internal styles to blend in */
+      --card-border: transparent;
+      --card-bg: transparent; /* allow container bg to show */
+      --zui-input-focus-bg: transparent;
     }
 
-    select:hover {
-      background: #f3f4f6;
+    /* Target the trigger button inside zui-select to remove borders/radius */
+    zui-select::part(trigger) {
+      border: none;
+      border-radius: 6px 0 0 6px; 
+      border-right: 1px solid var(--card-border, #d1d5db);
+      background: var(--bg-muted, #f9fafb);
+      height: 42px;
+      padding-right: 8px; /* Reduce padding to fit content better */
+    }
+    
+    zui-select::part(trigger):hover {
+       background: var(--bg-hover, #f3f4f6);
+    }
+
+    zui-select::part(chevron) {
+      display: none;
     }
 
     input {
       border: none;
       padding: 8px 12px;
       font-size: 1rem;
-      color: #111827;
-      background: #fff;
+      color: var(--text-main, #111827);
+      background: transparent;
       outline: none;
       width: 100%;
       min-width: 150px;
@@ -313,7 +327,7 @@ export class ZuiPhoneInput extends LitElement {
     }
 
     input::placeholder {
-      color: #9ca3af;
+      color: var(--text-muted, #9ca3af);
     }
   `;
 
@@ -324,7 +338,7 @@ export class ZuiPhoneInput extends LitElement {
   allowedCountries: string[] = [];
 
   @state()
-  private _countryCode = '+1';
+  private _isoCode = 'US';
 
   @state()
   private _phoneNumber = '';
@@ -342,33 +356,73 @@ export class ZuiPhoneInput extends LitElement {
     return ALL_COUNTRIES.filter(c => this.allowedCountries.includes(c.code));
   }
 
+  // Computed options for zui-select
+  private get _countryOptions() {
+    return this._filteredCountries.map(c => ({
+      label: `${c.flag} ${c.dial}`,
+      value: c.code, // Use ISO code as unique value
+      keywords: [c.name, c.code, c.dial.replace('+', '')] // Search by name, code (US), dial (1)
+    }));
+  }
+
   firstUpdated() {
     // Ensure initial country code is valid for filtered list
     const countries = this._filteredCountries;
-    if (countries.length > 0 && !countries.find(c => c.dial === this._countryCode)) {
-      this._countryCode = countries[0].dial;
+    // Find if current _isoCode is in the filtered list
+    if (countries.length > 0 && !countries.find(c => c.code === this._isoCode)) {
+      this._isoCode = countries[0].code;
       this.requestUpdate();
     }
+
+    // Parse initial value if present (e.g. "+1 1234567890")
+    if (this.value) {
+      // Simple heuristic: Try to match dial codes
+      // Sort by length desc to match longest dial code first (e.g. +1-684 vs +1)
+      const sortedCountries = [...countries].sort((a, b) => b.dial.length - a.dial.length);
+      const match = sortedCountries.find(c => this.value.startsWith(c.dial));
+      if (match) {
+        this._isoCode = match.code;
+        this._phoneNumber = this.value.slice(match.dial.length).trim();
+      }
+    }
+
     // Initial validation
     this._validate();
   }
 
+  @property({ type: Object })
+  validationPatterns: Record<string, string | RegExp> = {};
+
+  // ... (existing code)
+
   private _validate() {
-    const country = ALL_COUNTRIES.find(c => c.dial === this._countryCode);
-    // Default to 7-15 digits if no specific lengths defined
-    const validLengths = country && 'lengths' in country ? (country as any).lengths : [7, 8, 9, 10, 11, 12, 13, 14, 15];
-    
+    const country = ALL_COUNTRIES.find(c => c.code === this._isoCode);
+    if (!country) return;
+
     if (!this._phoneNumber) {
       this._isValid = false;
       return;
     }
 
-    this._isValid = validLengths.includes(this._phoneNumber.length);
+    // Check custom patterns first
+    if (this.validationPatterns && this.validationPatterns[this._isoCode]) {
+      const pattern = this.validationPatterns[this._isoCode];
+      const regex = typeof pattern === 'string' ? new RegExp(pattern) : pattern;
+      this._isValid = regex.test(this._phoneNumber);
+      return;
+    }
+
+    // Default legacy validation (length check)
+    // Default to 7-15 digits if no specific lengths defined
+    const validLengths = 'lengths' in country ? (country as any).lengths : [7, 8, 9, 10, 11, 12, 13, 14, 15];
+
+    // Strip spaces/dashes for length check
+    const cleanNumber = this._phoneNumber.replace(/\D/g, '');
+    this._isValid = validLengths.includes(cleanNumber.length);
   }
 
-  private _handleCountryChange(e: Event) {
-    const select = e.target as HTMLSelectElement;
-    this._countryCode = select.value;
+  private _handleCountryChange(e: CustomEvent) {
+    this._isoCode = e.detail.value;
     this._validate();
     this._emitChange();
   }
@@ -391,12 +445,16 @@ export class ZuiPhoneInput extends LitElement {
   }
 
   private _emitChange() {
-    const fullValue = `${this._countryCode} ${this._phoneNumber}`.trim();
+    const country = ALL_COUNTRIES.find(c => c.code === this._isoCode);
+    const dialCode = country ? country.dial : '';
+    const fullValue = `${dialCode} ${this._phoneNumber}`.trim();
+
     this.value = fullValue;
     this.dispatchEvent(new CustomEvent('zui-phone-change', {
       detail: { 
         value: fullValue,
-        countryCode: this._countryCode,
+        countryCode: this._isoCode,
+        dialCode: dialCode,
         phoneNumber: this._phoneNumber,
         isValid: this._isValid
       },
@@ -407,13 +465,20 @@ export class ZuiPhoneInput extends LitElement {
 
   render() {
     const isInvalid = !this._isValid && this._touched;
+    const country = ALL_COUNTRIES.find(c => c.code === this._isoCode);
+    // Determine placeholder based on selected country (could be improved with real formats)
+    const dialCode = country ? country.dial : '+1';
+
     return html`
       <div class="container ${isInvalid ? 'invalid' : ''}">
-        <select @change=${this._handleCountryChange} .value=${this._countryCode}>
-          ${this._filteredCountries.map(c => html`
-            <option value=${c.dial}>${c.flag} ${c.dial}</option>
-          `)}
-        </select>
+        <zui-select
+          .options=${this._countryOptions}
+          .value=${this._isoCode}
+          @zui-change=${this._handleCountryChange}
+          searchable
+          placeholder=${dialCode}
+          exportparts="trigger, chevron"
+        ></zui-select>
         <input
           type="tel"
           placeholder="Phone number"

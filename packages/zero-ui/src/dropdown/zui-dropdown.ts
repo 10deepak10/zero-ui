@@ -24,10 +24,13 @@ export class ZuiDropdown extends LitElement {
       position: fixed;
       z-index: 50;
       min-width: 200px;
-      background: white;
-      border: 1px solid #e5e7eb;
+      background: var(--zui-dropdown-bg, var(--card-bg, #ffffff));
+      color: var(--zui-dropdown-color, var(--text-main, inherit));
+      border: 1px solid var(--zui-dropdown-border, var(--card-border, #e5e7eb));
       border-radius: 0.5rem;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       opacity: 0;
       transform: scale(0.95);
       transition: opacity 0.1s ease-out, transform 0.1s ease-out;
@@ -194,30 +197,55 @@ export class ZuiDropdown extends LitElement {
       ? triggerRect.right - contentRect.width 
       : triggerRect.left;
 
-    // Check if dropdown would overflow bottom
-    if (top + contentRect.height > viewportHeight - 16) {
-      // Try to position above
-      const topAbove = triggerRect.top - contentRect.height - 8;
-      if (topAbove > 16) {
-        top = topAbove;
+    // Check availability space
+    const spaceBelow = viewportHeight - triggerRect.bottom - 16; // 16px padding
+    const spaceAbove = triggerRect.top - 16;
+    const height = contentRect.height;
+
+    let isAbove = false;
+
+    // If it doesn't fit below, and fits above OR there is more space above, put it above
+    if (height > spaceBelow && (height <= spaceAbove || spaceAbove > spaceBelow)) {
+      isAbove = true;
+    }
+
+    if (isAbove) {
+      // Position above: anchor to bottom
+      // bottom value is distance from bottom of viewport
+      const bottom = viewportHeight - triggerRect.top + 8;
+      content.style.bottom = `${bottom}px`;
+      content.style.top = '';
+      this.setAttribute('data-placement', 'top');
+
+      // Constrain height if needed
+      if (height > spaceAbove) {
+        content.style.maxHeight = `${spaceAbove}px`;
       } else {
-        // If neither works, constrain height
-        const maxHeight = viewportHeight - top - 16;
-        content.style.maxHeight = `${maxHeight}px`;
+        // Restore default max-height if it fits now (or let CSS handle it)
+        content.style.maxHeight = '300px';
+      }
+    } else {
+      // Position below: anchor to top
+      content.style.top = `${top}px`;
+      content.style.bottom = '';
+      this.setAttribute('data-placement', 'bottom');
+
+      // Constrain height if needed
+      if (height > spaceBelow) {
+        content.style.maxHeight = `${spaceBelow}px`;
+      } else {
+        content.style.maxHeight = '300px';
       }
     }
 
-    // Check if dropdown would overflow right
+    // Check horizontal overflow
     if (left + contentRect.width > viewportWidth - 16) {
       left = viewportWidth - contentRect.width - 16;
     }
-
-    // Check if dropdown would overflow left
     if (left < 16) {
       left = 16;
     }
 
-    content.style.top = `${top}px`;
     content.style.left = `${left}px`;
   };
 

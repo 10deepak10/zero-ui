@@ -16,8 +16,8 @@ export class ZuiBatteryCheck extends LitElement {
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--card-bg, rgba(255, 255, 255, 0.03));
+      border: 1px solid var(--card-border, rgba(255, 255, 255, 0.1));
       border-radius: 12px;
       padding: 16px;
     }
@@ -41,7 +41,7 @@ export class ZuiBatteryCheck extends LitElement {
     .battery-icon-container {
       width: 60px;
       height: 30px;
-      border: 3px solid rgba(255, 255, 255, 0.3);
+      border: 3px solid var(--text-muted, rgba(255, 255, 255, 0.3));
       border-radius: 6px;
       padding: 3px;
       position: relative;
@@ -55,7 +55,7 @@ export class ZuiBatteryCheck extends LitElement {
       transform: translateY(-50%);
       width: 4px;
       height: 12px;
-      background: rgba(255, 255, 255, 0.3);
+      background: var(--text-muted, rgba(255, 255, 255, 0.3));
       border-radius: 0 2px 2px 0;
     }
 

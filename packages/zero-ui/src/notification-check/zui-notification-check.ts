@@ -15,8 +15,8 @@ export class ZuiNotificationCheck extends LitElement {
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--card-bg, rgba(255, 255, 255, 0.03));
+      border: 1px solid var(--card-border, rgba(255, 255, 255, 0.1));
       border-radius: 12px;
       padding: 24px;
     }
@@ -81,15 +81,15 @@ export class ZuiNotificationCheck extends LitElement {
       flex-direction: column;
       gap: 12px;
       margin-top: 16px;
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--bg-muted, rgba(255, 255, 255, 0.05));
       padding: 16px;
       border-radius: 8px;
     }
 
     input, textarea {
-      background: rgba(0, 0, 0, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: white;
+      background: var(--zui-input-bg, rgba(0, 0, 0, 0.2));
+      border: 1px solid var(--card-border, rgba(255, 255, 255, 0.1));
+      color: var(--text-main, white);
       padding: 8px 12px;
       border-radius: 6px;
       font-family: inherit;

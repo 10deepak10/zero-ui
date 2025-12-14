@@ -1,43 +1,65 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '@deepverse/zero-ui/geolocation-check';
+import '../components/demo-page';
+import '../components/demo-example';
 
 @customElement('geolocation-check-demo')
 export class GeolocationCheckDemo extends LitElement {
   static styles = css`
-    :host {
-      display: block;
-      padding: 20px;
-      color: white;
+    .preview {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      flex-wrap: wrap;
     }
 
-    h1 {
-      margin-bottom: 20px;
-      font-size: 1.5rem;
-    }
-
-    .description {
-      margin-bottom: 30px;
-      color: #9ca3af;
-      line-height: 1.6;
-    }
-
-    .demo-container {
-      max-width: 500px;
+    zui-geolocation-check {
+      width: 100%;
     }
   `;
 
   render() {
-    return html`
-      <h1>Geolocation Check Component</h1>
-      <p class="description">
-        The <code>&lt;zui-geolocation-check&gt;</code> component uses the Geolocation API to retrieve your current position.
-        It handles permissions, errors, and displays coordinates with a link to open them in a map.
-      </p>
+    const basicHtml = `<zui-geolocation-check></zui-geolocation-check>`;
+    const basicReact = `import { ZuiGeolocationCheck } from '@deepverse/zero-ui/react';
 
-      <div class="demo-container">
-        <zui-geolocation-check></zui-geolocation-check>
-      </div>
+function App() {
+  return <ZuiGeolocationCheck />;
+}`;
+    const basicAngular = `import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: \`<zui-geolocation-check></zui-geolocation-check>\`
+})
+export class AppComponent {}`;
+    const basicVue = `<template>
+  <zui-geolocation-check />
+</template>`;
+
+    return html`
+      <demo-page
+        name="Geolocation Check"
+        description="Retrieves current position using the Geolocation API, handling permissions and errors."
+      >
+        <demo-example
+          header="Default Usage"
+          description="Geolocation service integration test."
+          .html=${basicHtml}
+          .react=${basicReact}
+          .angular=${basicAngular}
+          .vue=${basicVue}
+        >
+          <div class="preview">
+            <zui-geolocation-check></zui-geolocation-check>
+          </div>
+        </demo-example>
+      </demo-page>
     `;
   }
 }

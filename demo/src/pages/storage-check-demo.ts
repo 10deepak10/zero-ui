@@ -1,12 +1,56 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import '@deepverse/zero-ui/storage-check';
+import '../components/demo-page';
+import '../components/demo-example';
 import { StorageCheckService, type StorageQuota } from '@deepverse/zero-ui';
 
 @customElement('storage-check-demo')
 export class StorageCheckDemo extends LitElement {
   @state() private _serviceQuota: StorageQuota | null = null;
   @state() private _serviceAvailable: any = null;
+
+  static styles = css`
+    .preview {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    button {
+      padding: 8px 16px; 
+      border-radius: 6px; 
+      color: white; 
+      cursor: pointer; 
+      transition: opacity 0.2s;
+      font-family: inherit;
+      font-size: 0.875rem;
+    }
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed !important;
+    }
+    .btn-primary { background: #3b82f6; border: none; }
+    .btn-secondary { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); }
+    .btn-accent { background: #8b5cf6; border: none; }
+
+    zui-storage-check {
+      width: 100%;
+    }
+  `;
 
   async connectedCallback() {
     super.connectedCallback();
@@ -151,125 +195,133 @@ export class StorageCheckDemo extends LitElement {
     if (component) component._checkStorage();
   }
 
-  static styles = css`
-    :host {
-      display: block;
-      padding: 40px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 30px;
-      background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .section {
-      margin-bottom: 50px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 16px;
-      padding: 30px;
-    }
-
-    h2 {
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      color: var(--text-main);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding-bottom: 10px;
-    }
-
-    .demo-item {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .code-block {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 15px;
-      border-radius: 8px;
-      font-family: monospace;
-      font-size: 0.9rem;
-      color: #a5b4fc;
-      margin-top: 10px;
-      white-space: pre-wrap;
-    }
-
-    button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed !important;
-    }
-  `;
-
   render() {
-    return html`
-      <h1>Storage Check</h1>
+    const basicHtml = `<zui-storage-check></zui-storage-check>`;
+    const basicReact = `import { ZuiStorageCheck } from '@deepverse/zero-ui/react';
 
-      <div class="section">
-        <h2>Component Usage</h2>
-        <div class="demo-item">
-          <zui-storage-check></zui-storage-check>
-          
-          <div style="display: flex; gap: 10px; margin-top: 20px;">
-            <button 
-              id="fill-btn"
-              @click=${this._fillStorage}
-              style="padding: 8px 16px; background: #3b82f6; border: none; border-radius: 6px; color: white; cursor: pointer; transition: opacity 0.2s;"
-            >
-              Add +5MB (IndexedDB)
-            </button>
-            <button 
-              id="clear-btn"
-              @click=${this._clearStorage}
-              style="padding: 8px 16px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; color: white; cursor: pointer; transition: opacity 0.2s;"
-            >
-              Clear Storage
-            </button>
-          </div>
+function App() {
+  return <ZuiStorageCheck />;
+}`;
+    const basicAngular = `import { Component } from '@angular/core';
 
-          <div style="display: flex; gap: 10px; margin-top: 10px;">
-            <button 
-              id="fill-ls-btn"
-              @click=${this._fillLocalStorage}
-              style="padding: 8px 16px; background: #8b5cf6; border: none; border-radius: 6px; color: white; cursor: pointer; transition: opacity 0.2s;"
-            >
-              Add +500KB (LocalStorage)
-            </button>
-            <button 
-              @click=${this._clearLocalStorage}
-              style="padding: 8px 16px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; color: white; cursor: pointer; transition: opacity 0.2s;"
-            >
-              Clear LocalStorage
-            </button>
-          </div>
-        </div>
-      </div>
+@Component({
+  selector: 'app-root',
+  template: \`<zui-storage-check></zui-storage-check>\`
+})
+export class AppComponent {}`;
+    const basicVue = `<template>
+  <zui-storage-check />
+</template>`;
 
-      <div class="section">
-        <h2>Service Usage (Headless)</h2>
-        <div class="code-block">
+    const serviceReact = `import { useState, useEffect } from 'react';
 import { StorageCheckService } from '@deepverse/zero-ui';
 
-// Check availability (Sync)
-const available = StorageCheckService.checkAvailability();
+function App() {
+  const [quota, setQuota] = useState(null);
+  
+  useEffect(() => {
+    StorageCheckService.getQuota().then(setQuota);
+  }, []);
 
-// Get Quota (Async)
-const quota = await StorageCheckService.getQuota();
-        </div>
-        
-        <div class="code-block" style="margin-top: 10px; border-left: 4px solid #3b82f6;">
+  return <pre>{JSON.stringify(quota, null, 2)}</pre>;
+}`;
+
+    const serviceAngular = `import { Component, OnInit } from '@angular/core';
+import { StorageCheckService } from '@deepverse/zero-ui';
+
+@Component({
+  selector: 'app-root',
+  template: \`<pre>{{ quota | json }}</pre>\`
+})
+export class AppComponent implements OnInit {
+  quota: any;
+  async ngOnInit() {
+    this.quota = await StorageCheckService.getQuota();
+  }
+}`;
+
+    const serviceVue = `<template>
+  <pre>{{ quota }}</pre>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+import { StorageCheckService } from '@deepverse/zero-ui';
+
+const quota = ref(null);
+onMounted(async () => {
+    quota.value = await StorageCheckService.getQuota();
+});
+</script>`;
+
+    return html`
+      <demo-page
+        name="Storage Check"
+        description="Visualizes storage usage availability and quota (IndexedDB, LocalStorage, etc)."
+      >
+        <demo-example
+          header="Component Usage"
+          description="Visual storage quota indicator."
+          .html=${basicHtml}
+          .react=${basicReact}
+          .angular=${basicAngular}
+          .vue=${basicVue}
+        >
+          <div class="preview">
+            <zui-storage-check></zui-storage-check>
+            
+            <div class="controls">
+              <button 
+                id="fill-btn"
+                class="btn-primary"
+                @click=${this._fillStorage}
+              >
+                Add +5MB (IndexedDB)
+              </button>
+              <button 
+                id="clear-btn"
+                class="btn-secondary"
+                @click=${this._clearStorage}
+              >
+                Clear Storage
+              </button>
+            </div>
+
+            <div class="controls">
+              <button 
+                id="fill-ls-btn"
+                class="btn-accent"
+                @click=${this._fillLocalStorage}
+              >
+                Add +500KB (LocalStorage)
+              </button>
+              <button 
+                class="btn-secondary"
+                @click=${this._clearLocalStorage}
+              >
+                Clear LocalStorage
+              </button>
+            </div>
+          </div>
+        </demo-example>
+
+        <demo-example
+          header="Service Usage"
+          description="Headless API for accessing storage quota."
+          .html=${`<!-- No HTML equivalent, JS-only -->`}
+          .react=${serviceReact}
+          .angular=${serviceAngular}
+          .vue=${serviceVue}
+        >
+           <pre style="background: #1e1e1e; padding: 16px; border-radius: 8px; overflow: auto; color: #fff;">
 // Result (Availability):
 ${JSON.stringify(this._serviceAvailable, null, 2)}
 
 // Result (Quota):
 ${JSON.stringify(this._serviceQuota, null, 2)}
-        </div>
-      </div>
+           </pre>
+        </demo-example>
+      </demo-page>
     `;
   }
 }

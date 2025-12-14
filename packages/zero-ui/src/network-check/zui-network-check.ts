@@ -16,8 +16,8 @@ export class ZuiNetworkCheck extends LitElement {
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--card-bg, rgba(255, 255, 255, 0.03));
+      border: 1px solid var(--card-border, rgba(255, 255, 255, 0.1));
       border-radius: 12px;
       padding: 16px;
     }
@@ -68,10 +68,10 @@ export class ZuiNetworkCheck extends LitElement {
     }
 
     .info-item {
-      background: rgba(255, 255, 255, 0.02);
+      background: var(--bg-muted, rgba(255, 255, 255, 0.02));
       border-radius: 8px;
       padding: 10px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border, rgba(255, 255, 255, 0.05));
     }
 
     .label {
@@ -91,9 +91,9 @@ export class ZuiNetworkCheck extends LitElement {
       text-align: center;
       margin-bottom: 24px;
       padding: 20px 0;
-      background: rgba(255, 255, 255, 0.02);
+      background: var(--bg-muted, rgba(255, 255, 255, 0.02));
       border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border, rgba(255, 255, 255, 0.05));
     }
 
     .speed-value {
@@ -148,9 +148,9 @@ export class ZuiNetworkCheck extends LitElement {
     }
 
     .test-btn {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #fff;
+      background: var(--bg-hover, rgba(255, 255, 255, 0.1));
+      border: 1px solid var(--card-border, rgba(255, 255, 255, 0.2));
+      color: var(--text-main, #fff);
       padding: 6px 16px;
       border-radius: 20px;
       font-size: 0.85rem;
@@ -239,7 +239,7 @@ export class ZuiNetworkCheck extends LitElement {
             <div class="meter-container">
               <svg class="meter" viewBox="0 0 200 100">
                 <!-- Background Arc -->
-                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="20" />
+                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="var(--bg-muted, rgba(255,255,255,0.1))" stroke-width="20" />
                 
                 <!-- Foreground Arc (Active) -->
                 <path 

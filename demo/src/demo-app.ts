@@ -46,6 +46,8 @@ export class DemoApp extends LitElement {
       --link-hover-bg: rgba(255, 255, 255, 0.08);
       --link-active-bg: linear-gradient(135deg, rgba(59,130,246,0.3), rgba(139,92,246,0.3));
       --brand-bg: rgba(255, 255, 255, 0.06);
+      --bg-muted: rgba(255, 255, 255, 0.03);
+      --bg-hover: rgba(255, 255, 255, 0.05);
 
       display: flex;
       height: 100vh;
@@ -53,22 +55,82 @@ export class DemoApp extends LitElement {
       color: var(--text-main);
       background: var(--bg-body);
       transition: background 0.3s ease, color 0.3s ease;
+      --gradient-text: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+      
+      /* Code Editor Syntax (Dark) */
+      --code-comment: #6a9955;
+      --code-string: #ce9178;
+      --code-keyword: #569cd6;
+      --code-number: #b5cea8;
+      --code-tag: #569cd6;
+      --code-attribute: #9cdcfe;
+      --code-operator: #d4d4d4;
+      --code-default: #d4d4d4;
+      --code-default: #d4d4d4;
+      --zui-input-bg: rgba(0, 0, 0, 0.2);
+
+      /* Terminal/Sandbox (Dark Mode specific) */
+      --logger-bg: #0f172a;
+      --logger-border: #1e293b;
+      --sandbox-bg: #0f172a;
+      --sandbox-header-bg: #1e293b;
+      --event-bus-bg: #0f172a;
+      --event-bus-border: #1e293b;
+      
+      /* Sandbox Text Restored (Slate defaults) */
+      --sandbox-header-text: #94a3b8;
+      --sandbox-tab-text: #cbd5e1;
+      --sandbox-tab-hover: #f1f5f9;
     }
 
     :host([theme="light"]) {
-      --bg-body: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-      --text-main: #1f2937;
-      --text-muted: #6b7280;
+      --bg-body: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); /* Slightly cooler/crisper grey-blue */
+      --text-main: #102a43;
+      --text-muted: #486581;
       --glass-bg: rgba(255, 255, 255, 0.7);
-      --glass-border: rgba(255, 255, 255, 0.5);
-      --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-      --card-bg: rgba(255, 255, 255, 0.6);
-      --card-border: rgba(255, 255, 255, 0.4);
-      --sidebar-bg: rgba(255, 255, 255, 0.4);
-      --sidebar-border: rgba(255, 255, 255, 0.5);
-      --link-hover-bg: rgba(255, 255, 255, 0.5);
-      --link-active-bg: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(139,92,246,0.2));
-      --brand-bg: rgba(255, 255, 255, 0.5);
+      --glass-border: rgba(0, 0, 0, 0.08);
+      --glass-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --card-bg: #ffffff;
+      --card-border: rgba(0, 0, 0, 0.1); /* Darker border for contrast against light body */
+      --sidebar-bg: rgba(255, 255, 255, 0.85); /* More opaque */
+      --sidebar-border: rgba(0, 0, 0, 0.1);
+      --link-hover-bg: rgba(16, 42, 67, 0.05); /* darker hover tint */
+      --link-active-bg: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15));
+      --brand-bg: rgba(255, 255, 255, 0.8);
+      --bg-muted: #f3f4f6;
+      --bg-hover: #e5e7eb;
+      --gradient-text: linear-gradient(135deg, #102a43 0%, #6366f1 100%);
+      
+      /* Code Editor Syntax (Light) */
+      --code-comment: #008000;
+      --code-string: #a31515;
+      --code-keyword: #0000ff;
+      --code-number: #098658;
+      --code-tag: #800000;
+      --code-attribute: #ff0000;
+      --code-operator: #333333;
+      --code-default: #111111;
+      --code-default: #111111;
+      --zui-input-bg: #f9fafb;
+
+      /* Terminal/Sandbox (Light Mode specific) */
+      --logger-bg: #ffffff;
+      --logger-border: #e2e8f0;
+      --sandbox-bg: #ffffff;
+      --sandbox-header-bg: #f1f5f9;
+      --event-bus-bg: #ffffff;
+      --event-bus-bg: #ffffff;
+      --event-bus-border: #e2e8f0;
+      
+      /* Sandbox Text (Light Mode High Contrast) */
+      --sandbox-header-text: #475569;
+      --sandbox-tab-text: #64748b;
+      --sandbox-tab-hover: #1e293b;
+    }
+
+    :host([theme="light"]) .brand-logo-img {
+      filter: brightness(0);
+      opacity: 1;
     }
 
     aside {
@@ -78,99 +140,88 @@ export class DemoApp extends LitElement {
       border-right: 1px solid var(--sidebar-border);
       display: flex;
       flex-direction: column;
-      padding: 24px 0;
       flex-shrink: 0;
       box-shadow: 4px 0 30px rgba(0,0,0,0.1);
       transition: all 0.3s ease;
     }
 
     .brand {
-      padding: 0 24px 24px;
-      font-size: 1.6rem;
-      font-weight: 700;
+      padding: 24px 24px 12px;
       display: flex;
       align-items: center;
-      gap: 10px;
-
-      /* glass effect background */
-      background: var(--brand-bg);
-      border-radius: 14px;
-      padding: 14px 20px;
-      margin: 0 16px 26px;
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-
-      /* vivid neon gradient text */
-      background-clip: padding-box;
-      color: var(--text-main);
-
-      /* glow */
-      text-shadow: 
-        0 0 8px rgba(59,130,246,0.6),
-        0 0 12px rgba(139,92,246,0.6);
     }
 
-/* Apply gradient only to the logo icon */
-.brand .logo {
-  font-size: 1.8rem;
-  background: linear-gradient(135deg, #3b82f6, #a855f7);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+    .brand-logo-img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+    }
 
-  text-shadow: 
-    0 0 10px rgba(59,130,246,0.5),
-    0 0 16px rgba(139,92,246,0.5);
-}
+    .brand-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-main);
+      font-family: system-ui, -apple-system, sans-serif;
+      opacity: 0.9;
+    }
 
+    /* Apply gradient only to the logo icon */
+    .brand .logo {
+      font-size: 1.8rem;
+      background: linear-gradient(135deg, #3b82f6, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-  nav {
-    flex: 1;
-    overflow-y: auto;
-    padding: 24px 16px;
-  }
+    nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 16px 24px;
+    }
 
-  .nav-group {
-    margin-bottom: 24px;
-  }
+    .nav-group {
+      margin-bottom: 24px;
+    }
 
     .nav-header {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
       color: var(--text-muted);
-      font-weight: 600;
+      font-weight: 700;
       padding: 0 12px;
-      margin-bottom: 10px;
-      opacity: 0.7;
+      margin-bottom: 8px;
+      opacity: 0.6;
+      letter-spacing: 0.05em;
     }
 
     a {
       display: block;
-      padding: 10px 14px;
+      padding: 8px 12px;
       color: var(--text-muted);
       text-decoration: none;
-      border-radius: 10px;
-      font-size: 0.95rem;
-      transition: all 0.25s ease;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
       cursor: pointer;
-      margin-bottom: 4px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      backdrop-filter: blur(8px);
+      margin-bottom: 2px;
+      border: 1px solid transparent;
+      font-weight: 500;
     }
 
     a:hover {
       background: var(--link-hover-bg);
-      border-color: var(--glass-border);
       color: var(--text-main);
-      box-shadow: 0 6px 20px rgba(59,130,246,0.2);
-      transform: translateX(4px);
     }
 
     a.active {
-      background: var(--link-active-bg);
-      border-color: rgba(59,130,246,0.6);
-      color: var(--text-main);
-      box-shadow: 0 6px 30px rgba(59,130,246,0.4);
+      background: rgba(59, 130, 246, 0.1);
+      color: #60a5fa; /* Blue text for active state */
+      font-weight: 600;
+    }
+
+    :host([theme="light"]) a.active {
+      background: rgba(59, 130, 246, 0.1);
+      color: #2563eb;
     }
 
     .experimental-badge {
@@ -222,7 +273,7 @@ export class DemoApp extends LitElement {
 
   private _renderPage() {
     switch (this._route) {
-      case '/': return html`<intro-page></intro-page>`;
+      case '/': return html`<intro-page .theme=${this._theme}></intro-page>`;
 
       // General UI
       case '/button': return html`<button-demo></button-demo>`;
@@ -308,6 +359,9 @@ export class DemoApp extends LitElement {
       case '/json-formatter':
         import('./pages/json-formatter-demo');
         return html`<json-formatter-demo></json-formatter-demo>`;
+      case '/theme-service':
+        import('./pages/theme-service-demo');
+        return html`<theme-service-demo></theme-service-demo>`;
 
       // Tools
       case '/sandbox': return html`<sandbox-demo></sandbox-demo>`;
@@ -332,7 +386,10 @@ export class DemoApp extends LitElement {
   render() {
     return html`
       <aside>
-        <div class="brand">⚡️ Zero UI</div>
+        <div class="brand">
+          <img src="/brand-logo.png" alt="Zero UI" class="brand-logo-img" />
+          <span class="brand-text">Zero UI</span>
+        </div>
         <nav>
           <div class="nav-group">
             <div class="nav-header">Overview</div>
@@ -398,7 +455,7 @@ export class DemoApp extends LitElement {
             ${this._renderNavLink('/text-editor', 'Text Editor')}
             ${this._renderNavLink('/code-editor', 'Code Editor')}
             ${this._renderNavLink('/event-bus', 'Event Bus')}
-            ${this._renderNavLink('/theme-provider', 'Theme Provider')}
+            ${this._renderNavLink('/theme-service', 'Theme Service')}
           </div>
 
           <div class="nav-group">

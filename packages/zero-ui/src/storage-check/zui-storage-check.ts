@@ -20,8 +20,8 @@ export class ZuiStorageCheck extends LitElement {
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--card-bg, rgba(255, 255, 255, 0.03));
+      border: 1px solid var(--card-border, rgba(255, 255, 255, 0.1));
       border-radius: 12px;
       padding: 16px;
     }
@@ -82,14 +82,14 @@ export class ZuiStorageCheck extends LitElement {
 
     .quota-bar-bg {
       height: 8px;
-      background: rgba(255, 255, 255, 0.1);
+      background: var(--bg-muted, rgba(255, 255, 255, 0.1));
       border-radius: 4px;
       overflow: hidden;
     }
 
     .quota-bar-fill {
       height: 100%;
-      background: #3b82f6;
+      background: var(--zui-primary, #3b82f6);
       border-radius: 4px;
       transition: width 0.3s ease;
     }
@@ -168,7 +168,7 @@ export class ZuiStorageCheck extends LitElement {
                 </div>
               </div>
 
-              <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px;">
+              <div style="border-top: 1px solid var(--card-border, rgba(255,255,255,0.1)); padding-top: 12px;">
                 <div class="quota-text" style="margin-bottom: 8px;">
                   <span>Quota Usage</span>
                   <span>${this._formatBytes(this._quota.quota)} Max</span>

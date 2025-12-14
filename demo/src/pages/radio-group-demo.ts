@@ -1,75 +1,118 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import '@deepverse/zero-ui/radio-group';
+import '../components/demo-page';
+import '../components/demo-example';
 
 @customElement('radio-group-demo')
 export class RadioGroupDemo extends LitElement {
   @state() private _value1 = 'option1';
   @state() private _value2 = 'vertical1';
 
-  static styles = css`
-    :host {
-      display: block;
-      padding: 40px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 30px;
-      background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .section {
-      margin-bottom: 50px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 16px;
-      padding: 30px;
-    }
-
-    h2 {
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      color: var(--text-main);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding-bottom: 10px;
-    }
-
-    .demo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 30px;
-    }
-
-    .demo-item {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .code-block {
-      background: rgba(0, 0, 0, 0.3);
-      padding: 15px;
-      border-radius: 8px;
-      font-family: monospace;
-      font-size: 0.9rem;
-      color: #a5b4fc;
-      margin-top: 10px;
-    }
-  `;
+  /* No custom styles needed */
 
   render() {
-    return html`
-      <h1>Radio Group</h1>
+    const properties = [
+      { name: 'value', type: 'string', default: "''", description: 'Currently selected value.' },
+      { name: 'label', type: 'string', default: "''", description: 'Label for the radio group.' },
+      { name: 'orientation', type: "'horizontal' | 'vertical'", default: "'vertical'", description: 'Layout orientation.' },
+      { name: 'disabled', type: 'boolean', default: 'false', description: 'Disable the group.' },
+    ];
 
-      <div class="section">
-        <h2>Horizontal Layout</h2>
-        <div class="demo-grid">
-          <div class="demo-item">
+    const basicHtml = `<zui-radio-group 
+  label="Select Plan" 
+  orientation="horizontal"
+  .value="\${value}"
+  @change="\${handleChange}"
+>
+  <zui-radio value="option1">Basic</zui-radio>
+  <zui-radio value="option2">Pro</zui-radio>
+  <zui-radio value="option3">Enterprise</zui-radio>
+</zui-radio-group>`;
+
+    const verticalHtml = `<zui-radio-group 
+  label="Choose Preference" 
+  orientation="vertical"
+  .value="\${value}"
+>
+  <zui-radio value="a">Option A</zui-radio>
+  <zui-radio value="b">Option B</zui-radio>
+  <zui-radio value="c" disabled>Option C (Disabled)</zui-radio>
+</zui-radio-group>`;
+
+    const basicReact = `import { ZuiRadioGroup, ZuiRadio } from '@deepverse/zero-ui/react';
+
+function App() {
+  const [value, setValue] = useState('option1');
+  return (
+    <ZuiRadioGroup 
+      label="Select Plan" 
+      orientation="horizontal"
+      value={value}
+      onZuiChange={(e) => setValue(e.detail.value)}
+    >
+      <ZuiRadio value="option1">Basic</ZuiRadio>
+      <ZuiRadio value="option2">Pro</ZuiRadio>
+      <ZuiRadio value="option3">Enterprise</ZuiRadio>
+    </ZuiRadioGroup>
+  );
+}`;
+
+    const basicAngular = `import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  template: \`
+    <zui-radio-group 
+      label="Select Plan"
+      orientation="horizontal" 
+      [value]="value" 
+      (change)="handleChange($event)">
+      <zui-radio value="option1">Basic</zui-radio>
+      <zui-radio value="option2">Pro</zui-radio>
+      <zui-radio value="option3">Enterprise</zui-radio>
+    </zui-radio-group>
+  \`
+})
+export class AppComponent {
+  value = 'option1';
+  handleChange(e: any) {
+    this.value = e.detail.value;
+  }
+}`;
+
+    const basicVue = `<template>
+  <zui-radio-group 
+    label="Select Plan" 
+    orientation="horizontal"
+    v-model="value"
+  >
+    <zui-radio value="option1">Basic</zui-radio>
+    <zui-radio value="option2">Pro</zui-radio>
+    <zui-radio value="option3">Enterprise</zui-radio>
+  </zui-radio-group>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+const value = ref('option1');
+</script>`;
+
+    return html`
+      <demo-page
+        name="Radio Group"
+        description="Radio buttons allow the user to select one option from a set."
+        .properties=${properties}
+      >
+        <demo-example
+          header="Horizontal Layout"
+          description="Radio items arranged horizontally."
+          .html=${basicHtml}
+          .react=${basicReact}
+          .angular=${basicAngular}
+          .vue=${basicVue}
+        >
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
             <zui-radio-group 
               label="Select Plan" 
               orientation="horizontal"
@@ -80,15 +123,19 @@ export class RadioGroupDemo extends LitElement {
               <zui-radio value="option2">Pro</zui-radio>
               <zui-radio value="option3">Enterprise</zui-radio>
             </zui-radio-group>
-            <div class="code-block">Selected: ${this._value1}</div>
+            <div>Selected: ${this._value1}</div>
           </div>
-        </div>
-      </div>
+        </demo-example>
 
-      <div class="section">
-        <h2>Vertical Layout</h2>
-        <div class="demo-grid">
-          <div class="demo-item">
+        <demo-example
+          header="Vertical Layout"
+          description="Radio items arranged vertically, with disabled options."
+          .html=${verticalHtml}
+          .react=${basicReact}
+          .angular=${basicAngular}
+          .vue=${basicVue}
+        >
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
             <zui-radio-group 
               label="Choose Preference" 
               orientation="vertical"
@@ -99,10 +146,10 @@ export class RadioGroupDemo extends LitElement {
               <zui-radio value="vertical2">Option B</zui-radio>
               <zui-radio value="vertical3" disabled>Option C (Disabled)</zui-radio>
             </zui-radio-group>
-            <div class="code-block">Selected: ${this._value2}</div>
+            <div>Selected: ${this._value2}</div>
           </div>
-        </div>
-      </div>
+        </demo-example>
+      </demo-page>
     `;
   }
 }

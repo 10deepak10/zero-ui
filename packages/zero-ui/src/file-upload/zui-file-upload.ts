@@ -12,29 +12,29 @@ export class ZuiFileUpload extends LitElement {
       display: block;
       
       /* Color variables */
-      --zui-border-color: #e5e7eb;
-      --zui-border-color-hover: #3b82f6;
-      --zui-border-color-loading: #3b82f6;
+      --zui-border-color: var(--card-border, #e5e7eb);
+      --zui-border-color-hover: var(--zui-primary, #3b82f6);
+      --zui-border-color-loading: var(--zui-primary, #3b82f6);
       --zui-border-color-success: #10b981;
       --zui-border-color-error: #ef4444;
       
-      --zui-bg-color: #ffffff;
-      --zui-bg-color-loading: #eff6ff;
-      --zui-bg-color-success: #ecfdf5;
-      --zui-bg-color-error: #fef2f2;
+      --zui-bg-color: var(--card-bg, #ffffff);
+      --zui-bg-color-loading: var(--bg-muted, #eff6ff);
+      --zui-bg-color-success: rgba(16, 185, 129, 0.1);
+      --zui-bg-color-error: rgba(239, 68, 68, 0.1);
       
-      --zui-icon-bg: #f0f9ff;
-      --zui-icon-bg-alt: #f3f4f6;
-      --zui-icon-color: #3b82f6;
+      --zui-icon-bg: var(--bg-muted, #f0f9ff);
+      --zui-icon-bg-alt: var(--bg-hover, #f3f4f6);
+      --zui-icon-color: var(--zui-primary, #3b82f6);
       
-      --zui-text-primary: #111827;
-      --zui-text-secondary: #6b7280;
-      --zui-link-color: #3b82f6;
+      --zui-text-primary: var(--text-main, #111827);
+      --zui-text-secondary: var(--text-muted, #6b7280);
+      --zui-link-color: var(--zui-primary, #3b82f6);
       --zui-error-color: #ef4444;
       
-      --zui-file-bg: #ffffff;
-      --zui-progress-bg: #e5e7eb;
-      --zui-progress-bar: #3b82f6;
+      --zui-file-bg: var(--bg-muted, #f9fafb);
+      --zui-progress-bg: var(--card-border, #e5e7eb);
+      --zui-progress-bar: var(--zui-primary, #3b82f6);
       
       /* Spacing variables */
       --zui-padding: 32px;

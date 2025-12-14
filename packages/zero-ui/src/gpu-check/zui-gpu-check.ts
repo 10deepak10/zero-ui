@@ -12,8 +12,8 @@ export class ZuiGpuCheck extends LitElement {
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--card-bg, rgba(255, 255, 255, 0.03));
+      border: 1px solid var(--card-border, rgba(255, 255, 255, 0.1));
       border-radius: 12px;
       padding: 16px;
     }
@@ -37,7 +37,7 @@ export class ZuiGpuCheck extends LitElement {
       justify-content: space-between;
       align-items: center;
       padding-bottom: 8px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid var(--card-border, rgba(255, 255, 255, 0.05));
     }
 
     .info-item:last-child {

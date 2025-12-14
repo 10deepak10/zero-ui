@@ -22,15 +22,15 @@ export class ZuiTextEditor extends LitElement {
     }
 
     .editor-container:focus-within {
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 1px #3b82f6;
+      border-color: var(--zui-primary, #3b82f6);
+      box-shadow: 0 0 0 1px var(--zui-primary, #3b82f6);
     }
 
     .toolbar {
       display: flex;
       gap: 4px;
       padding: 8px;
-      background: rgba(0, 0, 0, 0.2);
+      background: var(--bg-muted, rgba(0, 0, 0, 0.2));
       border-bottom: 1px solid var(--card-border);
       flex-wrap: wrap;
     }
@@ -64,13 +64,13 @@ export class ZuiTextEditor extends LitElement {
     }
 
     button:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: var(--bg-hover, rgba(255, 255, 255, 0.1));
       color: var(--text-main);
     }
 
     button.active {
-      background: rgba(59, 130, 246, 0.2);
-      color: #3b82f6;
+      background: var(--link-active-bg, rgba(59, 130, 246, 0.2));
+      color: var(--zui-primary, #3b82f6);
     }
 
     .content-area {
@@ -94,7 +94,7 @@ export class ZuiTextEditor extends LitElement {
     .content-area h2 { font-size: 1.5em; margin: 0.5em 0; }
     .content-area p { margin: 0.5em 0; }
     .content-area ul, .content-area ol { margin-left: 1.5em; }
-    .content-area a { color: #3b82f6; text-decoration: underline; }
+      color: var(--link-color, #3b82f6); text-decoration: underline; }
     .content-area blockquote {
       border-left: 3px solid var(--text-muted);
       padding-left: 1rem;

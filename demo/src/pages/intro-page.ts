@@ -124,16 +124,18 @@ export class IntroPage extends LitElement {
     }
 
     .btn-secondary {
-      background: rgba(255,255,255,0.05);
-      border: 2px solid rgba(255,255,255,0.1);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
       backdrop-filter: blur(10px);
-      color: #fff;
+      color: var(--text-main);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
 
     .btn-secondary:hover {
-      background: rgba(255,255,255,0.1);
-      border-color: rgba(255,255,255,0.2);
+      background: var(--glass-bg);
+      border-color: var(--glass-border);
       transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
     }
 
     .features {
@@ -207,6 +209,12 @@ export class IntroPage extends LitElement {
 
   firstUpdated() {
     this.initCanvas();
+  }
+
+  updated(changedProperties: Map<string, any>) {
+    if (changedProperties.has('theme')) {
+      this.initCanvas();
+    }
   }
 
   initCanvas() {
@@ -407,6 +415,12 @@ export class IntroPage extends LitElement {
     this.initCanvas();
   }
 
+  private _navigateTo(e: Event, path: string) {
+    e.preventDefault();
+    window.history.pushState({}, '', path);
+    window.dispatchEvent(new PopStateEvent('popstate'));
+  }
+
   render() {
     return html`
       <header>
@@ -440,8 +454,9 @@ export class IntroPage extends LitElement {
         </p>
 
         <div class="cta-buttons">
-          <button class="btn btn-primary">Get Started</button>
-          <button class="btn btn-secondary">Documentation</button>
+        <button class="btn btn-secondary" @click=${(e: Event) => this._navigateTo(e, '/json-formatter')}>JSON Formatter</button>
+        <button class="btn btn-primary" @click=${(e: Event) => this._navigateTo(e, '/sandbox')}>Sandbox</button>
+        <button class="btn btn-secondary" @click=${(e: Event) => this._navigateTo(e, '/theme-generator')}>Theme Generator</button>
         </div>
 
         <div class="features">
