@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, type PropertyValues } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 
 import './pages/intro-page';
@@ -326,12 +326,99 @@ export class DemoApp extends LitElement {
     this.removeEventListener('theme-toggle', this._handleThemeToggle as EventListener);
   }
 
+  updated(changedProperties: PropertyValues) {
+    if (changedProperties.has('_route')) {
+      const main = this.shadowRoot?.querySelector('main');
+      if (main) {
+        main.scrollTop = 0;
+      }
+      this._updateMetadata();
+    }
+  }
+
   @state() private _sidebarOpen = false;
 
   private _handleThemeToggle = () => {
     this._theme = this._theme === 'dark' ? 'light' : 'dark';
     this.setAttribute('theme', this._theme);
   };
+
+  private _updateMetadata() {
+    const route = this._route;
+    const baseTitle = 'Zero UI';
+    const metadata: Record<string, { title: string; description: string }> = {
+      '/': { title: 'Introduction', description: 'A lightweight, performant, and customizable web component library.' },
+      '/button': { title: 'Button', description: 'Button component documentation and examples.' },
+      '/card': { title: 'Card', description: 'Card component for displaying content in a box.' },
+      '/split': { title: 'Split', description: 'Split pane layout component.' },
+      '/tabs': { title: 'Tabs', description: 'Tabs component for organizing content.' },
+      '/dropdown': { title: 'Dropdown', description: 'Dropdown menu component.' },
+      '/file-upload': { title: 'File Upload', description: 'File upload component with drag and drop support.' },
+      '/otp-input': { title: 'OTP Input', description: 'One-time password input component.' },
+      '/phone-input': { title: 'Phone Input', description: 'International phone number input component.' },
+      '/star-rating': { title: 'Star Rating', description: 'Star rating component.' },
+      '/select': { title: 'Select', description: 'Select dropdown component.' },
+      '/checkbox': { title: 'Checkbox', description: 'Checkbox component.' },
+      '/radio-group': { title: 'Radio Group', description: 'Radio group component.' },
+      '/toggle': { title: 'Toggle', description: 'Toggle switch component.' },
+      '/slider': { title: 'Slider', description: 'Range slider component.' },
+      '/os-check': { title: 'OS Check', description: 'Detect user operating system.' },
+      '/browser-check': { title: 'Browser Check', description: 'Detect user browser information.' },
+      '/screen-check': { title: 'Screen Check', description: 'Analyze screen properties.' },
+      '/storage-check': { title: 'Storage Check', description: 'Check available storage.' },
+      '/gpu-check': { title: 'GPU Check', description: 'Analyze GPU capabilities.' },
+      '/network-check': { title: 'Network Check', description: 'Check network status and speed.' },
+      '/theme-check': { title: 'Theme Check', description: 'Detect system theme preferences.' },
+      '/battery-check': { title: 'Battery Check', description: 'Check battery status.' },
+      '/camera-check': { title: 'Camera Check', description: 'Test camera and video input.' },
+      '/mic-check': { title: 'Microphone Check', description: 'Test microphone audio input.' },
+      '/geolocation-check': { title: 'Geolocation Check', description: 'Test geolocation services.' },
+      '/notification-check': { title: 'Notification Check', description: 'Test system notifications.' },
+      '/clipboard-check': { title: 'Clipboard Check', description: 'Test clipboard API interactions.' },
+      '/extension-check': { title: 'Extension Check', description: 'Check for installed browser extensions.' },
+      '/proctoring': { title: 'Proctoring', description: 'Proctoring session capabilities.' },
+      '/logger': { title: 'Logger', description: 'Application logging utility.' },
+      '/text-editor': { title: 'Text Editor', description: 'Rich text editor component.' },
+      '/code-editor': { title: 'Code Editor', description: 'Code editor component.' },
+      '/event-bus': { title: 'Event Bus', description: 'Event bus utility for messaging.' },
+      '/theme-generator': { title: 'Theme Generator', description: 'Generate custom themes for your app.' },
+      '/json-formatter': { title: 'JSON Formatter', description: 'Format and prettify JSON data.' },
+      '/theme-service': { title: 'Theme Service', description: 'Manage application theming.' },
+      '/sandbox': { title: 'Sandbox', description: 'Experimental sandbox for testing.' },
+    };
+
+    const data = metadata[route] || metadata['/'];
+    document.title = `${data.title} - ${baseTitle}`;
+
+    // Update meta description
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', data.description);
+
+    // Update Open Graph tags
+    this._updateMetaTag('property', 'og:title', `${data.title} - ${baseTitle}`);
+    this._updateMetaTag('property', 'og:description', data.description);
+    this._updateMetaTag('property', 'og:url', window.location.href);
+
+    // Update Twitter tags
+    this._updateMetaTag('property', 'twitter:title', `${data.title} - ${baseTitle}`);
+    this._updateMetaTag('property', 'twitter:description', data.description);
+    this._updateMetaTag('property', 'twitter:url', window.location.href);
+  }
+
+  private _updateMetaTag(attributeName: string, attributeValue: string, content: string) {
+    let element = document.querySelector(`meta[${attributeName}="${attributeValue}"]`);
+    if (!element) {
+      element = document.createElement('meta');
+      element.setAttribute(attributeName, attributeValue);
+      document.head.appendChild(element);
+    }
+    element.setAttribute('content', content);
+  }
 
   private _toggleSidebar() {
     this._sidebarOpen = !this._sidebarOpen;
