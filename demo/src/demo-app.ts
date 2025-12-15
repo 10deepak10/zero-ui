@@ -49,12 +49,14 @@ export class DemoApp extends LitElement {
       --bg-muted: rgba(255, 255, 255, 0.03);
       --bg-hover: rgba(255, 255, 255, 0.05);
 
+
       display: flex;
       height: 100vh;
       font-family: 'Segoe UI', system-ui, sans-serif;
       color: var(--text-main);
       background: var(--bg-body);
       transition: background 0.3s ease, color 0.3s ease;
+      -webkit-tap-highlight-color: transparent;
       --gradient-text: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
       
       @media (max-width: 768px) {

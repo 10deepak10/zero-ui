@@ -65,6 +65,7 @@ export class ZuiDropdown extends LitElement {
     document.addEventListener('click', this._handleDocumentClick);
     document.addEventListener('keydown', this._handleKeyDown);
     this.addEventListener('zui-dropdown-close', this._handleCloseRequest);
+    this.addEventListener('click', this._handleContentClick);
   }
 
   disconnectedCallback() {
@@ -72,8 +73,40 @@ export class ZuiDropdown extends LitElement {
     document.removeEventListener('click', this._handleDocumentClick);
     document.removeEventListener('keydown', this._handleKeyDown);
     this.removeEventListener('zui-dropdown-close', this._handleCloseRequest);
+    this.removeEventListener('click', this._handleContentClick);
     this._stopPositionTracking();
   }
+
+  private _handleContentClick = (e: MouseEvent) => {
+    if (!this.open) return;
+
+    // Check if the click target is an input or interactive element that shouldn't close the dropdown
+    const path = e.composedPath();
+    const target = path[0] as HTMLElement;
+
+    // Don't close if clicking input or textarea (e.g. search box)
+    if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
+      return;
+    }
+
+    // Don't close if explicit "keep-open" attribute is present
+    if (target.hasAttribute('data-keep-open') || target.closest('[data-keep-open]')) {
+      return;
+    }
+
+    // Don't close if clicking independent scrollbar or container background
+    // Logic: if click is on a "item" or "action", close.
+    // For now, simpler heuristic: if it's NOT the trigger, close it. 
+    // Wait, the event listener is on `this`. 
+    // We want to avoid closing if clicking the trigger (handled by toggle) or the whitespace of the panel?
+    // User request: "if item got click".
+
+    // Check if click is inside the content area
+    const content = this.shadowRoot?.querySelector('.content');
+    if (path.includes(content as EventTarget)) {
+      this.close();
+    }
+  };
 
   private _handleCloseRequest = () => {
     this.close();
