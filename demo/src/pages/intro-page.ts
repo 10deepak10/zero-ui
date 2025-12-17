@@ -67,6 +67,9 @@ export class IntroPage extends LitElement {
       height: 100%;
       display: block;
     }
+    canvas::selection {
+      background: transparent;
+    }
 
     .content {
       position: relative;

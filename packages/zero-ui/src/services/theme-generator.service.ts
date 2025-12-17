@@ -244,12 +244,16 @@ export class ThemeGeneratorService {
     }
 
     let lightText = darks.length > 0 ? darks[0].hex : '#0f172a';
-    
+    lightText = this.ensureContrast(lightText, lightSurface);
+
     // Primary for Light: Vibrant, distinct from bg. prefer mid-range luminance.
     const sortedBySat = [...analyzed].sort((a, b) => b.hsl.s - a.hsl.s);
     // Luminance between 0.15 and 0.7
     const vibrant = sortedBySat.find(c => c.lum > 0.15 && c.lum < 0.7) || analyzed.find(c => c.lum > 0.15 && c.lum < 0.7) || sortedBySat[0];
-    const lightPrimary = vibrant ? vibrant.hex : '#3b82f6';
+    let lightPrimary = vibrant ? vibrant.hex : '#3b82f6';
+    // Ensure primary contrast with White (for buttons)
+    lightPrimary = this.ensureContrast(lightPrimary, '#ffffff');
+
     const lightSecondary = sortedBySat.find(c => c.hex !== lightPrimary)?.hex || this.rotateHue(lightPrimary, 30);
 
     // --- Dark Palette ---
@@ -270,6 +274,7 @@ export class ThemeGeneratorService {
     }
 
     let darkText = lights.length > 0 ? lights[0].hex : '#f1f5f9';
+    darkText = this.ensureContrast(darkText, darkSurface);
 
     // Primary for Dark
     let darkPrimary = lightPrimary;
@@ -277,6 +282,12 @@ export class ThemeGeneratorService {
     if (pLum < 0.25) {
         darkPrimary = this.lighten(darkPrimary, 20);
     }
+    // Ensure contrast with White (assuming buttons are white text)
+    // Note: Dark mode primaries often use black text if they are light. 
+    // But if we enforce white text, we must darken.
+    // If we assume standard accessible patterns where onPrimary switches, checking against white might force it dark.
+    // However, per user request "primary to text majory in btns", and demo uses white text:
+    darkPrimary = this.ensureContrast(darkPrimary, '#ffffff');
     
     let darkSecondary = lightSecondary;
     
@@ -301,6 +312,30 @@ export class ThemeGeneratorService {
             }
         }
     };
+  }
+
+  static ensureContrast(color: string, against: string, minRatio: number = 4.5): string {
+    let current = color;
+    let ratio = this.getContrastRatio(current, against);
+    let loops = 0;
+
+    const rgbAgainst = this.hexToRgb(against);
+    if (!rgbAgainst) return color;
+
+    const againstLum = this.getLuminance(rgbAgainst.r, rgbAgainst.g, rgbAgainst.b);
+    const darken = againstLum > 0.5; // If background is light, we darken the foreground
+
+    while (ratio < minRatio && loops < 20) {
+      if (darken) {
+        current = this.darken(current, 5);
+      } else {
+        current = this.lighten(current, 5);
+      }
+      ratio = this.getContrastRatio(current, against);
+      loops++;
+    }
+
+    return current;
   }
 
   static generateCssVariables(theme: ThemeConfig, mode: 'light' | 'dark' = 'light'): string {

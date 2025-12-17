@@ -117,9 +117,19 @@ export class ZuiThemeGenerator extends LitElement {
     
     .color-row {
         display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 12px;
+    }
+    .color-row .color-label {
+        display: flex;
         align-items: center;
         gap: 12px;
-        margin-bottom: 8px;
+    }
+    .color-input {
+        display: flex;
+        align-items: center;
+        gap: 12px;
     }
     
     input[type="color"] {
@@ -358,6 +368,11 @@ ${this._generatedCss}
 
       return html`
         <div class="color-row">
+        <div class="color-label">
+            <span style="min-width: 80px; font-size: 0.9rem;">${label}</span>
+            ${contrastMsg ? html`<span style="color: var(--color-danger, #ef4444); font-size: 0.75rem; margin-left: auto;">${contrastMsg}</span>` : ''}
+        </div>
+        <div class="color-input">
             <input 
                 type="color" 
                 .value=${value}
@@ -368,8 +383,8 @@ ${this._generatedCss}
                 .value=${value}
                 @change=${(e: Event) => this._handleColorChange(key, (e.target as HTMLInputElement).value)}
             >
-            <span style="min-width: 80px; font-size: 0.9rem;">${label}</span>
-            ${contrastMsg ? html`<span style="color: var(--color-danger, #ef4444); font-size: 0.75rem; margin-left: auto;">${contrastMsg}</span>` : ''}
+        </div>
+            
         </div>
       `;
   }
