@@ -107,6 +107,45 @@ export class ZuiTextEditor extends LitElement {
       height: 16px;
       fill: currentColor;
     }
+    /* Toolbar Specifics */
+    select {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 4px 8px;
+      border-radius: 4px;
+      height: 32px;
+      outline: none;
+      cursor: pointer;
+    }
+    
+    select:hover {
+        background: var(--bg-hover, rgba(255, 255, 255, 0.1));
+    }
+
+    option {
+        background: var(--card-bg);
+        color: var(--text-main);
+    }
+    
+    input[type="color"] {
+        -webkit-appearance: none;
+        border: none;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        background: transparent;
+        cursor: pointer;
+    }
+    input[type="color"]::-webkit-color-swatch-wrapper {
+        padding: 4px;
+    }
+    input[type="color"]::-webkit-color-swatch {
+        border-radius: 4px;
+        border: 1px solid var(--card-border);
+    }
+
+    /* ... existing styles ... */
   `;
 
   @property({ type: String }) placeholder = 'Type something...';
@@ -114,6 +153,7 @@ export class ZuiTextEditor extends LitElement {
   
   @query('.content-area') private _editor!: HTMLDivElement;
   @state() private _activeFormats: Set<string> = new Set();
+  @state() private _currentBlock: string = 'p';
 
   protected firstUpdated() {
     if (this.value) {
@@ -135,7 +175,7 @@ export class ZuiTextEditor extends LitElement {
   };
 
   private _checkFormats() {
-    const formats = ['bold', 'italic', 'underline', 'strikeThrough', 'insertUnorderedList', 'insertOrderedList'];
+    const formats = ['bold', 'italic', 'underline', 'strikeThrough', 'insertUnorderedList', 'insertOrderedList', 'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'];
     const newFormats = new Set<string>();
     
     formats.forEach(format => {
@@ -145,6 +185,23 @@ export class ZuiTextEditor extends LitElement {
     });
 
     this._activeFormats = newFormats;
+    this._checkBlock();
+  }
+
+  private _checkBlock() {
+    const node = document.getSelection()?.anchorNode;
+    if (node) {
+      let parent = (node.nodeType === 3 ? node.parentElement : node) as HTMLElement;
+      while (parent && parent !== this._editor) {
+        const tag = parent.tagName.toLowerCase();
+        if (['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'div'].includes(tag)) {
+          this._currentBlock = tag;
+          return;
+        }
+        parent = parent.parentElement as HTMLElement;
+      }
+    }
+    this._currentBlock = 'p';
   }
 
   private _execCmd(command: string, value: string | undefined = undefined) {
@@ -162,7 +219,7 @@ export class ZuiTextEditor extends LitElement {
     const html = this._editor.innerHTML;
     this.value = html;
     this.dispatchEvent(new CustomEvent('change', {
-      detail: { html },
+      detail: { html, value: html }, // Standardizing on value, keeping html for compat
       bubbles: true,
       composed: true
     }));
@@ -177,7 +234,13 @@ export class ZuiTextEditor extends LitElement {
     ul: html`<svg viewBox="0 0 24 24"><path d="M4 10.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm0-6c-.83 0-1.5.67-1.5 1.5S3.17 7.5 4 7.5 5.5 6.83 5.5 6 4.83 4.5 4 4.5zm0 12c-.83 0-1.5.68-1.5 1.5s.68 1.5 1.5 1.5 1.5-.68 1.5-1.5-.67-1.5-1.5-1.5zM7 19h14v-2H7v2zm0-6h14v-2H7v2zm0-8v2h14V5H7z"/></svg>`,
     ol: html`<svg viewBox="0 0 24 24"><path d="M2 17h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2v1zm5-6v2h14V5H7zm0 14h14v-2H7v2zm0-6h14v-2H7v2z"/></svg>`,
     link: html`<svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>`,
-    clean: html`<svg viewBox="0 0 24 24"><path d="M19.89 5.55l-5.44-5.44c-.39-.39-1.02-.39-1.41 0L2.1 11.05c-.39.39-.39 1.02 0 1.41L11.06 21.4c.39.39 1.02.39 1.41 0l5.44-5.44c1.15.54 2.53.25 3.39-.61 1.17-1.17 1.17-3.07 0-4.24-.54-.54-1.25-.83-1.98-.86.13-.57-.03-1.18-.43-1.59zM15 20L5 10l8.94-8.94L20 7.17 15 20z"/></svg>`
+    clean: html`<svg viewBox="0 0 24 24"><path d="M19.89 5.55l-5.44-5.44c-.39-.39-1.02-.39-1.41 0L2.1 11.05c-.39.39-.39 1.02 0 1.41L11.06 21.4c.39.39 1.02.39 1.41 0l5.44-5.44c1.15.54 2.53.25 3.39-.61 1.17-1.17 1.17-3.07 0-4.24-.54-.54-1.25-.83-1.98-.86.13-.57-.03-1.18-.43-1.59zM15 20L5 10l8.94-8.94L20 7.17 15 20z"/></svg>`,
+    undo: html`<svg viewBox="0 0 24 24"><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg>`,
+    redo: html`<svg viewBox="0 0 24 24"><path d="M18.4 10.6C16.55 9 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z"/></svg>`,
+    alignLeft: html`<svg viewBox="0 0 24 24"><path d="M15 15H3v2h12v-2zm0-8H3v2h12V7zM3 13h18v-2H3v2zm0 8h18v-2H3v2zM3 3v2h18V3H3z"/></svg>`,
+    alignCenter: html`<svg viewBox="0 0 24 24"><path d="M7 15v2h10v-2H7zm-4 6h18v-2H3v2zm0-8h18v-2H3v2zm4-6v2h10V7H7zM3 3v2h18V3H3z"/></svg>`,
+    alignRight: html`<svg viewBox="0 0 24 24"><path d="M3 21h18v-2H3v2zm6-4h12v-2H9v2zm-6-4h18v-2H3v2zm6-4h12V7H9v2zM3 3v2h18V3H3z"/></svg>`,
+    alignJustify: html`<svg viewBox="0 0 24 24"><path d="M3 21h18v-2H3v2zm0-4h18v-2H3v2zm0-4h18v-2H3v2zm0-4h18V7H3v2zm0-6v2h18V3H3z"/></svg>`
   };
 
   private _btn(cmd: string, icon: any, activeCmd: string = cmd) {
@@ -185,6 +248,7 @@ export class ZuiTextEditor extends LitElement {
       <button 
         class="${this._activeFormats.has(activeCmd) ? 'active' : ''}"
         @mousedown=${(e: Event) => { e.preventDefault(); this._execCmd(cmd); }}
+        title="${cmd}"
       >
         ${icon}
       </button>
@@ -195,6 +259,36 @@ export class ZuiTextEditor extends LitElement {
     return html`
       <div class="editor-container">
         <div class="toolbar">
+
+          <div class="toolbar-group">
+             <button @mousedown=${(e: Event) => { e.preventDefault(); this._execCmd('undo'); }} title="Undo">${this._icons.undo}</button>
+             <button @mousedown=${(e: Event) => { e.preventDefault(); this._execCmd('redo'); }} title="Redo">${this._icons.redo}</button>
+          </div>
+
+          <div class="toolbar-group">
+            <select @change=${(e: Event) => {
+        const target = e.target as HTMLSelectElement;
+        this._execCmd('formatBlock', target.value);
+      }} .value=${this._currentBlock}>
+                <option value="p">Normal</option>
+                <option value="h1">Heading 1</option>
+                <option value="h2">Heading 2</option>
+                <option value="h3">Heading 3</option>
+                <option value="h4">Heading 4</option>
+                <option value="h5">Heading 5</option>
+                <option value="h6">Heading 6</option>
+            </select>
+          </div>
+
+          <div class="toolbar-group">
+             <input type="color" 
+                title="Text Color"
+                @input=${(e: Event) => {
+        this._execCmd('foreColor', (e.target as HTMLInputElement).value);
+      }}
+             >
+          </div>
+
           <div class="toolbar-group">
             ${this._btn('bold', this._icons.bold)}
             ${this._btn('italic', this._icons.italic)}
@@ -203,8 +297,10 @@ export class ZuiTextEditor extends LitElement {
           </div>
           
           <div class="toolbar-group">
-            ${this._btn('formatBlock', html`<b>H1</b>`, 'h1')}
-            ${this._btn('formatBlock', html`<b>H2</b>`, 'h2')}
+            ${this._btn('justifyLeft', this._icons.alignLeft)}
+            ${this._btn('justifyCenter', this._icons.alignCenter)}
+            ${this._btn('justifyRight', this._icons.alignRight)}
+            ${this._btn('justifyFull', this._icons.alignJustify)}
           </div>
 
           <div class="toolbar-group">
@@ -217,13 +313,13 @@ export class ZuiTextEditor extends LitElement {
                 e.preventDefault();
                 const url = prompt('Enter link URL:');
                 if (url) this._execCmd('createLink', url);
-             }}>
+    }} title="Link">
                ${this._icons.link}
              </button>
              <button @mousedown=${(e: Event) => {
                 e.preventDefault();
                 this._execCmd('removeFormat');
-             }}>
+    }} title="Clear Format">
                ${this._icons.clean}
              </button>
           </div>
