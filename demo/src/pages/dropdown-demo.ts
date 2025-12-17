@@ -76,7 +76,8 @@ export class DropdownDemo extends LitElement {
   </div>
 </zui-dropdown>`;
 
-    const basicReact = `import { ZuiDropdown, ZuiButton } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiDropdown } from '@deepverse/zero-ui/dropdown';
+import { ZuiButton } from '@deepverse/zero-ui/button';
 
 function App() {
   return (

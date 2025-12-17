@@ -30,7 +30,7 @@ export class StarRatingDemo extends LitElement {
   @zui-rating-change="\${handleChange}"
 ></zui-star-rating>`;
 
-    const basicReact = `import { ZuiStarRating } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiStarRating } from '@deepverse/zero-ui/star-rating';
 
 function App() {
   const [value, setValue] = useState(0);

@@ -197,7 +197,7 @@ export class StorageCheckDemo extends LitElement {
 
   render() {
     const basicHtml = `<zui-storage-check></zui-storage-check>`;
-    const basicReact = `import { ZuiStorageCheck } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiStorageCheck } from '@deepverse/zero-ui/storage-check';
 
 function App() {
   return <ZuiStorageCheck />;

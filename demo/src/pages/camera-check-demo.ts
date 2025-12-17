@@ -61,7 +61,7 @@ export class CameraCheckDemo extends LitElement {
 
     const basicHtml = `<zui-camera-check showPreview></zui-camera-check>`;
 
-    const basicReact = `import { ZuiCameraCheck } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiCameraCheck } from '@deepverse/zero-ui/camera-check';
 
 function App() {
   return <ZuiCameraCheck showPreview />;

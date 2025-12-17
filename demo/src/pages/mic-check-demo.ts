@@ -37,7 +37,7 @@ export class MicCheckDemo extends LitElement {
 
     const basicHtml = `<zui-mic-check showVisualizer></zui-mic-check>`;
 
-    const basicReact = `import { ZuiMicCheck } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiMicCheck } from '@deepverse/zero-ui/mic-check';
 
 function App() {
   return <ZuiMicCheck showVisualizer />;

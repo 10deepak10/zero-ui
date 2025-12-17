@@ -30,7 +30,7 @@ export class ToggleDemo extends LitElement {
   @change="\${handleChange}"
 ></zui-toggle>`;
 
-    const basicReact = `import { ZuiToggle } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiToggle } from '@deepverse/zero-ui/toggle';
 
 function App() {
   const [checked, setChecked] = useState(false);

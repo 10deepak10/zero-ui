@@ -70,7 +70,7 @@ export class SplitDemo extends LitElement {
   </zui-split>
 </div>`;
 
-    const basicReact = `import { ZuiSplit } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiSplit } from '@deepverse/zero-ui/split';
 
 function App() {
   return (

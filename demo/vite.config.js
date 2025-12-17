@@ -221,20 +221,7 @@ export default defineConfig({
           "../packages/zero-ui/src/tabs/index.ts"
         ),
       },
-      {
-        find: "@deepverse/zero-ui/theme-provider",
-        replacement: path.resolve(
-          __dirname,
-          "../packages/zero-ui/src/theme-provider/index.ts"
-        ),
-      },
-      {
-        find: "@deepverse/zero-ui/theme-generator",
-        replacement: path.resolve(
-          __dirname,
-          "../packages/zero-ui/src/theme-generator/index.ts"
-        ),
-      },
+
 
       {
         find: "@deepverse/zero-ui/text-editor",
@@ -257,6 +244,44 @@ export default defineConfig({
           "../packages/zero-ui/src/index.ts"
         ),
       },
+    ],
+  },
+  optimizeDeps: {
+    exclude: [
+      "@deepverse/zero-ui/button",
+      "@deepverse/zero-ui/card",
+      "@deepverse/zero-ui/file-upload",
+      "@deepverse/zero-ui/otp-input",
+      "@deepverse/zero-ui/phone-input",
+      "@deepverse/zero-ui/star-rating",
+      "@deepverse/zero-ui/select",
+      "@deepverse/zero-ui/dropdown",
+      "@deepverse/zero-ui/checkbox",
+      "@deepverse/zero-ui/radio-group",
+      "@deepverse/zero-ui/toggle",
+      "@deepverse/zero-ui/slider",
+      "@deepverse/zero-ui/os-check",
+      "@deepverse/zero-ui/browser-check",
+      "@deepverse/zero-ui/screen-check",
+      "@deepverse/zero-ui/storage-check",
+      "@deepverse/zero-ui/gpu-check",
+      "@deepverse/zero-ui/network-check",
+      "@deepverse/zero-ui/battery-check",
+      "@deepverse/zero-ui/camera-check",
+      "@deepverse/zero-ui/theme-check",
+      "@deepverse/zero-ui/mic-check",
+      "@deepverse/zero-ui/geolocation-check",
+      "@deepverse/zero-ui/clipboard-check",
+      "@deepverse/zero-ui/notification-check",
+      "@deepverse/zero-ui/extension-check",
+      "@deepverse/zero-ui/proctoring",
+      "@deepverse/zero-ui/logger",
+      "@deepverse/zero-ui/event-bus",
+      "@deepverse/zero-ui/split",
+      "@deepverse/zero-ui/tabs",
+
+      "@deepverse/zero-ui/text-editor",
+      "@deepverse/zero-ui/code-editor",
     ],
   },
 });

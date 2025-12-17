@@ -33,7 +33,7 @@ export class FileUploadDemo extends LitElement {
   maxSize="2"
 ></zui-file-upload>`;
 
-    const basicReact = `import { ZuiFileUpload } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiFileUpload } from '@deepverse/zero-ui/file-upload';
 
 function App() {
   const handleUpload = (e) => {

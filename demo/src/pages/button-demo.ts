@@ -52,7 +52,7 @@ export class ButtonDemo extends LitElement {
 <zui-button variant="primary">Primary</zui-button>
 <zui-button variant="secondary">Secondary</zui-button>`;
 
-    const basicReact = `import { ZuiButton } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiButton } from '@deepverse/zero-ui/button';
 
 function App() {
   return (

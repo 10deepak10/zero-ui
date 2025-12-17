@@ -40,7 +40,7 @@ export class RadioGroupDemo extends LitElement {
   <zui-radio value="c" disabled>Option C (Disabled)</zui-radio>
 </zui-radio-group>`;
 
-    const basicReact = `import { ZuiRadioGroup, ZuiRadio } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiRadioGroup, ZuiRadio } from '@deepverse/zero-ui/radio-group';
 
 function App() {
   const [value, setValue] = useState('option1');

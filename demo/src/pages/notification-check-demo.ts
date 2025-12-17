@@ -32,7 +32,7 @@ export class NotificationCheckDemo extends LitElement {
 
   render() {
     const basicHtml = `<zui-notification-check></zui-notification-check>`;
-    const basicReact = `import { ZuiNotificationCheck } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiNotificationCheck } from '@deepverse/zero-ui/notification-check';
 
 function App() {
   return <ZuiNotificationCheck />;

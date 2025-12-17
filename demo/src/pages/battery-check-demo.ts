@@ -44,7 +44,7 @@ export class BatteryCheckDemo extends LitElement {
   render() {
     const basicHtml = `<zui-battery-check></zui-battery-check>`;
 
-    const basicReact = `import { ZuiBatteryCheck } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiBatteryCheck } from '@deepverse/zero-ui/battery-check';
 
 function App() {
   return <ZuiBatteryCheck />;

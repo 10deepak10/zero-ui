@@ -39,7 +39,7 @@ export class PhoneInputDemo extends LitElement {
   .allowedCountries="\${['US', 'CA', 'GB']}"
 ></zui-phone-input>`;
 
-    const basicReact = `import { ZuiPhoneInput } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiPhoneInput } from '@deepverse/zero-ui/phone-input';
 
 function App() {
   return (
@@ -75,7 +75,7 @@ export class AppComponent {
 const logChange = (e) => console.log(e.detail);
 </script>`;
 
-    const filteredReact = `import { ZuiPhoneInput } from '@deepverse/zero-ui/react';
+    const filteredReact = `import { ZuiPhoneInput } from '@deepverse/zero-ui/phone-input';
 
 function App() {
   return (
@@ -150,7 +150,7 @@ function App() {
     'IN': /^[6-9]\\d{9}$/
   };
 </script>`}
-          .react=${`import { ZuiPhoneInput } from '@deepverse/zero-ui/react';
+          .react=${`import { ZuiPhoneInput } from '@deepverse/zero-ui/phone-input';
 
 function App() {
   const patterns = {

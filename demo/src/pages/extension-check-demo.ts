@@ -79,7 +79,7 @@ export class ExtensionCheckDemo extends LitElement {
 
   render() {
     const basicHtml = `<zui-extension-check .extensions="\${customExtensions}"></zui-extension-check>`;
-    const basicReact = `import { ZuiExtensionCheck } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiExtensionCheck } from '@deepverse/zero-ui/extension-check';
 
 const extensions = [ ... ]; // See JSON tab for config
 

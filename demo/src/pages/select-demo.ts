@@ -60,7 +60,7 @@ export class SelectDemo extends LitElement {
   @zui-change="\${handleChange}"
 ></zui-select>`;
 
-    const basicReact = `import { ZuiSelect } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiSelect } from '@deepverse/zero-ui/select';
 
 const options = [
   { label: 'Apple', value: 'apple' },
