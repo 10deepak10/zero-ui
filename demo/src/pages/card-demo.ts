@@ -28,7 +28,8 @@ export class CardDemo extends LitElement {
   </div>
 </zui-card>`;
 
-    const basicReact = `import { ZuiCard, ZuiButton } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiCard } from '@deepverse/zero-ui/card';
+import { ZuiButton } from '@deepverse/zero-ui/button';
 
 function App() {
   return (

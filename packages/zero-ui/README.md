@@ -16,43 +16,48 @@ You can import the entire library or individual components. The library is confi
 // Import specific components (Recommended)
 import '@deepverse/zero-ui/button';
 import '@deepverse/zero-ui/card';
-import '@deepverse/zero-ui/upload-box';
+import '@deepverse/zero-ui/code-editor';
 
-// OR Import everything
+// Import services (Granular & Tree-shakeable)
+import { LoggerService } from '@deepverse/zero-ui/services/logger';
+import { BatteryCheckService } from '@deepverse/zero-ui/services/battery';
+
+// OR Import everything (Not recommended for production)
 import '@deepverse/zero-ui';
+
 ```
 
 ## Components
 
-### Button (`<dv-button>`)
+### Button (`<zui-button>`)
 
 A simple button component.
 
 ```html
-<dv-button>Click Me</dv-button>
+<zui-button>Click Me</zui-button>
 ```
 
-### Card (`<dv-card>`)
+### Card (`<zui-card>`)
 
 A container component with shadow and rounded corners.
 
 ```html
-<dv-card>
+<zui-card>
   <h3>Card Title</h3>
   <p>Card content goes here.</p>
-</dv-card>
+</zui-card>
 ```
 
-### Upload Box (`<dv-upload-box>`)
+### File Upload (`<zui-file-upload>`)
 
 A drag-and-drop file upload component.
 
 ```html
-<dv-upload-box 
+<zui-file-upload 
   label="Upload Document" 
   accept=".pdf,.doc,.docx" 
-  maxSize="5"
-></dv-upload-box>
+  max-size="5"
+></zui-file-upload>
 ```
 
 #### Properties
@@ -61,10 +66,9 @@ A drag-and-drop file upload component.
 |----------|------|---------|-------------|
 | `label` | `string` | `''` | Label text shown when idle. |
 | `accept` | `string` | `'*/*'` | File types to accept (e.g., `image/*`, `.pdf`). |
-| `maxSize` | `number` | `10` | Maximum file size in MB. |
+| `max-size` | `number` | `10` | Maximum file size in MB. |
 | `disabled` | `boolean` | `false` | Whether the input is disabled. |
 | `required` | `boolean` | `false` | Whether the input is required in a form. |
-| `progress` | `number` | `0` | Upload progress percentage (0-100). |
 
 #### Events
 
@@ -72,7 +76,6 @@ A drag-and-drop file upload component.
 |-------|--------|-------------|
 | `change` | `{ file: File }` | Fired when a file is selected or dropped. |
 | `error` | `{ message: string }` | Fired when validation fails (e.g., wrong type or size). |
-| `clear` | `undefined` | Fired when the file is cleared. |
 
 ## Framework Integration
 
@@ -81,15 +84,15 @@ A drag-and-drop file upload component.
 The library includes global type declarations, so it works seamlessly with React and TypeScript.
 
 ```tsx
-import '@deepverse/zero-ui/upload-box';
+import '@deepverse/zero-ui/file-upload';
 
 function App() {
   return (
-    <dv-upload-box 
+    <zui-file-upload 
       label="Upload Image" 
       accept="image/*"
-      maxSize="2"
-    ></dv-upload-box>
+      max-size="2"
+    ></zui-file-upload>
   );
 }
 ```
@@ -101,7 +104,7 @@ To use Web Components in Angular, you must add `CUSTOM_ELEMENTS_SCHEMA`.
 1. **Update Module/Component**:
 ```typescript
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import '@deepverse/zero-ui/upload-box';
+import '@deepverse/zero-ui/file-upload';
 
 @Component({
   selector: 'app-root',
@@ -114,5 +117,5 @@ export class AppComponent {}
 
 2. **Use in Template**:
 ```html
-<dv-upload-box label="Upload"></dv-upload-box>
+<zui-file-upload label="Upload"></zui-file-upload>
 ```

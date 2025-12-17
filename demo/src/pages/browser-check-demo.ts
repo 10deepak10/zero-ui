@@ -43,7 +43,7 @@ export class BrowserCheckDemo extends LitElement {
   @browser-detected="\${handleDetection}"
 ></zui-browser-check>`;
 
-    const basicReact = `import { ZuiBrowserCheck } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiBrowserCheck } from '@deepverse/zero-ui/browser-check';
 
 function App() {
   const handleDetection = (e) => {

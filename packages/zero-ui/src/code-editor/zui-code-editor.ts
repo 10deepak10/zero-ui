@@ -2,7 +2,7 @@ import { LitElement, html, css } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { live } from 'lit/directives/live.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { SyntaxHighlighterService } from '../services/index.js';
+import { SyntaxHighlighterService } from '../services/syntax-highlighter.service.js';
 
 @customElement('zui-code-editor')
 export class ZuiCodeEditor extends LitElement {

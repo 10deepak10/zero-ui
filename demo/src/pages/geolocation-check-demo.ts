@@ -32,7 +32,7 @@ export class GeolocationCheckDemo extends LitElement {
 
   render() {
     const basicHtml = `<zui-geolocation-check></zui-geolocation-check>`;
-    const basicReact = `import { ZuiGeolocationCheck } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiGeolocationCheck } from '@deepverse/zero-ui/geolocation-check';
 
 function App() {
   return <ZuiGeolocationCheck />;

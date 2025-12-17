@@ -32,7 +32,7 @@ export class ClipboardCheckDemo extends LitElement {
 
   render() {
     const basicHtml = `<zui-clipboard-check></zui-clipboard-check>`;
-    const basicReact = `import { ZuiClipboardCheck } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiClipboardCheck } from '@deepverse/zero-ui/clipboard-check';
 
 function App() {
   return <ZuiClipboardCheck />;

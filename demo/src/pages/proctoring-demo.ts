@@ -77,7 +77,7 @@ export class ProctoringDemo extends LitElement {
   render() {
     const basicHtml = `<zui-proctoring .config="\${config}"></zui-proctoring>`;
 
-    const basicReact = `import { ZuiProctoring } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiProctoring } from '@deepverse/zero-ui/proctoring';
 
 function App() {
   const config = {

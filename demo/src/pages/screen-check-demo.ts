@@ -65,7 +65,7 @@ export class ScreenCheckDemo extends LitElement {
   live 
   @screen-change="\${handleChange}"
 ></zui-screen-check>`;
-    const liveReact = `import { ZuiScreenCheck } from '@deepverse/zero-ui/react';
+    const liveReact = `import { ZuiScreenCheck } from '@deepverse/zero-ui/screen-check';
 
 function App() {
   const handleScreenChange = (e) => {
@@ -96,7 +96,7 @@ const onScreenChange = (event) => {
 </script>`;
 
     const staticHtml = `<zui-screen-check></zui-screen-check>`;
-    const staticReact = `import { ZuiScreenCheck } from '@deepverse/zero-ui/react';
+    const staticReact = `import { ZuiScreenCheck } from '@deepverse/zero-ui/screen-check';
 
 function App() {
   return <ZuiScreenCheck />;

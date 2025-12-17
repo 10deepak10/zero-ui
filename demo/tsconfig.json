@@ -102,6 +102,9 @@
       ],
       "@deepverse/zero-ui/split": [
         "../packages/zero-ui/src/split/index.ts"
+      ],
+      "@deepverse/zero-ui/text-editor": [
+        "../packages/zero-ui/src/text-editor/index.ts"
       ]
     }
   },

@@ -85,7 +85,8 @@ export class LoggerDemo extends LitElement {
   render() {
     const basicHtml = `<zui-logger></zui-logger>`;
 
-    const basicReact = `import { ZuiLogger, LoggerService } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiLogger } from '@deepverse/zero-ui/logger';
+import { LoggerService } from '@deepverse/zero-ui/services/logger';
 
   function App() {
     const logInfo = () => {

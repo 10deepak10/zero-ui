@@ -36,7 +36,7 @@ export class OtpInputDemo extends LitElement {
   @zui-otp-complete="\${handleComplete}"
 ></zui-otp-input>`;
 
-    const basicReact = `import { ZuiOtpInput } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiOtpInput } from '@deepverse/zero-ui/otp-input';
 
 function App() {
   return (

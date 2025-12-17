@@ -60,7 +60,7 @@ greet(user);`;
   @change="\${handleCodeChange}"
 ></zui-code-editor>`;
 
-    const basicReact = `import { ZuiCodeEditor } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiCodeEditor } from '@deepverse/zero-ui/code-editor';
 
 function App() {
   const [code, setCode] = useState("console.log('Hello');");

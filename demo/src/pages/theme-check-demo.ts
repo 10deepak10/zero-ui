@@ -27,7 +27,7 @@ export class ThemeCheckDemo extends LitElement {
   render() {
     const basicHtml = `<zui-theme-check></zui-theme-check>`;
 
-    const basicReact = `import { ZuiThemeCheck } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiThemeCheck } from '@deepverse/zero-ui/theme-check';
 
 function App() {
   return <ZuiThemeCheck />;

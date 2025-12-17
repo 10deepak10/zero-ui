@@ -127,18 +127,6 @@
       "types": "./dist/event-bus/index.d.ts",
       "default": "./dist/event-bus/index.js"
     },
-    "./theme-provider": {
-      "types": "./dist/theme-provider/index.d.ts",
-      "default": "./dist/theme-provider/index.js"
-    },
-    "./theme-generator": {
-      "types": "./dist/theme-generator/index.d.ts",
-      "default": "./dist/theme-generator/index.js"
-    },
-    "./services": {
-      "types": "./dist/services/index.d.ts",
-      "default": "./dist/services/index.js"
-    },
     "./text-editor": {
       "types": "./dist/text-editor/index.d.ts",
       "default": "./dist/text-editor/index.js"
@@ -150,6 +138,90 @@
     "./tabs": {
       "types": "./dist/tabs/index.d.ts",
       "default": "./dist/tabs/index.js"
+    },
+    "./services": {
+      "types": "./dist/services/index.d.ts",
+      "default": "./dist/services/index.js"
+    },
+    "./services/battery": {
+      "types": "./dist/services/battery.service.d.ts",
+      "default": "./dist/services/battery.service.js"
+    },
+    "./services/browser": {
+      "types": "./dist/services/browser.service.d.ts",
+      "default": "./dist/services/browser.service.js"
+    },
+    "./services/camera": {
+      "types": "./dist/services/camera.service.d.ts",
+      "default": "./dist/services/camera.service.js"
+    },
+    "./services/clipboard": {
+      "types": "./dist/services/clipboard.service.d.ts",
+      "default": "./dist/services/clipboard.service.js"
+    },
+     "./services/event-bus": {
+      "types": "./dist/services/event-bus.service.d.ts",
+      "default": "./dist/services/event-bus.service.js"
+    },
+     "./services/extension": {
+      "types": "./dist/services/extension.service.d.ts",
+      "default": "./dist/services/extension.service.js"
+    },
+     "./services/formatter": {
+      "types": "./dist/services/formatter.service.d.ts",
+      "default": "./dist/services/formatter.service.js"
+    },
+     "./services/geolocation": {
+      "types": "./dist/services/geolocation.service.d.ts",
+      "default": "./dist/services/geolocation.service.js"
+    },
+     "./services/gpu": {
+      "types": "./dist/services/gpu.service.d.ts",
+      "default": "./dist/services/gpu.service.js"
+    },
+     "./services/logger": {
+      "types": "./dist/services/logger.service.d.ts",
+      "default": "./dist/services/logger.service.js"
+    },
+     "./services/mic": {
+      "types": "./dist/services/mic.service.d.ts",
+      "default": "./dist/services/mic.service.js"
+    },
+     "./services/network": {
+      "types": "./dist/services/network.service.d.ts",
+      "default": "./dist/services/network.service.js"
+    },
+     "./services/notification": {
+      "types": "./dist/services/notification.service.d.ts",
+      "default": "./dist/services/notification.service.js"
+    },
+     "./services/os": {
+      "types": "./dist/services/os.service.d.ts",
+      "default": "./dist/services/os.service.js"
+    },
+     "./services/proctoring": {
+      "types": "./dist/services/proctoring.service.d.ts",
+      "default": "./dist/services/proctoring.service.js"
+    },
+     "./services/screen": {
+      "types": "./dist/services/screen.service.d.ts",
+      "default": "./dist/services/screen.service.js"
+    },
+     "./services/storage": {
+      "types": "./dist/services/storage.service.d.ts",
+      "default": "./dist/services/storage.service.js"
+    },
+     "./services/syntax-highlighter": {
+      "types": "./dist/services/syntax-highlighter.service.d.ts",
+      "default": "./dist/services/syntax-highlighter.service.js"
+    },
+     "./services/theme-generator": {
+      "types": "./dist/services/theme-generator.service.d.ts",
+      "default": "./dist/services/theme-generator.service.js"
+    },
+    "./services/theme": {
+      "types": "./dist/services/theme.service.d.ts",
+      "default": "./dist/services/theme.service.js"
     }
   },
   "files": [

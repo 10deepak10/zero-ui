@@ -44,7 +44,7 @@ export class SliderDemo extends LitElement {
   @input="\${handleInput}"
 ></zui-slider>`;
 
-    const basicReact = `import { ZuiSlider } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiSlider } from '@deepverse/zero-ui/slider';
 
 function App() {
   const [value, setValue] = useState(50);

@@ -34,7 +34,7 @@ export class TabsDemo extends LitElement {
   </zui-tab-panel>
 </zui-tabs>`;
 
-    const basicReact = `import { ZuiTabs, ZuiTab, ZuiTabPanel } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiTabs, ZuiTab, ZuiTabPanel } from '@deepverse/zero-ui/tabs';
 
 function App() {
   return (

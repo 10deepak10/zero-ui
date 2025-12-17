@@ -248,8 +248,9 @@ export class ZuiSelect extends LitElement {
     );
   }
 
-  private _handleOptionClick(option: SelectOption) {
+  private _handleOptionClick(e: Event, option: SelectOption) {
     if (this.multiple) {
+      e.stopPropagation();
       const index = this.values.indexOf(option.value);
       if (index > -1) {
         this.values = this.values.filter(v => v !== option.value);
@@ -365,7 +366,7 @@ export class ZuiSelect extends LitElement {
                 return html`
                   <div
                     class="option ${isSelected && !this.multiple ? 'selected' : ''}"
-                    @click=${() => this._handleOptionClick(option)}
+                    @click=${(e: Event) => this._handleOptionClick(e, option)}
                   >
                     ${this.multiple ? html`
                       <div class="checkbox ${isSelected ? 'checked' : ''}">

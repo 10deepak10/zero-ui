@@ -30,7 +30,7 @@ export class CheckboxDemo extends LitElement {
   @change="\${handleChange}"
 ></zui-checkbox>`;
 
-    const basicReact = `import { ZuiCheckbox } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiCheckbox } from '@deepverse/zero-ui/checkbox';
 
 function App() {
   const [checked, setChecked] = useState(false);

@@ -77,7 +77,8 @@ export class EventBusDemo extends LitElement {
   render() {
     const basicHtml = `<zui-event-bus></zui-event-bus>`;
 
-    const basicReact = `import { ZuiEventBus, EventBusService } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiEventBus } from '@deepverse/zero-ui/event-bus';
+import { EventBusService } from '@deepverse/zero-ui/services/event-bus';
 
 function App() {
   const emitEvent = () => {

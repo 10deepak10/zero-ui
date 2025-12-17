@@ -43,7 +43,7 @@ export class OsCheckDemo extends LitElement {
   @os-detected="\${handleDetection}"
 ></zui-os-check>`;
 
-    const basicReact = `import { ZuiOsCheck } from '@deepverse/zero-ui/react';
+    const basicReact = `import { ZuiOsCheck } from '@deepverse/zero-ui/os-check';
 
 function App() {
   const handleDetection = (e) => {
