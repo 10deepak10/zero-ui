@@ -17,7 +17,8 @@ export class ZuiDropdown extends LitElement {
 
     .trigger {
       cursor: pointer;
-      display: inline-block;
+      display: block;
+      width: 100%;
     }
 
     .content {

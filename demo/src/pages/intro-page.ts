@@ -457,7 +457,7 @@ export class IntroPage extends LitElement {
       </div>
 
       <div class="content">
-        <h2 class="tagline">HIGH-PERFORMANCE WEB COMPONENTS</h2>
+        <h1 class="tagline">HIGH-PERFORMANCE WEB COMPONENTS</h1>
 
         <p class="description">
           Zero UI delivers blazing-fast, tree-shakeable components built with Lit. 

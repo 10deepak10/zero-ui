@@ -25,6 +25,7 @@ import './pages/camera-check-demo';
 import './pages/placeholder-demo';
 import './pages/sandbox-demo';
 import './pages/split-demo';
+import './pages/socket-demo';
 
 @customElement('demo-app')
 export class DemoApp extends LitElement {
@@ -387,6 +388,7 @@ export class DemoApp extends LitElement {
       '/json-formatter': { title: 'JSON Formatter', description: 'Format and prettify JSON data.' },
       '/theme-service': { title: 'Theme Service', description: 'Manage application theming.' },
       '/sandbox': { title: 'Sandbox', description: 'Experimental sandbox for testing.' },
+      '/socket-demo': { title: 'Socket Service', description: 'Real-time WebSocket communication demo.' },
     };
 
     const data = metadata[route] || metadata['/'];
@@ -520,6 +522,8 @@ export class DemoApp extends LitElement {
       case '/code-editor':
         import('./pages/code-editor-demo');
         return html`<code-editor-demo></code-editor-demo>`;
+      case '/socket-demo':
+        return html`<socket-demo></socket-demo>`;
       case '/event-bus':
         import('./pages/event-bus-demo');
         return html`<event-bus-demo></event-bus-demo>`;
@@ -658,6 +662,7 @@ export class DemoApp extends LitElement {
             ${this._renderNavLink('/logger', 'Logger')}
             ${this._renderNavLink('/text-editor', 'Text Editor')}
             ${this._renderNavLink('/code-editor', 'Code Editor')}
+            ${this._renderNavLink('/socket-demo', 'Socket Service', true)}
             ${this._renderNavLink('/event-bus', 'Event Bus')}
             ${this._renderNavLink('/theme-service', 'Theme Service')}
           </div>
