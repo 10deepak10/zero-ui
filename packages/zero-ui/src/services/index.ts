@@ -15,6 +15,7 @@ export * from './theme.service.js';
 export * from './event-bus.service.js';
 export * from './theme-generator.service.js';
 export * from './theme-models.js';
+export * from './socket.service.js';
 
 
 // Resolve ambiguities with named exports

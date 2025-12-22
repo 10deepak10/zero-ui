@@ -25,6 +25,7 @@ export * from './mic-check/zui-mic-check.js';
 export * from './geolocation-check/zui-geolocation-check.js';
 export * from './clipboard-check/zui-clipboard-check.js';
 export * from './notification-check/zui-notification-check.js';
+export * from './socket-check/zui-socket-check.js';
 export * from './extension-check/index.js';
 export * from './proctoring/index.js';
 export * from './text-editor/index.js';

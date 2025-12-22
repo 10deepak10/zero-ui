@@ -261,7 +261,7 @@ export class ZuiGeolocationCheck extends LitElement {
         </div>
         <div class="coord-item">
           <div class="coord-label">Speed</div>
-          <div class="coord-value">${speed ? `${speed.toFixed(1)} m/s` : '0 m/s'}</div>
+          <div class="coord-value">${speed ? `${(speed * 3.6).toFixed(1)} km/h` : '0 km/h'}</div>
         </div>
       </div>
 
