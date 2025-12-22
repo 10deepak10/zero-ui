@@ -1,4 +1,4 @@
-import { LitElement, html, css, TemplateResult } from 'lit';
+import { LitElement, html, css, type TemplateResult } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { ZuiSocketService, type ConnectionState, type ZuiSocketMessage } from '../services/socket.service.js';
 import { EventBusService, type EventBusEvent } from '../services/event-bus.service.js';

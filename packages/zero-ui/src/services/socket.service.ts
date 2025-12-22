@@ -192,7 +192,7 @@ export class ZuiSocketService {
     }
   }
 
-  private static _handleOpen(event: Event) {
+  private static _handleOpen(_event: Event) {
     this._state = 'connected';
     this._reconnectAttempts = 0;
     this._notifyStateChange();
@@ -390,7 +390,7 @@ export class ZuiSocketService {
 
     // Echo back after delay
     setTimeout(async () => {
-        let payload = message.payload;
+      // let payload = message.payload;
         
         // If it was sent encrypted, we pretend the server decrypted it, processed it, and re-encrypted the response
         // But for this mock, since we share the key in the static class, we can actually "decrypt" and "encrypt" it back if we wanted.
