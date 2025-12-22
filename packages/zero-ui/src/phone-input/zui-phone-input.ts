@@ -302,6 +302,7 @@ export class ZuiPhoneInput extends LitElement {
       border-right: 1px solid var(--card-border, #d1d5db);
       background: var(--bg-muted, #f9fafb);
       height: 42px;
+      box-sizing:border-box;
       padding-right: 8px; /* Reduce padding to fit content better */
     }
     

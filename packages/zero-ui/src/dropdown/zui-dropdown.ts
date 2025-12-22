@@ -13,6 +13,7 @@ export class ZuiDropdown extends LitElement {
     :host {
       display: inline-block;
       position: relative;
+      width: 100%;
     }
 
     .trigger {
