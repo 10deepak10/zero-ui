@@ -787,7 +787,7 @@ export class ZuiCodeEditor extends LitElement {
 
     // Strategy:
     // 1. Identify start line and end line in Display
-    const startDisplayLine = this._getDisplayLineFromOffset(start);
+    // const startDisplayLine = this._getDisplayLineFromOffset(start);
 
     // Simplification: 
     // For "Select All" case (start=0, end=max), we just copy `this.value`.
@@ -883,24 +883,7 @@ export class ZuiCodeEditor extends LitElement {
     return lines.length - 1;
   }
 
-  private _checkCursorInFold() {
-    if (!this._textarea || this._foldedRegions.size === 0) return;
 
-    const cursor = this._textarea.selectionStart;
-    const displayLineIdx = this._getDisplayLineFromOffset(cursor);
-
-    // Need to find if this display line maps to a real line that is the START of a fold
-    if (displayLineIdx >= 0 && displayLineIdx < this._displayToRealLineMap.length) {
-      const realLine = this._displayToRealLineMap[displayLineIdx];
-      if (this._foldedRegions.has(realLine)) {
-        // Cursor is on a folded line header. Unfold it.
-        this._toggleFold(realLine);
-
-        // We might need to adjust cursor position if text expands? 
-        // But for now, just unfolding makes the hidden text appear below, preserving cursor relative pos.
-      }
-    }
-  }
 
   private _handleScroll() {
     if (this._textarea && this._gutter && this._highlightLayer) {
@@ -1375,7 +1358,7 @@ export class ZuiCodeEditor extends LitElement {
     return html`
       <div class="editor-wrapper">
         <div class="gutter">
-          ${displayLines.map((realLineIndex, i) => {
+          ${displayLines.map((realLineIndex) => {
             const isFoldable = this._foldableRanges.has(realLineIndex);
             const isFolded = this._foldedRegions.has(realLineIndex);
             return html`
