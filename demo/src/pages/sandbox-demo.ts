@@ -8,9 +8,198 @@ import '@deepverse/zero-ui/toggle';
 import '@deepverse/zero-ui/code-editor';
 import '@deepverse/zero-ui/tabs';
 
-const DEFAULT_HTML = '<h1>Hello Sandbox</h1>\n<p>Start editing to see changes!</p>\n<button id="btn">Click Me</button>';
-const DEFAULT_CSS = 'body {\n  font-family: sans-serif;\n  padding: 20px;\n}\n\nh1 {\n  color: #3b82f6;\n}\n\nbutton {\n  padding: 8px 16px;\n  background: #10b981;\n  color: white;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n}';
-const DEFAULT_JS = 'document.getElementById("btn").addEventListener("click", () => {\n  console.log("Button clicked at " + new Date().toLocaleTimeString());\n  EventBus.emit("user:click", { btnId: "btn", time: Date.now() });\n});\n\nconsole.info("Sandbox initialized");\nEventBus.emit("sandbox:init", { ready: true });';
+const DEFAULT_HTML = `
+<div class="layout">
+  <div class="header">
+    <h1>Theming Playground</h1>
+    <p class="subtitle">Paste your generated CSS to see the magic happen!</p>
+  </div>
+
+  <section class="card">
+    <h2>Buttons</h2>
+    <div class="row">
+      <button class="btn btn-primary">Primary Action</button>
+      <button class="btn btn-secondary">Secondary</button>
+      <button class="btn btn-outline">Outline</button>
+      <button class="btn btn-ghost">Ghost</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Form Elements</h2>
+    <div class="form-group">
+        <label>Username</label>
+        <input type="text" placeholder="Enter your username" />
+    </div>
+    <div class="row">
+        <label class="checkbox">
+            <input type="checkbox" checked /> Remember me
+        </label>
+        <label class="radio">
+             <input type="radio" name="g1" checked /> Option A
+        </label>
+        <label class="radio">
+             <input type="radio" name="g1" /> Option B
+        </label>
+    </div>
+  </section>
+
+  <section class="grid-2">
+      <div class="card">
+         <h3>Card Title</h3>
+         <p>This is a surface card that uses the surface color variable. It adapts to the theme.</p>
+         <div class="tag-row">
+            <span class="tag">#Design</span>
+            <span class="tag">#UI</span>
+            <span class="tag">#Theme</span>
+         </div>
+      </div>
+      <div class="card highlight">
+         <h3>Highlighted</h3>
+         <p>Some cards might want to use the primary color as a subtle background.</p>
+         <button class="btn btn-sm btn-primary">Learn More</button>
+      </div>
+  </section>
+</div>`;
+
+const DEFAULT_CSS = `/* 
+  PASTE YOUR GENERATED THEME HERE 
+  -------------------------------
+*/
+:root {
+  /* Brand Colors */
+  --color-primary: #3b82f6;
+  --color-secondary: #64748b;
+  
+  /* Semantic Colors */
+  --color-success: #22c55e;
+  --color-danger: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #0ea5e9;
+
+  /* Base Colors */
+  --color-background: #0f172a;
+  --color-surface: #1e293b;
+  --color-text: #f1f5f9;
+  --text-muted: #94a3b8;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+
+  /* Typography */
+  --font-family: 'Inter', system-ui, sans-serif;
+  --font-size-body: 1rem;
+  --font-size-h1: 2rem;
+  --font-size-h2: 1.5rem;
+  --font-size-h3: 1.25rem;
+}
+
+/* Base Styles */
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  padding: 2rem;
+  margin: 0;
+  line-height: 1.5;
+  transition: all 0.3s ease;
+}
+
+h1, h2, h3 { margin: 0 0 0.5em; font-weight: 700; color: var(--color-text); }
+h1 { font-size: var(--font-size-h1); }
+h2 { font-size: var(--font-size-h2); }
+h3 { font-size: var(--font-size-h3); }
+
+p { margin: 0 0 1em; color: var(--text-muted); }
+
+/* Layout Utilities */
+.layout { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+.row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media(max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+
+/* Components */
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.btn {
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn:hover { transform: translateY(-1px); filter: brightness(110%); }
+.btn:active { transform: translateY(0); }
+
+.btn-sm { padding: 6px 12px; font-size: 0.8rem; }
+
+/* Variants */
+.btn-primary { background: var(--color-primary); color: white; }
+.btn-secondary { background: var(--color-secondary); color: white; }
+.btn-outline { background: transparent; border: 1px solid var(--color-text); color: var(--color-text); }
+.btn-ghost { background: transparent; color: var(--text-muted); }
+.btn-ghost:hover { background: rgba(255,255,255,0.05); color: var(--color-text); }
+
+/* Inputs */
+input[type="text"] {
+  background: rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--color-text);
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+input[type="text"]:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary); /* Simplified focus ring */
+}
+
+/* Tags */
+.tag-row { display: flex; gap: 8px; margin-top: auto; }
+.tag {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    background: rgba(255,255,255,0.05);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+}
+
+.highlight {
+    background: linear-gradient(135deg, var(--color-surface), rgba(59, 130, 246, 0.1));
+    border-color: var(--color-primary);
+}
+`;
+
+const DEFAULT_JS = `// Log interactions
+document.querySelectorAll('.btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    const text = e.target.innerText;
+    console.log(\`Clicked button: \${text}\`);
+    
+    // Add a simple ripple effect (css driven active state is simpler but let's log it)
+    EventBus.emit('ui:interaction', { type: 'click', label: text });
+  });
+});
+
+console.info("Ready for theming! Paste your CSS variables.");`;
 
 @customElement('sandbox-demo')
 export class SandboxDemo extends LitElement {
