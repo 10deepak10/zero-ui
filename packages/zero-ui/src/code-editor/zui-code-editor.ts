@@ -595,10 +595,6 @@ export class ZuiCodeEditor extends LitElement {
 
     this._updateDisplayState();
 
-    const newCursor = realStart + text.length;
-    // Restore cursor (best effort approximation on display)
-    // We can just rely on requestUpdate, but ideally we set it.
-    // Since we cleared folds, mapping is linear-ish.
     // We need to re-calc display pos.
     // Defer to next frame?
     setTimeout(() => {
@@ -610,46 +606,16 @@ export class ZuiCodeEditor extends LitElement {
         // So `this._displayToRealLineMap` is fresh.
 
         // Reverse map is expensive.
-        // Let's just find the line.
-        let runningReal = 0;
-        let targetDisplayLine = 0;
-        let offsetInLine = 0;
 
-        const lines = this.value.split('\n');
-        let found = false;
+        // Just leave cursor at end of insertion visually if possible or just focus.
+        this._textarea.focus();
+        this._textarea.selectionStart = this._textarea.selectionEnd = this._displayValue.length; // Fallback to end
 
-        // But wait, `this.value` changed.
-        // `this._displayToRealLineMap` is updated.
-
-        // Simple scan of real lines?
-        // ... Implementation of reverse map ...
-        // Use naive fallback: Cursor at end of pasted text?
-        // If we just focus, it might be lost.
-
-        // Let's try to set it.
-        // Count characters in display until we match real index? NO, display is partial.
-        // We know `realStart` and text length.
-        // If there are NO folds before `realStart`, displayCursor == realCursor.
-
-        // Check folds
-        let foldDiscount = 0;
-        for (const startLine of this._foldedRegions) {
-          const endLine = this._foldableRanges.get(startLine)!;
-          // If this fold is BEFORE our edit?
-          // We need byte size.
-          // Iterate lines.
-          // This is getting heavy for a paste handler.
-
-          // Just leave cursor at end of insertion visually if possible or just focus.
-          this._textarea.focus();
-          this._textarea.selectionStart = this._textarea.selectionEnd = this._displayValue.length; // Fallback to end
-
-          // Better: Calculate exact offset
-          // We know the new `displayValue` contains the pasted text.
-          // The start of paste in Display is `start` (from event).
-          // The end is `start + text.length`.
-          this._textarea.selectionStart = this._textarea.selectionEnd = start + text.length;
-        }
+        // Better: Calculate exact offset
+        // We know the new `displayValue` contains the pasted text.
+        // The start of paste in Display is `start` (from event).
+        // The end is `start + text.length`.
+        this._textarea.selectionStart = this._textarea.selectionEnd = start + text.length;
       }
     }, 0);
   }
@@ -780,7 +746,7 @@ export class ZuiCodeEditor extends LitElement {
       this._updateDisplayState();
 
       // Move Cursor
-      const newCursor = realStart + replacement.length;
+      // const newCursor = realStart + replacement.length;
       // We need to map Real Cursor back to Display Cursor? 
       // Since we unfolded, Real == Display roughly (except other folds).
       // Let's just update display and let natural mapping work?
