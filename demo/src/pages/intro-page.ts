@@ -8,7 +8,7 @@ export class IntroPage extends LitElement {
   static styles = css`
     :host {
       display: block;
-      min-height: 100vh;
+      min-height: 100dvh;
       background: transparent;
       font-family: 'Segoe UI', system-ui, sans-serif;
       color: var(--text-main);

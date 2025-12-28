@@ -52,7 +52,7 @@ export class DemoApp extends LitElement {
 
 
       display: flex;
-      height: 100vh;
+      height: 100dvh;
       font-family: 'Segoe UI', system-ui, sans-serif;
       color: var(--text-main);
       background: var(--bg-body);

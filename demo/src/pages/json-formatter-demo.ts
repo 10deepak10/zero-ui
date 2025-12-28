@@ -7,7 +7,7 @@ export class JsonFormatterDemo extends LitElement {
   static styles = css`
     :host {
       display: block;
-      height: 100vh;
+      height: 100dvh;
       padding: 16px;
       box-sizing: border-box;
       box-sizing: border-box;
