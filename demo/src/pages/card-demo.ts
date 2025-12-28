@@ -94,21 +94,7 @@ export class AppComponent {}`;
           </div>
         </demo-example>
 
-        <demo-example
-          header="Hover Effect"
-          description="Card with elevation change on hover."
-          .html=${`<zui-card hover>\n  <h3>Hoverable</h3>\n  <p>Hover over me!</p>\n</zui-card>`}
-          .react=${basicReact.replace('<ZuiCard>', '<ZuiCard hover>')}
-          .angular=${basicAngular.replace('<zui-card>', '<zui-card hover>')}
-          .vue=${basicVue.replace('<zui-card>', '<zui-card hover>')}
-        >
-          <div style="display: flex; justify-content: center;">
-            <zui-card hover>
-              <h3>Hoverable</h3>
-              <p>Hover over me to see the effect.</p>
-            </zui-card>
-          </div>
-        </demo-example>
+
       </demo-page>
     `;
   }

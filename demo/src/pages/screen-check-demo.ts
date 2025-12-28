@@ -58,6 +58,39 @@ export class ScreenCheckDemo extends LitElement {
        /* Prevent full width in flex container */
        width: fit-content;
     }
+
+    h3 {
+      margin-top: 0;
+      color: var(--text-main);
+      font-size: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--text-main);
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: var(--code-string);
+    }
   `;
 
   render() {
@@ -159,6 +192,62 @@ onUnmounted(() => {
 });
 </script>`;
 
+    const properties = [
+      { name: 'live', type: 'boolean', default: 'false', description: 'If true, continuously updates screen dimensions on resize.' }
+    ];
+
+    const apiHtml = html`
+      <div slot="api">
+        <h3>Properties</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+             ${properties.map(p => html`
+              <tr>
+                <td><code>${p.name}</code></td>
+                <td><code>${p.type}</code></td>
+                <td><code>${p.default}</code></td>
+                <td>${p.description}</td>
+              </tr>
+            `)}
+          </tbody>
+        </table>
+
+        <h3>Static Methods (ScreenCheckService)</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Parameters</th>
+              <th>Returns</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>getScreenInfo</code></td>
+              <td><code>-</code></td>
+              <td><code>ScreenInfo</code></td>
+              <td>Get current screen dimensions/orientation.</td>
+            </tr>
+            <tr>
+              <td><code>subscribe</code></td>
+              <td><code>callback: (info) => void</code></td>
+              <td><code>() => void</code></td>
+              <td>Subscribe to resize/orientation changes. Returns cleanup function.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+
     return html`
       <demo-page
         name="Screen Check"
@@ -173,7 +262,7 @@ onUnmounted(() => {
           .vue=${liveVue}
         >
           <div class="preview">
-            <span class="badge">Resize Window to Test</span>
+             <span class="badge">Resize Window to Test</span>
             <zui-screen-check
               live
               @screen-change=${this._handleScreenChange}
@@ -215,6 +304,8 @@ ${JSON.stringify(this._serviceInfo, null, 2)}
              </pre>
           </div>
         </demo-example>
+
+        ${apiHtml}
       </demo-page>
     `;
   }

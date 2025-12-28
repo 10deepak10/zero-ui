@@ -52,6 +52,39 @@ export class EventBusDemo extends LitElement {
       width: 100%;
       height: 100%;
     }
+
+    h3 {
+      margin-top: 0;
+      color: var(--text-main);
+      font-size: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--text-main);
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: var(--code-string);
+    }
   `;
 
   private _emitUserEvent() {
@@ -128,6 +161,66 @@ const emitEvent = () => {
 };
 </script>`;
 
+    const apiHtml = html`
+      <div slot="api">
+        <h3>Static Methods</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Parameters</th>
+              <th>Returns</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>emit&lt;T&gt;</code></td>
+              <td><code>name: string, data: T, source?: string</code></td>
+              <td><code>void</code></td>
+              <td>Dispatch a new event.</td>
+            </tr>
+            <tr>
+              <td><code>subscribe&lt;T&gt;</code></td>
+              <td><code>name: string, callback: EventCallback&lt;T&gt;</code></td>
+              <td><code>void</code></td>
+              <td>Listen for specific events.</td>
+            </tr>
+            <tr>
+              <td><code>subscribeAll</code></td>
+              <td><code>callback: EventCallback</code></td>
+              <td><code>void</code></td>
+              <td>Listen for ALL events.</td>
+            </tr>
+            <tr>
+              <td><code>unsubscribe&lt;T&gt;</code></td>
+              <td><code>name: string, callback: EventCallback&lt;T&gt;</code></td>
+              <td><code>void</code></td>
+              <td>Remove a specific event listener.</td>
+            </tr>
+            <tr>
+              <td><code>unsubscribeAll</code></td>
+              <td><code>callback: EventCallback</code></td>
+              <td><code>void</code></td>
+              <td>Remove a global listener.</td>
+            </tr>
+            <tr>
+              <td><code>getHistory</code></td>
+              <td><code>-</code></td>
+              <td><code>EventBusEvent[]</code></td>
+              <td>Get recent event history.</td>
+            </tr>
+            <tr>
+              <td><code>clearHistory</code></td>
+              <td><code>-</code></td>
+              <td><code>void</code></td>
+              <td>Clear event history.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+
     return html`
       <demo-page
         name="Event Bus Utility"
@@ -154,6 +247,8 @@ const emitEvent = () => {
             </div>
           </div>
         </demo-example>
+
+        ${apiHtml}
       </demo-page>
     `;
   }

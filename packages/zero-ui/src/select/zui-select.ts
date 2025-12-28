@@ -73,10 +73,8 @@ export class ZuiSelect extends LitElement {
     }
 
     .chevron {
-      position: absolute;
+      position: relative;
       right: 0.75rem;
-      top: 50%;
-      transform: translateY(-50%);
       pointer-events: none;
       color: var(--text-muted, #6b7280);
       width: 1.25rem;
@@ -85,7 +83,7 @@ export class ZuiSelect extends LitElement {
     }
 
     .chevron.open {
-      transform: translateY(-50%) rotate(180deg);
+      transform: rotate(180deg);
     }
 
     .dropdown-content {

@@ -29,6 +29,39 @@ export class BatteryCheckDemo extends LitElement {
     zui-battery-check {
       width: 100%;
     }
+
+    h3 {
+      margin-top: 0;
+      color: var(--text-main);
+      font-size: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--text-main);
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: var(--code-string);
+    }
   `;
 
   connectedCallback() {
@@ -111,6 +144,42 @@ onMounted(() => BatteryCheckService.subscribe(update));
 onUnmounted(() => BatteryCheckService.unsubscribe(update));
 </script>`;
 
+    const apiHtml = html`
+      <div slot="api">
+        <h3>Static Methods</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Parameters</th>
+              <th>Returns</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>getBatteryInfo</code></td>
+              <td><code>-</code></td>
+              <td><code>Promise&lt;BatteryInfo&gt;</code></td>
+              <td>Get current battery status (level, charging, etc).</td>
+            </tr>
+            <tr>
+              <td><code>subscribe</code></td>
+              <td><code>callback: (info: BatteryInfo) => void</code></td>
+              <td><code>Promise&lt;void&gt;</code></td>
+              <td>Listen for battery status changes.</td>
+            </tr>
+            <tr>
+              <td><code>unsubscribe</code></td>
+              <td><code>callback: (info: BatteryInfo) => void</code></td>
+              <td><code>void</code></td>
+              <td>Stop listening for updates.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+
     return html`
       <demo-page
         name="Battery Check"
@@ -129,7 +198,7 @@ onUnmounted(() => BatteryCheckService.unsubscribe(update));
           </div>
         </demo-example>
 
-        <demo-example
+         <demo-example
           header="Service Usage"
           description="Headless API for accessing battery info."
           .html=${`<!-- No HTML equivalent, JS-only -->`}
@@ -142,6 +211,8 @@ onUnmounted(() => BatteryCheckService.unsubscribe(update));
 ${JSON.stringify(this._serviceInfo, null, 2)}
            </pre>
         </demo-example>
+
+        ${apiHtml}
       </demo-page>
     `;
   }

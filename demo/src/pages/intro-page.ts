@@ -76,7 +76,7 @@ export class IntroPage extends LitElement {
       z-index: 10;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 60px 24px;
+      padding: 0px 24px 60px;
     }
 
     .tagline {
@@ -116,14 +116,14 @@ export class IntroPage extends LitElement {
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-      box-shadow: 0 8px 32px rgba(59,130,246,0.3);
-      color: #fff;
+      background: var(--text-main);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      color: var(--bg-body);
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 48px rgba(59,130,246,0.5);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
     }
 
     .btn-secondary {
@@ -151,7 +151,7 @@ export class IntroPage extends LitElement {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       backdrop-filter: blur(20px);
-      padding: 40px;
+      padding: 30px;
       border-radius: 20px;
       position: relative;
       overflow: hidden;
@@ -162,14 +162,14 @@ export class IntroPage extends LitElement {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(59,130,246,.1), rgba(139,92,246,.1));
+      background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(100,100,100,0.05));
       opacity: 0;
       transition: opacity 0.4s ease;
     }
 
     .feature-card:hover {
       transform: translateY(-8px);
-      border-color: rgba(59,130,246,0.3);
+      border-color: var(--text-muted);
       box-shadow: var(--glass-shadow);
     }
 
@@ -180,7 +180,7 @@ export class IntroPage extends LitElement {
     .feature-icon {
       font-size: 3rem;
       display: block;
-      margin-bottom: 20px;
+      margin-bottom: 12px;
       transition: transform 0.4s ease;
     }
 
@@ -191,10 +191,8 @@ export class IntroPage extends LitElement {
     .feature-title {
       font-size: 1.8rem;
       font-weight: 700;
-      margin-bottom: 16px;
-      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+      color: var(--text-main);
     }
 
     .feature-description {
@@ -389,13 +387,13 @@ export class IntroPage extends LitElement {
 
         if (this.theme === 'dark') {
           gradient.addColorStop(0, "rgba(255,255,255,0.95)");
-          gradient.addColorStop(0.3, "rgba(120,170,255,0.45)");
-          gradient.addColorStop(1, "rgba(100,100,255,0)");
+          gradient.addColorStop(0.3, "rgba(255,255,255,0.2)");
+          gradient.addColorStop(1, "rgba(255,255,255,0)");
           ctx.globalCompositeOperation = "lighter"; // neon add-glow
         } else {
-          gradient.addColorStop(0, "rgba(59,130,246,0.95)");
-          gradient.addColorStop(0.3, "rgba(59,130,246,0.45)");
-          gradient.addColorStop(1, "rgba(59,130,246,0)");
+          gradient.addColorStop(0, "rgba(0,0,0,0.8)");
+          gradient.addColorStop(0.3, "rgba(0,0,0,0.2)");
+          gradient.addColorStop(1, "rgba(0,0,0,0)");
           ctx.globalCompositeOperation = "source-over"; // normal blending for light mode
         }
         ctx.fillStyle = gradient;
@@ -480,7 +478,11 @@ export class IntroPage extends LitElement {
 
         <div class="features">
           <div class="feature-card">
-            <span class="feature-icon">⚡</span>
+            <span class="feature-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </span>
             <h3 class="feature-title">Blazing Fast</h3>
             <p class="feature-description">
               Built on native web standards with zero overhead. Lightning-fast performance that scales effortlessly.
@@ -488,7 +490,12 @@ export class IntroPage extends LitElement {
           </div>
 
           <div class="feature-card">
-            <span class="feature-icon">🌲</span>
+            <span class="feature-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+              </svg>
+            </span>
             <h3 class="feature-title">Tree-Shakeable</h3>
             <p class="feature-description">
               Modular architecture ensures you only bundle what you use. Keep your applications lean and efficient.
@@ -496,7 +503,11 @@ export class IntroPage extends LitElement {
           </div>
 
           <div class="feature-card">
-            <span class="feature-icon">🔌</span>
+            <span class="feature-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/>
+              </svg>
+            </span>
             <h3 class="feature-title">Universal</h3>
             <p class="feature-description">
               Works with React, Angular, Vue, and vanilla HTML. Truly framework-agnostic.

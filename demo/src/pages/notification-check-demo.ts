@@ -28,6 +28,39 @@ export class NotificationCheckDemo extends LitElement {
     zui-notification-check {
       width: 100%;
     }
+
+    h3 {
+      margin-top: 0;
+      color: var(--text-main);
+      font-size: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--text-main);
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: var(--code-string);
+    }
   `;
 
   render() {
@@ -48,6 +81,42 @@ export class AppComponent {}`;
   <zui-notification-check />
 </template>`;
 
+    const apiHtml = html`
+      <div slot="api">
+        <h3>Static Methods</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Parameters</th>
+              <th>Returns</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>getPermission</code></td>
+              <td><code>-</code></td>
+              <td><code>NotificationPermission</code></td>
+              <td>Get current notification permission.</td>
+            </tr>
+            <tr>
+              <td><code>requestPermission</code></td>
+              <td><code>-</code></td>
+              <td><code>Promise&lt;NotificationPermission&gt;</code></td>
+              <td>Request notification permission.</td>
+            </tr>
+            <tr>
+              <td><code>sendNotification</code></td>
+              <td><code>title: string, options?: NotificationOptions</code></td>
+              <td><code>boolean</code></td>
+              <td>Send a notification if permitted.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+
     return html`
       <demo-page
         name="Notification Check"
@@ -65,6 +134,8 @@ export class AppComponent {}`;
             <zui-notification-check></zui-notification-check>
           </div>
         </demo-example>
+
+        ${apiHtml}
       </demo-page>
     `;
   }

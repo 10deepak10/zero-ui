@@ -1,25 +1,16 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: 'Merriweather', 'Times New Roman', serif;
+  line-height: 1.6;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #2C2C2C; /* Ink Black */
+  background-color: #F9F7F1; /* Warm Newsprint */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
 }
 
 body {
@@ -28,67 +19,140 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  background-color: #F9F7F1;
+  background-image: linear-gradient(#eee 1px, transparent 1px);
+  background-size: 100% 1.8rem; /* Ruled paper effect subtle hint */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  color: #1a1a1a;
+  border-bottom: 2px solid #2C2C2C;
+  padding-bottom: 0.2em;
+  margin-bottom: 0.8em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 3.5em;
+  line-height: 1;
+  text-transform: uppercase;
+  border-bottom: 4px double #2C2C2C; /* Double border for H1 */
+}
+
+a {
+  font-weight: 700;
+  color: #8B0000; /* Classic Red */
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: all 0.2s ease;
+}
+a:hover {
+  color: #A52A2A;
+  background-color: rgba(139, 0, 0, 0.1);
 }
 
 #app {
   width: 100%;
   height: 100%;
+  position: relative;
+  z-index: 1;
 }
 
+/* Print/Paper Utilities */
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
+  filter: grayscale(100%) contrast(120%); /* Make logos look like ink */
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #3178c6aa);
+  filter: grayscale(0%) contrast(100%);
 }
 
 .card {
   padding: 2em;
+  background: #ffffff;
+  border: 1px solid #2C2C2C;
+  border-radius: 2px;
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.1); /* Hard shadow */
 }
 
 .read-the-docs {
-  color: #888;
+  color: #555;
+  font-style: italic;
+  font-family: 'Playfair Display', serif;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
+  border-radius: 2px;
+  border: 2px solid #2C2C2C;
   padding: 0.6em 1.2em;
   font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  font-weight: 700;
+  font-family: 'Merriweather', serif;
+  background-color: #ffffff;
+  color: #2C2C2C;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.15s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 2px 2px 0px #2C2C2C;
 }
 button:hover {
-  border-color: #646cff;
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0px #2C2C2C;
+  background-color: #F0F0F0;
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 2px dashed #8B0000;
+  outline-offset: 4px;
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
+  /* Newspaper Dark Mode (Inverted Ink) */
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: #F5F5F3;
+    background-color: #1a1a1a;
   }
-  a:hover {
-    color: #747bff;
+  body {
+    background-color: #1a1a1a;
+    background-image: linear-gradient(#333 1px, transparent 1px);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    color: #F5F5F3;
+    border-color: #F5F5F3;
+  }
+  .card {
+    background: #2d2d2d;
+    border-color: #666;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.5);
   }
   button {
-    background-color: #f9f9f9;
+    background-color: #2d2d2d;
+    color: #F5F5F3;
+    border-color: #F5F5F3;
+    box-shadow: 2px 2px 0px #F5F5F3;
+  }
+  button:hover {
+    background-color: #3d3d3d;
+    box-shadow: 1px 1px 0px #F5F5F3;
+  }
+  a {
+    color: #D2B48C; /* Tan for dark mode links */
+  }
+  a:hover {
+    color: #F4A460;
+    background-color: rgba(210, 180, 140, 0.1);
+  }
+  .logo {
+    filter: invert(1) grayscale(100%);
+  }
+  .logo:hover {
+    filter: invert(0);
   }
 }

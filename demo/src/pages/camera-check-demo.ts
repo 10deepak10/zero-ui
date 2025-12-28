@@ -32,6 +32,39 @@ export class CameraCheckDemo extends LitElement {
     zui-camera-check {
        width: 100%;
     }
+
+    h3 {
+      margin-top: 0;
+      color: var(--text-main);
+      font-size: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--text-main);
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: var(--code-string);
+    }
   `;
 
   connectedCallback() {
@@ -131,6 +164,82 @@ onMounted(async () => {
 });
 </script>`;
 
+    const apiHtml = html`
+      <div slot="api">
+        <h3>Properties</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+             ${properties.map(p => html`
+              <tr>
+                <td><code>${p.name}</code></td>
+                <td><code>${p.type}</code></td>
+                <td><code>${p.default}</code></td>
+                <td>${p.description}</td>
+              </tr>
+            `)}
+          </tbody>
+        </table>
+
+        <h3>Static Methods (CameraCheckService)</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Parameters</th>
+              <th>Returns</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>checkPermission</code></td>
+              <td><code>-</code></td>
+              <td><code>Promise&lt;PermissionStatus&gt;</code></td>
+              <td>Check camera permission status.</td>
+            </tr>
+            <tr>
+              <td><code>requestAccess</code></td>
+              <td><code>-</code></td>
+              <td><code>Promise&lt;boolean&gt;</code></td>
+              <td>Request camera access.</td>
+            </tr>
+            <tr>
+              <td><code>getDevices</code></td>
+              <td><code>-</code></td>
+              <td><code>Promise&lt;CameraDevice[]&gt;</code></td>
+              <td>List available video input devices.</td>
+            </tr>
+            <tr>
+              <td><code>getStream</code></td>
+              <td><code>deviceId?: string</code></td>
+              <td><code>Promise&lt;MediaStream&gt;</code></td>
+              <td>Get video stream for a device.</td>
+            </tr>
+            <tr>
+              <td><code>subscribe</code></td>
+              <td><code>callback: (status) => void</code></td>
+              <td><code>void</code></td>
+              <td>Listen for permission changes.</td>
+            </tr>
+            <tr>
+              <td><code>unsubscribe</code></td>
+              <td><code>callback: (status) => void</code></td>
+              <td><code>void</code></td>
+              <td>Stop listening.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+
     return html`
       <demo-page
         name="Camera Check"
@@ -166,6 +275,8 @@ ${this._permission}
 ${JSON.stringify(this._devices, null, 2)}
            </pre>
         </demo-example>
+
+        ${apiHtml}
       </demo-page>
     `;
   }

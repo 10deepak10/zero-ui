@@ -28,6 +28,39 @@ export class GeolocationCheckDemo extends LitElement {
     zui-geolocation-check {
       width: 100%;
     }
+
+    h3 {
+      margin-top: 0;
+      color: var(--text-main);
+      font-size: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--text-main);
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: var(--code-string);
+    }
   `;
 
   render() {
@@ -48,6 +81,48 @@ export class AppComponent {}`;
   <zui-geolocation-check />
 </template>`;
 
+    const apiHtml = html`
+      <div slot="api">
+        <h3>Static Methods</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Parameters</th>
+              <th>Returns</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>checkPermission</code></td>
+              <td><code>-</code></td>
+              <td><code>Promise&lt;PermissionStatus&gt;</code></td>
+              <td>Check current geolocation permission status.</td>
+            </tr>
+            <tr>
+              <td><code>getPosition</code></td>
+              <td><code>options?: PositionOptions</code></td>
+              <td><code>Promise&lt;GeolocationPosition&gt;</code></td>
+              <td>One-time retrieval of current position.</td>
+            </tr>
+            <tr>
+              <td><code>watchPosition</code></td>
+              <td><code>success: (pos) => void, error?: (err) => void, options?</code></td>
+              <td><code>number</code></td>
+              <td>Subscribe to position updates. Returns watchId.</td>
+            </tr>
+            <tr>
+              <td><code>clearWatch</code></td>
+              <td><code>watchId: number</code></td>
+              <td><code>void</code></td>
+              <td>Stop watching position updates.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+
     return html`
       <demo-page
         name="Geolocation Check"
@@ -65,6 +140,8 @@ export class AppComponent {}`;
             <zui-geolocation-check></zui-geolocation-check>
           </div>
         </demo-example>
+
+        ${apiHtml}
       </demo-page>
     `;
   }

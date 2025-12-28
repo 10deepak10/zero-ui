@@ -68,14 +68,14 @@ const DEFAULT_CSS = `/*
 */
 :root {
   /* Brand Colors */
-  --color-primary: #3b82f6;
-  --color-secondary: #64748b;
+  --color-primary: #000000;
+  --color-secondary: #666666;
   
   /* Semantic Colors */
-  --color-success: #22c55e;
-  --color-danger: #ef4444;
-  --color-warning: #f59e0b;
-  --color-info: #0ea5e9;
+  --color-success: #333333;
+  --color-danger: #000000;
+  --color-warning: #555555;
+  --color-info: #888888;
 
   /* Base Colors */
   --color-background: #0f172a;
@@ -183,7 +183,7 @@ input[type="text"]:focus {
 }
 
 .highlight {
-    background: linear-gradient(135deg, var(--color-surface), rgba(59, 130, 246, 0.1));
+    background: linear-gradient(135deg, var(--color-surface), rgba(255, 255, 255, 0.05));
     border-color: var(--color-primary);
 }
 `;
@@ -268,10 +268,10 @@ export class SandboxDemo extends LitElement {
         border-left: 3px solid transparent; 
     }
     
-    .section-header.html { border-left-color: #e44d26; }
-    .section-header.css { border-left-color: #2965f1; }
-    .section-header.js { border-left-color: #f0db4f; }
-    .section-header.preview { border-left-color: #3b82f6; }
+    .section-header.html { border-left-color: #555; }
+    .section-header.css { border-left-color: #777; }
+    .section-header.js { border-left-color: #999; }
+    .section-header.preview { border-left-color: #333; }
 
     .editors {
       display: block;
@@ -337,8 +337,8 @@ export class SandboxDemo extends LitElement {
     }
 
     .run-btn {
-      background: #3b82f6;
-      color: white;
+      background: var(--text-main);
+      color: var(--bg-body);
       border: none;
       padding: 6px 16px;
       border-radius: 6px;
@@ -441,9 +441,9 @@ export class SandboxDemo extends LitElement {
     }
     
     zui-tab[active] {
-       color: var(--zui-primary, #60a5fa);
-       background: rgba(59, 130, 246, 0.05);
-       border-bottom-color: var(--zui-primary, #60a5fa);
+       color: var(--text-main, #000000);
+       background: rgba(0, 0, 0, 0.05);
+       border-bottom-color: var(--text-main, #000000);
     }
     
     zui-tab-panel {

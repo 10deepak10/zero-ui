@@ -34,21 +34,21 @@ export class DemoApp extends LitElement {
 
   static styles = css`
     :host {
-      --bg-body: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0f0f1e 100%);
-      --text-main: #fff;
-      --text-muted: #8b9dc3;
-      --glass-bg: rgba(255, 255, 255, 0.04);
-      --glass-border: rgba(255, 255, 255, 0.08);
-      --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-      --card-bg: rgba(255, 255, 255, 0.02);
-      --card-border: rgba(255, 255, 255, 0.05);
-      --sidebar-bg: rgba(255, 255, 255, 0.04);
-      --sidebar-border: rgba(255, 255, 255, 0.08);
-      --link-hover-bg: rgba(255, 255, 255, 0.08);
-      --link-active-bg: linear-gradient(135deg, rgba(59,130,246,0.3), rgba(139,92,246,0.3));
-      --brand-bg: rgba(255, 255, 255, 0.06);
-      --bg-muted: rgba(255, 255, 255, 0.03);
-      --bg-hover: rgba(255, 255, 255, 0.05);
+      --bg-body: #000000;
+      --text-main: #ffffff;
+      --text-muted: #999999;
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.15);
+      --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+      --card-bg: #0a0a0a;
+      --card-border: #333333;
+      --sidebar-bg: #050505;
+      --sidebar-border: #333333;
+      --link-hover-bg: rgba(255, 255, 255, 0.1);
+      --link-active-bg: rgba(255, 255, 255, 0.2);
+      --brand-bg: rgba(255, 255, 255, 0.1);
+      --bg-muted: #111111;
+      --bg-hover: #222222;
 
 
       display: flex;
@@ -58,7 +58,7 @@ export class DemoApp extends LitElement {
       background: var(--bg-body);
       transition: background 0.3s ease, color 0.3s ease;
       -webkit-tap-highlight-color: transparent;
-      --gradient-text: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+      --gradient-text: linear-gradient(135deg, #ffffff 0%, #999999 100%);
       
       @media (max-width: 768px) {
         flex-direction: column;
@@ -77,36 +77,36 @@ export class DemoApp extends LitElement {
       --zui-input-bg: rgba(0, 0, 0, 0.2);
 
       /* Terminal/Sandbox (Dark Mode specific) */
-      --logger-bg: #0f172a;
-      --logger-border: #1e293b;
-      --sandbox-bg: #0f172a;
-      --sandbox-header-bg: #1e293b;
-      --event-bus-bg: #0f172a;
-      --event-bus-border: #1e293b;
+      --logger-bg: #000000;
+      --logger-border: #333333;
+      --sandbox-bg: #000000;
+      --sandbox-header-bg: #111111;
+      --event-bus-bg: #000000;
+      --event-bus-border: #333333;
       
       /* Sandbox Text Restored (Slate defaults) */
-      --sandbox-header-text: #94a3b8;
-      --sandbox-tab-text: #cbd5e1;
-      --sandbox-tab-hover: #f1f5f9;
+      --sandbox-header-text: #999999;
+      --sandbox-tab-text: #666666;
+      --sandbox-tab-hover: #ffffff;
     }
 
     :host([theme="light"]) {
-      --bg-body: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); /* Slightly cooler/crisper grey-blue */
-      --text-main: #102a43;
-      --text-muted: #486581;
-      --glass-bg: rgba(255, 255, 255, 0.7);
-      --glass-border: rgba(0, 0, 0, 0.08);
+      --bg-body: #ffffff;
+      --text-main: #000000;
+      --text-muted: #666666;
+      --glass-bg: rgba(255, 255, 255, 0.9);
+      --glass-border: rgba(0, 0, 0, 0.1);
       --glass-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
       --card-bg: #ffffff;
-      --card-border: rgba(0, 0, 0, 0.1); /* Darker border for contrast against light body */
-      --sidebar-bg: rgba(255, 255, 255, 0.85); /* More opaque */
+      --card-border: rgba(0, 0, 0, 0.1);
+      --sidebar-bg: #f5f5f5;
       --sidebar-border: rgba(0, 0, 0, 0.1);
-      --link-hover-bg: rgba(16, 42, 67, 0.05); /* darker hover tint */
-      --link-active-bg: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15));
-      --brand-bg: rgba(255, 255, 255, 0.8);
+      --link-hover-bg: rgba(0, 0, 0, 0.05);
+      --link-active-bg: rgba(0, 0, 0, 0.08);
+      --brand-bg: rgba(0, 0, 0, 0.05);
       --bg-muted: #f3f4f6;
       --bg-hover: #e5e7eb;
-      --gradient-text: linear-gradient(135deg, #102a43 0%, #6366f1 100%);
+      --gradient-text: linear-gradient(135deg, #000000 0%, #666666 100%);
       
       /* Code Editor Syntax (Light) */
       --code-comment: #008000;
@@ -241,7 +241,7 @@ export class DemoApp extends LitElement {
     /* Apply gradient only to the logo icon */
     .brand .logo {
       font-size: 1.8rem;
-      background: linear-gradient(135deg, #3b82f6, #a855f7);
+      background: linear-gradient(135deg, #ffffff, #666666);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -287,14 +287,14 @@ export class DemoApp extends LitElement {
     }
 
     a.active {
-      background: rgba(59, 130, 246, 0.1);
-      color: #60a5fa; /* Blue text for active state */
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
       font-weight: 600;
     }
 
     :host([theme="light"]) a.active {
-      background: rgba(59, 130, 246, 0.1);
-      color: #2563eb;
+      background: rgba(0, 0, 0, 0.08);
+      color: #000000;
     }
 
     .experimental-badge {
@@ -302,8 +302,8 @@ export class DemoApp extends LitElement {
       font-size: 0.65rem;
       padding: 2px 6px;
       border-radius: 4px;
-      background: rgba(251, 191, 36, 0.2);
-      color: #fbbf24;
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
       font-weight: 600;
       text-transform: uppercase;
       margin-left: 8px;
@@ -603,47 +603,22 @@ export class DemoApp extends LitElement {
             <div class="nav-header">Overview</div>
             ${this._renderNavLink('/', 'Introduction')}
           </div>
-          
-          <div class="nav-group">
-            <div class="nav-header">General UI</div>
-            ${this._renderNavLink('/button', 'Button')}
-            ${this._renderNavLink('/card', 'Card')}
-            ${this._renderNavLink('/split', 'Split')}
-            ${this._renderNavLink('/tabs', 'Tabs')}
-            ${this._renderNavLink('/dropdown', 'Dropdown')}
-          </div>
 
           <div class="nav-group">
-            <div class="nav-header">Form Elements</div>
-            ${this._renderNavLink('/file-upload', 'File Upload')}
-            ${this._renderNavLink('/otp-input', 'OTP Input')}
-            ${this._renderNavLink('/phone-input', 'Phone Input')}
-            ${this._renderNavLink('/star-rating', 'Star Rating')}
-            ${this._renderNavLink('/select', 'Select')}
-            ${this._renderNavLink('/checkbox', 'Checkbox')}
-            ${this._renderNavLink('/radio-group', 'Radio Group')}
-            ${this._renderNavLink('/toggle', 'Toggle')}
-            ${this._renderNavLink('/slider', 'Slider')}
+            <div class="nav-header">Utilities</div>
+            ${this._renderNavLink('/theme-service', 'Theme Service')}
+            ${this._renderNavLink('/text-editor', 'Text Editor')}
+            ${this._renderNavLink('/code-editor', 'Code Editor')}
+            ${this._renderNavLink('/logger', 'Logger')}
+            ${this._renderNavLink('/event-bus', 'Event Bus')}
           </div>
-
-          <div class="nav-group">
-            <div class="nav-header">Browser & Device</div>
-            ${this._renderNavLink('/os-check', 'OS Check')}
-            ${this._renderNavLink('/browser-check', 'Browser Check')}
-            ${this._renderNavLink('/screen-check', 'Screen Check')}
-            ${this._renderNavLink('/storage-check', 'Storage Check')}
-            ${this._renderNavLink('/gpu-check', 'GPU Check')}
-            ${this._renderNavLink('/network-check', 'Network Check')}
-            ${this._renderNavLink('/theme-check', 'Theme Check')}
-            ${this._renderNavLink('/battery-check', 'Battery Check')}
-          </div>
+      
 
           <div class="nav-group">
             <div class="nav-header">Permissions & Media</div>
             ${this._renderNavLink('/camera-check', 'Camera Check')}
             ${this._renderNavLink('/mic-check', 'Mic Check')}
             ${this._renderNavLink('/geolocation-check', 'Geolocation Check')}
-            ${this._renderNavLink('/notification-check', 'Notification Check', true)}
             ${this._renderNavLink('/clipboard-check', 'Clipboard Check')}
           </div>
 
@@ -658,13 +633,37 @@ export class DemoApp extends LitElement {
           </div>
 
           <div class="nav-group">
-            <div class="nav-header">Utilities</div>
-            ${this._renderNavLink('/logger', 'Logger')}
-            ${this._renderNavLink('/text-editor', 'Text Editor')}
-            ${this._renderNavLink('/code-editor', 'Code Editor')}
-            ${this._renderNavLink('/socket-demo', 'Socket Service', true)}
-            ${this._renderNavLink('/event-bus', 'Event Bus')}
-            ${this._renderNavLink('/theme-service', 'Theme Service')}
+            <div class="nav-header">Browser & Device</div>
+            ${this._renderNavLink('/os-check', 'OS Check')}
+            ${this._renderNavLink('/browser-check', 'Browser Check')}
+            ${this._renderNavLink('/screen-check', 'Screen Check')}
+            ${this._renderNavLink('/storage-check', 'Storage Check')}
+            ${this._renderNavLink('/gpu-check', 'GPU Check')}
+            ${this._renderNavLink('/network-check', 'Network Check')}
+            ${this._renderNavLink('/theme-check', 'Theme Check')}
+            ${this._renderNavLink('/battery-check', 'Battery Check')}
+          </div>
+          
+          <div class="nav-group">
+            <div class="nav-header">Form Elements</div>
+            ${this._renderNavLink('/file-upload', 'File Upload')}
+            ${this._renderNavLink('/otp-input', 'OTP Input')}
+            ${this._renderNavLink('/phone-input', 'Phone Input')}
+            ${this._renderNavLink('/star-rating', 'Star Rating')}
+            ${this._renderNavLink('/select', 'Select')}
+            ${this._renderNavLink('/checkbox', 'Checkbox')}
+            ${this._renderNavLink('/radio-group', 'Radio Group')}
+            ${this._renderNavLink('/toggle', 'Toggle')}
+            ${this._renderNavLink('/slider', 'Slider')}
+          </div>
+
+           <div class="nav-group">
+            <div class="nav-header">General UI</div>
+            ${this._renderNavLink('/button', 'Button')}
+            ${this._renderNavLink('/card', 'Card')}
+            ${this._renderNavLink('/split', 'Split')}
+            ${this._renderNavLink('/tabs', 'Tabs')}
+            ${this._renderNavLink('/dropdown', 'Dropdown')}
           </div>
 
           <div class="nav-group">

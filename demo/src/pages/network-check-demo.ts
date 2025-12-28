@@ -44,6 +44,39 @@ export class NetworkCheckDemo extends LitElement {
     zui-network-check {
       width: 100%;
     }
+
+    h3 {
+      margin-top: 0;
+      color: var(--text-main);
+      font-size: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--text-main);
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: var(--code-string);
+    }
   `;
 
   connectedCallback() {
@@ -126,6 +159,48 @@ onMounted(() => NetworkCheckService.subscribe(update));
 onUnmounted(() => NetworkCheckService.unsubscribe(update));
 </script>`;
 
+    const apiHtml = html`
+      <div slot="api">
+        <h3>Static Methods</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Parameters</th>
+              <th>Returns</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>getNetworkInfo</code></td>
+              <td><code>-</code></td>
+              <td><code>NetworkInfo</code></td>
+              <td>Get current connection properties (type, rtt, etc).</td>
+            </tr>
+            <tr>
+              <td><code>measureConnectionSpeed</code></td>
+              <td><code>-</code></td>
+              <td><code>Promise&lt;number&gt;</code></td>
+              <td>Run active speed test (downloads file). Returns Mbps.</td>
+            </tr>
+            <tr>
+              <td><code>subscribe</code></td>
+              <td><code>callback: (info: NetworkInfo) => void</code></td>
+              <td><code>void</code></td>
+              <td>Listen for network status changes.</td>
+            </tr>
+            <tr>
+              <td><code>unsubscribe</code></td>
+              <td><code>callback: (info: NetworkInfo) => void</code></td>
+              <td><code>void</code></td>
+              <td>Stop listening.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+
     return html`
       <demo-page
         name="Network Check"
@@ -161,6 +236,8 @@ onUnmounted(() => NetworkCheckService.unsubscribe(update));
 ${JSON.stringify(this._serviceInfo, null, 2)}
            </pre>
         </demo-example>
+
+        ${apiHtml}
       </demo-page>
     `;
   }

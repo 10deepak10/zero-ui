@@ -50,6 +50,39 @@ export class StorageCheckDemo extends LitElement {
     zui-storage-check {
       width: 100%;
     }
+
+    h3 {
+      margin-top: 0;
+      color: var(--text-main);
+      font-size: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--text-main);
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: var(--code-string);
+    }
   `;
 
   async connectedCallback() {
@@ -254,6 +287,36 @@ onMounted(async () => {
 });
 </script>`;
 
+    const apiHtml = html`
+      <div slot="api">
+        <h3>Static Methods</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Parameters</th>
+              <th>Returns</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>checkAvailability</code></td>
+              <td><code>-</code></td>
+              <td><code>StorageAvailability</code></td>
+              <td>Check support for LocalStorage, SessionStorage, IDB.</td>
+            </tr>
+            <tr>
+              <td><code>getQuota</code></td>
+              <td><code>-</code></td>
+              <td><code>Promise&lt;StorageQuota&gt;</code></td>
+              <td>Get storage quota and usage estimates.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+
     return html`
       <demo-page
         name="Storage Check"
@@ -321,6 +384,8 @@ ${JSON.stringify(this._serviceAvailable, null, 2)}
 ${JSON.stringify(this._serviceQuota, null, 2)}
            </pre>
         </demo-example>
+
+        ${apiHtml}
       </demo-page>
     `;
   }

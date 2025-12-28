@@ -168,7 +168,7 @@ export class ZuiTextEditor extends LitElement {
 
   @property({ type: String }) placeholder = 'Type something...';
   @property({ type: String }) value = '';
-  
+
   @query('.content-area') private _editor!: HTMLDivElement;
   @state() private _activeFormats: Set<string> = new Set();
   @state() private _currentBlock: string = 'p';
@@ -195,7 +195,7 @@ export class ZuiTextEditor extends LitElement {
   private _checkFormats() {
     const formats = ['bold', 'italic', 'underline', 'strikeThrough', 'insertUnorderedList', 'insertOrderedList', 'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'];
     const newFormats = new Set<string>();
-    
+
     formats.forEach(format => {
       if (document.queryCommandState(format)) {
         newFormats.add(format);
@@ -284,26 +284,6 @@ export class ZuiTextEditor extends LitElement {
           </div>
 
           <div class="toolbar-group">
-            <zui-select
-              .options=${[
-        { label: 'Normal', value: 'p' },
-        { label: 'Heading 1', value: 'h1' },
-        { label: 'Heading 2', value: 'h2' },
-        { label: 'Heading 3', value: 'h3' },
-        { label: 'Heading 4', value: 'h4' },
-        { label: 'Heading 5', value: 'h5' },
-        { label: 'Heading 6', value: 'h6' }
-      ]}
-              .value=${this._currentBlock}
-              placeholder="Format"
-              @zui-change=${(e: CustomEvent) => {
-        this._execCmd('formatBlock', e.detail.value);
-      }}
-              style="width: 105px;"
-            ></zui-select>
-          </div>
-
-          <div class="toolbar-group">
              <input type="color" 
                 title="Text Color"
                 @input=${(e: Event) => {
@@ -333,20 +313,40 @@ export class ZuiTextEditor extends LitElement {
 
           <div class="toolbar-group">
              <button @mousedown=${(e: Event) => {
-                e.preventDefault();
-                const url = prompt('Enter link URL:');
-                if (url) this._execCmd('createLink', url);
+      e.preventDefault();
+      const url = prompt('Enter link URL:');
+      if (url) this._execCmd('createLink', url);
     }} title="Link">
                ${this._icons.link}
              </button>
              <button @mousedown=${(e: Event) => {
-                e.preventDefault();
-                this._execCmd('removeFormat');
+      e.preventDefault();
+      this._execCmd('removeFormat');
     }} title="Clear Format">
                ${this._icons.clean}
              </button>
           </div>
+           <div class="toolbar-group">
+            <zui-select
+              .options=${[
+        { label: 'Normal', value: 'p' },
+        { label: 'Heading 1', value: 'h1' },
+        { label: 'Heading 2', value: 'h2' },
+        { label: 'Heading 3', value: 'h3' },
+        { label: 'Heading 4', value: 'h4' },
+        { label: 'Heading 5', value: 'h5' },
+        { label: 'Heading 6', value: 'h6' }
+      ]}
+              .value=${this._currentBlock}
+              placeholder="Format"
+              @zui-change=${(e: CustomEvent) => {
+        this._execCmd('formatBlock', e.detail.value);
+      }}
+              style="width: 125px;"
+            ></zui-select>
+          </div>
         </div>
+        
         
         <div 
           class="content-area" 

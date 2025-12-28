@@ -18,10 +18,16 @@ export class TextEditorDemo extends LitElement {
     @state() private _value = '<p>Hello <b>World</b>!</p>';
 
     render() {
-        return html`
+      const properties = [
+        { name: 'value', type: 'string', default: "''", description: 'Resulting HTML content.' },
+        { name: 'placeholder', type: 'string', default: "'Type something...'", description: 'Placeholder text when empty.' },
+      ];
+
+      return html`
       <demo-page
         name="Text Editor"
         description="A rich text editor component."
+        .properties=${properties}
       >
         <demo-example
           header="Basic Usage"

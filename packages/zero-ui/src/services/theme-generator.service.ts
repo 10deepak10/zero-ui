@@ -354,6 +354,22 @@ export class ThemeGeneratorService {
       // Typography
       lines.push(`--font-family: ${theme.typography.fontFamily};`);
       
+    // Headings
+    Object.entries(theme.typography.headings).forEach(([key, value]) => {
+      lines.push(`--font-size-${key}: ${value.fontSize};`);
+      lines.push(`--font-weight-${key}: ${value.fontWeight};`);
+      lines.push(`--line-height-${key}: ${value.lineHeight};`);
+    });
+
+    // Body & Caption
+    lines.push(`--font-size-body: ${theme.typography.body.fontSize};`);
+    lines.push(`--font-weight-body: ${theme.typography.body.fontWeight};`);
+    lines.push(`--line-height-body: ${theme.typography.body.lineHeight};`);
+
+    lines.push(`--font-size-caption: ${theme.typography.caption.fontSize};`);
+    lines.push(`--font-weight-caption: ${theme.typography.caption.fontWeight};`);
+    lines.push(`--line-height-caption: ${theme.typography.caption.lineHeight};`);
+
       // Spacing
       theme.spacing.scale.forEach(multiplier => {
           lines.push(`--spacing-${multiplier}: ${theme.spacing.base * multiplier}px;`);

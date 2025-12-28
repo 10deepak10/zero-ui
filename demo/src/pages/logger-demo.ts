@@ -49,6 +49,39 @@ export class LoggerDemo extends LitElement {
     zui-logger {
       width: 100%;
     }
+
+    h3 {
+      margin-top: 0;
+      color: var(--text-main);
+      font-size: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--text-main);
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: var(--code-string);
+    }
   `;
 
   private _logInfo() {
@@ -130,6 +163,72 @@ const logInfo = () => {
 };
 </script>`;
 
+    const apiHtml = html`
+      <div slot="api">
+        <h3>Static Methods</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Parameters</th>
+              <th>Returns</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>debug</code></td>
+              <td><code>message: string, module?: string, data?: any</code></td>
+              <td><code>void</code></td>
+              <td>Log a debug message.</td>
+            </tr>
+            <tr>
+              <td><code>info</code></td>
+              <td><code>message: string, module?: string, data?: any</code></td>
+              <td><code>void</code></td>
+              <td>Log an informational message.</td>
+            </tr>
+            <tr>
+              <td><code>warn</code></td>
+              <td><code>message: string, module?: string, data?: any</code></td>
+              <td><code>void</code></td>
+              <td>Log a warning message.</td>
+            </tr>
+            <tr>
+              <td><code>error</code></td>
+              <td><code>message: string, module?: string, data?: any</code></td>
+              <td><code>void</code></td>
+              <td>Log an error message.</td>
+            </tr>
+            <tr>
+              <td><code>subscribe</code></td>
+              <td><code>listener: (entry: LogEntry) => void</code></td>
+              <td><code>void</code></td>
+              <td>Subscribe to new log entries.</td>
+            </tr>
+            <tr>
+              <td><code>unsubscribe</code></td>
+              <td><code>listener: (entry: LogEntry) => void</code></td>
+              <td><code>void</code></td>
+              <td>Unsubscribe from log updates.</td>
+            </tr>
+            <tr>
+              <td><code>getHistory</code></td>
+              <td><code>-</code></td>
+              <td><code>LogEntry[]</code></td>
+              <td>Retrieve current log history (max 1000).</td>
+            </tr>
+            <tr>
+              <td><code>clear</code></td>
+              <td><code>-</code></td>
+              <td><code>void</code></td>
+              <td>Clear all history.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+
     return html`
       <demo-page
         name="Logger Utility"
@@ -157,6 +256,8 @@ const logInfo = () => {
             </div>
           </div>
         </demo-example>
+
+        ${apiHtml}
       </demo-page>
     `;
   }

@@ -75,6 +75,39 @@ export class ExtensionCheckDemo extends LitElement {
     zui-extension-check {
       width: 100%;
     }
+
+    h3 {
+      margin-top: 0;
+      color: var(--text-main);
+      font-size: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--text-main);
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    code {
+      background: rgba(0,0,0,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: var(--code-string);
+    }
   `;
 
   render() {
@@ -103,6 +136,62 @@ export class AppComponent {
 const extensions = [ ... ]; // See JSON tab for config
 </script>`;
 
+    const properties = [
+      { name: 'extensions', type: 'ExtensionDefinition[]', default: '[]', description: 'List of extensions to check for.' }
+    ];
+
+    const apiHtml = html`
+      <div slot="api">
+        <h3>Properties</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+             ${properties.map(p => html`
+              <tr>
+                <td><code>${p.name}</code></td>
+                <td><code>${p.type}</code></td>
+                <td><code>${p.default}</code></td>
+                <td>${p.description}</td>
+              </tr>
+            `)}
+          </tbody>
+        </table>
+
+        <h3>Static Methods (ExtensionCheckService)</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Parameters</th>
+              <th>Returns</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>checkExtension</code></td>
+              <td><code>ext: ExtensionDefinition</code></td>
+              <td><code>Promise&lt;boolean&gt;</code></td>
+              <td>Check if a specific extension is installed.</td>
+            </tr>
+            <tr>
+              <td><code>checkExtensions</code></td>
+              <td><code>extensions: ExtensionDefinition[]</code></td>
+              <td><code>Promise&lt;DetectionResult[]&gt;</code></td>
+              <td>Check multiple extensions.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+
     return html`
       <demo-page
         name="Extension Check"
@@ -127,6 +216,8 @@ ${JSON.stringify(this.extensions, null, 2)}</pre>
                </div>
           </div>
         </demo-example>
+
+        ${apiHtml}
       </demo-page>
     `;
   }

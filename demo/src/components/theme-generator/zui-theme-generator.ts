@@ -218,7 +218,7 @@ export class ZuiThemeGenerator extends LitElement {
     @state() private _baseTheme: ThemeConfig = { ...DEFAULT_THEME };
   @state() private _generatedCss = '';
   @state() private _previewImage: string = '';
-  @state() private _previewMode: 'light' | 'dark' = 'light';
+    @state() private _previewMode: 'light' | 'dark' = 'dark';
 
   updated(changedProperties: Map<string, any>) {
       if (changedProperties.has('_previewMode')) {
@@ -235,7 +235,7 @@ export class ZuiThemeGenerator extends LitElement {
       this._updateTheme();
       
       // Default to Light mode or System
-      this._previewMode = 'light';
+      this._previewMode = 'dark';
       
       // Setup ResizeObserver for scaling
       setTimeout(() => {
@@ -381,7 +381,7 @@ ${this._generatedCss}
             <input 
                 type="text" 
                 .value=${value}
-                @change=${(e: Event) => this._handleColorChange(key, (e.target as HTMLInputElement).value)}
+                @input=${(e: Event) => this._handleColorChange(key, (e.target as HTMLInputElement).value)}
             >
         </div>
             
@@ -403,7 +403,7 @@ ${this._generatedCss}
             <label class="form-label" style="width: 120px; margin: 0;">${label}</label>
             <input type="text" 
                 .value=${value}
-                @change=${(e: any) => {
+                @input=${(e: any) => {
                 target[finalKey] = e.target.value;
                 this._updateTheme();
                 this.requestUpdate();
@@ -420,7 +420,7 @@ ${this._generatedCss}
             <label class="form-label" style="width: 120px; margin: 0;">${label}</label>
             <input type="text" 
                 .value=${value}
-                @change=${(e: any) => {
+                @input=${(e: any) => {
                 (this._theme[section] as any)[key] = e.target.value;
                 this._updateTheme();
                 this.requestUpdate();
@@ -524,7 +524,7 @@ ${this._generatedCss}
                             <label class="form-label">Font Family</label>
                             <input type="text" style="width: 100%" 
                                 .value=${this._theme.typography.fontFamily}
-                                @change=${(e: any) => {
+                                @input=${(e: any) => {
                                     this._theme.typography.fontFamily = e.target.value;
                                     this._updateTheme();
                                     this.requestUpdate();
@@ -555,21 +555,21 @@ ${this._generatedCss}
                             <label class="form-label">Small (sm)</label>
                             <input type="text" 
                                 .value=${this._theme.borderRadius.sm} 
-                                @change=${(e: any) => { this._theme.borderRadius.sm = e.target.value; this._updateTheme(); }}
+                                @input=${(e: any) => { this._theme.borderRadius.sm = e.target.value; this._updateTheme(); }}
                             >
                          </div>
                          <div class="form-group">
                             <label class="form-label">Medium (md)</label>
                             <input type="text" 
                                 .value=${this._theme.borderRadius.md} 
-                                @change=${(e: any) => { this._theme.borderRadius.md = e.target.value; this._updateTheme(); }}
+                                @input=${(e: any) => { this._theme.borderRadius.md = e.target.value; this._updateTheme(); }}
                             >
                          </div>
                          <div class="form-group">
                             <label class="form-label">Large (lg)</label>
                             <input type="text"
                                 .value=${this._theme.borderRadius.lg} 
-                                @change=${(e: any) => { this._theme.borderRadius.lg = e.target.value; this._updateTheme(); }}
+                                @input=${(e: any) => { this._theme.borderRadius.lg = e.target.value; this._updateTheme(); }}
                             >
                          </div>
 
@@ -685,10 +685,10 @@ ${this._generatedCss}
                             text-align: center; color: #fff;
                             padding: 24px;
                         ">
-                            <h1 style="font-size: 2.5rem; font-weight: 800; margin: 0 0 16px; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">
+                            <h1 style="font-size: var(--font-size-h1); font-weight: var(--font-weight-h1); margin: 0 0 16px; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">
                                 Welcome to Your Theme
                             </h1>
-                            <p style="font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 0 32px;">
+                            <p style="font-size: var(--font-size-body); opacity: 0.9; max-width: 600px; margin: 0 0 32px;">
                                 Auto-generated from your image. This landing page demonstrates your extraction results.
                             </p>
                             <button class="preview-btn preview-btn-primary" style="--color-text: #fff; border: 1px solid rgba(255,255,255,0.2);">Get Started</button>
@@ -696,8 +696,8 @@ ${this._generatedCss}
                     </div>
                     ` : html`
                          <div style="padding: 48px 24px; text-align: center; border-bottom: 1px solid var(--card-border, rgba(255,255,255,0.1));">
-                            <h1 style="font-size: 2.5rem; font-weight: 800; margin: 0 0 16px; color: var(--color-text);">Welcome to Your Theme</h1>
-                            <p style="font-size: 1.1rem; opacity: 0.7; max-width: 600px; margin: 0 auto 32px; color: var(--color-text);">
+                            <h1 style="font-size: var(--font-size-h1); font-weight: var(--font-weight-h1); margin: 0 0 var(--spacing-4); color: var(--color-text);">Welcome to Your Theme</h1>
+                            <p style="font-size: var(--font-size-body); opacity: 0.7; max-width: 600px; margin: 0 auto var(--spacing-8); color: var(--color-text);">
                                 Upload an image to generate a custom banner and theme.
                             </p>
                          </div>
@@ -709,7 +709,7 @@ ${this._generatedCss}
                     ">
                         <!-- Realistic Typography Examples -->
                          <div style="margin-bottom: 64px;">
-                            <h2 style="font-size: 1.5rem; margin-bottom: 24px; opacity: 0.5; text-transform: uppercase; letter-spacing: 2px;">Typography in Context</h2>
+                            <h2 style="font-size: var(--font-size-h4); margin-bottom: var(--spacing-6); opacity: 0.5; text-transform: uppercase; letter-spacing: 2px;">Typography in Context</h2>
                             
                             <div style="
                                 display: grid; 
@@ -720,12 +720,12 @@ ${this._generatedCss}
                                 <div style="
                                     background: var(--color-surface);
                                     border-radius: var(--radius-md);
-                                    padding: 32px;
+                                    padding: var(--spacing-8);
                                     box-shadow: var(--shadow-sm);
                                     border: 1px solid var(--card-border, rgba(255,255,255,0.05));
                                 ">
                                     <span style="font-size: var(--font-size-caption); color: var(--color-primary); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Design Trends</span>
-                                    <h1 style="margin: 12px 0; color: var(--color-text); line-height: 1.1;">The Future of UI Design</h1>
+                                    <h1 style="margin: 12px 0; color: var(--color-text); line-height: 1.1; font-size: var(--font-size-h1); font-weight: var(--font-weight-h1);">The Future of UI Design</h1>
                                     <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 24px;">
                                         <div style="width: 32px; height: 32px; border-radius: 99px; background: var(--color-secondary);"></div>
                                         <div style="font-size: var(--font-size-caption); color: var(--text-muted, #94a3b8);">
@@ -733,8 +733,8 @@ ${this._generatedCss}
                                         </div>
                                     </div>
                                     
-                                    <h2 style="margin: 0 0 12px; color: var(--color-text);">Understanding Color Theory</h2>
-                                    <p style="margin: 0 0 16px; color: var(--color-text); line-height: 1.6; opacity: 0.9;">
+                                    <h2 style="margin: 0 0 12px; color: var(--color-text); font-size: var(--font-size-h2); font-weight: var(--font-weight-h2);">Understanding Color Theory</h2>
+                                    <p style="margin: 0 0 16px; color: var(--color-text); line-height: 1.6; opacity: 0.9; font-size: var(--font-size-body);">
                                         Colors aren't just visual decoration; they evoke emotion and guide user behavior. 
                                         When building a design system, your primary palette defines your brand's voice.
                                     </p>
@@ -745,38 +745,38 @@ ${this._generatedCss}
                                 <div style="
                                     background: var(--color-surface);
                                     border-radius: var(--radius-md);
-                                    padding: 32px;
+                                    padding: var(--spacing-8);
                                     box-shadow: var(--shadow-sm);
                                     border: 1px solid var(--card-border, rgba(255,255,255,0.05));
                                     display: flex; flex-direction: column;
                                 ">
                                     <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 24px;">
                                         <div>
-                                            <h3 style="margin: 0; color: var(--color-text);">Revenue Overview</h3>
+                                            <h3 style="margin: 0; color: var(--color-text); font-size: var(--font-size-h3);">Revenue Overview</h3>
                                             <span style="font-size: var(--font-size-caption); opacity: 0.6; color: var(--color-text);">Last 30 days performance</span>
                                         </div>
                                         <button style="padding: 4px 12px; border-radius: 99px; background: rgba(255,255,255,0.1); border: none; color: var(--color-text); cursor: pointer;">Export</button>
                                     </div>
 
-                                    <div style="margin-bottom: 32px;">
+                                    <div style="margin-bottom: var(--spacing-8);">
                                         <h4 style="font-size: 3rem; margin: 0; color: var(--color-text); line-height: 1;">$45,231.89</h4>
                                         <div style="color: var(--color-success); margin-top: 8px; font-weight: 600;">+20.1% <span style="font-weight: 400; opacity: 0.7; color: var(--color-text);">vs last month</span></div>
                                     </div>
 
-                                    <h5 style="margin: 0 0 16px; color: var(--color-text); text-transform: uppercase; font-size: 0.75rem; opacity: 0.7;">Top Channels</h5>
+                                    <h5 style="margin: 0 0 16px; color: var(--color-text); text-transform: uppercase; font-size: var(--font-size-caption); opacity: 0.7;">Top Channels</h5>
 
                                     <div style="display: flex; flex-direction: column; gap: 12px;">
                                         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border, rgba(255,255,255,0.05)); padding-bottom: 8px;">
-                                            <h6 style="margin: 0; color: var(--color-text);">Organic Search</h6>
-                                            <span style="font-weight: 600; color: var(--color-text);">65%</span>
+                                            <h6 style="margin: 0; color: var(--color-text); font-size: var(--font-size-h6);">Organic Search</h6>
+                                            <span style="font-weight: 600; color: var(--color-text); font-size: var(--font-size-body);">65%</span>
                                         </div>
                                         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border, rgba(255,255,255,0.05)); padding-bottom: 8px;">
-                                            <h6 style="margin: 0; color: var(--color-text);">Direct Traffic</h6>
-                                            <span style="font-weight: 600; color: var(--color-text);">22%</span>
+                                            <h6 style="margin: 0; color: var(--color-text); font-size: var(--font-size-h6);">Direct Traffic</h6>
+                                            <span style="font-weight: 600; color: var(--color-text); font-size: var(--font-size-body);">22%</span>
                                         </div>
                                         <div style="display: flex; justify-content: space-between; align-items: center;">
-                                            <h6 style="margin: 0; color: var(--color-text);">Social Media</h6>
-                                            <span style="font-weight: 600; color: var(--color-text);">13%</span>
+                                            <h6 style="margin: 0; color: var(--color-text); font-size: var(--font-size-h6);">Social Media</h6>
+                                            <span style="font-weight: 600; color: var(--color-text); font-size: var(--font-size-body);">13%</span>
                                         </div>
                                     </div>
                                 </div>
@@ -785,13 +785,13 @@ ${this._generatedCss}
 
                         <!-- Real Life Example: Pricing -->
                         <div>
-                            <h2 style="font-size: 1.5rem; margin-bottom: 32px; opacity: 0.5; text-transform: uppercase; letter-spacing: 2px;">Pricing</h2>
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px;">
+                            <h2 style="font-size: var(--font-size-h4); margin-bottom: var(--spacing-8); opacity: 0.5; text-transform: uppercase; letter-spacing: 2px;">Pricing</h2>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-8);">
                                 <!-- Standard Plan -->
                                 <div style="
                                     background: var(--color-surface);
                                     border-radius: var(--radius-md);
-                                    padding: 32px;
+                                    padding: var(--spacing-8);
                                     box-shadow: var(--shadow-sm);
                                     border: 1px solid var(--card-border, rgba(255,255,255,0.05));
                                     transition: transform var(--animate-normal);
@@ -800,11 +800,11 @@ ${this._generatedCss}
                                 @mouseleave=${(e: any) => e.target.style.transform = 'translateY(0)'}
                                 >
                                     <h3 style="color: var(--color-text); margin-top: 0;">Standard</h3>
-                                    <div style="font-size: 3rem; font-weight: 800; color: var(--color-text); margin-bottom: 16px;">$19<span style="font-size: 1rem; opacity: 0.6; font-weight: 400;">/mo</span></div>
-                                    <p style="color: var(--color-text); opacity: 0.8; margin-bottom: 24px;">Perfect for individual developers.</p>
+                                    <div style="font-size: var(--font-size-h1); font-weight: 800; color: var(--color-text); margin-bottom: var(--spacing-4);">$19<span style="font-size: var(--font-size-caption); opacity: 0.6; font-weight: 400;">/mo</span></div>
+                                    <p style="color: var(--color-text); opacity: 0.8; margin-bottom: var(--spacing-6);">Perfect for individual developers.</p>
                                     <button style="
                                         width: 100%;
-                                        padding: 12px;
+                                        padding: var(--spacing-3);
                                         border-radius: var(--radius-sm);
                                         background: transparent;
                                         border: 1px solid var(--color-text);
@@ -822,7 +822,7 @@ ${this._generatedCss}
                                 <div style="
                                     background: var(--color-surface);
                                     border-radius: var(--radius-lg);
-                                    padding: 40px 32px;
+                                    padding: var(--spacing-12) var(--spacing-8);
                                     box-shadow: var(--shadow-lg);
                                     border: 2px solid var(--color-primary);
                                     position: relative;
@@ -831,19 +831,19 @@ ${this._generatedCss}
                                     <div style="
                                         position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
                                         background: var(--color-primary); color: #fff;
-                                        padding: 4px 12px; border-radius: 99px; font-size: 0.75rem; font-weight: 700;
+                                        padding: 4px 12px; border-radius: 99px; font-size: var(--font-size-caption); font-weight: 700;
                                     ">MOST POPULAR</div>
                                     <h3 style="color: var(--color-primary); margin-top: 0;">Professional</h3>
-                                    <div style="font-size: 3rem; font-weight: 800; color: var(--color-text); margin-bottom: 16px;">$49<span style="font-size: 1rem; opacity: 0.6; font-weight: 400;">/mo</span></div>
-                                    <p style="color: var(--color-text); opacity: 0.8; margin-bottom: 24px;">For growing teams and businesses.</p>
-                                    <ul style="list-style: none; padding: 0; margin: 0 0 24px; color: var(--color-text); opacity: 0.8; font-size: 0.9rem;">
-                                        <li style="margin-bottom: 8px;">✓ All Standard features</li>
-                                        <li style="margin-bottom: 8px;">✓ Unlimited projects</li>
+                                    <div style="font-size: var(--font-size-h1); font-weight: 800; color: var(--color-text); margin-bottom: var(--spacing-4);">$49<span style="font-size: var(--font-size-caption); opacity: 0.6; font-weight: 400;">/mo</span></div>
+                                    <p style="color: var(--color-text); opacity: 0.8; margin-bottom: var(--spacing-6);">For growing teams and businesses.</p>
+                                    <ul style="list-style: none; padding: 0; margin: 0 0 var(--spacing-6); color: var(--color-text); opacity: 0.8; font-size: var(--font-size-body);">
+                                        <li style="margin-bottom: var(--spacing-2);">✓ All Standard features</li>
+                                        <li style="margin-bottom: var(--spacing-2);">✓ Unlimited projects</li>
                                         <li>✓ Priority support</li>
                                     </ul>
                                     <button style="
                                         width: 100%;
-                                        padding: 12px;
+                                        padding: var(--spacing-3);
                                         border-radius: var(--radius-md);
                                         background: var(--color-primary);
                                         border: none;
