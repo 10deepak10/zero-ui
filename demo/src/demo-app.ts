@@ -26,6 +26,7 @@ import './pages/placeholder-demo';
 import './pages/sandbox-demo';
 import './pages/split-demo';
 import './pages/socket-demo';
+import './pages/video-call-demo';
 
 @customElement('demo-app')
 export class DemoApp extends LitElement {
@@ -524,6 +525,8 @@ export class DemoApp extends LitElement {
         return html`<code-editor-demo></code-editor-demo>`;
       case '/socket-demo':
         return html`<socket-demo></socket-demo>`;
+      case '/video-call':
+        return html`<video-call-demo></video-call-demo>`;
       case '/event-bus':
         import('./pages/event-bus-demo');
         return html`<event-bus-demo></event-bus-demo>`;
@@ -618,6 +621,8 @@ export class DemoApp extends LitElement {
             <div class="nav-header">Permissions & Media</div>
             ${this._renderNavLink('/camera-check', 'Camera Check')}
             ${this._renderNavLink('/mic-check', 'Mic Check')}
+            ${this._renderNavLink('/video-call', 'Video Call', true)}
+            ${this._renderNavLink('/geolocation-check', 'Geolocation Check')}
             ${this._renderNavLink('/geolocation-check', 'Geolocation Check')}
             ${this._renderNavLink('/clipboard-check', 'Clipboard Check')}
           </div>

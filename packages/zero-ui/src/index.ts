@@ -39,3 +39,6 @@ export * from './event-bus/index.js';
 export * from './services/index.js';
 export * from './split/index.js';
 export * from './tabs/index.js';
+export * from './video-call/zui-video-call.js';
+export * from './webrtc/zui-webrtc-peer.js';
+export * from './webrtc/signaling.js';
