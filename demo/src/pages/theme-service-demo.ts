@@ -137,7 +137,7 @@ export class ThemeServiceDemo extends LitElement {
           this._extractedPalette = await ThemeGeneratorService.extractColorsFromImage(file);
           this._generatedTheme = ThemeGeneratorService.mapPaletteToTheme(this._extractedPalette);
           // Set base color for manipulation to primary color
-          if (this._generatedTheme.colors.light.primary) {
+        if (this._generatedTheme && this._generatedTheme.colors.light.primary) {
               this._hex1 = this._generatedTheme.colors.light.primary;
           }
       }

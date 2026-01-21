@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@deepverse/zero-ui/proctoring';
+import '../components/proctoring/zui-proctoring.js';
 import '@deepverse/zero-ui/checkbox';
 import '../components/demo-page';
 import '../components/demo-example';
@@ -110,7 +110,7 @@ export class ProctoringDemo extends LitElement {
   render() {
     const basicHtml = `<zui-proctoring .config="\${config}"></zui-proctoring>`;
 
-    const basicReact = `import { ZuiProctoring } from '@deepverse/zero-ui/proctoring';
+    const basicReact = `import { ZuiProctoring } from '../components/proctoring/zui-proctoring.js';
 
 function App() {
   const config = {

@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@deepverse/zero-ui/os-check';
+import '../components/os-check/zui-os-check.js';
 import '../components/demo-page';
 import '../components/demo-example';
 import { OsCheckService } from '@deepverse/zero-ui';
@@ -76,7 +76,7 @@ export class OsCheckDemo extends LitElement {
   @os-detected="\${handleDetection}"
 ></zui-os-check>`;
 
-    const basicReact = `import { ZuiOsCheck } from '@deepverse/zero-ui/os-check';
+    const basicReact = `import { ZuiOsCheck } from '../components/os-check/zui-os-check.js';
 
 function App() {
   const handleDetection = (e) => {

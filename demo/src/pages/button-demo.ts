@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '@deepverse/zero-ui/button';
-import '@deepverse/zero-ui/code-editor';
+import '../components/code-editor/zui-code-editor.js';
 import '../components/demo-page';
 
 @customElement('button-demo')

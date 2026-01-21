@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '@deepverse/zero-ui/logger';
+import '../components/logger/zui-logger.js';
 import '../components/demo-page';
 import '../components/demo-example';
 import { LoggerService } from '@deepverse/zero-ui';
@@ -118,7 +118,7 @@ export class LoggerDemo extends LitElement {
   render() {
     const basicHtml = `<zui-logger></zui-logger>`;
 
-    const basicReact = `import { ZuiLogger } from '@deepverse/zero-ui/logger';
+    const basicReact = `import { ZuiLogger } from '../components/logger/zui-logger.js';
 import { LoggerService } from '@deepverse/zero-ui/services/logger';
 
   function App() {

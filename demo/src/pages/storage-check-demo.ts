@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@deepverse/zero-ui/storage-check';
+import '../components/storage-check/zui-storage-check.js';
 import '../components/demo-page';
 import '../components/demo-example';
 import { StorageCheckService, type StorageQuota } from '@deepverse/zero-ui';
@@ -230,7 +230,7 @@ export class StorageCheckDemo extends LitElement {
 
   render() {
     const basicHtml = `<zui-storage-check></zui-storage-check>`;
-    const basicReact = `import { ZuiStorageCheck } from '@deepverse/zero-ui/storage-check';
+    const basicReact = `import { ZuiStorageCheck } from '../components/storage-check/zui-storage-check.js';
 
 function App() {
   return <ZuiStorageCheck />;

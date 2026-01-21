@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@deepverse/zero-ui/extension-check';
+import '../components/extension-check/zui-extension-check.js';
 import '../components/demo-page';
 import '../components/demo-example';
 import { type ExtensionDefinition } from '@deepverse/zero-ui';
@@ -112,7 +112,7 @@ export class ExtensionCheckDemo extends LitElement {
 
   render() {
     const basicHtml = `<zui-extension-check .extensions="\${customExtensions}"></zui-extension-check>`;
-    const basicReact = `import { ZuiExtensionCheck } from '@deepverse/zero-ui/extension-check';
+    const basicReact = `import { ZuiExtensionCheck } from '../components/extension-check/zui-extension-check.js';
 
 const extensions = [ ... ]; // See JSON tab for config
 

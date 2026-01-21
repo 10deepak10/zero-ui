@@ -60,48 +60,54 @@
         "../packages/zero-ui/src/slider/zui-slider.ts"
       ],
       "@deepverse/zero-ui/os-check": [
-        "../packages/zero-ui/src/os-check/zui-os-check.ts"
+        "../packages/zero-ui/src/services/os.service.ts"
       ],
       "@deepverse/zero-ui/browser-check": [
-        "../packages/zero-ui/src/browser-check/zui-browser-check.ts"
+        "../packages/zero-ui/src/services/browser.service.ts"
       ],
       "@deepverse/zero-ui/screen-check": [
-        "../packages/zero-ui/src/screen-check/zui-screen-check.ts"
+        "../packages/zero-ui/src/services/screen.service.ts"
       ],
       "@deepverse/zero-ui/storage-check": [
-        "../packages/zero-ui/src/storage-check/zui-storage-check.ts"
+        "../packages/zero-ui/src/services/storage.service.ts"
       ],
-      "@deepverse/zero-ui/gpu-check": ["../packages/zero-ui/src/gpu-check/zui-gpu-check.ts"],
-      "@deepverse/zero-ui/network-check": ["../packages/zero-ui/src/network-check/zui-network-check.ts"],
-      "@deepverse/zero-ui/battery-check": ["../packages/zero-ui/src/battery-check/zui-battery-check.ts"],
-      "@deepverse/zero-ui/camera-check": ["../packages/zero-ui/src/camera-check/zui-camera-check.ts"],
-      "@deepverse/zero-ui/theme-check": ["../packages/zero-ui/src/theme-check/zui-theme-check.ts"],
-      "@deepverse/zero-ui/mic-check": ["../packages/zero-ui/src/mic-check/zui-mic-check.ts"],
-      "@deepverse/zero-ui/geolocation-check": ["../packages/zero-ui/src/geolocation-check/zui-geolocation-check.ts"],
-      "@deepverse/zero-ui/clipboard-check": ["../packages/zero-ui/src/clipboard-check/zui-clipboard-check.ts"],
+      "@deepverse/zero-ui/gpu-check": ["../packages/zero-ui/src/services/gpu.service.ts"],
+      "@deepverse/zero-ui/network-check": ["../packages/zero-ui/src/services/network.service.ts"],
+      "@deepverse/zero-ui/battery-check": ["../packages/zero-ui/src/services/battery.service.ts"],
+      "@deepverse/zero-ui/camera-check": ["../packages/zero-ui/src/services/camera.service.ts"],
+      "@deepverse/zero-ui/theme-check": ["../packages/zero-ui/src/services/theme.service.ts"],
+      "@deepverse/zero-ui/mic-check": ["../packages/zero-ui/src/services/mic.service.ts"],
+      "@deepverse/zero-ui/geolocation-check": ["../packages/zero-ui/src/services/geolocation.service.ts"],
+      "@deepverse/zero-ui/clipboard-check": ["../packages/zero-ui/src/services/clipboard.service.ts"],
       "@deepverse/zero-ui/notification-check": [
-        "../packages/zero-ui/src/notification-check/zui-notification-check.ts"
+        "../packages/zero-ui/src/services/notification.service.ts"
       ],
       "@deepverse/zero-ui/extension-check": [
-        "../packages/zero-ui/src/extension-check/zui-extension-check.ts"
+        "../packages/zero-ui/src/services/extension.service.ts"
       ],
       "@deepverse/zero-ui/proctoring": [
-        "../packages/zero-ui/src/proctoring/zui-proctoring.ts"
+        "../packages/zero-ui/src/services/proctoring.service.ts"
       ],
       "@deepverse/zero-ui/logger": [
-        "../packages/zero-ui/src/logger/zui-logger.ts"
+        "../packages/zero-ui/src/services/logger.service.ts"
       ],
       "@deepverse/zero-ui/code-editor": [
-        "../packages/zero-ui/src/code-editor/zui-code-editor.ts"
+        "../packages/zero-ui/src/services/syntax-highlighter.service.ts"
       ],
       "@deepverse/zero-ui/tabs": [
         "../packages/zero-ui/src/tabs/index.ts"
       ],
       "@deepverse/zero-ui/event-bus": [
-        "../packages/zero-ui/src/event-bus/index.ts"
+        "../packages/zero-ui/src/services/event-bus.service.ts"
       ],
       "@deepverse/zero-ui/split": [
         "../packages/zero-ui/src/split/index.ts"
+      ],
+      "@deepverse/zero-ui/socket-check": [
+        "../packages/zero-ui/src/services/socket.service.ts"
+      ],
+      "@deepverse/zero-ui/theme-generator": [
+        "../packages/zero-ui/src/services/theme-generator.service.ts"
       ],
       "@deepverse/zero-ui/text-editor": [
         "../packages/zero-ui/src/text-editor/index.ts"

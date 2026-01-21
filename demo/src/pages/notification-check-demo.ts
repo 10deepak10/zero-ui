@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '@deepverse/zero-ui/notification-check';
+import '../components/notification-check/zui-notification-check.js';
 import '../components/demo-page';
 import '../components/demo-example';
 
@@ -65,7 +65,7 @@ export class NotificationCheckDemo extends LitElement {
 
   render() {
     const basicHtml = `<zui-notification-check></zui-notification-check>`;
-    const basicReact = `import { ZuiNotificationCheck } from '@deepverse/zero-ui/notification-check';
+    const basicReact = `import { ZuiNotificationCheck } from '../components/notification-check/zui-notification-check.js';
 
 function App() {
   return <ZuiNotificationCheck />;

@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@deepverse/zero-ui/code-editor';
+import '../components/code-editor/zui-code-editor.js';
 import '../components/demo-page';
 import '../components/demo-example';
 
@@ -60,7 +60,7 @@ greet(user);`;
   @change="\${handleCodeChange}"
 ></zui-code-editor>`;
 
-    const basicReact = `import { ZuiCodeEditor } from '@deepverse/zero-ui/code-editor';
+    const basicReact = `import { ZuiCodeEditor } from '../components/code-editor/zui-code-editor.js';
 
 function App() {
   const [code, setCode] = useState("console.log('Hello');");

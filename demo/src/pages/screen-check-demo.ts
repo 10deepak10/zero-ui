@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@deepverse/zero-ui/screen-check';
+import '../components/screen-check/zui-screen-check.js';
 import '../components/demo-page';
 import '../components/demo-example';
 import { ScreenCheckService } from '@deepverse/zero-ui';
@@ -98,7 +98,7 @@ export class ScreenCheckDemo extends LitElement {
   live 
   @screen-change="\${handleChange}"
 ></zui-screen-check>`;
-    const liveReact = `import { ZuiScreenCheck } from '@deepverse/zero-ui/screen-check';
+    const liveReact = `import { ZuiScreenCheck } from '../components/screen-check/zui-screen-check.js';
 
 function App() {
   const handleScreenChange = (e) => {
@@ -129,7 +129,7 @@ const onScreenChange = (event) => {
 </script>`;
 
     const staticHtml = `<zui-screen-check></zui-screen-check>`;
-    const staticReact = `import { ZuiScreenCheck } from '@deepverse/zero-ui/screen-check';
+    const staticReact = `import { ZuiScreenCheck } from '../components/screen-check/zui-screen-check.js';
 
 function App() {
   return <ZuiScreenCheck />;

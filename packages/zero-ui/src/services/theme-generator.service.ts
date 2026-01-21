@@ -1,4 +1,6 @@
 import { type ThemeConfig, DEFAULT_THEME } from './theme-models.js';
+export type { ThemeConfig };
+export { DEFAULT_THEME };
 
 interface Rgb { r: number; g: number; b: number; }
 interface Hsl { h: number; s: number; l: number; }

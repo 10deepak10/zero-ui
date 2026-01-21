@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@deepverse/zero-ui/network-check';
+import '../components/network-check/zui-network-check.js';
 import '../components/demo-page';
 import '../components/demo-example';
 import { NetworkCheckService, type NetworkInfo } from '@deepverse/zero-ui';
@@ -92,7 +92,7 @@ export class NetworkCheckDemo extends LitElement {
   render() {
     const basicHtml = `<zui-network-check></zui-network-check>`;
 
-    const basicReact = `import { ZuiNetworkCheck } from '@deepverse/zero-ui/network-check';
+    const basicReact = `import { ZuiNetworkCheck } from '../components/network-check/zui-network-check.js';
 
 function App() {
   return <ZuiNetworkCheck />;

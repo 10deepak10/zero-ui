@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import '@deepverse/zero-ui/tabs';
-import '@deepverse/zero-ui/code-editor';
+import './code-editor/zui-code-editor.js';
 
 @customElement('demo-example')
 export class DemoExample extends LitElement {

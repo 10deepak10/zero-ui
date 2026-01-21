@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '@deepverse/zero-ui/theme-check';
+import '../components/theme-check/zui-theme-check.js';
 import '../components/demo-page';
 import '../components/demo-example';
 
@@ -60,7 +60,7 @@ export class ThemeCheckDemo extends LitElement {
   render() {
     const basicHtml = `<zui-theme-check></zui-theme-check>`;
 
-    const basicReact = `import { ZuiThemeCheck } from '@deepverse/zero-ui/theme-check';
+    const basicReact = `import { ZuiThemeCheck } from '../components/theme-check/zui-theme-check.js';
 
 function App() {
   return <ZuiThemeCheck />;

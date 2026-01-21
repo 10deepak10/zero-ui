@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '@deepverse/zero-ui/event-bus';
+import '../components/event-bus/zui-event-bus.js';
 import '../components/demo-page';
 import '../components/demo-example';
 import { EventBusService } from '@deepverse/zero-ui';
@@ -110,7 +110,7 @@ export class EventBusDemo extends LitElement {
   render() {
     const basicHtml = `<zui-event-bus></zui-event-bus>`;
 
-    const basicReact = `import { ZuiEventBus } from '@deepverse/zero-ui/event-bus';
+    const basicReact = `import { ZuiEventBus } from '../components/event-bus/zui-event-bus.js';
 import { EventBusService } from '@deepverse/zero-ui/services/event-bus';
 
 function App() {

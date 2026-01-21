@@ -1,11 +1,11 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { LoggerService, FormatterService, EventBusService } from '@deepverse/zero-ui';
-import '@deepverse/zero-ui/logger';
-import '@deepverse/zero-ui/event-bus';
+import '../components/logger/zui-logger.js';
+import '../components/event-bus/zui-event-bus.js';
 import '@deepverse/zero-ui/split';
 import '@deepverse/zero-ui/toggle';
-import '@deepverse/zero-ui/code-editor';
+import '../components/code-editor/zui-code-editor.js';
 import '@deepverse/zero-ui/tabs';
 
 const DEFAULT_HTML = `

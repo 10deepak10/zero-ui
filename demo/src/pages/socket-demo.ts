@@ -2,7 +2,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { ZuiSocketService } from '@deepverse/zero-ui';
-import '@deepverse/zero-ui/event-bus';
+import '../components/event-bus/zui-event-bus.js';
 // Note: We assume zero-ui exposes these. If not, we might need relative imports if running from mono-repo source.
 // Checking demo-app.ts will confirm import style.
 

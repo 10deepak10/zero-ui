@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '@deepverse/zero-ui/mic-check';
+import '../components/mic-check/zui-mic-check.js';
 import '../components/demo-page';
 import '../components/demo-example';
 
@@ -70,7 +70,7 @@ export class MicCheckDemo extends LitElement {
 
     const basicHtml = `<zui-mic-check showVisualizer></zui-mic-check>`;
 
-    const basicReact = `import { ZuiMicCheck } from '@deepverse/zero-ui/mic-check';
+    const basicReact = `import { ZuiMicCheck } from '../components/mic-check/zui-mic-check.js';
 
 function App() {
   return <ZuiMicCheck showVisualizer />;

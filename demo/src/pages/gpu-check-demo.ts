@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@deepverse/zero-ui/gpu-check';
+import '../components/gpu-check/zui-gpu-check.js';
 import '../components/demo-page';
 import '../components/demo-example';
 import { GpuCheckService, type GpuInfo } from '@deepverse/zero-ui';
@@ -74,7 +74,7 @@ export class GpuCheckDemo extends LitElement {
   render() {
     const basicHtml = `<zui-gpu-check></zui-gpu-check>`;
 
-    const basicReact = `import { ZuiGpuCheck } from '@deepverse/zero-ui/gpu-check';
+    const basicReact = `import { ZuiGpuCheck } from '../components/gpu-check/zui-gpu-check.js';
 
 function App() {
   return <ZuiGpuCheck />;

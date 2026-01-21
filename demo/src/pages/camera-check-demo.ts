@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@deepverse/zero-ui/camera-check';
+import '../components/camera-check/zui-camera-check.js';
 import '../components/demo-page';
 import '../components/demo-example';
 import { CameraCheckService, type CameraDevice } from '@deepverse/zero-ui';
@@ -94,7 +94,7 @@ export class CameraCheckDemo extends LitElement {
 
     const basicHtml = `<zui-camera-check showPreview></zui-camera-check>`;
 
-    const basicReact = `import { ZuiCameraCheck } from '@deepverse/zero-ui/camera-check';
+    const basicReact = `import { ZuiCameraCheck } from '../components/camera-check/zui-camera-check.js';
 
 function App() {
   return <ZuiCameraCheck showPreview />;

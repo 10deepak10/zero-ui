@@ -1,8 +1,7 @@
 {
   "name": "@deepverse/zero-ui",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "type": "module",
-
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -63,77 +62,89 @@
       "types": "./dist/slider/zui-slider.d.ts",
       "default": "./dist/slider/zui-slider.js"
     },
-    "./os-check": {
-      "types": "./dist/os-check/zui-os-check.d.ts",
-      "default": "./dist/os-check/zui-os-check.js"
+    "./battery-check": {
+      "types": "./dist/services/battery.service.d.ts",
+      "default": "./dist/services/battery.service.js"
     },
     "./browser-check": {
-      "types": "./dist/browser-check/zui-browser-check.d.ts",
-      "default": "./dist/browser-check/zui-browser-check.js"
-    },
-    "./screen-check": {
-      "types": "./dist/screen-check/zui-screen-check.d.ts",
-      "default": "./dist/screen-check/zui-screen-check.js"
-    },
-    "./storage-check": {
-      "types": "./dist/storage-check/zui-storage-check.d.ts",
-      "default": "./dist/storage-check/zui-storage-check.js"
-    },
-    "./gpu-check": {
-      "types": "./dist/gpu-check/zui-gpu-check.d.ts",
-      "default": "./dist/gpu-check/zui-gpu-check.js"
-    },
-    "./network-check": {
-      "types": "./dist/network-check/zui-network-check.d.ts",
-      "default": "./dist/network-check/zui-network-check.js"
-    },
-    "./battery-check": {
-      "types": "./dist/battery-check/zui-battery-check.d.ts",
-      "default": "./dist/battery-check/zui-battery-check.js"
+      "types": "./dist/services/browser.service.d.ts",
+      "default": "./dist/services/browser.service.js"
     },
     "./camera-check": {
-      "types": "./dist/camera-check/zui-camera-check.d.ts",
-      "default": "./dist/camera-check/zui-camera-check.js"
+      "types": "./dist/services/camera.service.d.ts",
+      "default": "./dist/services/camera.service.js"
     },
-    "./theme-check": {
-      "types": "./dist/theme-check/zui-theme-check.d.ts",
-      "default": "./dist/theme-check/zui-theme-check.js"
+    "./clipboard-check": {
+      "types": "./dist/services/clipboard.service.d.ts",
+      "default": "./dist/services/clipboard.service.js"
     },
-    "./mic-check": {
-      "types": "./dist/mic-check/zui-mic-check.d.ts",
-      "default": "./dist/mic-check/zui-mic-check.js"
-    },
-    "./geolocation-check": {
-      "types": "./dist/geolocation-check/zui-geolocation-check.d.ts",
-      "default": "./dist/geolocation-check/zui-geolocation-check.js"
-    },
-    "./notification-check": {
-      "types": "./dist/notification-check/zui-notification-check.d.ts",
-      "default": "./dist/notification-check/zui-notification-check.js"
-    },
-    "./extension-check": {
-      "types": "./dist/extension-check/index.d.ts",
-      "default": "./dist/extension-check/index.js"
-    },
-    "./proctoring": {
-      "types": "./dist/proctoring/index.d.ts",
-      "default": "./dist/proctoring/index.js"
-    },
-    "./logger": {
-      "types": "./dist/logger/index.d.ts",
-      "default": "./dist/logger/index.js"
+    "./code-editor": {
+      "types": "./dist/services/syntax-highlighter.service.d.ts",
+      "default": "./dist/services/syntax-highlighter.service.js"
     },
     "./event-bus": {
-      "types": "./dist/event-bus/index.d.ts",
-      "default": "./dist/event-bus/index.js"
+      "types": "./dist/services/event-bus.service.d.ts",
+      "default": "./dist/services/event-bus.service.js"
+    },
+    "./extension-check": {
+      "types": "./dist/services/extension.service.d.ts",
+      "default": "./dist/services/extension.service.js"
+    },
+    "./geolocation-check": {
+      "types": "./dist/services/geolocation.service.d.ts",
+      "default": "./dist/services/geolocation.service.js"
+    },
+    "./gpu-check": {
+      "types": "./dist/services/gpu.service.d.ts",
+      "default": "./dist/services/gpu.service.js"
+    },
+    "./logger": {
+      "types": "./dist/services/logger.service.d.ts",
+      "default": "./dist/services/logger.service.js"
+    },
+    "./mic-check": {
+      "types": "./dist/services/mic.service.d.ts",
+      "default": "./dist/services/mic.service.js"
+    },
+    "./network-check": {
+      "types": "./dist/services/network.service.d.ts",
+      "default": "./dist/services/network.service.js"
+    },
+    "./notification-check": {
+      "types": "./dist/services/notification.service.d.ts",
+      "default": "./dist/services/notification.service.js"
+    },
+    "./os-check": {
+      "types": "./dist/services/os.service.d.ts",
+      "default": "./dist/services/os.service.js"
+    },
+    "./proctoring": {
+      "types": "./dist/services/proctoring.service.d.ts",
+      "default": "./dist/services/proctoring.service.js"
+    },
+    "./screen-check": {
+      "types": "./dist/services/screen.service.d.ts",
+      "default": "./dist/services/screen.service.js"
+    },
+    "./socket-check": {
+      "types": "./dist/services/socket.service.d.ts",
+      "default": "./dist/services/socket.service.js"
+    },
+    "./storage-check": {
+      "types": "./dist/services/storage.service.d.ts",
+      "default": "./dist/services/storage.service.js"
+    },
+    "./theme-check": {
+      "types": "./dist/services/theme.service.d.ts",
+      "default": "./dist/services/theme.service.js"
+    },
+    "./theme-generator": {
+      "types": "./dist/services/theme-generator.service.d.ts",
+      "default": "./dist/services/theme-generator.service.js"
     },
     "./text-editor": {
       "types": "./dist/text-editor/index.d.ts",
       "default": "./dist/text-editor/index.js"
-    },
-    "./code-editor": {
-      "types": "./dist/code-editor/index.d.ts",
-      "default": "./dist/code-editor/index.js"
     },
     "./tabs": {
       "types": "./dist/tabs/index.d.ts",
@@ -159,63 +170,63 @@
       "types": "./dist/services/clipboard.service.d.ts",
       "default": "./dist/services/clipboard.service.js"
     },
-     "./services/event-bus": {
+    "./services/event-bus": {
       "types": "./dist/services/event-bus.service.d.ts",
       "default": "./dist/services/event-bus.service.js"
     },
-     "./services/extension": {
+    "./services/extension": {
       "types": "./dist/services/extension.service.d.ts",
       "default": "./dist/services/extension.service.js"
     },
-     "./services/formatter": {
+    "./services/formatter": {
       "types": "./dist/services/formatter.service.d.ts",
       "default": "./dist/services/formatter.service.js"
     },
-     "./services/geolocation": {
+    "./services/geolocation": {
       "types": "./dist/services/geolocation.service.d.ts",
       "default": "./dist/services/geolocation.service.js"
     },
-     "./services/gpu": {
+    "./services/gpu": {
       "types": "./dist/services/gpu.service.d.ts",
       "default": "./dist/services/gpu.service.js"
     },
-     "./services/logger": {
+    "./services/logger": {
       "types": "./dist/services/logger.service.d.ts",
       "default": "./dist/services/logger.service.js"
     },
-     "./services/mic": {
+    "./services/mic": {
       "types": "./dist/services/mic.service.d.ts",
       "default": "./dist/services/mic.service.js"
     },
-     "./services/network": {
+    "./services/network": {
       "types": "./dist/services/network.service.d.ts",
       "default": "./dist/services/network.service.js"
     },
-     "./services/notification": {
+    "./services/notification": {
       "types": "./dist/services/notification.service.d.ts",
       "default": "./dist/services/notification.service.js"
     },
-     "./services/os": {
+    "./services/os": {
       "types": "./dist/services/os.service.d.ts",
       "default": "./dist/services/os.service.js"
     },
-     "./services/proctoring": {
+    "./services/proctoring": {
       "types": "./dist/services/proctoring.service.d.ts",
       "default": "./dist/services/proctoring.service.js"
     },
-     "./services/screen": {
+    "./services/screen": {
       "types": "./dist/services/screen.service.d.ts",
       "default": "./dist/services/screen.service.js"
     },
-     "./services/storage": {
+    "./services/storage": {
       "types": "./dist/services/storage.service.d.ts",
       "default": "./dist/services/storage.service.js"
     },
-     "./services/syntax-highlighter": {
+    "./services/syntax-highlighter": {
       "types": "./dist/services/syntax-highlighter.service.d.ts",
       "default": "./dist/services/syntax-highlighter.service.js"
     },
-     "./services/theme-generator": {
+    "./services/theme-generator": {
       "types": "./dist/services/theme-generator.service.d.ts",
       "default": "./dist/services/theme-generator.service.js"
     },

@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '@deepverse/zero-ui/geolocation-check';
+import '../components/geolocation-check/zui-geolocation-check.js';
 import '../components/demo-page';
 import '../components/demo-example';
 
@@ -65,7 +65,7 @@ export class GeolocationCheckDemo extends LitElement {
 
   render() {
     const basicHtml = `<zui-geolocation-check></zui-geolocation-check>`;
-    const basicReact = `import { ZuiGeolocationCheck } from '@deepverse/zero-ui/geolocation-check';
+    const basicReact = `import { ZuiGeolocationCheck } from '../components/geolocation-check/zui-geolocation-check.js';
 
 function App() {
   return <ZuiGeolocationCheck />;

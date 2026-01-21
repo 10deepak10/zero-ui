@@ -1,7 +1,7 @@
 
 import { LitElement, html, css } from 'lit';
 import { customElement, state, property } from 'lit/decorators.js';
-import { type ThemeConfig, DEFAULT_THEME, ThemeGeneratorService } from '@deepverse/zero-ui';
+import { type ThemeConfig, DEFAULT_THEME, ThemeGeneratorService } from '@deepverse/zero-ui/theme-generator';
 import '@deepverse/zero-ui/tabs';
 import '@deepverse/zero-ui/button';
 import '@deepverse/zero-ui/card';

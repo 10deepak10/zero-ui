@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@deepverse/zero-ui/battery-check';
+import '../components/battery-check/zui-battery-check.js';
 import '../components/demo-page';
 import '../components/demo-example';
 import { BatteryCheckService, type BatteryInfo } from '@deepverse/zero-ui';
@@ -77,7 +77,7 @@ export class BatteryCheckDemo extends LitElement {
   render() {
     const basicHtml = `<zui-battery-check></zui-battery-check>`;
 
-    const basicReact = `import { ZuiBatteryCheck } from '@deepverse/zero-ui/battery-check';
+    const basicReact = `import { ZuiBatteryCheck } from '../components/battery-check/zui-battery-check.js';
 
 function App() {
   return <ZuiBatteryCheck />;

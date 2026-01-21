@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '@deepverse/zero-ui/clipboard-check';
+import '../components/clipboard-check/zui-clipboard-check.js';
 import '../components/demo-page';
 import '../components/demo-example';
 
@@ -65,7 +65,7 @@ export class ClipboardCheckDemo extends LitElement {
 
   render() {
     const basicHtml = `<zui-clipboard-check></zui-clipboard-check>`;
-    const basicReact = `import { ZuiClipboardCheck } from '@deepverse/zero-ui/clipboard-check';
+    const basicReact = `import { ZuiClipboardCheck } from '../components/clipboard-check/zui-clipboard-check.js';
 
 function App() {
   return <ZuiClipboardCheck />;
