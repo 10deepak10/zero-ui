@@ -2,6 +2,8 @@
 
 A lightweight, tree-shakeable Web Component library built with [Lit](https://lit.dev/).
 
+**[Live Documentation](https://thezeroui.com/)**
+
 ## Installation
 
 ```bash
@@ -13,18 +15,27 @@ npm install @deepverse/zero-ui
 You can import the entire library or individual components. The library is configured for tree-shaking, so unused components will be removed from your bundle.
 
 ```typescript
-// Import specific components (Recommended)
+// Import UI components
 import '@deepverse/zero-ui/button';
 import '@deepverse/zero-ui/card';
-import '@deepverse/zero-ui/code-editor';
+import '@deepverse/zero-ui/file-upload';
 
-// Import services (Granular & Tree-shakeable)
-import { LoggerService } from '@deepverse/zero-ui/services/logger';
-import { BatteryCheckService } from '@deepverse/zero-ui/services/battery';
+// Import Services (Granular Imports Recommended)
+import { LoggerService } from '@deepverse/zero-ui/logger';
+import { BatteryCheckService } from '@deepverse/zero-ui/battery-check';
+import { BrowserCheckService } from '@deepverse/zero-ui/browser-check';
+import { ScreenCheckService } from '@deepverse/zero-ui/screen-check';
+// ... and other services:
+// - @deepverse/zero-ui/os-check
+// - @deepverse/zero-ui/network-check
+// - @deepverse/zero-ui/geolocation-check
+// - @deepverse/zero-ui/mic-check
+// - @deepverse/zero-ui/camera-check
+// - @deepverse/zero-ui/theme-generator
 
-// OR Import everything (Not recommended for production)
-import '@deepverse/zero-ui';
-
+// Access services
+const logger = LoggerService.getInstance();
+const batteryInfo = await BatteryCheckService.getBatteryInfo();
 ```
 
 ## Components

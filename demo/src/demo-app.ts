@@ -389,6 +389,8 @@ export class DemoApp extends LitElement {
       '/theme-service': { title: 'Theme Service', description: 'Manage application theming.' },
       '/sandbox': { title: 'Sandbox', description: 'Experimental sandbox for testing.' },
       '/socket-demo': { title: 'Socket Service', description: 'Real-time WebSocket communication demo.' },
+      '/online-status': { title: 'Online Status', description: 'Check if you are currently online or offline.' },
+      '/wallet-check': { title: 'Wallet Check', description: 'Check for installed crypto wallets.' },
     };
 
     const data = metadata[route] || metadata['/'];
