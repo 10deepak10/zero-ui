@@ -3,6 +3,8 @@
   <h1>⚡️ Zero UI</h1>
   <h3>The next-generation, framework-agnostic UI library.</h3>
   <br />
+  <p><strong><a href="https://thezeroui.com/">Live Documentation & Demo</a></strong></p>
+  <br />
   <p>
     <a href="https://www.npmjs.com/package/@deepverse/zero-ui"><img src="https://img.shields.io/npm/v/@deepverse/zero-ui?style=flat-square" alt="npm version" /></a>
     <a href="https://github.com/deepverse/zero-ui"><img src="https://img.shields.io/npm/l/@deepverse/zero-ui?style=flat-square" alt="License" /></a>
@@ -97,9 +99,15 @@ npm install @deepverse/zero-ui
 Then import the components you need:
 
 ```typescript
+// Import UI components
 import '@deepverse/zero-ui/button';
 import '@deepverse/zero-ui/card';
 import '@deepverse/zero-ui/file-upload';
+
+// Import Services (Granular Imports Recommended)
+import { LoggerService } from '@deepverse/zero-ui/logger';
+import { BatteryCheckService } from '@deepverse/zero-ui/battery-check';
+// ... other services available at @deepverse/zero-ui/<service-name>
 ```
 
 For detailed usage instructions and framework integration guides (React, Angular, etc.), please refer to the [Library Documentation](packages/zero-ui/README.md).
