@@ -15,12 +15,6 @@ export class ZuiRadio extends LitElement {
       display: inline-flex;
       align-items: center;
       cursor: pointer;
-      --zui-radio-size: 18px;
-      --zui-radio-color: #3b82f6;
-      --zui-radio-border-color: #d1d5db;
-      --zui-radio-bg: transparent;
-      --zui-radio-dot-size: 8px;
-      --zui-radio-disabled-opacity: 0.5;
     }
 
     :host([disabled]) {
@@ -54,11 +48,11 @@ export class ZuiRadio extends LitElement {
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s ease;
+      transition: border-color var(--zui-duration-fast) var(--zui-easing-standard),
+                  box-shadow var(--zui-duration-fast) var(--zui-easing-standard);
       flex-shrink: 0;
     }
 
-    /* Checked State */
     :host([checked]) .radio-control {
       border-color: var(--zui-radio-color);
     }
@@ -69,21 +63,20 @@ export class ZuiRadio extends LitElement {
       border-radius: 50%;
       background-color: var(--zui-radio-color);
       transform: scale(0);
-      transition: transform 0.2s ease;
+      transition: transform var(--zui-duration-fast) var(--zui-easing-standard);
     }
 
     :host([checked]) .radio-dot {
       transform: scale(1);
     }
 
-    /* Focus State */
     :host(:focus-within) .radio-control {
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+      box-shadow: 0 0 0 3px var(--zui-color-focus-ring-alpha);
     }
 
     .label-text {
       font-family: inherit;
-      font-size: 1rem;
+      font-size: var(--zui-font-size-md);
       color: currentColor;
       user-select: none;
     }

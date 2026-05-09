@@ -1,0 +1,15 @@
+{
+  "dropdown": {
+    "bg": "{semantic.color.surface.elevated}",
+    "text": "{semantic.color.text.primary}",
+    "border": "{semantic.color.border.default}",
+    "shadow": "{semantic.elevation.shadow.lg}",
+    "radius": "{semantic.elevation.radius.lg}",
+    "option": {
+      "bg-hover": "{semantic.color.action.ghost-hover}",
+      "bg-selected": "rgb(59 130 246 / 0.15)",
+      "text-selected": "{semantic.color.action.primary}",
+      "text-muted": "{semantic.color.text.muted}"
+    }
+  }
+}

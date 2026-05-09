@@ -19,13 +19,6 @@ export class ZuiCheckbox extends LitElement {
       align-items: center;
       vertical-align: middle;
       cursor: pointer;
-      --zui-checkbox-size: 18px;
-      --zui-checkbox-color: var(--zui-primary, #3b82f6);
-      --zui-checkbox-border-color: var(--card-border, #d1d5db);
-      --zui-checkbox-border-radius: 4px;
-      --zui-checkbox-check-color: #ffffff;
-      --zui-checkbox-disabled-opacity: 0.5;
-      --zui-checkbox-focus-ring: 0 0 0 3px var(--zui-focus-ring, rgba(59, 130, 246, 0.3));
     }
 
     :host([disabled]) {
@@ -59,30 +52,31 @@ export class ZuiCheckbox extends LitElement {
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s ease;
+      transition: background-color var(--zui-duration-fast) var(--zui-easing-standard),
+                  border-color var(--zui-duration-fast) var(--zui-easing-standard),
+                  box-shadow var(--zui-duration-fast) var(--zui-easing-standard),
+                  transform var(--zui-duration-fast) var(--zui-easing-standard);
       flex-shrink: 0;
     }
 
-    /* Checked State */
     :host([checked]) .checkbox-control,
     :host([indeterminate]) .checkbox-control {
       background-color: var(--zui-checkbox-color);
       border-color: var(--zui-checkbox-color);
     }
 
-    /* Focus State */
     :host(:focus-within) .checkbox-control {
       box-shadow: var(--zui-checkbox-focus-ring);
     }
 
-    /* Checkmark / Indeterminate Icon */
     .icon {
       color: var(--zui-checkbox-check-color);
       width: 100%;
       height: 100%;
       opacity: 0;
       transform: scale(0.5);
-      transition: all 0.2s ease;
+      transition: opacity var(--zui-duration-fast) var(--zui-easing-standard),
+                  transform var(--zui-duration-fast) var(--zui-easing-standard);
     }
 
     :host([checked]) .icon,
@@ -93,7 +87,7 @@ export class ZuiCheckbox extends LitElement {
 
     .label-text {
       font-family: inherit;
-      font-size: 1rem;
+      font-size: var(--zui-font-size-md);
       color: currentColor;
       user-select: none;
     }

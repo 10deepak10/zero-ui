@@ -239,13 +239,16 @@
     "dist"
   ],
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "generate:tokens": "node scripts/generate-tokens-css.js",
+    "build:all": "npm run generate:tokens && npm run build"
   },
   "dependencies": {
     "lit": "^3.0.0",
     "tslib": "^2.8.1"
   },
   "devDependencies": {
+    "@rollup/plugin-json": "^6.1.0",
     "rollup": "^4.53.3",
     "rollup-plugin-typescript2": "^0.36.0",
     "typescript": "^5.9.3"

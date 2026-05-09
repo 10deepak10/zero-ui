@@ -1,0 +1,11 @@
+{
+  "slider": {
+    "height": "6px",
+    "thumb-size": "20px",
+    "track-color": "{semantic.color.border.default}",
+    "fill-color": "{semantic.color.action.primary}",
+    "thumb-color": "{semantic.color.action.primary-text}",
+    "thumb-border": "2px solid {semantic.color.action.primary}",
+    "disabled-opacity": "0.5"
+  }
+}

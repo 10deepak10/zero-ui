@@ -23,11 +23,14 @@ export class ZuiButton extends LitElement {
       outline: none;
       background: none;
       border: 1px solid transparent;
-      border-radius: 6px;
+      border-radius: var(--zui-radius-md);
       cursor: pointer;
       font-family: inherit;
-      font-weight: 500;
-      transition: all 0.2s ease;
+      font-weight: var(--zui-font-weight-medium);
+      transition: background-color var(--zui-duration-fast) var(--zui-easing-standard),
+                  color var(--zui-duration-fast) var(--zui-easing-standard),
+                  border-color var(--zui-duration-fast) var(--zui-easing-standard),
+                  box-shadow var(--zui-duration-fast) var(--zui-easing-standard);
       user-select: none;
     }
 
@@ -36,75 +39,85 @@ export class ZuiButton extends LitElement {
       opacity: 0.5;
     }
 
-    /* Sizes */
     .sm {
-      padding: 6px 12px;
-      font-size: 12px;
-      line-height: 16px;
-      gap: 4px;
+      padding: var(--zui-space-1-5) var(--zui-space-3);
+      font-size: var(--zui-font-size-xs);
+      line-height: var(--zui-leading-none);
+      gap: var(--zui-space-1);
     }
 
     .md {
-      padding: 8px 16px;
-      font-size: 14px;
-      line-height: 20px;
-      gap: 8px;
+      padding: var(--zui-space-2) var(--zui-space-4);
+      font-size: var(--zui-font-size-sm);
+      line-height: var(--zui-leading-none);
+      gap: var(--zui-space-2);
     }
 
     .lg {
-      padding: 12px 24px;
-      font-size: 16px;
-      line-height: 24px;
-      gap: 12px;
+      padding: var(--zui-space-3) var(--zui-space-6);
+      font-size: var(--zui-font-size-md);
+      line-height: var(--zui-leading-none);
+      gap: var(--zui-space-3);
     }
 
-    /* Variants */
     .primary {
-      background-color: var(--zui-primary, #3b82f6);
-      color: white;
-      border-color: transparent;
+      background-color: var(--zui-button-primary-bg);
+      color: var(--zui-button-primary-text);
+      border-color: var(--zui-button-primary-border);
     }
     .primary:hover:not(:disabled) {
-      background-color: var(--zui-primary-hover, #2563eb);
+      background-color: var(--zui-button-primary-bg-hover);
     }
     .primary:active:not(:disabled) {
-      background-color: var(--zui-primary-active, #1d4ed8);
+      background-color: var(--zui-button-primary-bg-active);
     }
 
     .secondary {
-      background-color: var(--zui-secondary, #64748b);
-      color: white;
-      border-color: transparent;
+      background-color: var(--zui-button-secondary-bg);
+      color: var(--zui-button-secondary-text);
+      border-color: var(--zui-button-secondary-border);
     }
     .secondary:hover:not(:disabled) {
-      background-color: var(--zui-secondary-hover, #475569);
+      background-color: var(--zui-button-secondary-bg-hover);
+    }
+    .secondary:active:not(:disabled) {
+      background-color: var(--zui-button-secondary-bg-active);
     }
 
     .outline {
-      background-color: transparent;
-      color: var(--zui-primary, #3b82f6);
-      border-color: var(--zui-primary, #3b82f6);
+      background-color: var(--zui-button-outline-bg);
+      color: var(--zui-button-outline-text);
+      border-color: var(--zui-button-outline-border);
     }
     .outline:hover:not(:disabled) {
-      background-color: rgba(59, 130, 246, 0.1);
+      background-color: var(--zui-button-outline-bg-hover);
+    }
+    .outline:active:not(:disabled) {
+      background-color: var(--zui-button-outline-bg-active);
     }
 
     .ghost {
-      background-color: transparent;
-      color: var(--text-main, #e2e8f0);
-      border-color: transparent;
+      background-color: var(--zui-button-ghost-bg);
+      color: var(--zui-button-ghost-text);
+      border-color: var(--zui-button-ghost-border);
     }
     .ghost:hover:not(:disabled) {
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: var(--zui-button-ghost-bg-hover);
+    }
+    .ghost:active:not(:disabled) {
+      background-color: var(--zui-button-ghost-bg-active);
     }
 
     .danger {
-      background-color: var(--zui-danger, #ef4444);
-      color: white;
-      border-color: transparent;
+      background-color: var(--zui-button-danger-bg);
+      color: var(--zui-button-danger-text);
+      border-color: var(--zui-button-danger-border);
     }
     .danger:hover:not(:disabled) {
-      background-color: var(--zui-danger-hover, #dc2626);
+      background-color: var(--zui-button-danger-bg-hover);
+    }
+    .danger:active:not(:disabled) {
+      background-color: var(--zui-button-danger-bg-active);
     }
   `;
 

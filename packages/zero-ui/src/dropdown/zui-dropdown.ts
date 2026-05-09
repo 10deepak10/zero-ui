@@ -25,16 +25,17 @@ export class ZuiDropdown extends LitElement {
       position: fixed;
       z-index: 50;
       min-width: 200px;
-      background: var(--zui-dropdown-bg, var(--card-bg, #ffffff));
-      color: var(--zui-dropdown-color, var(--text-main, inherit));
-      border: 1px solid var(--zui-dropdown-border, var(--card-border, #e5e7eb));
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      background: var(--zui-dropdown-bg);
+      color: var(--zui-dropdown-text);
+      border: 1px solid var(--zui-dropdown-border);
+      border-radius: var(--zui-dropdown-radius);
+      box-shadow: var(--zui-dropdown-shadow);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       opacity: 0;
       transform: scale(0.95);
-      transition: opacity 0.1s ease-out, transform 0.1s ease-out;
+      transition: opacity var(--zui-duration-fast) var(--zui-easing-standard),
+                  transform var(--zui-duration-fast) var(--zui-easing-decelerate);
       pointer-events: none;
       visibility: hidden;
       max-height: 300px;

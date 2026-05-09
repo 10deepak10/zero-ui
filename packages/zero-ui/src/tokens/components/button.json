@@ -1,0 +1,44 @@
+{
+  "button": {
+    "primary": {
+      "bg": "{semantic.color.action.primary}",
+      "bg-hover": "{semantic.color.action.primary-hover}",
+      "bg-active": "{semantic.color.action.primary-active}",
+      "text": "{semantic.color.action.primary-text}",
+      "border": "transparent"
+    },
+    "secondary": {
+      "bg": "{semantic.color.action.secondary}",
+      "bg-hover": "{semantic.color.action.secondary-hover}",
+      "bg-active": "{semantic.color.action.secondary-active}",
+      "text": "{semantic.color.action.secondary-text}",
+      "border": "transparent"
+    },
+    "outline": {
+      "bg": "transparent",
+      "bg-hover": "{primitives.colors.gray.100}",
+      "bg-active": "{primitives.colors.gray.200}",
+      "text": "{semantic.color.action.primary}",
+      "border": "{semantic.color.action.primary}"
+    },
+    "ghost": {
+      "bg": "transparent",
+      "bg-hover": "{semantic.color.action.ghost-hover}",
+      "bg-active": "{semantic.color.action.ghost-active}",
+      "text": "{semantic.color.text.primary}",
+      "border": "transparent"
+    },
+    "danger": {
+      "bg": "{semantic.color.action.danger}",
+      "bg-hover": "{semantic.color.action.danger-hover}",
+      "bg-active": "{semantic.color.action.danger-active}",
+      "text": "{semantic.color.action.danger-text}",
+      "border": "transparent"
+    },
+    "disabled": {
+      "bg": "{semantic.color.action.disabled}",
+      "text": "{semantic.color.action.disabled-text}",
+      "border": "transparent"
+    }
+  }
+}

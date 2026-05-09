@@ -12,19 +12,22 @@ export class ZuiCard extends LitElement {
       display: block; 
     }
     .card {
-      padding: var(--spacing-6, 24px);
-      border-radius: var(--radius-md, 12px);
-      border: 1px solid var(--card-border, rgba(255, 255, 255, 0.1));
-      background: var(--card-bg, #1e1e1e);
-      color: var(--text-main, inherit);
-      box-shadow: var(--shadow-sm, 0 1px 4px rgba(0,0,0,0.1));
-      transition: all 0.3s ease;
+      padding: var(--zui-card-padding);
+      border-radius: var(--zui-card-radius);
+      border: 1px solid var(--zui-card-border);
+      background: var(--zui-card-bg);
+      color: var(--zui-card-text);
+      box-shadow: var(--zui-card-shadow);
+      transition: background-color var(--zui-duration-normal) var(--zui-easing-standard),
+                  box-shadow var(--zui-duration-normal) var(--zui-easing-standard),
+                  border-color var(--zui-duration-normal) var(--zui-easing-standard),
+                  transform var(--zui-duration-normal) var(--zui-easing-decelerate);
     }
 
     :host([hover]) .card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05));
-      border-color: var(--color-primary, #3b82f6);
+      transform: translateY(-2px);
+      box-shadow: var(--zui-card-shadow-hover);
+      border-color: var(--zui-card-border-hover);
     }
   `;
 

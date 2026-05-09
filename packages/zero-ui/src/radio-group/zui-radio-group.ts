@@ -19,15 +19,15 @@ export class ZuiRadioGroup extends LitElement {
 
     .group-label {
       display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--text-main, currentColor);
+      margin-bottom: var(--zui-space-2);
+      font-weight: var(--zui-font-weight-semibold);
+      font-size: var(--zui-font-size-sm);
+      color: var(--zui-color-text-primary);
     }
 
     .radio-group {
       display: flex;
-      gap: 12px;
+      gap: var(--zui-space-3);
     }
 
     :host([orientation="vertical"]) .radio-group {

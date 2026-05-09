@@ -1,0 +1,13 @@
+{
+  "toggle": {
+    "width": "44px",
+    "height": "24px",
+    "thumb-size": "20px",
+    "bg-off": "{semantic.color.border.default}",
+    "bg-on": "{semantic.color.action.primary}",
+    "thumb-color": "{semantic.color.action.primary-text}",
+    "disabled-opacity": "0.5",
+    "focus-ring": "0 0 0 3px {semantic.color.focus.ring-alpha}",
+    "transition": "0.2s ease"
+  }
+}

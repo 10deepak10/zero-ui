@@ -1,0 +1,11 @@
+{
+  "checkbox": {
+    "size": "18px",
+    "color": "{semantic.color.action.primary}",
+    "border-color": "{semantic.color.border.default}",
+    "border-radius": "{semantic.elevation.radius.xs}",
+    "check-color": "{semantic.color.action.primary-text}",
+    "disabled-opacity": "0.5",
+    "focus-ring": "0 0 0 3px {semantic.color.focus.ring-alpha}"
+  }
+}

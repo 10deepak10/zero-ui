@@ -1,21 +1,4 @@
 
-export interface ColorToken {
-  name: string;
-  value: string; // Hex
-}
-
-export interface TypographyToken {
-  fontFamily: string;
-  fontSize: string;
-  fontWeight: string;
-  lineHeight: string;
-}
-
-export interface SpacingToken {
-  name: string;
-  value: string;
-}
-
 export interface ThemeColorPalette {
   primary: string;
   secondary: string;
@@ -36,19 +19,19 @@ export interface ThemeConfig {
   typography: {
     fontFamily: string;
     headings: {
-      h1: TypographyToken;
-      h2: TypographyToken;
-      h3: TypographyToken;
-      h4: TypographyToken;
-      h5: TypographyToken;
-      h6: TypographyToken;
+      h1: { fontFamily: string; fontSize: string; fontWeight: string; lineHeight: string };
+      h2: { fontFamily: string; fontSize: string; fontWeight: string; lineHeight: string };
+      h3: { fontFamily: string; fontSize: string; fontWeight: string; lineHeight: string };
+      h4: { fontFamily: string; fontSize: string; fontWeight: string; lineHeight: string };
+      h5: { fontFamily: string; fontSize: string; fontWeight: string; lineHeight: string };
+      h6: { fontFamily: string; fontSize: string; fontWeight: string; lineHeight: string };
     };
-    body: TypographyToken;
-    caption: TypographyToken;
+    body: { fontFamily: string; fontSize: string; fontWeight: string; lineHeight: string };
+    caption: { fontFamily: string; fontSize: string; fontWeight: string; lineHeight: string };
   };
   spacing: {
-    base: number; // e.g. 4px
-    scale: number[]; // multipliers
+    base: number;
+    scale: number[];
   };
   borderRadius: {
     sm: string;
@@ -80,7 +63,7 @@ const DEFAULT_PALETTE_LIGHT: ThemeColorPalette = {
 };
 
 const DEFAULT_PALETTE_DARK: ThemeColorPalette = {
-  primary: '#60a5fa', // lighter for dark mode
+  primary: '#60a5fa',
   secondary: '#94a3b8',
   success: '#4ade80',
   danger: '#f87171',

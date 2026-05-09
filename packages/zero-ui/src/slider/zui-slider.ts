@@ -15,13 +15,6 @@ export class ZuiSlider extends LitElement {
   static styles = css`
     :host {
       display: block;
-      --zui-slider-height: 6px;
-      --zui-slider-thumb-size: 20px;
-      --zui-slider-track-color: #e5e7eb;
-      --zui-slider-fill-color: #3b82f6;
-      --zui-slider-thumb-color: #ffffff;
-      --zui-slider-thumb-border: 2px solid #3b82f6;
-      --zui-slider-disabled-opacity: 0.5;
     }
 
     :host([disabled]) {
@@ -36,16 +29,16 @@ export class ZuiSlider extends LitElement {
 
     .label {
       display: block;
-      margin-bottom: 8px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--text-main, currentColor);
+      margin-bottom: var(--zui-space-2);
+      font-size: var(--zui-font-size-sm);
+      font-weight: var(--zui-font-weight-medium);
+      color: var(--zui-color-text-secondary);
     }
 
     .track-wrapper {
       position: relative;
       height: var(--zui-slider-height);
-      border-radius: 999px;
+      border-radius: var(--zui-radius-full);
       background-color: var(--zui-slider-track-color);
       cursor: pointer;
     }
@@ -55,7 +48,7 @@ export class ZuiSlider extends LitElement {
       top: 0;
       height: 100%;
       background-color: var(--zui-slider-fill-color);
-      border-radius: 999px;
+      border-radius: var(--zui-radius-full);
       pointer-events: none;
     }
 
@@ -69,8 +62,9 @@ export class ZuiSlider extends LitElement {
       border-radius: 50%;
       transform: translate(-50%, -50%);
       cursor: grab;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      transition: transform 0.1s, box-shadow 0.1s;
+      box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+      transition: transform var(--zui-duration-fast) var(--zui-easing-standard),
+                  box-shadow var(--zui-duration-fast) var(--zui-easing-standard);
       z-index: 1;
     }
 
@@ -82,7 +76,7 @@ export class ZuiSlider extends LitElement {
     .thumb:active {
       cursor: grabbing;
       transform: translate(-50%, -50%) scale(1.1);
-      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+      box-shadow: 0 0 0 4px var(--zui-color-focus-ring-alpha);
       z-index: 3;
     }
   `;

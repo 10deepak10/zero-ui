@@ -1,0 +1,20 @@
+{
+  "input": {
+    "bg": "{semantic.color.surface.primary}",
+    "bg-hover": "{semantic.color.surface.primary}",
+    "bg-focus": "{semantic.color.surface.primary}",
+    "bg-disabled": "{semantic.color.surface.secondary}",
+    "text": "{semantic.color.text.primary}",
+    "text-placeholder": "{semantic.color.text.placeholder}",
+    "text-disabled": "{semantic.color.text.disabled}",
+    "border": "{semantic.color.border.default}",
+    "border-hover": "{semantic.color.border.muted}",
+    "border-focus": "{semantic.color.border.focus}",
+    "border-disabled": "{semantic.color.border.disabled}",
+    "border-error": "{semantic.color.border.error}",
+    "radius": "{semantic.elevation.radius.md}",
+    "shadow-focus": "0 0 0 3px {semantic.color.focus.ring-alpha}",
+    "padding-x": "{semantic.elevation.space.3}",
+    "padding-y": "{semantic.elevation.space.2-5}"
+  }
+}

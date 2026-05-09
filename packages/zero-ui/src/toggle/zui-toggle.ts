@@ -17,15 +17,6 @@ export class ZuiToggle extends LitElement {
       display: inline-flex;
       align-items: center;
       cursor: pointer;
-      --zui-toggle-width: 44px;
-      --zui-toggle-height: 24px;
-      --zui-toggle-thumb-size: 20px;
-      --zui-toggle-bg-off: var(--card-border, #e5e7eb);
-      --zui-toggle-bg-on: var(--zui-primary, #3b82f6);
-      --zui-toggle-thumb-color: #ffffff;
-      --zui-toggle-disabled-opacity: 0.5;
-      --zui-toggle-focus-ring: 0 0 0 3px var(--zui-focus-ring, rgba(59, 130, 246, 0.3));
-      --zui-toggle-transition: 0.2s ease;
     }
 
     :host([disabled]) {
@@ -54,7 +45,7 @@ export class ZuiToggle extends LitElement {
       width: var(--zui-toggle-width);
       height: var(--zui-toggle-height);
       background-color: var(--zui-toggle-bg-off);
-      border-radius: 9999px;
+      border-radius: var(--zui-radius-full);
       position: relative;
       transition: background-color var(--zui-toggle-transition);
       flex-shrink: 0;
@@ -69,10 +60,9 @@ export class ZuiToggle extends LitElement {
       top: 2px;
       left: 2px;
       transition: transform var(--zui-toggle-transition);
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 1px 2px rgb(0 0 0 / 0.1);
     }
 
-    /* Checked State */
     :host([checked]) .toggle-track {
       background-color: var(--zui-toggle-bg-on);
     }
@@ -81,14 +71,13 @@ export class ZuiToggle extends LitElement {
       transform: translateX(calc(var(--zui-toggle-width) - var(--zui-toggle-thumb-size) - 4px));
     }
 
-    /* Focus State */
     :host(:focus-within) .toggle-track {
       box-shadow: var(--zui-toggle-focus-ring);
     }
 
     .label-text {
       font-family: inherit;
-      font-size: 1rem;
+      font-size: var(--zui-font-size-md);
       color: currentColor;
       user-select: none;
     }

@@ -1,0 +1,15 @@
+{
+  "select": {
+    "bg": "{semantic.color.surface.primary}",
+    "border": "{semantic.color.border.default}",
+    "border-hover": "{semantic.color.border.muted}",
+    "border-focus": "{semantic.color.border.focus}",
+    "text": "{semantic.color.text.primary}",
+    "text-placeholder": "{semantic.color.text.placeholder}",
+    "radius": "{semantic.elevation.radius.md}",
+    "focus-ring": "0 0 0 3px {semantic.color.focus.ring-alpha}",
+    "tag-bg": "rgb(59 130 246 / 0.2)",
+    "tag-text": "{semantic.color.text.primary}",
+    "tag-border": "rgb(59 130 246 / 0.3)"
+  }
+}

@@ -14,9 +14,9 @@ export * from './select/zui-select.js';
 
 export * from './text-editor/index.js';
 
-
-
-
+export * from './styles/index.js';
+export * from './tokens/index.js';
 export * from './services/index.js';
+export { TokenThemeService } from './services/token-theme.service.js';
 export * from './split/index.js';
 export * from './tabs/index.js';

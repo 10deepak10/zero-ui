@@ -1,0 +1,14 @@
+{
+  "brand": {
+    "primary": "{primitives.colors.blue.500}",
+    "primary-light": "{primitives.colors.blue.400}",
+    "primary-dark": "{primitives.colors.blue.600}",
+    "secondary": "{primitives.colors.slate.500}",
+    "secondary-light": "{primitives.colors.slate.400}",
+    "secondary-dark": "{primitives.colors.slate.600}",
+    "accent": "{primitives.colors.purple.500}",
+    "accent-light": "{primitives.colors.purple.400}",
+    "accent-dark": "{primitives.colors.purple.600}",
+    "tertiary": "{primitives.colors.teal.500}"
+  }
+}

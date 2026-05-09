@@ -17,7 +17,7 @@ export class ZuiStarRating extends LitElement {
 
     .stars {
       display: flex;
-      gap: 4px;
+      gap: var(--zui-space-1);
       cursor: pointer;
     }
 
@@ -28,7 +28,7 @@ export class ZuiStarRating extends LitElement {
     .star {
       width: 24px;
       height: 24px;
-      transition: transform 0.1s;
+      transition: transform var(--zui-duration-fast) var(--zui-easing-standard);
     }
 
     .star:not(.readonly):hover {
@@ -81,8 +81,8 @@ export class ZuiStarRating extends LitElement {
             >
               <defs>
                 <linearGradient id=${gradientId}>
-                  <stop offset="${fill}%" stop-color="var(--star-filled, #fbbf24)" />
-                  <stop offset="${fill}%" stop-color="var(--star-empty, var(--text-muted, #d1d5db))" />
+                  <stop offset="${fill}%" stop-color="var(--zui-star-filled, var(--zui-amber-400))" />
+                  <stop offset="${fill}%" stop-color="var(--zui-star-empty, var(--zui-color-border-default))" />
                 </linearGradient>
               </defs>
               <path 

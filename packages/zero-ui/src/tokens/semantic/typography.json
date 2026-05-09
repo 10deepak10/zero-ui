@@ -1,0 +1,102 @@
+{
+  "font": {
+    "family": {
+      "primary": "{primitives.typography.fontFamily.sans}",
+      "mono": "{primitives.typography.fontFamily.mono}"
+    },
+    "size": {
+      "xs": "{primitives.typography.fontSize.xs}",
+      "sm": "{primitives.typography.fontSize.sm}",
+      "md": "{primitives.typography.fontSize.md}",
+      "lg": "{primitives.typography.fontSize.lg}",
+      "xl": "{primitives.typography.fontSize.xl}",
+      "2xl": "{primitives.typography.fontSize.2xl}",
+      "3xl": "{primitives.typography.fontSize.3xl}",
+      "4xl": "{primitives.typography.fontSize.4xl}",
+      "5xl": "{primitives.typography.fontSize.5xl}",
+      "6xl": "{primitives.typography.fontSize.6xl}"
+    },
+    "weight": {
+      "regular": "{primitives.typography.fontWeight.regular}",
+      "medium": "{primitives.typography.fontWeight.medium}",
+      "semibold": "{primitives.typography.fontWeight.semibold}",
+      "bold": "{primitives.typography.fontWeight.bold}"
+    },
+    "leading": {
+      "none": "{primitives.typography.lineHeight.none}",
+      "tight": "{primitives.typography.lineHeight.tight}",
+      "snug": "{primitives.typography.lineHeight.snug}",
+      "normal": "{primitives.typography.lineHeight.normal}",
+      "relaxed": "{primitives.typography.lineHeight.relaxed}"
+    },
+    "tracking": {
+      "tight": "{primitives.typography.letterSpacing.tight}",
+      "normal": "{primitives.typography.letterSpacing.normal}",
+      "wide": "{primitives.typography.letterSpacing.wide}"
+    }
+  },
+  "text": {
+    "body": {
+      "fontFamily": "{semantic.font.family.primary}",
+      "fontSize": "{semantic.font.size.md}",
+      "fontWeight": "{semantic.font.weight.regular}",
+      "lineHeight": "{semantic.font.leading.normal}"
+    },
+    "body-sm": {
+      "fontFamily": "{semantic.font.family.primary}",
+      "fontSize": "{semantic.font.size.sm}",
+      "fontWeight": "{semantic.font.weight.regular}",
+      "lineHeight": "{semantic.font.leading.normal}"
+    },
+    "caption": {
+      "fontFamily": "{semantic.font.family.primary}",
+      "fontSize": "{semantic.font.size.xs}",
+      "fontWeight": "{semantic.font.weight.regular}",
+      "lineHeight": "{semantic.font.leading.normal}"
+    },
+    "heading": {
+      "h1": {
+        "fontFamily": "{semantic.font.family.primary}",
+        "fontSize": "{semantic.font.size.4xl}",
+        "fontWeight": "{semantic.font.weight.bold}",
+        "lineHeight": "{semantic.font.leading.tight}"
+      },
+      "h2": {
+        "fontFamily": "{semantic.font.family.primary}",
+        "fontSize": "{semantic.font.size.3xl}",
+        "fontWeight": "{semantic.font.weight.semibold}",
+        "lineHeight": "{semantic.font.leading.tight}"
+      },
+      "h3": {
+        "fontFamily": "{semantic.font.family.primary}",
+        "fontSize": "{semantic.font.size.2xl}",
+        "fontWeight": "{semantic.font.weight.semibold}",
+        "lineHeight": "{semantic.font.leading.snug}"
+      },
+      "h4": {
+        "fontFamily": "{semantic.font.family.primary}",
+        "fontSize": "{semantic.font.size.xl}",
+        "fontWeight": "{semantic.font.weight.semibold}",
+        "lineHeight": "{semantic.font.leading.snug}"
+      },
+      "h5": {
+        "fontFamily": "{semantic.font.family.primary}",
+        "fontSize": "{semantic.font.size.lg}",
+        "fontWeight": "{semantic.font.weight.medium}",
+        "lineHeight": "{semantic.font.leading.snug}"
+      },
+      "h6": {
+        "fontFamily": "{semantic.font.family.primary}",
+        "fontSize": "{semantic.font.size.md}",
+        "fontWeight": "{semantic.font.weight.medium}",
+        "lineHeight": "{semantic.font.leading.snug}"
+      }
+    },
+    "code": {
+      "fontFamily": "{semantic.font.family.mono}",
+      "fontSize": "{semantic.font.size.sm}",
+      "fontWeight": "{semantic.font.weight.regular}",
+      "lineHeight": "{semantic.font.leading.normal}"
+    }
+  }
+}

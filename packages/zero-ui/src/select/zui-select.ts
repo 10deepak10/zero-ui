@@ -19,7 +19,7 @@ export class ZuiSelect extends LitElement {
   static styles = css`
     :host {
       display: block;
-      font-family: system-ui, -apple-system, sans-serif;
+      font-family: var(--zui-font-family-primary);
     }
 
     .wrapper {
@@ -28,58 +28,59 @@ export class ZuiSelect extends LitElement {
 
     label {
       display: block;
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--text-main, #374151);
-      margin-bottom: 0.375rem;
+      font-size: var(--zui-font-size-sm);
+      font-weight: var(--zui-font-weight-medium);
+      color: var(--zui-color-text-primary);
+      margin-bottom: var(--zui-space-1-5);
     }
 
     .trigger-button {
       width: 100%;
-      background-color: var(--zui-input-bg, var(--card-bg, rgba(255, 255, 255, 0.05)));
-      border: 1px solid var(--card-border, #d1d5db);
-      border-radius: 0.375rem;
-      padding: 0.625rem 2.5rem 0.625rem 0.75rem;
-      font-size: 1rem;
-      line-height: 1.5;
-      color: var(--text-main, #111827);
+      background-color: var(--zui-select-bg);
+      border: 1px solid var(--zui-select-border);
+      border-radius: var(--zui-select-radius);
+      padding: var(--zui-input-padding-y) var(--zui-space-10) var(--zui-input-padding-y) var(--zui-input-padding-x);
+      font-size: var(--zui-font-size-md);
+      line-height: var(--zui-leading-normal);
+      color: var(--zui-select-text);
       cursor: pointer;
-      transition: all 0.2s;
+      transition: border-color var(--zui-duration-fast) var(--zui-easing-standard),
+                  box-shadow var(--zui-duration-fast) var(--zui-easing-standard);
       text-align: left;
       position: relative;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: var(--zui-space-2);
     }
 
     .trigger-button:hover:not(.disabled) {
-      border-color: var(--zui-border-hover, var(--text-muted, #9ca3af));
+      border-color: var(--zui-select-border-hover);
     }
 
     .trigger-button:focus {
       outline: none;
-      border-color: var(--zui-primary, #3b82f6);
-      box-shadow: 0 0 0 3px var(--zui-focus-ring, rgba(59, 130, 246, 0.1));
+      border-color: var(--zui-select-border-focus);
+      box-shadow: var(--zui-select-focus-ring);
     }
 
     .trigger-button.disabled {
-      background-color: var(--bg-muted, #f3f4f6);
-      color: var(--text-muted, #9ca3af);
+      background-color: var(--zui-input-bg-disabled);
+      color: var(--zui-input-text-disabled);
       cursor: not-allowed;
     }
 
     .trigger-button.placeholder {
-      color: var(--text-muted, #9ca3af);
+      color: var(--zui-select-text-placeholder);
     }
 
     .chevron {
       position: relative;
-      right: 0.75rem;
+      right: var(--zui-space-3);
       pointer-events: none;
-      color: var(--text-muted, #6b7280);
+      color: var(--zui-color-text-muted);
       width: 1.25rem;
       height: 1.25rem;
-      transition: transform 0.2s;
+      transition: transform var(--zui-duration-fast) var(--zui-easing-standard);
     }
 
     .chevron.open {
@@ -95,7 +96,6 @@ export class ZuiSelect extends LitElement {
       overflow: hidden;
     }
 
-    /* Target dropdown in "top" placement */
     zui-dropdown[data-placement="top"] .dropdown-content {
       flex-direction: column-reverse;
     }
@@ -103,67 +103,67 @@ export class ZuiSelect extends LitElement {
     .options-list {
       overflow-y: auto;
       flex: 1;
-      padding: 0.5rem 0;
-      min-height: 0; /* Important for flex child scrolling */
+      padding: var(--zui-space-2) 0;
+      min-height: 0;
     }
 
     .search-container {
-      padding: 0.5rem;
+      padding: var(--zui-space-2);
       background-color: inherit;
       flex-shrink: 0;
-      border-bottom: 1px solid var(--card-border, #d1d5db);
+      border-bottom: 1px solid var(--zui-dropdown-border);
     }
     
-    /* When column-reverse (top placement), search is at bottom, so border should be top */
     zui-dropdown[data-placement="top"] .search-container {
       border-bottom: none;
-      border-top: 1px solid var(--card-border, #d1d5db);
+      border-top: 1px solid var(--zui-dropdown-border);
     }
 
     .search-input {
       width: 100%;
-      padding: 0.5rem 0.75rem;
-      border: 1px solid var(--card-border, #d1d5db);
-      border-radius: 0.375rem;
-      font-size: 0.875rem;
-      color: var(--text-main, #111827);
+      padding: var(--zui-space-2) var(--zui-space-3);
+      border: 1px solid var(--zui-select-border);
+      border-radius: var(--zui-radius-sm);
+      font-size: var(--zui-font-size-sm);
+      color: var(--zui-select-text);
       box-sizing: border-box;
-      background-color: var(--zui-input-bg, var(--glass-bg, rgba(255, 255, 255, 0.05)));
-      transition: all 0.2s;
+      background-color: var(--zui-select-bg);
+      transition: border-color var(--zui-duration-fast) var(--zui-easing-standard),
+                  box-shadow var(--zui-duration-fast) var(--zui-easing-standard);
     }
     
     .search-input:focus {
       outline: none;
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-      background-color: var(--zui-input-focus-bg, var(--card-bg, rgba(255, 255, 255, 0.1)));
+      border-color: var(--zui-select-border-focus);
+      box-shadow: var(--zui-select-focus-ring);
+      background-color: var(--zui-select-bg);
     }
 
     .option {
       display: flex;
       align-items: center;
-      padding: 0.5rem 1rem;
+      padding: var(--zui-space-2) var(--zui-space-4);
       cursor: pointer;
-      color: var(--text-main, #374151);
-      font-size: 0.875rem;
-      transition: background-color 0.15s;
-      gap: 0.5rem;
+      color: var(--zui-dropdown-text);
+      font-size: var(--zui-font-size-sm);
+      transition: background-color var(--zui-duration-fast) var(--zui-easing-standard);
+      gap: var(--zui-space-2);
     }
 
     .option:hover {
-      background-color: var(--zui-option-hover-bg, var(--link-hover-bg, rgba(125, 125, 125, 0.1)));
+      background-color: var(--zui-dropdown-option-bg-hover);
     }
 
     .option.selected {
-      background-color: var(--zui-option-selected-bg, var(--link-active-bg, rgba(59, 130, 246, 0.15)));
-      color: var(--zui-option-selected-color, var(--zui-primary, #3b82f6));
+      background-color: var(--zui-dropdown-option-bg-selected);
+      color: var(--zui-dropdown-option-text-selected);
     }
 
     .checkbox {
       width: 1rem;
       height: 1rem;
-      border: 1px solid #d1d5db;
-      border-radius: 0.25rem;
+      border: 1px solid var(--zui-checkbox-border-color);
+      border-radius: var(--zui-checkbox-border-radius);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -171,33 +171,33 @@ export class ZuiSelect extends LitElement {
     }
 
     .checkbox.checked {
-      background-color: var(--zui-primary, #3b82f6);
-      border-color: var(--zui-primary, #3b82f6);
-      color: white;
+      background-color: var(--zui-checkbox-color);
+      border-color: var(--zui-checkbox-color);
+      color: var(--zui-checkbox-check-color);
     }
 
     .no-results {
-      padding: 1rem;
+      padding: var(--zui-space-4);
       text-align: center;
-      color: #9ca3af;
-      font-size: 0.875rem;
+      color: var(--zui-color-text-muted);
+      font-size: var(--zui-font-size-sm);
     }
 
     .selected-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.25rem;
+      gap: var(--zui-space-1);
     }
 
     .tag {
-      background: var(--zui-tag-bg, var(--link-active-bg, rgba(59, 130, 246, 0.2)));
-      color: var(--zui-tag-color, #ffffff);
-      padding: 2px 8px;
-      border: 1px solid rgba(59, 130, 246, 0.3);
-      border-radius: 6px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      line-height: 1.25;
+      background: var(--zui-select-tag-bg);
+      color: var(--zui-select-tag-text);
+      padding: 2px var(--zui-space-2);
+      border: 1px solid var(--zui-select-tag-border);
+      border-radius: var(--zui-radius-sm);
+      font-size: var(--zui-text-xs);
+      font-weight: var(--zui-font-weight-medium);
+      line-height: var(--zui-leading-normal);
     }
   `;
 

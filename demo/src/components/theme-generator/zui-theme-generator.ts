@@ -277,44 +277,34 @@ export class ZuiThemeGenerator extends LitElement {
        }));
   }
 
-  private _handleColorChange(key: string, value: string) {
-       // We update the specific palette for the current mode
-       const currentPalette = { ...this._theme.colors[this._previewMode] };
-       
-       // @ts-ignore - dynamic key access
-       currentPalette[key] = value;
+  private _deepClone<T>(obj: T): T {
+    return JSON.parse(JSON.stringify(obj));
+  }
 
-       this._theme = {
-           ...this._theme,
-           colors: {
-               ...this._theme.colors,
-               [this._previewMode]: currentPalette
-           }
-       };
-       
+  private _updateNestedTheme(path: string[], value: string) {
+    const newTheme = this._deepClone(this._theme);
+    let target: any = newTheme;
+    for (let i = 0; i < path.length - 1; i++) {
+      target = target[path[i]];
+    }
+    target[path[path.length - 1]] = value;
+    this._theme = newTheme;
+    this._updateTheme();
+  }
+
+  private _handleColorChange(key: string, value: string) {
+       const newTheme = this._deepClone(this._theme);
+       (newTheme.colors[this._previewMode] as any)[key] = value;
+       this._theme = newTheme;
        this._updateTheme();
   }
-  
-  // Removed legacy _handleColorChange duplicate or old signature
 
 
 
   private _resetToDefault() {
-      // "Smart Reset":
-      // 1. If an image was uploaded, we revert to the extracted theme (stored in _baseTheme).
-      // 2. We ONLY reset the colors for the CURRENT mode.
-
-      const currentMode = this._previewMode;
-      const baseColors = this._baseTheme.colors[currentMode];
-
-      this._theme = {
-          ...this._theme,
-          colors: {
-              ...this._theme.colors,
-              [currentMode]: { ...baseColors }
-          }
-      };
-
+      const newTheme = this._deepClone(this._theme);
+      newTheme.colors[this._previewMode] = this._deepClone(this._baseTheme.colors[this._previewMode]);
+      this._theme = newTheme;
       this._updateTheme();
   }
 
@@ -404,9 +394,7 @@ ${this._generatedCss}
             <input type="text" 
                 .value=${value}
                 @input=${(e: any) => {
-                target[finalKey] = e.target.value;
-                this._updateTheme();
-                this.requestUpdate();
+                this._updateNestedTheme(['typography', ...path], e.target.value);
             }}
             >
         </div>
@@ -415,15 +403,14 @@ ${this._generatedCss}
 
     private _renderTextInput(label: string, section: 'shadows' | 'animations', key: string) {
         const value = (this._theme[section] as any)[key];
+        const path = [section, key];
         return html`
         <div class="form-group" style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
             <label class="form-label" style="width: 120px; margin: 0;">${label}</label>
             <input type="text" 
                 .value=${value}
                 @input=${(e: any) => {
-                (this._theme[section] as any)[key] = e.target.value;
-                this._updateTheme();
-                this.requestUpdate();
+                this._updateNestedTheme(path, e.target.value);
             }}
             >
         </div>
@@ -525,9 +512,7 @@ ${this._generatedCss}
                             <input type="text" style="width: 100%" 
                                 .value=${this._theme.typography.fontFamily}
                                 @input=${(e: any) => {
-                                    this._theme.typography.fontFamily = e.target.value;
-                                    this._updateTheme();
-                                    this.requestUpdate();
+                                    this._updateNestedTheme(['typography', 'fontFamily'], e.target.value);
                                 }}
                             >
                         </div>
@@ -555,21 +540,21 @@ ${this._generatedCss}
                             <label class="form-label">Small (sm)</label>
                             <input type="text" 
                                 .value=${this._theme.borderRadius.sm} 
-                                @input=${(e: any) => { this._theme.borderRadius.sm = e.target.value; this._updateTheme(); }}
+                                @input=${(e: any) => { this._updateNestedTheme(['borderRadius', 'sm'], e.target.value); }}
                             >
                          </div>
                          <div class="form-group">
                             <label class="form-label">Medium (md)</label>
                             <input type="text" 
                                 .value=${this._theme.borderRadius.md} 
-                                @input=${(e: any) => { this._theme.borderRadius.md = e.target.value; this._updateTheme(); }}
+                                @input=${(e: any) => { this._updateNestedTheme(['borderRadius', 'md'], e.target.value); }}
                             >
                          </div>
                          <div class="form-group">
                             <label class="form-label">Large (lg)</label>
                             <input type="text"
                                 .value=${this._theme.borderRadius.lg} 
-                                @input=${(e: any) => { this._theme.borderRadius.lg = e.target.value; this._updateTheme(); }}
+                                @input=${(e: any) => { this._updateNestedTheme(['borderRadius', 'lg'], e.target.value); }}
                             >
                          </div>
 

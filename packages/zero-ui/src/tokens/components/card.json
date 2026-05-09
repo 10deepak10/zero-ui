@@ -1,0 +1,14 @@
+{
+  "card": {
+    "bg": "{semantic.color.surface.primary}",
+    "bg-hover": "{semantic.color.surface.secondary}",
+    "text": "{semantic.color.text.primary}",
+    "text-secondary": "{semantic.color.text.secondary}",
+    "border": "{semantic.color.border.subtle}",
+    "border-hover": "{semantic.color.border.default}",
+    "radius": "{semantic.elevation.radius.lg}",
+    "shadow": "{semantic.elevation.shadow.sm}",
+    "shadow-hover": "{semantic.elevation.shadow.lg}",
+    "padding": "{semantic.elevation.space.6}"
+  }
+}
